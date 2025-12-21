@@ -6,194 +6,417 @@
 <title>Ágora Peruana - Difusión Filosófica</title>
 <meta name="description" content="Plataforma pionera de difusión filosófica en Perú. Videos, artículos y recursos sobre filosofía para toda la comunidad peruana.">
 <script src="https://cdn.tailwindcss.com"></script>
+<style>
+.video-card:hover { transform: translateY(-5px); transition: all 0.3s; }
+</style>
 </head>
 <body class="bg-gradient-to-br from-amber-50 to-orange-50 min-h-screen">
 
 <header class="bg-white shadow-lg p-4 sticky top-0 z-50">
-<div class="max-w-6xl mx-auto flex items-center justify-between">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
 <div class="flex items-center gap-3">
-<div class="w-10 h-10 bg-amber-600 rounded-lg flex items-center justify-center text-white font-bold">ÁP</div>
+<div class="w-10 h-10 bg-amber-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">ÁP</div>
 <div>
 <h1 class="text-xl font-bold">Ágora Peruana</h1>
 <p class="text-xs text-gray-600">Difusión Filosófica</p>
 </div>
 </div>
-<button id="menu" class="text-2xl">☰</button>
+<nav class="hidden md:flex gap-2 text-sm">
+<a href="#inicio" class="px-3 py-2 hover:bg-amber-50 rounded">Inicio</a>
+<a href="#videos" class="px-3 py-2 hover:bg-amber-50 rounded">Videos</a>
+<a href="#articulos" class="px-3 py-2 hover:bg-amber-50 rounded">Artículos</a>
+<a href="#recursos" class="px-3 py-2 hover:bg-amber-50 rounded">Recursos</a>
+</nav>
+<button id="menuBtn" class="md:hidden text-2xl">☰</button>
 </div>
 </header>
 
-<main class="max-w-6xl mx-auto p-4">
+<main class="max-w-7xl mx-auto p-4">
 
-<section class="text-center my-16">
+<section id="inicio" class="text-center my-12">
 <h2 class="text-4xl md:text-5xl font-bold mb-4">Pioneros en Difusión <span class="text-amber-600">Filosófica</span></h2>
-<p class="text-lg md:text-xl text-gray-700 mb-8">Democratizando el acceso al pensamiento crítico en Perú</p>
+<p class="text-lg md:text-xl text-gray-700 mb-6">Democratizando el acceso al pensamiento crítico en Perú</p>
 <div class="flex gap-4 justify-center flex-wrap">
-<a href="#videos" class="px-8 py-3 bg-amber-600 text-white rounded-xl font-bold hover:bg-amber-700 transition">Ver Videos</a>
-<a href="#recursos" class="px-8 py-3 border-2 border-amber-600 rounded-xl font-bold hover:bg-amber-50 transition">Recursos Gratis</a>
+<a href="#videos" class="px-6 py-3 bg-amber-600 text-white rounded-xl font-bold hover:bg-amber-700">Ver Videos</a>
+<a href="#recursos" class="px-6 py-3 border-2 border-amber-600 rounded-xl font-bold hover:bg-amber-50">Recursos</a>
 </div>
 </section>
 
-<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
-<div class="bg-white p-6 rounded-xl text-center shadow-lg">
-<div class="text-3xl font-bold text-amber-600">3+</div>
-<div class="text-sm text-gray-600">Videos</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+<div class="bg-white p-4 rounded-xl text-center shadow">
+<div class="text-2xl font-bold text-amber-600">25+</div>
+<div class="text-xs text-gray-600">Videos</div>
 </div>
-<div class="bg-white p-6 rounded-xl text-center shadow-lg">
-<div class="text-3xl font-bold text-amber-600">500+</div>
-<div class="text-sm text-gray-600">Vistas</div>
+<div class="bg-white p-4 rounded-xl text-center shadow">
+<div class="text-2xl font-bold text-amber-600">1K+</div>
+<div class="text-xs text-gray-600">Vistas</div>
 </div>
-<div class="bg-white p-6 rounded-xl text-center shadow-lg">
-<div class="text-3xl font-bold text-amber-600">10+</div>
-<div class="text-sm text-gray-600">Eventos</div>
+<div class="bg-white p-4 rounded-xl text-center shadow">
+<div class="text-2xl font-bold text-amber-600">15+</div>
+<div class="text-xs text-gray-600">Eventos</div>
 </div>
-<div class="bg-white p-6 rounded-xl text-center shadow-lg">
-<div class="text-3xl font-bold text-amber-600">100+</div>
-<div class="text-sm text-gray-600">Descargas</div>
+<div class="bg-white p-4 rounded-xl text-center shadow">
+<div class="text-2xl font-bold text-amber-600">200+</div>
+<div class="text-xs text-gray-600">Descargas</div>
 </div>
 </div>
 
-<section id="videos" class="mb-16">
+<section id="videos" class="mb-12">
 <h2 class="text-3xl font-bold mb-6 text-center">Biblioteca de <span class="text-amber-600">Videos</span></h2>
-<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-<div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition">
-<a href="https://youtu.be/NQR3mKJux8M" target="_blank" rel="noopener">
-<img src="https://img.youtube.com/vi/NQR3mKJux8M/maxresdefault.jpg" class="w-full h-48 object-cover" alt="Filosofía de la mente">
+<div class="mb-8">
+<h3 class="text-2xl font-semibold mb-4 text-amber-700">📚 Introducción a la Filosofía</h3>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
+<a href="https://youtu.be/fymoy64ufGc" target="_blank">
+<img src="https://img.youtube.com/vi/fymoy64ufGc/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
 </a>
-<div class="p-6">
-<h3 class="font-bold mb-2 line-clamp-2">Filosofía de la mente: El problema mente-cerebro</h3>
-<p class="text-sm text-gray-600 mb-3">23 Marzo 2024</p>
-<div class="flex gap-2">
-<a href="https://youtu.be/NQR3mKJux8M" target="_blank" rel="noopener" class="flex-1 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-center text-sm font-semibold">Ver en YouTube</a>
-<button onclick="compartir('https://youtu.be/NQR3mKJux8M', 'Filosofía de la mente')" class="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700">
-<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
-</button>
-</div>
+<div class="p-4">
+<h4 class="font-bold text-sm mb-2">Introducción a la filosofía - Clase de Arturo Romero Contreras</h4>
+<p class="text-xs text-gray-600 mb-2">1 Febrero 2025</p>
+<a href="https://youtu.be/fymoy64ufGc" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
 </div>
 </div>
 
-<div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition">
-<a href="https://youtu.be/fymoy64ufGc" target="_blank" rel="noopener">
-<img src="https://img.youtube.com/vi/fymoy64ufGc/maxresdefault.jpg" class="w-full h-48 object-cover" alt="Introducción a la filosofía">
+<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
+<a href="https://youtu.be/EtB9MBNNVO4" target="_blank">
+<img src="https://img.youtube.com/vi/EtB9MBNNVO4/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
 </a>
-<div class="p-6">
-<h3 class="font-bold mb-2 line-clamp-2">Introducción a la filosofía - Clase de Arturo Romero Contreras</h3>
-<p class="text-sm text-gray-600 mb-3">1 Febrero 2024</p>
-<div class="flex gap-2">
-<a href="https://youtu.be/fymoy64ufGc" target="_blank" rel="noopener" class="flex-1 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-center text-sm font-semibold">Ver en YouTube</a>
-<button onclick="compartir('https://youtu.be/fymoy64ufGc', 'Introducción a la filosofía')" class="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700">
-<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
-</button>
-</div>
+<div class="p-4">
+<h4 class="font-bold text-sm mb-2">Introducción a la Filosofía - Parte 2</h4>
+<p class="text-xs text-gray-600 mb-2">2024</p>
+<a href="https://youtu.be/EtB9MBNNVO4" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
 </div>
 </div>
 
-<div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition">
-<a href="https://youtu.be/8bXvcMbVZNQ" target="_blank" rel="noopener">
-<img src="https://img.youtube.com/vi/8bXvcMbVZNQ/maxresdefault.jpg" class="w-full h-48 object-cover" alt="Ciencia ficción">
+</div>
+</div>
+
+<div class="mb-8">
+<h3 class="text-2xl font-semibold mb-4 text-amber-700">🧠 Filosofía de la Mente</h3>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
+<a href="https://youtu.be/NQR3mKJux8M" target="_blank">
+<img src="https://img.youtube.com/vi/NQR3mKJux8M/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
 </a>
-<div class="p-6">
-<h3 class="font-bold mb-2 line-clamp-2">Ciencia ficción como recurso didáctico para la enseñanza de filosofía política y ética</h3>
-<p class="text-sm text-gray-600 mb-3">29 Septiembre 2024</p>
-<div class="flex gap-2">
-<a href="https://youtu.be/8bXvcMbVZNQ" target="_blank" rel="noopener" class="flex-1 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-center text-sm font-semibold">Ver en YouTube</a>
-<button onclick="compartir('https://youtu.be/8bXvcMbVZNQ', 'Ciencia ficción y filosofía')" class="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700">
-<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
-</button>
+<div class="p-4">
+<h4 class="font-bold text-sm mb-2">Filosofía de la mente: El problema mente-cerebro</h4>
+<p class="text-xs text-gray-600 mb-2">23 Marzo 2024</p>
+<a href="https://youtu.be/NQR3mKJux8M" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
 </div>
+</div>
+
+<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
+<a href="https://youtu.be/50r4sgpuvVs" target="_blank">
+<img src="https://img.youtube.com/vi/50r4sgpuvVs/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
+</a>
+<div class="p-4">
+<h4 class="font-bold text-sm mb-2">Filosofía de la Mente - Parte 2</h4>
+<p class="text-xs text-gray-600 mb-2">2024</p>
+<a href="https://youtu.be/50r4sgpuvVs" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
 </div>
 </div>
 
 </div>
+</div>
+
+<div class="mb-8">
+<h3 class="text-2xl font-semibold mb-4 text-amber-700">⚖️ Filosofía Política y Ética</h3>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
+<a href="https://youtu.be/8bXvcMbVZNQ" target="_blank">
+<img src="https://img.youtube.com/vi/8bXvcMbVZNQ/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
+</a>
+<div class="p-4">
+<h4 class="font-bold text-sm mb-2">Ciencia ficción como recurso didáctico para filosofía política y ética</h4>
+<p class="text-xs text-gray-600 mb-2">29 Septiembre 2024</p>
+<a href="https://youtu.be/8bXvcMbVZNQ" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
+</div>
+</div>
+
+<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
+<a href="https://youtu.be/TO625dMyF8g" target="_blank">
+<img src="https://img.youtube.com/vi/TO625dMyF8g/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
+</a>
+<div class="p-4">
+<h4 class="font-bold text-sm mb-2">Filosofía Política - Análisis</h4>
+<p class="text-xs text-gray-600 mb-2">2024</p>
+<a href="https://youtu.be/TO625dMyF8g" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
+</div>
+</div>
+
+<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
+<a href="https://youtu.be/SEoSpO_SXkI" target="_blank">
+<img src="https://img.youtube.com/vi/SEoSpO_SXkI/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
+</a>
+<div class="p-4">
+<h4 class="font-bold text-sm mb-2">Ética Contemporánea</h4>
+<p class="text-xs text-gray-600 mb-2">2024</p>
+<a href="https://youtu.be/SEoSpO_SXkI" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="mb-8">
+<h3 class="text-2xl font-semibold mb-4 text-amber-700">📖 Historia de la Filosofía</h3>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
+<a href="https://youtu.be/NEGIqdC2NVI" target="_blank">
+<img src="https://img.youtube.com/vi/NEGIqdC2NVI/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
+</a>
+<div class="p-4">
+<h4 class="font-bold text-sm mb-2">Historia de la Filosofía - Parte 1</h4>
+<p class="text-xs text-gray-600 mb-2">2024</p>
+<a href="https://youtu.be/NEGIqdC2NVI" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
+</div>
+</div>
+
+<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
+<a href="https://youtu.be/2KuW-rxgbBE" target="_blank">
+<img src="https://img.youtube.com/vi/2KuW-rxgbBE/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
+</a>
+<div class="p-4">
+<h4 class="font-bold text-sm mb-2">Grandes Filósofos de la Historia</h4>
+<p class="text-xs text-gray-600 mb-2">2024</p>
+<a href="https://youtu.be/2KuW-rxgbBE" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
+</div>
+</div>
+
+<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
+<a href="https://youtu.be/-7zDr4VbPgM" target="_blank">
+<img src="https://img.youtube.com/vi/-7zDr4VbPgM/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
+</a>
+<div class="p-4">
+<h4 class="font-bold text-sm mb-2">Filosofía Clásica</h4>
+<p class="text-xs text-gray-600 mb-2">2024</p>
+<a href="https://youtu.be/-7zDr4VbPgM" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
+</div>
+</div>
+
+<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
+<a href="https://youtu.be/XOADbZvOSW0" target="_blank">
+<img src="https://img.youtube.com/vi/XOADbZvOSW0/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
+</a>
+<div class="p-4">
+<h4 class="font-bold text-sm mb-2">Autores Fundamentales</h4>
+<p class="text-xs text-gray-600 mb-2">2024</p>
+<a href="https://youtu.be/XOADbZvOSW0" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="mb-8">
+<h3 class="text-2xl font-semibold mb-4 text-amber-700">🎯 Temas Especiales</h3>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
+<a href="https://youtu.be/8mzRZ-ME0Cs" target="_blank">
+<img src="https://img.youtube.com/vi/8mzRZ-ME0Cs/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
+</a>
+<div class="p-4">
+<h4 class="font-bold text-sm mb-2">Tema Especial 1</h4>
+<p class="text-xs text-gray-600 mb-2">2024</p>
+<a href="https://youtu.be/8mzRZ-ME0Cs" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
+</div>
+</div>
+
+<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
+<a href="https://youtu.be/QKbLEQlnV-g" target="_blank">
+<img src="https://img.youtube.com/vi/QKbLEQlnV-g/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
+</a>
+<div class="p-4">
+<h4 class="font-bold text-sm mb-2">Tema Especial 2</h4>
+<p class="text-xs text-gray-600 mb-2">2024</p>
+<a href="https://youtu.be/QKbLEQlnV-g" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
+</div>
+</div>
+
+<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
+<a href="https://youtu.be/-IxOcDO2mBs" target="_blank">
+<img src="https://img.youtube.com/vi/-IxOcDO2mBs/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
+</a>
+<div class="p-4">
+<h4 class="font-bold text-sm mb-2">Tema Especial 3</h4>
+<p class="text-xs text-gray-600 mb-2">2024</p>
+<a href="https://youtu.be/-IxOcDO2mBs" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
+</div>
+</div>
+
+<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
+<a href="https://youtu.be/Zx_1ZJaTQyI" target="_blank">
+<img src="https://img.youtube.com/vi/Zx_1ZJaTQyI/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
+</a>
+<div class="p-4">
+<h4 class="font-bold text-sm mb-2">Tema Especial 4</h4>
+<p class="text-xs text-gray-600 mb-2">2024</p>
+<a href="https://youtu.be/Zx_1ZJaTQyI" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
+</div>
+</div>
+
+<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
+<a href="https://youtu.be/4IX2lKmxu98" target="_blank">
+<img src="https://img.youtube.com/vi/4IX2lKmxu98/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
+</a>
+<div class="p-4">
+<h4 class="font-bold text-sm mb-2">Tema Especial 5</h4>
+<p class="text-xs text-gray-600 mb-2">2024</p>
+<a href="https://youtu.be/4IX2lKmxu98" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
+</div>
+</div>
+
+<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
+<a href="https://youtu.be/N50VXid_Qsg" target="_blank">
+<img src="https://img.youtube.com/vi/N50VXid_Qsg/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
+</a>
+<div class="p-4">
+<h4 class="font-bold text-sm mb-2">Tema Especial 6</h4>
+<p class="text-xs text-gray-600 mb-2">2024</p>
+<a href="https://youtu.be/N50VXid_Qsg" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
+</div>
+</div>
+
+<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
+<a href="https://youtu.be/WKowgRsDyI8" target="_blank">
+<img src="https://img.youtube.com/vi/WKowgRsDyI8/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
+</a>
+<div class="p-4">
+<h4 class="font-bold text-sm mb-2">Tema Especial 7</h4>
+<p class="text-xs text-gray-600 mb-2">2024</p>
+<a href="https://youtu.be/WKowgRsDyI8" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
+</div>
+</div>
+
+<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
+<a href="https://youtu.be/85iA_2AuMnc" target="_blank">
+<img src="https://img.youtube.com/vi/85iA_2AuMnc/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
+</a>
+<div class="p-4">
+<h4 class="font-bold text-sm mb-2">Tema Especial 8</h4>
+<p class="text-xs text-gray-600 mb-2">2024</p>
+<a href="https://youtu.be/85iA_2AuMnc" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
+</div>
+</div>
+
+<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
+<a href="https://youtu.be/poLG3Qi60Q8" target="_blank">
+<img src="https://img.youtube.com/vi/poLG3Qi60Q8/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
+</a>
+<div class="p-4">
+<h4 class="font-bold text-sm mb-2">Tema Especial 9</h4>
+<p class="text-xs text-gray-600 mb-2">2024</p>
+<a href="https://youtu.be/poLG3Qi60Q8" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
+</div>
+</div>
+
+<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
+<a href="https://youtu.be/QCtSDgCjBWM" target="_blank">
+<img src="https://img.youtube.com/vi/QCtSDgCjBWM/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
+</a>
+<div class="p-4">
+<h4 class="font-bold text-sm mb-2">Tema Especial 10</h4>
+<p class="text-xs text-gray-600 mb-2">2024</p>
+<a href="https://youtu.be/QCtSDgCjBWM" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
+</div>
+</div>
+
+<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
+<a href="https://youtu.be/GM2Ee6UCgrY" target="_blank">
+<img src="https://img.youtube.com/vi/GM2Ee6UCgrY/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
+</a>
+<div class="p-4">
+<h4 class="font-bold text-sm mb-2">Tema Especial 11</h4>
+<p class="text-xs text-gray-600 mb-2">2024</p>
+<a href="https://youtu.be/GM2Ee6UCgrY" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
+</div>
+</div>
+
+<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
+<a href="https://youtu.be/J7uZUmlcPmM" target="_blank">
+<img src="https://img.youtube.com/vi/J7uZUmlcPmM/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
+</a>
+<div class="p-4">
+<h4 class="font-bold text-sm mb-2">Tema Especial 12</h4>
+<p class="text-xs text-gray-600 mb-2">2024</p>
+<a href="https://youtu.be/J7uZUmlcPmM" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
+</div>
+</div>
+
+<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
+<a href="https://youtu.be/JAavnv2yVq8" target="_blank">
+<img src="https://img.youtube.com/vi/JAavnv2yVq8/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
+</a>
+<div class="p-4">
+<h4 class="font-bold text-sm mb-2">Tema Especial 13</h4>
+<p class="text-xs text-gray-600 mb-2">2024</p>
+<a href="https://youtu.be/JAavnv2yVq8" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
+</div>
+</div>
+
+</div>
+</div>
+
 </section>
 
-<section class="mb-16">
+<section id="articulos" class="mb-12">
 <h2 class="text-3xl font-bold mb-6 text-center">Próximamente: <span class="text-amber-600">Artículos</span></h2>
-<div class="bg-white rounded-xl p-8 text-center shadow-lg">
-<p class="text-gray-600 mb-4">Estamos preparando artículos filosóficos de alta calidad.</p>
+<div class="bg-white rounded-xl p-6 text-center shadow-lg">
+<p class="text-gray-600 mb-3">Estamos preparando artículos filosóficos de alta calidad.</p>
 <p class="text-amber-600 font-semibold">¡Mantente atento!</p>
 </div>
 </section>
 
-<section id="recursos" class="mb-16">
+<section id="recursos" class="mb-12">
 <h2 class="text-3xl font-bold mb-4 text-center"><span class="text-amber-600">Recursos</span> Gratuitos</h2>
-<p class="text-center text-gray-600 mb-8">Material de estudio gratuito para profundizar en filosofía</p>
-<div class="grid gap-4">
-<div class="bg-white rounded-xl p-6 shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-4">
+<p class="text-center text-gray-600 mb-6">Material de estudio para profundizar en filosofía</p>
+<div class="grid gap-3">
+<div class="bg-white rounded-xl p-4 shadow flex items-center justify-between">
 <div>
-<h3 class="font-bold text-lg">Introducción a la Filosofía Contemporánea</h3>
-<p class="text-sm text-gray-600">Próximamente disponible</p>
+<h3 class="font-bold">Introducción a la Filosofía Contemporánea</h3>
+<p class="text-sm text-gray-600">Próximamente</p>
 </div>
-<button class="px-6 py-3 bg-gray-300 text-gray-600 rounded-lg cursor-not-allowed">Próximamente</button>
+<button class="px-4 py-2 bg-gray-300 text-gray-600 rounded-lg cursor-not-allowed text-sm">Pronto</button>
 </div>
-<div class="bg-white rounded-xl p-6 shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="bg-white rounded-xl p-4 shadow flex items-center justify-between">
 <div>
-<h3 class="font-bold text-lg">Guía de Lectura: Grandes Filósofos</h3>
-<p class="text-sm text-gray-600">Próximamente disponible</p>
+<h3 class="font-bold">Guía de Lectura: Grandes Filósofos</h3>
+<p class="text-sm text-gray-600">Próximamente</p>
 </div>
-<button class="px-6 py-3 bg-gray-300 text-gray-600 rounded-lg cursor-not-allowed">Próximamente</button>
+<button class="px-4 py-2 bg-gray-300 text-gray-600 rounded-lg cursor-not-allowed text-sm">Pronto</button>
 </div>
 </div>
 </section>
 
-<section class="bg-amber-600 text-white rounded-2xl p-8 mb-16 text-center">
-<h2 class="text-3xl font-bold mb-4">Únete a la Comunidad</h2>
-<p class="mb-6">Sigue nuestro contenido en YouTube y redes sociales</p>
-<div class="flex gap-4 justify-center flex-wrap">
-<a href="https://www.youtube.com/@agoraperuana" target="_blank" rel="noopener" class="px-6 py-3 bg-white text-amber-600 rounded-lg font-bold hover:bg-gray-100 transition">
-YouTube
-</a>
-<a href="#" class="px-6 py-3 bg-white text-amber-600 rounded-lg font-bold hover:bg-gray-100 transition">
-Instagram
-</a>
-<a href="#" class="px-6 py-3 bg-white text-amber-600 rounded-lg font-bold hover:bg-gray-100 transition">
-TikTok
-</a>
+<section class="bg-amber-600 text-white rounded-2xl p-6 mb-12 text-center">
+<h2 class="text-2xl font-bold mb-3">Únete a la Comunidad</h2>
+<p class="mb-4 text-sm">Sigue nuestro contenido en redes sociales</p>
+<div class="flex gap-3 justify-center flex-wrap">
+<a href="https://www.youtube.com/@elbuho.filosofico" target="_blank" class="px-5 py-2 bg-white text-amber-600 rounded-lg font-bold hover:bg-gray-100 text-sm">YouTube</a>
+<a href="#" class="px-5 py-2 bg-white text-amber-600 rounded-lg font-bold hover:bg-gray-100 text-sm">Instagram</a>
+<a href="#" class="px-5 py-2 bg-white text-amber-600 rounded-lg font-bold hover:bg-gray-100 text-sm">TikTok</a>
 </div>
 </section>
 
 </main>
 
-<footer class="bg-gray-900 text-white py-12 text-center">
+<footer class="bg-gray-900 text-white py-8 text-center">
 <h3 class="text-xl font-bold mb-2">Ágora Peruana</h3>
-<p class="text-gray-400 text-sm mb-4">Plataforma pionera de difusión filosófica en Perú</p>
+<p class="text-gray-400 text-sm mb-3">Plataforma pionera de difusión filosófica en Perú</p>
 <p class="text-gray-600 text-xs">© 2024 Ágora Peruana. Todos los derechos reservados.</p>
 </footer>
 
 <script>
-function compartir(url, titulo) {
-  if (navigator.share) {
-    navigator.share({
-      title: titulo + ' - Ágora Peruana',
-      text: 'Mira este video de filosofía en Ágora Peruana',
-      url: url
-    }).catch(err => console.log('Error al compartir:', err));
-  } else {
-    const mensaje = encodeURIComponent('Mira este video: ' + titulo + ' ' + url);
-    window.open('https://api.whatsapp.com/send?text=' + mensaje, '_blank');
-  }
-}
-
-document.getElementById('menu').addEventListener('click', function() {
-  alert('Menú en desarrollo. Por ahora usa los enlaces en la página.');
+document.getElementById('menuBtn').addEventListener('click', function() {
+  alert('Menú móvil en desarrollo. Usa los enlaces de la página.');
 });
 </script>
 
 </body>
-  </html></div>
-<button class="bg-amber-600 text-white px-4 py-2 rounded-lg">Descargar</button>
-</div>
-</div>
-</section>
-
-</main>
-
-<footer class="bg-gray-900 text-white py-12 text-center">
-<h3 class="text-xl font-bold mb-2">Ágora Peruana</h3>
-<p class="text-gray-400 text-sm">Plataforma líder en difusión filosófica del Perú</p>
-<p class="text-gray-600 text-xs mt-4">© 2024 Ágora Peruana</p>
-</footer>
-
-</body>
-  </html>
-
+</html>
