@@ -1,0 +1,67 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "videos"
+    label: "Videos"
+    folder: "content/videos"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Link de YouTube", name: "youtube_url", widget: "string", hint: "Ejemplo: https://youtu.be/ABC123"}
+      - {label: "ID del Video", name: "video_id", widget: "string", hint: "Ejemplo: ABC123 (la parte después de youtu.be/)"}
+      - {label: "Fecha de Publicación", name: "date", widget: "datetime"}
+      - {label: "Categoría", name: "category", widget: "select", options: ["Introducción a la Filosofía", "Filosofía de la Mente", "Filosofía Política y Ética", "Historia de la Filosofía", "Temas Especiales"]}
+      - {label: "Descripción", name: "description", widget: "text", required: false}
+      - {label: "Publicado", name: "published", widget: "boolean", default: true}
+
+  - name: "articulos"
+    label: "Artículos"
+    folder: "content/articulos"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Autor", name: "author", widget: "string"}
+      - {label: "Fecha de Publicación", name: "date", widget: "datetime"}
+      - {label: "Categoría", name: "category", widget: "select", options: ["Filosofía Peruana", "Ética", "Epistemología", "Metafísica", "Filosofía Política", "Estética", "Lógica"]}
+      - {label: "Resumen", name: "excerpt", widget: "text", hint: "Resumen corto de 2-3 líneas"}
+      - {label: "Contenido", name: "body", widget: "markdown"}
+      - {label: "Imagen destacada", name: "featured_image", widget: "image", required: false}
+      - {label: "Etiquetas", name: "tags", widget: "list", required: false}
+      - {label: "Publicado", name: "published", widget: "boolean", default: true}
+
+  - name: "ensayos"
+    label: "Ensayos y PDFs"
+    folder: "content/ensayos"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Autor", name: "author", widget: "string"}
+      - {label: "Fecha de Publicación", name: "date", widget: "datetime"}
+      - {label: "Categoría", name: "category", widget: "string"}
+      - {label: "Descripción", name: "description", widget: "text"}
+      - {label: "Archivo PDF", name: "pdf_file", widget: "file"}
+      - {label: "Número de descargas", name: "downloads", widget: "number", default: 0}
+      - {label: "Publicado", name: "published", widget: "boolean", default: true}
+
+  - name: "eventos"
+    label: "Eventos"
+    folder: "content/eventos"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Título del Evento", name: "title", widget: "string"}
+      - {label: "Fecha del Evento", name: "event_date", widget: "datetime"}
+      - {label: "Lugar", name: "location", widget: "string"}
+      - {label: "Número de Asistentes", name: "attendees", widget: "number", required: false}
+      - {label: "Descripción", name: "description", widget: "text"}
+      - {label: "Imagen del Evento", name: "image", widget: "image"}
+      - {label: "Link a grabación", name: "recording_url", widget: "string", required: false}
+      - {label: "Publicado", name: "published", widget: "boolean", default: true}
