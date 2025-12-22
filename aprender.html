@@ -4,204 +4,200 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aprender Filosofía - ASEFIP</title>
-    <meta name="description" content="Comienza tu viaje filosófico. Biblioteca completa de videos educativos organizados por tema, desde conceptos básicos hasta análisis especializados.">
+    <meta name="description" content="Aprende filosofía desde cero con nuestra biblioteca de videos educativos, organizados por temas y niveles.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         html { scroll-behavior: smooth; font-family: 'Inter', sans-serif; }
         h1, h2, h3 { font-family: 'Playfair Display', serif; }
-        .video-card:hover { transform: translateY(-5px); transition: transform 0.3s ease; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); }
-        /* Estilo para ocultar elementos filtrados */
-        .hidden-by-filter { display: none; }
+        .video-card { transition: all 0.3s ease; }
+        .video-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.3); }
+        .filtro-activo { background-color: #1e40af; color: white; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-gradient-to-b from-blue-50 to-white min-h-screen text-gray-800">
 
-<!-- Navegación Principal (IDÉNTICA a la de index.html) -->
-<header class="bg-white shadow-sm border-b">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <a href="index.html" class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-gradient-to-br from-indigo-700 to-blue-800 rounded-lg flex items-center justify-center text-white font-bold">AS</div>
-            <div>
-                <h1 class="text-xl font-bold text-gray-900">ASEFIP</h1>
-                <p class="text-xs text-gray-600">Portal de Filosofía Peruana</p>
-            </div>
-        </a>
-        <nav class="hidden md:flex space-x-1">
-            <a href="index.html" class="px-4 py-2 font-medium text-gray-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg">Inicio</a>
-            <a href="aprender.html" class="px-4 py-2 font-medium text-blue-700 border-b-2 border-blue-700">Aprender</a>
-            <a href="investigar.html" class="px-4 py-2 font-medium text-gray-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg">Investigar</a>
-            <a href="comunidad.html" class="px-4 py-2 font-medium text-gray-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg">Comunidad</a>
-            <a href="recursos.html" class="px-4 py-2 font-medium text-gray-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg">Recursos</a>
-        </nav>
-        <button id="menuBtn" class="md:hidden text-2xl text-gray-700">☰</button>
-    </div>
-    <!-- Menú Móvil Desplegable -->
-    <div id="mobileMenu" class="hidden md:hidden bg-white border-t px-4 py-3">
-        <a href="index.html" class="block py-3 px-2 text-gray-700 hover:bg-gray-100 rounded">Inicio</a>
-        <a href="aprender.html" class="block py-3 px-2 font-medium text-blue-700 bg-blue-50 rounded">Aprender</a>
-        <a href="investigar.html" class="block py-3 px-2 text-gray-700 hover:bg-gray-100 rounded">Investigar</a>
-        <a href="comunidad.html" class="block py-3 px-2 text-gray-700 hover:bg-gray-100 rounded">Comunidad</a>
-        <a href="recursos.html" class="block py-3 px-2 text-gray-700 hover:bg-gray-100 rounded">Recursos</a>
-    </div>
-</header>
-
-<main class="max-w-7xl mx-auto px-4 py-8 md:py-12">
-    <!-- Cabecera de la sección -->
-    <section class="text-center mb-12">
-        <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-            Aprender <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-indigo-700">Filosofía</span> desde Cero
-        </h2>
-        <p class="text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
-            Explora nuestra biblioteca curada de videos educativos. Hemos organizado las lecciones por temas para que puedas seguir un camino de aprendizaje claro, desde los conceptos más fundamentales hasta los análisis más especializados.
-        </p>
-
-        <!-- Barra de Búsqueda Simple -->
-        <div class="max-w-2xl mx-auto mb-10">
-            <label for="buscadorVideos" class="block text-lg font-semibold text-gray-700 mb-3">🔍 Buscar un video por título o tema:</label>
-            <div class="flex">
-                <input type="text" id="buscadorVideos" placeholder="Ej: 'mente', 'ética', 'introducción'..." class="flex-grow p-4 border border-gray-300 rounded-l-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg">
-                <button onclick="filtrarVideos()" class="px-6 bg-gradient-to-r from-blue-700 to-indigo-700 text-white font-bold rounded-r-xl hover:from-blue-800 hover:to-indigo-800">Buscar</button>
-            </div>
-            <p class="text-sm text-gray-500 mt-2">Escribe palabras clave para filtrar la lista de videos.</p>
+    <!-- Navegación (MISMA que en index.html) -->
+    <header class="bg-white shadow-sm border-b sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-indigo-700 to-blue-800 rounded-lg flex items-center justify-center text-white font-bold">AS</div>
+                <div>
+                    <h1 class="text-xl font-bold text-gray-900">ASEFIP</h1>
+                    <p class="text-xs text-gray-600">Portal de Filosofía Peruana</p>
+                </div>
+            </a>
+            <nav class="hidden md:flex space-x-1">
+                <a href="index.html" class="px-4 py-2 font-medium text-gray-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg">Inicio</a>
+                <a href="aprender.html" class="px-4 py-2 font-medium text-blue-700 border-b-2 border-blue-700">Aprender</a>
+                <a href="investigar.html" class="px-4 py-2 font-medium text-gray-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg">Investigar</a>
+                <a href="comunidad.html" class="px-4 py-2 font-medium text-gray-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg">Comunidad</a>
+                <a href="recursos.html" class="px-4 py-2 font-medium text-gray-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg">Recursos</a>
+            </nav>
+            <button id="menuBtn" class="md:hidden text-2xl text-gray-700">☰</button>
         </div>
-    </section>
-
-    <!-- Sección: Introducción a la Filosofía -->
-    <section class="mb-16">
-        <div class="flex items-center justify-between mb-8">
-            <h3 class="text-3xl font-bold text-gray-900">📚 Introducción a la Filosofía</h3>
-            <span class="bg-blue-100 text-blue-800 text-sm font-semibold px-4 py-2 rounded-full">Fundamentos</span>
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t px-4 py-3">
+            <a href="index.html" class="block py-3 px-2 text-gray-700 hover:bg-gray-100 rounded">Inicio</a>
+            <a href="aprender.html" class="block py-3 px-2 font-medium text-blue-700 bg-blue-50 rounded">Aprender</a>
+            <a href="investigar.html" class="block py-3 px-2 text-gray-700 hover:bg-gray-100 rounded">Investigar</a>
+            <a href="comunidad.html" class="block py-3 px-2 text-gray-700 hover:bg-gray-100 rounded">Comunidad</a>
+            <a href="recursos.html" class="block py-3 px-2 text-gray-700 hover:bg-gray-100 rounded">Recursos</a>
         </div>
-        <p class="text-gray-600 mb-10 text-lg">¿Qué es la filosofía y por qué importa? Estos videos sentarán las bases de tu pensamiento crítico y te presentarán las grandes preguntas.</p>
+    </header>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Video 1 -->
-            <div class="video-card video-item bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200">
-                <a href="https://youtu.be/fymoy64ufGc" target="_blank">
-                    <img src="https://img.youtube.com/vi/fymoy64ufGc/maxresdefault.jpg" alt="Miniatura del video: Introducción a la filosofía" class="w-full h-48 object-cover">
-                </a>
-                <div class="p-6">
-                    <h4 class="font-bold text-xl mb-2">Introducción a la filosofía - Clase de Arturo Romero Contreras</h4>
-                    <p class="text-sm text-gray-500 mb-4">1 Febrero 2025</p>
-                    <p class="text-gray-700 mb-6">Una clase magistral que abre el panorama sobre qué significa filosofar y cuál es su relevancia en el mundo contemporáneo.</p>
-                    <a href="https://youtu.be/fymoy64ufGc" target="_blank" class="block w-full text-center py-3 bg-gradient-to-r from-red-600 to-red-700 text-white font-bold rounded-lg hover:from-red-700 hover:to-red-800 transition-all">Ver en YouTube</a>
+    <!-- Contenido Principal de la Página "Aprender" -->
+    <main class="max-w-7xl mx-auto px-4 py-8 md:py-12">
+        <!-- Sección de Presentación -->
+        <section class="text-center mb-12">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                Aprende <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-indigo-600">Filosofía</span> desde la Base
+            </h2>
+            <p class="text-xl text-gray-700 max-w-3xl mx-auto mb-10">
+                Esta biblioteca está diseñada para guiarte paso a paso. Comienza con los conceptos fundamentales y explora temas más complejos a tu propio ritmo. Cada video ha sido seleccionado por su claridad y valor educativo.
+            </p>
+            <div class="inline-flex items-center bg-blue-100 text-blue-800 px-4 py-3 rounded-xl font-medium">
+                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                Recomendación: Sigue el orden de las categorías para un aprendizaje estructurado.
+            </div>
+        </section>
+
+        <!-- Filtros por Categoría -->
+        <section class="mb-12">
+            <h3 class="text-2xl font-bold mb-6 text-gray-800">Explorar por Categoría</h3>
+            <div class="flex flex-wrap gap-3 mb-8" id="filtrosCategoria">
+                <button class="filtro-categoria px-5 py-2.5 bg-white border-2 border-blue-200 text-blue-700 font-semibold rounded-xl hover:bg-blue-50 hover:border-blue-300 filtro-activo" data-categoria="todas">
+                    Todas 🎬
+                </button>
+                <button class="filtro-categoria px-5 py-2.5 bg-white border-2 border-blue-200 text-blue-700 font-semibold rounded-xl hover:bg-blue-50 hover:border-blue-300" data-categoria="introduccion">
+                    Introducción 📚
+                </button>
+                <button class="filtro-categoria px-5 py-2.5 bg-white border-2 border-blue-200 text-blue-700 font-semibold rounded-xl hover:bg-blue-50 hover:border-blue-300" data-categoria="historia">
+                    Historia 📖
+                </button>
+                <button class="filtro-categoria px-5 py-2.5 bg-white border-2 border-blue-200 text-blue-700 font-semibold rounded-xl hover:bg-blue-50 hover:border-blue-300" data-categoria="etica">
+                    Ética ⚖️
+                </button>
+                <button class="filtro-categoria px-5 py-2.5 bg-white border-2 border-blue-200 text-blue-700 font-semibold rounded-xl hover:bg-blue-50 hover:border-blue-300" data-categoria="mente">
+                    Filosofía de la Mente 🧠
+                </button>
+                <button class="filtro-categoria px-5 py-2.5 bg-white border-2 border-blue-200 text-blue-700 font-semibold rounded-xl hover:bg-blue-50 hover:border-blue-300" data-categoria="especiales">
+                    Temas Especiales 🎯
+                </button>
+            </div>
+            <p class="text-gray-600" id="contadorVideos">Mostrando <span id="totalVideos">0</span> videos disponibles.</p>
+        </section>
+
+        <!-- Grid de Videos (AQUÍ IRÁ TU BIBLIOTECA) -->
+        <section>
+            <h3 class="text-2xl font-bold mb-8 text-gray-800">Biblioteca de Videos Educativos</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="contenedorVideos">
+                <!--
+                ================================================================================
+                INSTRUCCIÓN CRUCIAL: AQUÍ DEBES PEGAR TU BLOQUE ORIGINAL DE VIDEOS.
+                ================================================================================
+                1. Encuentra en tu archivo antiguo TODA la sección de videos.
+                2. Busca el primer div con clase "grid" dentro de <section id="videos">.
+                3. Copia TODO su contenido interno (los múltiples bloques de video-card) y
+                   péguelo aquí, reemplazando este comentario.
+                4. A cada contenedor de video (ej: <div class="bg-white rounded-xl... video-card">),
+                   AÑÁDELE un atributo: data-categoria="introduccion" (o la que corresponda).
+                Ejemplo:
+                <div class="video-card bg-white rounded-xl..." data-categoria="introduccion">
+                -->
+                <p class="text-center text-gray-500 col-span-3 p-8 bg-white rounded-2xl border-2 border-dashed border-blue-200">
+                    🔧 <strong>Zona de carga de videos.</strong><br>
+                    Para restaurar tu biblioteca, pega aquí el código HTML de tus videos, organizados en tarjetas. No olvides añadir el atributo <code>data-categoria</code> a cada una.
+                </p>
+                <!-- Pega tu código arriba de este comentario -->
+                <!-- ================================================================================ -->
+            </div>
+        </section>
+
+        <!-- Sección de Guía de Estudio -->
+        <section class="mt-20 bg-gradient-to-r from-blue-100 to-indigo-100 rounded-3xl p-8 md:p-12">
+            <h3 class="text-3xl font-bold mb-6 text-gray-900">¿Cómo aprovechar al máximo esta biblioteca?</h3>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white/80 p-6 rounded-2xl backdrop-blur-sm">
+                    <div class="text-3xl mb-4">1️⃣</div>
+                    <h4 class="font-bold text-xl mb-3">Comienza por lo Básico</h4>
+                    <p class="text-gray-700">Ve primero los videos de <strong>Introducción</strong>. Entender los conceptos fundamentales te dará las herramientas para abordar temas más complejos.</p>
+                </div>
+                <div class="bg-white/80 p-6 rounded-2xl backdrop-blur-sm">
+                    <div class="text-3xl mb-4">2️⃣</div>
+                    <h4 class="font-bold text-xl mb-3">Toma Notas y Reflexiona</h4>
+                    <p class="text-gray-700">Pausa el video para anotar ideas clave. Al final, pregúntate: ¿Qué aprendí? ¿Con qué estoy de acuerdo o en desacuerdo? ¿Cómo se aplica esto?</p>
+                </div>
+                <div class="bg-white/80 p-6 rounded-2xl backdrop-blur-sm">
+                    <div class="text-3xl mb-4">3️⃣</div>
+                    <h4 class="font-bold text-xl mb-3">Profundiza y Conecta</h4>
+                    <p class="text-gray-700">Usa los temas vistos como puente para explorar la sección <a href="investigar.html" class="text-blue-700 underline font-medium">Investigar</a>. Busca artículos o fuentes primarias sobre lo que más te interese.</p>
                 </div>
             </div>
-            <!-- Video 2 -->
-            <div class="video-card video-item bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200">
-                <a href="https://youtu.be/EtB9MBNNVO4" target="_blank">
-                    <img src="https://img.youtube.com/vi/EtB9MBNNVO4/maxresdefault.jpg" alt="Miniatura del video: Introducción a la Filosofía - Parte 2" class="w-full h-48 object-cover">
-                </a>
-                <div class="p-6">
-                    <h4 class="font-bold text-xl mb-2">Introducción a la Filosofía - Parte 2</h4>
-                    <p class="text-sm text-gray-500 mb-4">2024</p>
-                    <p class="text-gray-700 mb-6">Profundización en las ramas principales de la filosofía: metafísica, epistemología, ética y lógica.</p>
-                    <a href="https://youtu.be/EtB9MBNNVO4" target="_blank" class="block w-full text-center py-3 bg-gradient-to-r from-red-600 to-red-700 text-white font-bold rounded-lg hover:from-red-700 hover:to-red-800 transition-all">Ver en YouTube</a>
-                </div>
-            </div>
-            <!-- Video 3 - Añade más videos aquí siguiendo la misma estructura -->
+        </section>
+    </main>
+
+    <!-- Pie de Página -->
+    <footer class="bg-gray-900 text-white mt-20 py-10">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h3 class="text-2xl font-bold mb-2">ASEFIP</h3>
+            <p class="text-gray-400 mb-6">Portal de referencia para la filosofía en el Perú.</p>
+            <p class="text-gray-500 text-sm">© 2024 - 2025 ASEFIP. Proyecto educativo sin fines de lucro.</p>
         </div>
-    </section>
+    </footer>
 
-    <!-- Sección: Filosofía de la Mente -->
-    <section class="mb-16">
-        <div class="flex items-center justify-between mb-8">
-            <h3 class="text-3xl font-bold text-gray-900">🧠 Filosofía de la Mente</h3>
-            <span class="bg-purple-100 text-purple-800 text-sm font-semibold px-4 py-2 rounded-full">Conciencia & Cognición</span>
-        </div>
-        <p class="text-gray-600 mb-10 text-lg">¿Qué es la mente? ¿Cómo se relaciona con el cerebro? Explora el misterio de la conciencia, la inteligencia y la subjetividad.</p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Video 1 de esta sección -->
-            <div class="video-card video-item bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200">
-                <a href="https://youtu.be/NQR3mKJux8M" target="_blank">
-                    <img src="https://img.youtube.com/vi/NQR3mKJux8M/maxresdefault.jpg" alt="Miniatura: Filosofía de la mente: El problema mente-cerebro" class="w-full h-48 object-cover">
-                </a>
-                <div class="p-6">
-                    <h4 class="font-bold text-xl mb-2">Filosofía de la mente: El problema mente-cerebro</h4>
-                    <p class="text-sm text-gray-500 mb-4">23 Marzo 2024</p>
-                    <p class="text-gray-700 mb-6">Un análisis claro del llamado "problema difícil" de la conciencia y las diferentes posturas filosóficas al respecto.</p>
-                    <a href="https://youtu.be/NQR3mKJux8M" target="_blank" class="block w-full text-center py-3 bg-gradient-to-r from-red-600 to-red-700 text-white font-bold rounded-lg hover:from-red-700 hover:to-red-800 transition-all">Ver en YouTube</a>
-                </div>
-            </div>
-            <!-- Video 2 de esta sección -->
-            <div class="video-card video-item bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200">
-                <a href="https://youtu.be/50r4sgpuvVs" target="_blank">
-                    <img src="https://img.youtube.com/vi/50r4sgpuvVs/maxresdefault.jpg" alt="Miniatura: Filosofía de la Mente - Parte 2" class="w-full h-48 object-cover">
-                </a>
-                <div class="p-6">
-                    <h4 class="font-bold text-xl mb-2">Filosofía de la Mente - Parte 2</h4>
-                    <p class="text-sm text-gray-500 mb-4">2024</p>
-                    <p class="text-gray-700 mb-6">Continuación del debate, explorando el funcionalismo, el externalismo y las implicaciones de la IA.</p>
-                    <a href="https://youtu.be/50r4sgpuvVs" target="_blank" class="block w-full text-center py-3 bg-gradient-to-r from-red-600 to-red-700 text-white font-bold rounded-lg hover:from-red-700 hover:to-red-800 transition-all">Ver en YouTube</a>
-                </div>
-            </div>
-            <!-- Añade más videos de esta categoría -->
-        </div>
-    </section>
-
-    <!-- (SECCIONES ADICIONALES: Aquí puedes pegar los bloques de "Filosofía Política y Ética", "Historia de la Filosofía" y "Temas Especiales" de tu código original) -->
-    <section class="mb-16">
-        <h3 class="text-3xl font-bold mb-8 text-gray-900">⚖️ Filosofía Política y Ética</h3>
-        <p class="text-gray-600 mb-10 text-lg">Sobre la justicia, la libertad, el poder y cómo debemos vivir juntos. Análisis de los fundamentos de la sociedad y la moral.</p>
-        <!-- Pega aquí la grid de videos de "Filosofía Política y Ética" de tu HTML anterior -->
-        <p class="text-center text-gray-500 p-8 bg-gray-100 rounded-2xl">🔧 <em>Pega aquí el bloque de videos de "Filosofía Política y Ética" de tu código anterior.</em></p>
-    </section>
-
-    <section class="mb-16">
-        <h3 class="text-3xl font-bold mb-8 text-gray-900">📖 Historia de la Filosofía</h3>
-        <p class="text-gray-600 mb-10 text-lg">Un viaje a través del pensamiento occidental y no occidental, conociendo a sus protagonistas y las ideas que cambiaron el mundo.</p>
-        <!-- Pega aquí la grid de videos de "Historia de la Filosofía" de tu HTML anterior -->
-        <p class="text-center text-gray-500 p-8 bg-gray-100 rounded-2xl">🔧 <em>Pega aquí el bloque de videos de "Historia de la Filosofía" de tu código anterior.</em></p>
-    </section>
-
-    <!-- Mensaje Final -->
-    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-3xl p-10 text-center mt-16">
-        <h4 class="text-2xl font-bold mb-4">¿No encuentras un tema específico?</h4>
-        <p class="text-gray-700 mb-6">Nuestra biblioteca está en constante crecimiento. Si hay un autor o problema filosófico que te interese y no está cubierto, <a href="comunidad.html" class="text-blue-700 font-semibold underline hover:text-blue-900">sugiérenoslo</a>.</p>
-        <a href="recursos.html" class="inline-block px-8 py-4 bg-white border-2 border-blue-700 text-blue-700 font-bold rounded-xl hover:bg-blue-50 text-lg">Explorar más Recursos de Estudio →</a>
-    </div>
-
-</main>
-
-<!-- Pie de Página (Coherente con index.html) -->
-<footer class="bg-gray-900 text-white mt-20 py-10">
-    <div class="max-w-7xl mx-auto px-4 text-center">
-        <h3 class="text-2xl font-bold mb-2">ASEFIP</h3>
-        <p class="text-gray-400 mb-6">Portal de referencia para la filosofía en el Perú.</p>
-        <p class="text-gray-500 text-sm">© 2024 - 2025 ASEFIP. Proyecto educativo sin fines de lucro. Todo el contenido se comparte con fines de estudio y divulgación.</p>
-    </div>
-</footer>
-
-<script>
-    // Script para el menú móvil
-    document.getElementById('menuBtn').addEventListener('click', function() {
-        document.getElementById('mobileMenu').classList.toggle('hidden');
-    });
-
-    // Script para el buscador/filtro de videos
-    function filtrarVideos() {
-        const input = document.getElementById('buscadorVideos');
-        const filter = input.value.toLowerCase();
-        const videos = document.querySelectorAll('.video-item');
-
-        videos.forEach(video => {
-            // Busca en el título del video (dentro de un h4)
-            const titleElement = video.querySelector('h4');
-            const titleText = titleElement ? titleElement.textContent.toLowerCase() : '';
-            // Muestra u oculta según coincida
-            if (titleText.includes(filter)) {
-                video.classList.remove('hidden-by-filter');
-            } else {
-                video.classList.add('hidden-by-filter');
-            }
+    <!-- Scripts para funcionalidad -->
+    <script>
+        // 1. Menú móvil (mismo funcionamiento que index.html)
+        document.getElementById('menuBtn').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
         });
-    }
 
-    // Opcional: Filtrar al escribir (sin botón)
-    document.getElementById('buscadorVideos').addEventListener('keyup', filtrarVideos);
-</script>
+        // 2. Filtrado de videos por categoría
+        const filtros = document.querySelectorAll('.filtro-categoria');
+        const videos = document.querySelectorAll('.video-card'); // Seleccionará tus videos
+        const contadorTotal = document.getElementById('totalVideos');
+        const contadorFiltrado = document.getElementById('contadorVideos');
 
+        // Función para filtrar
+        function filtrarVideos(categoria) {
+            let videosVisibles = 0;
+            videos.forEach(video => {
+                const videoCategoria = video.getAttribute('data-categoria');
+                // Si la categoría es "todas" o coincide, mostrar
+                if (categoria === 'todas' || videoCategoria === categoria) {
+                    video.classList.remove('hidden');
+                    videosVisibles++;
+                } else {
+                    video.classList.add('hidden');
+                }
+            });
+            // Actualizar texto del contador
+            if (categoria === 'todas') {
+                contadorFiltrado.textContent = `Mostrando todos los ${videosVisibles} videos disponibles.`;
+            } else {
+                const nombreCategoria = document.querySelector(`[data-categoria="${categoria}"]`).textContent.trim();
+                contadorFiltrado.textContent = `Mostrando ${videosVisibles} videos de la categoría: ${nombreCategoria}.`;
+            }
+        }
+
+        // Añadir evento a cada botón de filtro
+        filtros.forEach(boton => {
+            boton.addEventListener('click', function() {
+                // Remover clase activa de todos los botones
+                filtros.forEach(b => b.classList.remove('filtro-activo'));
+                // Añadir clase activa al botón clickeado
+                this.classList.add('filtro-activo');
+                // Filtrar videos según la categoría del botón
+                const categoriaSeleccionada = this.getAttribute('data-categoria');
+                filtrarVideos(categoriaSeleccionada);
+            });
+        });
+
+        // Inicializar: Contar y mostrar todos los videos al cargar
+        document.addEventListener('DOMContentLoaded', function() {
+            contadorTotal.textContent = videos.length;
+            filtrarVideos('todas'); // Mostrar todos inicialmente
+        });
+    </script>
 </body>
-  </html>
+</html>
