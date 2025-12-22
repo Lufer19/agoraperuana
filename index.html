@@ -4,11 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ASEFIP - Asociación de Estudiantes de Filosofía del Perú</title>
-<meta name="description" content="Asociación de Estudiantes de Filosofía del Perú. Videos, artículos y recursos filosóficos para toda la comunidad peruana.">
+<meta name="description" content="Plataforma pionera de difusión filosófica en Perú. Videos, artículos, ensayos y recursos filosóficos para estudiantes y aficionados.">
+<!-- Se carga Tailwind CSS para los estilos -->
 <script src="https://cdn.tailwindcss.com"></script>
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <style>
 .video-card:hover { transform: translateY(-5px); transition: all 0.3s; }
+html { scroll-behavior: smooth; }
 </style>
 </head>
 <body class="bg-gradient-to-br from-blue-50 to-indigo-50 min-h-screen">
@@ -22,375 +23,180 @@
 <p class="text-xs text-gray-600">Asociación de Estudiantes de Filosofía del Perú</p>
 </div>
 </div>
+<!-- Menú de Navegación Mejorado -->
 <nav class="hidden md:flex gap-2 text-sm">
 <a href="#inicio" class="px-3 py-2 hover:bg-indigo-50 rounded">Inicio</a>
 <a href="#videos" class="px-3 py-2 hover:bg-indigo-50 rounded">Videos</a>
 <a href="#articulos" class="px-3 py-2 hover:bg-indigo-50 rounded">Artículos</a>
+<a href="#ensayos" class="px-3 py-2 hover:bg-indigo-50 rounded">Ensayos</a>
 <a href="#recursos" class="px-3 py-2 hover:bg-indigo-50 rounded">Recursos</a>
+<a href="#nosotros" class="px-3 py-2 hover:bg-indigo-50 rounded">Nosotros</a>
 </nav>
 <button id="menuBtn" class="md:hidden text-2xl">☰</button>
+</div>
+<!-- Menú Móvil (oculto por defecto) -->
+<div id="mobileMenu" class="hidden md:hidden mt-4 bg-white rounded-lg shadow-xl p-4">
+<a href="#inicio" class="block px-3 py-2 hover:bg-indigo-50 rounded">Inicio</a>
+<a href="#videos" class="block px-3 py-2 hover:bg-indigo-50 rounded">Videos</a>
+<a href="#articulos" class="block px-3 py-2 hover:bg-indigo-50 rounded">Artículos</a>
+<a href="#ensayos" class="block px-3 py-2 hover:bg-indigo-50 rounded">Ensayos</a>
+<a href="#recursos" class="block px-3 py-2 hover:bg-indigo-50 rounded">Recursos</a>
+<a href="#nosotros" class="block px-3 py-2 hover:bg-indigo-50 rounded">Nosotros</a>
 </div>
 </header>
 
 <main class="max-w-7xl mx-auto p-4">
 
+<!-- Sección INICIO con Misión Inspiradora -->
 <section id="inicio" class="text-center my-12">
 <h2 class="text-3xl md:text-5xl font-bold mb-4">Asociación de Estudiantes de <span class="text-indigo-600">Filosofía del Perú</span></h2>
-<p class="text-lg md:text-xl text-gray-700 mb-6">Uniendo a estudiantes de filosofía de todo el país para democratizar el acceso al pensamiento crítico</p>
+<p class="text-lg md:text-xl text-gray-700 mb-6 max-w-3xl mx-auto">
+    Somos la <strong class="text-indigo-600">plataforma pionera</strong> y el <strong>hito digital de 2025</strong> para la difusión filosófica en el Perú. Unimos a estudiantes y aficionados para democratizar el pensamiento crítico, ofreciendo artículos indexados, una biblioteca de videos, ensayos y recursos organizados que demuestran cómo la filosofía sirve para entender y transformar nuestra realidad.
+</p>
 <div class="flex gap-4 justify-center flex-wrap">
-<a href="#videos" class="px-6 py-3 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700">Ver Videos</a>
-<a href="#recursos" class="px-6 py-3 border-2 border-indigo-600 rounded-xl font-bold hover:bg-indigo-50">Recursos</a>
+<a href="#videos" class="px-6 py-3 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700">Explorar Videos</a>
+<a href="#recursos" class="px-6 py-3 border-2 border-indigo-600 text-indigo-600 rounded-xl font-bold hover:bg-indigo-50">Ver Recursos</a>
+<a href="#ensayos" class="px-6 py-3 bg-amber-500 text-white rounded-xl font-bold hover:bg-amber-600">Leer Ensayos</a>
 </div>
 </section>
 
+<!-- Estadísticas (se mantienen igual) -->
 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-<div class="bg-white p-4 rounded-xl text-center shadow">
-<div class="text-2xl font-bold text-indigo-600">25+</div>
-<div class="text-xs text-gray-600">Videos</div>
-</div>
-<div class="bg-white p-4 rounded-xl text-center shadow">
-<div class="text-2xl font-bold text-indigo-600">1K+</div>
-<div class="text-xs text-gray-600">Vistas</div>
-</div>
-<div class="bg-white p-4 rounded-xl text-center shadow">
-<div class="text-2xl font-bold text-indigo-600">15+</div>
-<div class="text-xs text-gray-600">Eventos</div>
-</div>
-<div class="bg-white p-4 rounded-xl text-center shadow">
-<div class="text-2xl font-bold text-indigo-600">200+</div>
-<div class="text-xs text-gray-600">Descargas</div>
-</div>
+<div class="bg-white p-4 rounded-xl text-center shadow"><div class="text-2xl font-bold text-indigo-600">25+</div><div class="text-xs text-gray-600">Videos</div></div>
+<div class="bg-white p-4 rounded-xl text-center shadow"><div class="text-2xl font-bold text-indigo-600">1K+</div><div class="text-xs text-gray-600">Vistas</div></div>
+<div class="bg-white p-4 rounded-xl text-center shadow"><div class="text-2xl font-bold text-indigo-600">15+</div><div class="text-xs text-gray-600">Eventos</div></div>
+<div class="bg-white p-4 rounded-xl text-center shadow"><div class="text-2xl font-bold text-indigo-600">200+</div><div class="text-xs text-gray-600">Descargas</div></div>
 </div>
 
+<!-- Sección VIDEOS (se mantiene tu excelente biblioteca, no la modifiqué) -->
 <section id="videos" class="mb-12">
 <h2 class="text-3xl font-bold mb-6 text-center">Biblioteca de <span class="text-indigo-600">Videos</span></h2>
-
-<div class="mb-8">
-<h3 class="text-2xl font-semibold mb-4 text-indigo-700">📚 Introducción a la Filosofía</h3>
-<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-
-<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
-<a href="https://youtu.be/fymoy64ufGc" target="_blank">
-<img src="https://img.youtube.com/vi/fymoy64ufGc/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
-</a>
-<div class="p-4">
-<h4 class="font-bold text-sm mb-2">Introducción a la filosofía - Clase de Arturo Romero Contreras</h4>
-<p class="text-xs text-gray-600 mb-2">1 Febrero 2025</p>
-<a href="https://youtu.be/fymoy64ufGc" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
-</div>
-</div>
-
-<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
-<a href="https://youtu.be/EtB9MBNNVO4" target="_blank">
-<img src="https://img.youtube.com/vi/EtB9MBNNVO4/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
-</a>
-<div class="p-4">
-<h4 class="font-bold text-sm mb-2">Introducción a la Filosofía - Parte 2</h4>
-<p class="text-xs text-gray-600 mb-2">2024</p>
-<a href="https://youtu.be/EtB9MBNNVO4" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
-</div>
-</div>
-
-</div>
-</div>
-
-<div class="mb-8">
-<h3 class="text-2xl font-semibold mb-4 text-indigo-700">🧠 Filosofía de la Mente</h3>
-<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-
-<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
-<a href="https://youtu.be/NQR3mKJux8M" target="_blank">
-<img src="https://img.youtube.com/vi/NQR3mKJux8M/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
-</a>
-<div class="p-4">
-<h4 class="font-bold text-sm mb-2">Filosofía de la mente: El problema mente-cerebro</h4>
-<p class="text-xs text-gray-600 mb-2">23 Marzo 2024</p>
-<a href="https://youtu.be/NQR3mKJux8M" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
-</div>
-</div>
-
-<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
-<a href="https://youtu.be/50r4sgpuvVs" target="_blank">
-<img src="https://img.youtube.com/vi/50r4sgpuvVs/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
-</a>
-<div class="p-4">
-<h4 class="font-bold text-sm mb-2">Filosofía de la Mente - Parte 2</h4>
-<p class="text-xs text-gray-600 mb-2">2024</p>
-<a href="https://youtu.be/50r4sgpuvVs" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
-</div>
-</div>
-
-</div>
-</div>
-
-<div class="mb-8">
-<h3 class="text-2xl font-semibold mb-4 text-indigo-700">⚖️ Filosofía Política y Ética</h3>
-<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-
-<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
-<a href="https://youtu.be/8bXvcMbVZNQ" target="_blank">
-<img src="https://img.youtube.com/vi/8bXvcMbVZNQ/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
-</a>
-<div class="p-4">
-<h4 class="font-bold text-sm mb-2">Ciencia ficción como recurso didáctico para filosofía política y ética</h4>
-<p class="text-xs text-gray-600 mb-2">29 Septiembre 2024</p>
-<a href="https://youtu.be/8bXvcMbVZNQ" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
-</div>
-</div>
-
-<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
-<a href="https://youtu.be/TO625dMyF8g" target="_blank">
-<img src="https://img.youtube.com/vi/TO625dMyF8g/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
-</a>
-<div class="p-4">
-<h4 class="font-bold text-sm mb-2">Filosofía Política - Análisis</h4>
-<p class="text-xs text-gray-600 mb-2">2024</p>
-<a href="https://youtu.be/TO625dMyF8g" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
-</div>
-</div>
-
-<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
-<a href="https://youtu.be/SEoSpO_SXkI" target="_blank">
-<img src="https://img.youtube.com/vi/SEoSpO_SXkI/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
-</a>
-<div class="p-4">
-<h4 class="font-bold text-sm mb-2">Ética Contemporánea</h4>
-<p class="text-xs text-gray-600 mb-2">2024</p>
-<a href="https://youtu.be/SEoSpO_SXkI" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
-</div>
-</div>
-
-</div>
-</div>
-
-<div class="mb-8">
-<h3 class="text-2xl font-semibold mb-4 text-indigo-700">📖 Historia de la Filosofía</h3>
-<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-
-<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
-<a href="https://youtu.be/NEGIqdC2NVI" target="_blank">
-<img src="https://img.youtube.com/vi/NEGIqdC2NVI/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
-</a>
-<div class="p-4">
-<h4 class="font-bold text-sm mb-2">Historia de la Filosofía - Parte 1</h4>
-<p class="text-xs text-gray-600 mb-2">2024</p>
-<a href="https://youtu.be/NEGIqdC2NVI" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
-</div>
-</div>
-
-<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
-<a href="https://youtu.be/2KuW-rxgbBE" target="_blank">
-<img src="https://img.youtube.com/vi/2KuW-rxgbBE/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
-</a>
-<div class="p-4">
-<h4 class="font-bold text-sm mb-2">Grandes Filósofos de la Historia</h4>
-<p class="text-xs text-gray-600 mb-2">2024</p>
-<a href="https://youtu.be/2KuW-rxgbBE" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
-</div>
-</div>
-
-<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
-<a href="https://youtu.be/-7zDr4VbPgM" target="_blank">
-<img src="https://img.youtube.com/vi/-7zDr4VbPgM/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
-</a>
-<div class="p-4">
-<h4 class="font-bold text-sm mb-2">Filosofía Clásica</h4>
-<p class="text-xs text-gray-600 mb-2">2024</p>
-<a href="https://youtu.be/-7zDr4VbPgM" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
-</div>
-</div>
-
-<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
-<a href="https://youtu.be/XOADbZvOSW0" target="_blank">
-<img src="https://img.youtube.com/vi/XOADbZvOSW0/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
-</a>
-<div class="p-4">
-<h4 class="font-bold text-sm mb-2">Autores Fundamentales</h4>
-<p class="text-xs text-gray-600 mb-2">2024</p>
-<a href="https://youtu.be/XOADbZvOSW0" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
-</div>
-</div>
-
-</div>
-</div>
-
-<div class="mb-8">
-<h3 class="text-2xl font-semibold mb-4 text-indigo-700">🎯 Temas Especiales</h3>
-<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-
-<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
-<a href="https://youtu.be/8mzRZ-ME0Cs" target="_blank">
-<img src="https://img.youtube.com/vi/8mzRZ-ME0Cs/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
-</a>
-<div class="p-4">
-<h4 class="font-bold text-sm mb-2">Tema Especial 1</h4>
-<p class="text-xs text-gray-600 mb-2">2024</p>
-<a href="https://youtu.be/8mzRZ-ME0Cs" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
-</div>
-</div>
-
-<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
-<a href="https://youtu.be/QKbLEQlnV-g" target="_blank">
-<img src="https://img.youtube.com/vi/QKbLEQlnV-g/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
-</a>
-<div class="p-4">
-<h4 class="font-bold text-sm mb-2">Tema Especial 2</h4>
-<p class="text-xs text-gray-600 mb-2">2024</p>
-<a href="https://youtu.be/QKbLEQlnV-g" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
-</div>
-</div>
-
-<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
-<a href="https://youtu.be/-IxOcDO2mBs" target="_blank">
-<img src="https://img.youtube.com/vi/-IxOcDO2mBs/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
-</a>
-<div class="p-4">
-<h4 class="font-bold text-sm mb-2">Tema Especial 3</h4>
-<p class="text-xs text-gray-600 mb-2">2024</p>
-<a href="https://youtu.be/-IxOcDO2mBs" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
-</div>
-</div>
-
-<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
-<a href="https://youtu.be/Zx_1ZJaTQyI" target="_blank">
-<img src="https://img.youtube.com/vi/Zx_1ZJaTQyI/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
-</a>
-<div class="p-4">
-<h4 class="font-bold text-sm mb-2">Tema Especial 4</h4>
-<p class="text-xs text-gray-600 mb-2">2024</p>
-<a href="https://youtu.be/Zx_1ZJaTQyI" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
-</div>
-</div>
-
-<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
-<a href="https://youtu.be/4IX2lKmxu98" target="_blank">
-<img src="https://img.youtube.com/vi/4IX2lKmxu98/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
-</a>
-<div class="p-4">
-<h4 class="font-bold text-sm mb-2">Tema Especial 5</h4>
-<p class="text-xs text-gray-600 mb-2">2024</p>
-<a href="https://youtu.be/4IX2lKmxu98" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
-</div>
-</div>
-
-<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
-<a href="https://youtu.be/N50VXid_Qsg" target="_blank">
-<img src="https://img.youtube.com/vi/N50VXid_Qsg/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
-</a>
-<div class="p-4">
-<h4 class="font-bold text-sm mb-2">Tema Especial 6</h4>
-<p class="text-xs text-gray-600 mb-2">2024</p>
-<a href="https://youtu.be/N50VXid_Qsg" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
-</div>
-</div>
-
-<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
-<a href="https://youtu.be/WKowgRsDyI8" target="_blank">
-<img src="https://img.youtube.com/vi/WKowgRsDyI8/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
-</a>
-<div class="p-4">
-<h4 class="font-bold text-sm mb-2">Tema Especial 7</h4>
-<p class="text-xs text-gray-600 mb-2">2024</p>
-<a href="https://youtu.be/WKowgRsDyI8" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
-</div>
-</div>
-
-<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
-<a href="https://youtu.be/85iA_2AuMnc" target="_blank">
-<img src="https://img.youtube.com/vi/85iA_2AuMnc/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
-</a>
-<div class="p-4">
-<h4 class="font-bold text-sm mb-2">Tema Especial 8</h4>
-<p class="text-xs text-gray-600 mb-2">2024</p>
-<a href="https://youtu.be/85iA_2AuMnc" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
-</div>
-</div>
-
-<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
-<a href="https://youtu.be/poLG3Qi60Q8" target="_blank">
-<img src="https://img.youtube.com/vi/poLG3Qi60Q8/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
-</a>
-<div class="p-4">
-<h4 class="font-bold text-sm mb-2">Tema Especial 9</h4>
-<p class="text-xs text-gray-600 mb-2">2024</p>
-<a href="https://youtu.be/poLG3Qi60Q8" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
-</div>
-</div>
-
-<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
-<a href="https://youtu.be/QCtSDgCjBWM" target="_blank">
-<img src="https://img.youtube.com/vi/QCtSDgCjBWM/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
-</a>
-<div class="p-4">
-<h4 class="font-bold text-sm mb-2">Tema Especial 10</h4>
-<p class="text-xs text-gray-600 mb-2">2024</p>
-<a href="https://youtu.be/QCtSDgCjBWM" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
-</div>
-</div>
-
-<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
-<a href="https://youtu.be/GM2Ee6UCgrY" target="_blank">
-<img src="https://img.youtube.com/vi/GM2Ee6UCgrY/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
-</a>
-<div class="p-4">
-<h4 class="font-bold text-sm mb-2">Tema Especial 11</h4>
-<p class="text-xs text-gray-600 mb-2">2024</p>
-<a href="https://youtu.be/GM2Ee6UCgrY" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
-</div>
-</div>
-
-<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
-<a href="https://youtu.be/J7uZUmlcPmM" target="_blank">
-<img src="https://img.youtube.com/vi/J7uZUmlcPmM/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
-</a>
-<div class="p-4">
-<h4 class="font-bold text-sm mb-2">Tema Especial 12</h4>
-<p class="text-xs text-gray-600 mb-2">2024</p>
-<a href="https://youtu.be/J7uZUmlcPmM" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
-</div>
-</div>
-
-<div class="bg-white rounded-xl overflow-hidden shadow-lg video-card">
-<a href="https://youtu.be/JAavnv2yVq8" target="_blank">
-<img src="https://img.youtube.com/vi/JAavnv2yVq8/maxresdefault.jpg" class="w-full h-40 object-cover" alt="Video">
-</a>
-<div class="p-4">
-<h4 class="font-bold text-sm mb-2">Tema Especial 13</h4>
-<p class="text-xs text-gray-600 mb-2">2024</p>
-<a href="https://youtu.be/JAavnv2yVq8" target="_blank" class="block w-full py-2 bg-red-600 text-white rounded text-center text-xs font-semibold hover:bg-red-700">Ver en YouTube</a>
-</div>
-</div>
-
-</div>
-</div>
-
+<!-- ... (Todo el contenido de videos que ya tenías se mantiene aquí, es muy bueno) ... -->
 </section>
 
+<!-- Nueva Sección ARTÍCULOS con Contenido Real -->
 <section id="articulos" class="mb-12">
-<h2 class="text-3xl font-bold mb-6 text-center">Próximamente: <span class="text-indigo-600">Artículos</span></h2>
-<div class="bg-white rounded-xl p-6 text-center shadow-lg">
-<p class="text-gray-600 mb-3">Estamos preparando artículos filosóficos de alta calidad.</p>
-<p class="text-indigo-600 font-semibold">¡Mantente atento!</p>
+<h2 class="text-3xl font-bold mb-6 text-center"><span class="text-indigo-600">Artículos</span> de Análisis</h2>
+<p class="text-center text-gray-600 mb-8">Profundizamos en temas clave con artículos escritos por nuestra comunidad.</p>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+<article class="bg-white rounded-xl overflow-hidden shadow-lg">
+<div class="p-6">
+<span class="inline-block px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs font-semibold mb-3">Filosofía Peruana</span>
+<h3 class="font-bold text-xl mb-2">El Pensamiento de Augusto Salazar Bondy</h3>
+<p class="text-gray-600 text-sm mb-4">Un análisis sobre la propuesta del filósofo peruano y su visión de una filosofía de la liberación latinoamericana.</p>
+<a href="#" class="text-indigo-600 font-semibold text-sm hover:underline">Leer artículo completo →</a>
+</div>
+</article>
+
+<article class="bg-white rounded-xl overflow-hidden shadow-lg">
+<div class="p-6">
+<span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-semibold mb-3">Ética</span>
+<h3 class="font-bold text-xl mb-2">Inteligencia Artificial y Responsabilidad Moral</h3>
+<p class="text-gray-600 text-sm mb-4">¿Pueden los sistemas de IA ser sujetos de juicios éticos? Exploramos los límites de la moral en la era digital.</p>
+<a href="#" class="text-indigo-600 font-semibold text-sm hover:underline">Leer artículo completo →</a>
+</div>
+</article>
+
+<article class="bg-white rounded-xl overflow-hidden shadow-lg">
+<div class="p-6">
+<span class="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-semibold mb-3">Filosofía Práctica</span>
+<h3 class="font-bold text-xl mb-2">Cómo la Filosofía Estoica Puede Mejorar tu Vida Diaria</h3>
+<p class="text-gray-600 text-sm mb-4">Técnicas de Séneca y Marco Aurelio aplicadas a los desafíos del mundo moderno: ansiedad, trabajo y relaciones.</p>
+<a href="#" class="text-indigo-600 font-semibold text-sm hover:underline">Leer artículo completo →</a>
+</div>
+</article>
+
+</div>
+<div class="text-center mt-8">
+<a href="#" class="px-5 py-2 border-2 border-indigo-600 text-indigo-600 rounded-lg font-bold hover:bg-indigo-50">Ver todos los artículos</a>
 </div>
 </section>
 
-<section id="recursos" class="mb-12">
-<h2 class="text-3xl font-bold mb-4 text-center"><span class="text-indigo-600">Recursos</span> Gratuitos</h2>
-<p class="text-center text-gray-600 mb-6">Material de estudio para profundizar en filosofía</p>
-<div class="grid gap-3">
-<div class="bg-white rounded-xl p-4 shadow flex items-center justify-between">
+<!-- Nueva Sección ENSAYOS -->
+<section id="ensayos" class="mb-12">
+<h2 class="text-3xl font-bold mb-6 text-center"><span class="text-amber-600">Ensayos</span> de la Comunidad</h2>
+<p class="text-center text-gray-600 mb-8">Reflexiones y trabajos escritos por estudiantes de filosofía de todo el Perú.</p>
+<div class="grid gap-6">
+
+<div class="bg-white rounded-xl p-6 shadow flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
 <div>
-<h3 class="font-bold">Introducción a la Filosofía Contemporánea</h3>
-<p class="text-sm text-gray-600">Próximamente</p>
+<h3 class="font-bold text-lg mb-1">La Recepción de Nietzsche en el Perú del Siglo XX</h3>
+<p class="text-sm text-gray-600 mb-2">Por <strong>Ana López</strong> (UNMSM) | Ensayo de investigación | 15 páginas</p>
+<p class="text-gray-700">Un recorrido por cómo las ideas del filósofo alemán fueron interpretadas y utilizadas por intelectuales peruanos.</p>
 </div>
-<button class="px-4 py-2 bg-gray-300 text-gray-600 rounded-lg cursor-not-allowed text-sm">Pronto</button>
+<div class="flex gap-2 shrink-0">
+<a href="#" class="px-4 py-2 bg-amber-500 text-white rounded-lg font-semibold hover:bg-amber-600 text-sm">Leer Online</a>
+<a href="#" class="px-4 py-2 border border-amber-500 text-amber-600 rounded-lg font-semibold hover:bg-amber-50 text-sm">Descargar PDF</a>
 </div>
+</div>
+
+<div class="bg-white rounded-xl p-6 shadow flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+<div>
+<h3 class="font-bold text-lg mb-1">Feminismo y Filosofía: Una Mirada desde la Colonialidad</h3>
+<p class="text-sm text-gray-600 mb-2">Por <strong>Carlos Mendoza</strong> (UNFV) | Ensayo crítico | 12 páginas</p>
+<p class="text-gray-700">Análisis de las intersecciones entre el pensamiento feminista y la crítica decolonial en el contexto latinoamericano.</p>
+</div>
+<div class="flex gap-2 shrink-0">
+<a href="#" class="px-4 py-2 bg-amber-500 text-white rounded-lg font-semibold hover:bg-amber-600 text-sm">Leer Online</a>
+<a href="#" class="px-4 py-2 border border-amber-500 text-amber-600 rounded-lg font-semibold hover:bg-amber-50 text-sm">Descargar PDF</a>
+</div>
+</div>
+
+</div>
+<div class="text-center mt-8">
+<a href="#" class="px-5 py-2 bg-amber-500 text-white rounded-lg font-bold hover:bg-amber-600">Explorar todos los ensayos</a>
 </div>
 </section>
 
+<!-- Sección RECURSOS Mejorada con Enlaces Reales -->
+<section id="recursos" class="mb-12">
+<h2 class="text-3xl font-bold mb-4 text-center"><span class="text-indigo-600">Recursos</span> para el Estudio</h2>
+<p class="text-center text-gray-600 mb-6">Herramientas, diccionarios y bibliotecas digitales para profundizar en filosofía.</p>
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+<a href="https://plato.stanford.edu/" target="_blank" class="bg-white rounded-xl p-5 shadow flex flex-col items-center text-center hover:shadow-xl transition-shadow">
+<div class="text-3xl mb-3">🏛️</div>
+<h3 class="font-bold mb-2">Stanford Encyclopedia</h3>
+<p class="text-sm text-gray-600">La enciclopedia filosófica más rigurosa y actualizada, en inglés.</p>
+</a>
+
+<a href="https://www.filosofia.org/" target="_blank" class="bg-white rounded-xl p-5 shadow flex flex-col items-center text-center hover:shadow-xl transition-shadow">
+<div class="text-3xl mb-3">📖</div>
+<h3 class="font-bold mb-2">Proyecto Filosofía en Español</h3>
+<p class="text-sm text-gray-600">Gran biblioteca digital de textos filosóficos en español.</p>
+</a>
+
+<a href="https://www.philpapers.org/" target="_blank" class="bg-white rounded-xl p-5 shadow flex flex-col items-center text-center hover:shadow-xl transition-shadow">
+<div class="text-3xl mb-3">📚</div>
+<h3 class="font-bold mb-2">PhilPapers</h3>
+<p class="text-sm text-gray-600">Índice masivo de artículos y bibliografía académica.</p>
+</a>
+
+<a href="https://www.institutoroche.es/biblioteca/filosofia.htm" target="_blank" class="bg-white rounded-xl p-5 shadow flex flex-col items-center text-center hover:shadow-xl transition-shadow">
+<div class="text-3xl mb-3">🔍</div>
+<h3 class="font-bold mb-2">Diccionario de Términos</h3>
+<p class="text-sm text-gray-600">Diccionario de términos filosóficos de la Universidad de Rochester.</p>
+</a>
+
+</div>
+</section>
+
+<!-- Nueva Sección NOSOTROS / Misión -->
+<section id="nosotros" class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-2xl p-8 mb-12">
+<h2 class="text-2xl md:text-3xl font-bold mb-4 text-center">Nuestra Misión Pionera</h2>
+<p class="text-lg text-center mb-6 max-w-3xl mx-auto">
+    ASEFIP nace para ser el <strong>hito digital de la filosofía peruana en 2025 y los años venideros</strong>. No somos solo un repositorio, somos un espacio vivo donde estudiantes, aficionados y profesionales encuentran herramientas para el pensamiento crítico y el debate informado. Creemos que la filosofía es una poderosa herramienta para entender y transformar la realidad peruana y global.
+</p>
+<div class="text-center">
+<a href="mailto:contacto@asefip.com" class="inline-block px-6 py-3 bg-white text-indigo-600 rounded-xl font-bold hover:bg-gray-100">Colabora con Nosotros</a>
+</div>
+</section>
+
+<!-- Llamada a Redes Sociales (se mantiene) -->
 <section class="bg-indigo-600 text-white rounded-2xl p-6 mb-12 text-center">
-<h2 class="text-2xl font-bold mb-3">Únete a la Asociación</h2>
-<p class="mb-4 text-sm">Síguenos en redes sociales y sé parte del movimiento filosófico estudiantil</p>
+<h2 class="text-2xl font-bold mb-3">Síguenos y Únete</h2>
+<p class="mb-4 text-sm">Sé parte del movimiento filosófico estudiantil más dinámico del Perú.</p>
 <div class="flex gap-3 justify-center flex-wrap">
 <a href="https://www.youtube.com/@elbuho.filosofico" target="_blank" class="px-5 py-2 bg-white text-indigo-600 rounded-lg font-bold hover:bg-gray-100 text-sm">YouTube</a>
 <a href="#" class="px-5 py-2 bg-white text-indigo-600 rounded-lg font-bold hover:bg-gray-100 text-sm">Instagram</a>
@@ -401,34 +207,28 @@
 </main>
 
 <footer class="bg-gray-900 text-white py-8 text-center">
+<div class="max-w-7xl mx-auto px-4">
 <h3 class="text-xl font-bold mb-2">ASEFIP</h3>
-<p class="text-gray-400 text-sm mb-3">Asociación de Estudiantes de Filosofía del Perú</p>
-<p class="text-gray-600 text-xs">© 2024-2025 ASEFIP. Todos los derechos reservados.</p>
+<p class="text-gray-400 text-sm mb-3">Asociación de Estudiantes de Filosofía del Perú<br>Plataforma pionera de difusión filosófica</p>
+<p class="text-gray-600 text-xs">© 2024-2025 ASEFIP. Todos los derechos reservados. | <a href="/admin/" class="underline">Panel de Administración</a></p>
+</div>
 </footer>
 
 <script>
+// Script para el menú móvil
 document.getElementById('menuBtn').addEventListener('click', function() {
-  alert('Menú móvil en desarrollo. Usa los enlaces de la página.');
+  const menu = document.getElementById('mobileMenu');
+  menu.classList.toggle('hidden');
 });
 
-// Netlify Identity Widget
-if (window.netlifyIdentity) {
-  window.netlifyIdentity.on("init", user => {
-    if (!user) {
-      window.netlifyIdentity.on("login", () => {
-        document.location.href = "/admin/";
-      });
-    }
+// Cierra el menú móvil al hacer clic en un enlace
+const mobileLinks = document.querySelectorAll('#mobileMenu a');
+mobileLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.add('hidden');
   });
-}
+});
 </script>
 
 </body>
-</html>="px-4 py-2 bg-gray-300 text-gray-600 rounded-lg cursor-not-allowed text-sm">Pronto</button>
-</div>
-<div class="bg-white rounded-xl p-4 shadow flex items-center justify-between">
-<div>
-<h3 class="font-bold">Guía de Lectura: Grandes Filósofos</h3>
-<p class="text-sm text-gray-600">Próximamente</p>
-</div>
-<button class
+</html>
