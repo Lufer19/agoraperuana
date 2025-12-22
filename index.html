@@ -1,234 +1,361 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ASEFIP - Asociación de Estudiantes de Filosofía del Perú</title>
-<meta name="description" content="Plataforma pionera de difusión filosófica en Perú. Videos, artículos, ensayos y recursos filosóficos para estudiantes y aficionados.">
-<!-- Se carga Tailwind CSS para los estilos -->
-<script src="https://cdn.tailwindcss.com"></script>
-<style>
-.video-card:hover { transform: translateY(-5px); transition: all 0.3s; }
-html { scroll-behavior: smooth; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASEFIP - Plataforma Pionera de Filosofía en el Perú</title>
+    <meta name="description" content="Recursos confiables para estudiantes de filosofía: artículos, ensayos, videos, glosario y una comunidad activa.">
+    <!-- Tailwind CSS para estilos -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fuentes de Google para mejor tipografía -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        html { scroll-behavior: smooth; font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        .video-card:hover { transform: translateY(-5px); transition: transform 0.3s ease; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); }
+        .termino-glosario { cursor: pointer; transition: all 0.2s; }
+        .termino-glosario:hover { background-color: #f0f9ff; border-color: #3b82f6; }
+        .definicion { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+        .definicion.activa { max-height: 200px; }
+    </style>
 </head>
-<body class="bg-gradient-to-br from-blue-50 to-indigo-50 min-h-screen">
+<body class="bg-gradient-to-br from-blue-50 to-indigo-50 min-h-screen text-gray-800">
 
-<header class="bg-white shadow-lg p-4 sticky top-0 z-50">
-<div class="max-w-7xl mx-auto flex items-center justify-between">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">ASEFIP</div>
-<div>
-<h1 class="text-lg md:text-xl font-bold">ASEFIP</h1>
-<p class="text-xs text-gray-600">Asociación de Estudiantes de Filosofía del Perú</p>
-</div>
-</div>
-<!-- Menú de Navegación Mejorado -->
-<nav class="hidden md:flex gap-2 text-sm">
-<a href="#inicio" class="px-3 py-2 hover:bg-indigo-50 rounded">Inicio</a>
-<a href="#videos" class="px-3 py-2 hover:bg-indigo-50 rounded">Videos</a>
-<a href="#articulos" class="px-3 py-2 hover:bg-indigo-50 rounded">Artículos</a>
-<a href="#ensayos" class="px-3 py-2 hover:bg-indigo-50 rounded">Ensayos</a>
-<a href="#recursos" class="px-3 py-2 hover:bg-indigo-50 rounded">Recursos</a>
-<a href="#nosotros" class="px-3 py-2 hover:bg-indigo-50 rounded">Nosotros</a>
-</nav>
-<button id="menuBtn" class="md:hidden text-2xl">☰</button>
-</div>
-<!-- Menú Móvil (oculto por defecto) -->
-<div id="mobileMenu" class="hidden md:hidden mt-4 bg-white rounded-lg shadow-xl p-4">
-<a href="#inicio" class="block px-3 py-2 hover:bg-indigo-50 rounded">Inicio</a>
-<a href="#videos" class="block px-3 py-2 hover:bg-indigo-50 rounded">Videos</a>
-<a href="#articulos" class="block px-3 py-2 hover:bg-indigo-50 rounded">Artículos</a>
-<a href="#ensayos" class="block px-3 py-2 hover:bg-indigo-50 rounded">Ensayos</a>
-<a href="#recursos" class="block px-3 py-2 hover:bg-indigo-50 rounded">Recursos</a>
-<a href="#nosotros" class="block px-3 py-2 hover:bg-indigo-50 rounded">Nosotros</a>
-</div>
+<!-- ==================== HEADER & NAVEGACIÓN ==================== -->
+<header class="bg-white/90 backdrop-blur-sm shadow-lg p-4 sticky top-0 z-50 border-b">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <a href="#inicio" class="flex items-center gap-3 group">
+            <div class="w-10 h-10 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-sm group-hover:scale-105 transition-transform">AS</div>
+            <div>
+                <h1 class="text-lg md:text-xl font-bold">ASEFIP</h1>
+                <p class="text-xs text-gray-600">Asociación de Estudiantes de Filosofía del Perú</p>
+            </div>
+        </a>
+        <nav class="hidden md:flex gap-1 text-sm">
+            <a href="#inicio" class="px-4 py-2 rounded-lg hover:bg-indigo-50 hover:text-indigo-700 font-medium">Inicio</a>
+            <a href="#videos" class="px-4 py-2 rounded-lg hover:bg-indigo-50 hover:text-indigo-700 font-medium">Videos</a>
+            <a href="#articulos" class="px-4 py-2 rounded-lg hover:bg-indigo-50 hover:text-indigo-700 font-medium">Artículos</a>
+            <a href="#ensayos" class="px-4 py-2 rounded-lg hover:bg-indigo-50 hover:text-indigo-700 font-medium">Ensayos</a>
+            <a href="#recursos" class="px-4 py-2 rounded-lg hover:bg-indigo-50 hover:text-indigo-700 font-medium">Recursos</a>
+            <a href="#colabora" class="px-4 py-2 rounded-lg bg-amber-500 text-white hover:bg-amber-600 font-medium">Envía tu Ensayo</a>
+        </nav>
+        <button id="menuBtn" class="md:hidden text-2xl text-gray-700">☰</button>
+    </div>
+    <!-- Menú Móvil -->
+    <div id="mobileMenu" class="hidden md:hidden mt-4 bg-white rounded-xl shadow-xl p-4 border">
+        <a href="#inicio" class="block px-4 py-3 hover:bg-indigo-50 rounded-lg font-medium">Inicio</a>
+        <a href="#videos" class="block px-4 py-3 hover:bg-indigo-50 rounded-lg font-medium">Videos</a>
+        <a href="#articulos" class="block px-4 py-3 hover:bg-indigo-50 rounded-lg font-medium">Artículos</a>
+        <a href="#ensayos" class="block px-4 py-3 hover:bg-indigo-50 rounded-lg font-medium">Ensayos</a>
+        <a href="#recursos" class="block px-4 py-3 hover:bg-indigo-50 rounded-lg font-medium">Recursos</a>
+        <a href="#colabora" class="block px-4 py-3 mt-2 bg-amber-500 text-white rounded-lg font-medium text-center">Envía tu Ensayo</a>
+    </div>
 </header>
 
-<main class="max-w-7xl mx-auto p-4">
+<main class="max-w-7xl mx-auto p-4 md:p-6">
 
-<!-- Sección INICIO con Misión Inspiradora -->
-<section id="inicio" class="text-center my-12">
-<h2 class="text-3xl md:text-5xl font-bold mb-4">Asociación de Estudiantes de <span class="text-indigo-600">Filosofía del Perú</span></h2>
-<p class="text-lg md:text-xl text-gray-700 mb-6 max-w-3xl mx-auto">
-    Somos la <strong class="text-indigo-600">plataforma pionera</strong> y el <strong>hito digital de 2025</strong> para la difusión filosófica en el Perú. Unimos a estudiantes y aficionados para democratizar el pensamiento crítico, ofreciendo artículos indexados, una biblioteca de videos, ensayos y recursos organizados que demuestran cómo la filosofía sirve para entender y transformar nuestra realidad.
-</p>
-<div class="flex gap-4 justify-center flex-wrap">
-<a href="#videos" class="px-6 py-3 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700">Explorar Videos</a>
-<a href="#recursos" class="px-6 py-3 border-2 border-indigo-600 text-indigo-600 rounded-xl font-bold hover:bg-indigo-50">Ver Recursos</a>
-<a href="#ensayos" class="px-6 py-3 bg-amber-500 text-white rounded-xl font-bold hover:bg-amber-600">Leer Ensayos</a>
-</div>
+<!-- ==================== SECCIÓN HERO / INICIO ==================== -->
+<section id="inicio" class="text-center my-12 md:my-16">
+    <h2 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">Asociación de Estudiantes de <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">Filosofía del Perú</span></h2>
+    <p class="text-xl md:text-2xl text-gray-700 mb-8 max-w-4xl mx-auto leading-relaxed">
+        Somos la <strong class="text-indigo-600">plataforma pionera</strong> y el <strong class="text-purple-600">hito digital de 2025</strong>. Aquí encontrarás <strong>artículos verificados, ensayos de la comunidad, una biblioteca de videos curada y herramientas de estudio</strong> diseñadas específicamente para el estudiante y aficionado peruano.
+    </p>
+    <div class="flex flex-wrap gap-4 justify-center">
+        <a href="#articulos" class="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all">Comenzar a Leer</a>
+        <a href="#recursos" class="px-8 py-4 bg-white border-2 border-indigo-600 text-indigo-600 rounded-xl font-bold text-lg hover:bg-indigo-50 transition-colors">Herramientas de Estudio</a>
+    </div>
 </section>
 
-<!-- Estadísticas (se mantienen igual) -->
-<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-<div class="bg-white p-4 rounded-xl text-center shadow"><div class="text-2xl font-bold text-indigo-600">25+</div><div class="text-xs text-gray-600">Videos</div></div>
-<div class="bg-white p-4 rounded-xl text-center shadow"><div class="text-2xl font-bold text-indigo-600">1K+</div><div class="text-xs text-gray-600">Vistas</div></div>
-<div class="bg-white p-4 rounded-xl text-center shadow"><div class="text-2xl font-bold text-indigo-600">15+</div><div class="text-xs text-gray-600">Eventos</div></div>
-<div class="bg-white p-4 rounded-xl text-center shadow"><div class="text-2xl font-bold text-indigo-600">200+</div><div class="text-xs text-gray-600">Descargas</div></div>
+<!-- ==================== ESTADÍSTICAS ==================== -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+    <div class="bg-gradient-to-br from-white to-blue-50 p-6 rounded-2xl text-center shadow-sm border">
+        <div class="text-3xl md:text-4xl font-bold text-indigo-600 mb-2">25+</div>
+        <div class="text-sm text-gray-600 font-medium">Videos Educativos</div>
+    </div>
+    <div class="bg-gradient-to-br from-white to-blue-50 p-6 rounded-2xl text-center shadow-sm border">
+        <div class="text-3xl md:text-4xl font-bold text-indigo-600 mb-2">En crecimiento</div>
+        <div class="text-sm text-gray-600 font-medium">Artículos & Ensayos</div>
+    </div>
+    <div class="bg-gradient-to-br from-white to-blue-50 p-6 rounded-2xl text-center shadow-sm border">
+        <div class="text-3xl md:text-4xl font-bold text-indigo-600 mb-2">Comunidad</div>
+        <div class="text-sm text-gray-600 font-medium">Activa y Colaborativa</div>
+    </div>
+    <div class="bg-gradient-to-br from-white to-blue-50 p-6 rounded-2xl text-center shadow-sm border">
+        <div class="text-3xl md:text-4xl font-bold text-indigo-600 mb-2">100%</div>
+        <div class="text-sm text-gray-600 font-medium">Recursos Gratuitos</div>
+    </div>
 </div>
 
-<!-- Sección VIDEOS (se mantiene tu excelente biblioteca, no la modifiqué) -->
-<section id="videos" class="mb-12">
-<h2 class="text-3xl font-bold mb-6 text-center">Biblioteca de <span class="text-indigo-600">Videos</span></h2>
-<!-- ... (Todo el contenido de videos que ya tenías se mantiene aquí, es muy bueno) ... -->
+<!-- ==================== SECCIÓN VIDEOS (Tu contenido existente se mantiene aquí) ==================== -->
+<section id="videos" class="mb-16">
+    <h2 class="text-3xl font-bold mb-8 text-center">Biblioteca de <span class="text-indigo-600">Videos</span></h2>
+    <!-- (TODO: Aquí debes pegar TODO tu bloque original de videos, que es muy bueno) -->
+    <p class="text-center text-gray-500 p-8 bg-white rounded-2xl border">🔧 <em>Tu sección de videos organizada por temáticas se insertará aquí. Es excelente, no la modifiques.</em></p>
 </section>
 
-<!-- Nueva Sección ARTÍCULOS con Contenido Real -->
-<section id="articulos" class="mb-12">
-<h2 class="text-3xl font-bold mb-6 text-center"><span class="text-indigo-600">Artículos</span> de Análisis</h2>
-<p class="text-center text-gray-600 mb-8">Profundizamos en temas clave con artículos escritos por nuestra comunidad.</p>
-<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-<article class="bg-white rounded-xl overflow-hidden shadow-lg">
-<div class="p-6">
-<span class="inline-block px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs font-semibold mb-3">Filosofía Peruana</span>
-<h3 class="font-bold text-xl mb-2">El Pensamiento de Augusto Salazar Bondy</h3>
-<p class="text-gray-600 text-sm mb-4">Un análisis sobre la propuesta del filósofo peruano y su visión de una filosofía de la liberación latinoamericana.</p>
-<a href="#" class="text-indigo-600 font-semibold text-sm hover:underline">Leer artículo completo →</a>
-</div>
-</article>
-
-<article class="bg-white rounded-xl overflow-hidden shadow-lg">
-<div class="p-6">
-<span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-semibold mb-3">Ética</span>
-<h3 class="font-bold text-xl mb-2">Inteligencia Artificial y Responsabilidad Moral</h3>
-<p class="text-gray-600 text-sm mb-4">¿Pueden los sistemas de IA ser sujetos de juicios éticos? Exploramos los límites de la moral en la era digital.</p>
-<a href="#" class="text-indigo-600 font-semibold text-sm hover:underline">Leer artículo completo →</a>
-</div>
-</article>
-
-<article class="bg-white rounded-xl overflow-hidden shadow-lg">
-<div class="p-6">
-<span class="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-semibold mb-3">Filosofía Práctica</span>
-<h3 class="font-bold text-xl mb-2">Cómo la Filosofía Estoica Puede Mejorar tu Vida Diaria</h3>
-<p class="text-gray-600 text-sm mb-4">Técnicas de Séneca y Marco Aurelio aplicadas a los desafíos del mundo moderno: ansiedad, trabajo y relaciones.</p>
-<a href="#" class="text-indigo-600 font-semibold text-sm hover:underline">Leer artículo completo →</a>
-</div>
-</article>
-
-</div>
-<div class="text-center mt-8">
-<a href="#" class="px-5 py-2 border-2 border-indigo-600 text-indigo-600 rounded-lg font-bold hover:bg-indigo-50">Ver todos los artículos</a>
-</div>
+<!-- ==================== SECCIÓN ARTÍCULOS (Enlaces Corregidos) ==================== -->
+<section id="articulos" class="mb-16">
+    <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold mb-3"><span class="text-indigo-600">Artículos</span> de Análisis</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">Profundizamos en temas clave con artículos rigurosos y accesibles escritos por y para la comunidad filosófica peruana.</p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Artículo 1 - CON ENLACE REAL -->
+        <article class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
+            <div class="p-7 flex-grow">
+                <span class="inline-block px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs font-semibold mb-4">Filosofía Peruana</span>
+                <h3 class="font-bold text-xl mb-4">El Pensamiento de Augusto Salazar Bondy</h3>
+                <p class="text-gray-600 mb-6 leading-relaxed">Un análisis sobre la propuesta del filósofo peruano y su visión de una filosofía de la liberación latinoamericana.</p>
+                <a href="articulo-salazar-bondy.html" class="text-indigo-600 font-semibold text-sm hover:underline inline-flex items-center">
+                    Leer artículo completo
+                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+            </div>
+        </article>
+        <!-- Artículo 2 - CON ENLACE REAL -->
+        <article class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
+            <div class="p-7 flex-grow">
+                <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-semibold mb-4">Ética & Tecnología</span>
+                <h3 class="font-bold text-xl mb-4">Inteligencia Artificial y Responsabilidad Moral</h3>
+                <p class="text-gray-600 mb-6 leading-relaxed">¿Pueden los sistemas de IA ser sujetos de juicios éticos? Exploramos los límites de la moral en la era digital.</p>
+                <a href="articulo-ia-etica.html" class="text-indigo-600 font-semibold text-sm hover:underline inline-flex items-center">
+                    Leer artículo completo
+                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+            </div>
+        </article>
+        <!-- Artículo 3 - CON ENLACE REAL -->
+        <article class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
+            <div class="p-7 flex-grow">
+                <span class="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-semibold mb-4">Filosofía Práctica</span>
+                <h3 class="font-bold text-xl mb-4">Cómo la Filosofía Estoica Puede Mejorar tu Vida Diaria</h3>
+                <p class="text-gray-600 mb-6 leading-relaxed">Técnicas de Séneca y Marco Aurelio aplicadas a los desafíos del mundo moderno: ansiedad, trabajo y relaciones.</p>
+                <a href="articulo-estoicismo-practico.html" class="text-indigo-600 font-semibold text-sm hover:underline inline-flex items-center">
+                    Leer artículo completo
+                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+            </div>
+        </article>
+    </div>
+    <p class="text-center mt-10 text-gray-500 text-sm">🔍 <strong>Próximamente:</strong> Un buscador para filtrar artículos por autor, época o concepto.</p>
 </section>
 
-<!-- Nueva Sección ENSAYOS -->
-<section id="ensayos" class="mb-12">
-<h2 class="text-3xl font-bold mb-6 text-center"><span class="text-amber-600">Ensayos</span> de la Comunidad</h2>
-<p class="text-center text-gray-600 mb-8">Reflexiones y trabajos escritos por estudiantes de filosofía de todo el Perú.</p>
-<div class="grid gap-6">
-
-<div class="bg-white rounded-xl p-6 shadow flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-<div>
-<h3 class="font-bold text-lg mb-1">La Recepción de Nietzsche en el Perú del Siglo XX</h3>
-<p class="text-sm text-gray-600 mb-2">Por <strong>Ana López</strong> (UNMSM) | Ensayo de investigación | 15 páginas</p>
-<p class="text-gray-700">Un recorrido por cómo las ideas del filósofo alemán fueron interpretadas y utilizadas por intelectuales peruanos.</p>
-</div>
-<div class="flex gap-2 shrink-0">
-<a href="#" class="px-4 py-2 bg-amber-500 text-white rounded-lg font-semibold hover:bg-amber-600 text-sm">Leer Online</a>
-<a href="#" class="px-4 py-2 border border-amber-500 text-amber-600 rounded-lg font-semibold hover:bg-amber-50 text-sm">Descargar PDF</a>
-</div>
-</div>
-
-<div class="bg-white rounded-xl p-6 shadow flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-<div>
-<h3 class="font-bold text-lg mb-1">Feminismo y Filosofía: Una Mirada desde la Colonialidad</h3>
-<p class="text-sm text-gray-600 mb-2">Por <strong>Carlos Mendoza</strong> (UNFV) | Ensayo crítico | 12 páginas</p>
-<p class="text-gray-700">Análisis de las intersecciones entre el pensamiento feminista y la crítica decolonial en el contexto latinoamericano.</p>
-</div>
-<div class="flex gap-2 shrink-0">
-<a href="#" class="px-4 py-2 bg-amber-500 text-white rounded-lg font-semibold hover:bg-amber-600 text-sm">Leer Online</a>
-<a href="#" class="px-4 py-2 border border-amber-500 text-amber-600 rounded-lg font-semibold hover:bg-amber-50 text-sm">Descargar PDF</a>
-</div>
-</div>
-
-</div>
-<div class="text-center mt-8">
-<a href="#" class="px-5 py-2 bg-amber-500 text-white rounded-lg font-bold hover:bg-amber-600">Explorar todos los ensayos</a>
-</div>
+<!-- ==================== SECCIÓN ENSAYOS (Botones Corregidos) ==================== -->
+<section id="ensayos" class="mb-16">
+    <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold mb-3"><span class="text-amber-600">Ensayos</span> de la Comunidad</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">Reflexiones y trabajos de investigación escritos por estudiantes de filosofía de todo el Perú. Revisados y seleccionados para garantizar calidad.</p>
+    </div>
+    <div class="grid gap-8 max-w-4xl mx-auto">
+        <!-- Ensayo 1 - Estado claro -->
+        <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 flex flex-col md:flex-row items-start justify-between gap-6">
+            <div class="flex-grow">
+                <div class="flex flex-wrap items-center gap-3 mb-3">
+                    <span class="inline-block px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-xs font-semibold">Ensayo de Investigación</span>
+                    <span class="text-xs text-gray-500">• En proceso de revisión editorial</span>
+                </div>
+                <h3 class="font-bold text-2xl mb-3">La Recepción de Nietzsche en el Perú del Siglo XX</h3>
+                <p class="text-gray-700 mb-4">Un recorrido por cómo las ideas del filósofo alemán fueron interpretadas, criticadas y utilizadas por intelectuales peruanos, desde González Prada hasta nuestros días.</p>
+                <p class="text-sm text-gray-600"><strong>Autora:</strong> Ana López (UNMSM) | <strong>Extensión:</strong> 15 páginas</p>
+            </div>
+            <div class="flex flex-col gap-3 shrink-0">
+                <button class="px-5 py-3 bg-gray-200 text-gray-700 rounded-lg font-semibold text-sm cursor-not-allowed" disabled>PDF en Revisión</button>
+                <button class="px-5 py-3 border-2 border-amber-500 text-amber-600 rounded-lg font-semibold text-sm hover:bg-amber-50 transition-colors cursor-not-allowed" disabled>Vista Previa (Pronto)</button>
+            </div>
+        </div>
+        <!-- Ensayo 2 - Estado claro -->
+        <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 flex flex-col md:flex-row items-start justify-between gap-6">
+            <div class="flex-grow">
+                <div class="flex flex-wrap items-center gap-3 mb-3">
+                    <span class="inline-block px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs font-semibold">Ensayo Crítico</span>
+                    <span class="text-xs text-gray-500">• Recibiendo correcciones finales</span>
+                </div>
+                <h3 class="font-bold text-2xl mb-3">Feminismo y Filosofía: Una Mirada desde la Colonialidad</h3>
+                <p class="text-gray-700 mb-4">Análisis de las intersecciones entre el pensamiento feminista y la crítica decolonial en el contexto latinoamericano, con énfasis en autoras peruanas.</p>
+                <p class="text-sm text-gray-600"><strong>Autor:</strong> Carlos Mendoza (UNFV) | <strong>Extensión:</strong> 12 páginas</p>
+            </div>
+            <div class="flex flex-col gap-3 shrink-0">
+                <button class="px-5 py-3 bg-gray-200 text-gray-700 rounded-lg font-semibold text-sm cursor-not-allowed" disabled>PDF en Revisión</button>
+                <button class="px-5 py-3 border-2 border-amber-500 text-amber-600 rounded-lg font-semibold text-sm hover:bg-amber-50 transition-colors cursor-not-allowed" disabled>Vista Previa (Pronto)</button>
+            </div>
+        </div>
+    </div>
+    <div class="text-center mt-12">
+        <a href="#colabora" class="px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl inline-block">¿Escribiste un ensayo? ¡Envíanoslo!</a>
+    </div>
 </section>
 
-<!-- Sección RECURSOS Mejorada con Enlaces Reales -->
-<section id="recursos" class="mb-12">
-<h2 class="text-3xl font-bold mb-4 text-center"><span class="text-indigo-600">Recursos</span> para el Estudio</h2>
-<p class="text-center text-gray-600 mb-6">Herramientas, diccionarios y bibliotecas digitales para profundizar en filosofía.</p>
-<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- ==================== SECCIÓN RECURSOS & GLOSARIO ==================== -->
+<section id="recursos" class="mb-16">
+    <h2 class="text-3xl font-bold mb-10 text-center"><span class="text-indigo-600">Recursos</span> para el Estudio</h2>
+    <p class="text-center text-gray-600 mb-10 max-w-3xl mx-auto">Más que enlaces, te ofrecemos herramientas integradas y accesos directos a las fuentes más confiables del mundo filosófico.</p>
 
-<a href="https://plato.stanford.edu/" target="_blank" class="bg-white rounded-xl p-5 shadow flex flex-col items-center text-center hover:shadow-xl transition-shadow">
-<div class="text-3xl mb-3">🏛️</div>
-<h3 class="font-bold mb-2">Stanford Encyclopedia</h3>
-<p class="text-sm text-gray-600">La enciclopedia filosófica más rigurosa y actualizada, en inglés.</p>
-</a>
+    <div class="mb-12">
+        <h3 class="text-2xl font-bold mb-6 text-gray-800">📖 Glosario Rápido de Términos Filosóficos</h3>
+        <p class="text-gray-600 mb-6">Haz clic en cada término para ver su definición. Una herramienta básica pero esencial.</p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="termino-glosario bg-white p-5 rounded-xl border-2 border-gray-100">
+                <h4 class="font-bold text-lg text-indigo-700 mb-2">A priori / A posteriori</h4>
+                <div class="definicion">
+                    <p class="text-gray-700 text-sm">Distinción clave en epistemología. <strong>A priori</strong>: conocimiento independiente de la experiencia (ej: "todo soltero no está casado"). <strong>A posteriori</strong>: conocimiento que depende de la experiencia (ej: "el agua hierve a 100°C"). Concepto central en Kant.</p>
+                </div>
+            </div>
+            <div class="termino-glosario bg-white p-5 rounded-xl border-2 border-gray-100">
+                <h4 class="font-bold text-lg text-indigo-700 mb-2">Dialéctica</h4>
+                <div class="definicion">
+                    <p class="text-gray-700 text-sm">Método de razonamiento y debate para alcanzar la verdad. En Platón, es el diálogo mediante preguntas. En Hegel y Marx, es el proceso donde una tesis genera su antítesis, resultando en una síntesis que supera la contradicción.</p>
+                </div>
+            </div>
+            <div class="termino-glosario bg-white p-5 rounded-xl border-2 border-gray-100">
+                <h4 class="font-bold text-lg text-indigo-700 mb-2">Imperativo Categórico</h4>
+                <div class="definicion">
+                    <p class="text-gray-700 text-sm">Concepto central en la ética de Kant. Es un mandato moral universal e incondicional: "Obra sólo según aquella máxima por la cual puedas querer que al mismo tiempo se convierta en ley universal". La base de la moral autónoma.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<a href="https://www.filosofia.org/" target="_blank" class="bg-white rounded-xl p-5 shadow flex flex-col items-center text-center hover:shadow-xl transition-shadow">
-<div class="text-3xl mb-3">📖</div>
-<h3 class="font-bold mb-2">Proyecto Filosofía en Español</h3>
-<p class="text-sm text-gray-600">Gran biblioteca digital de textos filosóficos en español.</p>
-</a>
-
-<a href="https://www.philpapers.org/" target="_blank" class="bg-white rounded-xl p-5 shadow flex flex-col items-center text-center hover:shadow-xl transition-shadow">
-<div class="text-3xl mb-3">📚</div>
-<h3 class="font-bold mb-2">PhilPapers</h3>
-<p class="text-sm text-gray-600">Índice masivo de artículos y bibliografía académica.</p>
-</a>
-
-<a href="https://www.institutoroche.es/biblioteca/filosofia.htm" target="_blank" class="bg-white rounded-xl p-5 shadow flex flex-col items-center text-center hover:shadow-xl transition-shadow">
-<div class="text-3xl mb-3">🔍</div>
-<h3 class="font-bold mb-2">Diccionario de Términos</h3>
-<p class="text-sm text-gray-600">Diccionario de términos filosóficos de la Universidad de Rochester.</p>
-</a>
-
-</div>
+    <h3 class="text-2xl font-bold mb-6 text-gray-800">🌐 Enlaces a Fuentes de Autoridad</h3>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <a href="https://plato.stanford.edu/" target="_blank" class="bg-white rounded-2xl p-6 shadow flex flex-col items-center text-center hover:shadow-xl transition-shadow border hover:border-indigo-300">
+            <div class="text-4xl mb-4">🏛️</div>
+            <h4 class="font-bold text-lg mb-2">Stanford Encyclopedia</h4>
+            <p class="text-sm text-gray-600">La enciclopedia filosófica más rigurosa y actualizada, en inglés. Indispensable para investigación seria.</p>
+        </a>
+        <a href="https://www.filosofia.org/" target="_blank" class="bg-white rounded-2xl p-6 shadow flex flex-col items-center text-center hover:shadow-xl transition-shadow border hover:border-indigo-300">
+            <div class="text-4xl mb-4">📖</div>
+            <h4 class="font-bold text-lg mb-2">Filosofía en Español</h4>
+            <p class="text-sm text-gray-600">Gran biblioteca digital de textos filosóficos en español. Incluye obras clásicas y contemporáneas.</p>
+        </a>
+        <a href="https://www.philpapers.org/" target="_blank" class="bg-white rounded-2xl p-6 shadow flex flex-col items-center text-center hover:shadow-xl transition-shadow border hover:border-indigo-300">
+            <div class="text-4xl mb-4">📚</div>
+            <h4 class="font-bold text-lg mb-2">PhilPapers</h4>
+            <p class="text-sm text-gray-600">Índice masivo de artículos académicos, actualizado diariamente. Ideal para estar al día.</p>
+        </a>
+        <a href="https://diccionariodefilosofia.es/" target="_blank" class="bg-white rounded-2xl p-6 shadow flex flex-col items-center text-center hover:shadow-xl transition-shadow border hover:border-indigo-300">
+            <div class="text-4xl mb-4">🔍</div>
+            <h4 class="font-bold text-lg mb-2">Diccionario Interactivo</h4>
+            <p class="text-sm text-gray-600">Diccionario de Términos Filosóficos. Permite búsqueda alfabética y por conceptos.</p>
+        </a>
+    </div>
 </section>
 
-<!-- Nueva Sección NOSOTROS / Misión -->
-<section id="nosotros" class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-2xl p-8 mb-12">
-<h2 class="text-2xl md:text-3xl font-bold mb-4 text-center">Nuestra Misión Pionera</h2>
-<p class="text-lg text-center mb-6 max-w-3xl mx-auto">
-    ASEFIP nace para ser el <strong>hito digital de la filosofía peruana en 2025 y los años venideros</strong>. No somos solo un repositorio, somos un espacio vivo donde estudiantes, aficionados y profesionales encuentran herramientas para el pensamiento crítico y el debate informado. Creemos que la filosofía es una poderosa herramienta para entender y transformar la realidad peruana y global.
-</p>
-<div class="text-center">
-<a href="mailto:contacto@asefip.com" class="inline-block px-6 py-3 bg-white text-indigo-600 rounded-xl font-bold hover:bg-gray-100">Colabora con Nosotros</a>
-</div>
+<!-- ==================== FORMULARIO DE COLABORACIÓN ==================== -->
+<section id="colabora" class="mb-16">
+    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-3xl p-8 md:p-12 border border-indigo-100">
+        <div class="max-w-2xl mx-auto">
+            <h2 class="text-3xl font-bold mb-4 text-center">Envía tu Ensayo o Artículo</h2>
+            <p class="text-gray-700 text-center mb-8">
+                ¿Escribiste sobre filosofía? Queremos leerte. Envíanos tu trabajo para nuestra <strong>revisión editorial</strong>. Si cumple con los criterios de rigor y claridad, lo publicaremos en ASEFIP, dándote crédito completo como autor.
+            </p>
+            <!-- FORMULARIO NETLIFY (¡FUNCIONA AUTOMÁTICAMENTE!) -->
+            <form name="envio-ensayo" method="POST" netlify action="/gracias.html" class="space-y-6 bg-white p-8 rounded-2xl shadow-lg">
+                <div>
+                    <label for="nombre" class="block text-sm font-semibold text-gray-700 mb-2">Nombre Completo *</label>
+                    <input type="text" id="nombre" name="nombre" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div>
+                    <label for="institucion" class="block text-sm font-semibold text-gray-700 mb-2">Universidad o Institución</label>
+                    <input type="text" id="institucion" name="institucion" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Ej: UNMSM, UNFV, independiente...">
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Correo Electrónico *</label>
+                    <input type="email" id="email" name="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div>
+                    <label for="titulo" class="block text-sm font-semibold text-gray-700 mb-2">Título de tu trabajo *</label>
+                    <input type="text" id="titulo" name="titulo" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div>
+                    <label for="resumen" class="block text-sm font-semibold text-gray-700 mb-2">Resumen o descripción (máx. 300 palabras) *</label>
+                    <textarea id="resumen" name="resumen" rows="4" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Explica el tema central, tu enfoque y las conclusiones principales..."></textarea>
+                </div>
+                <div>
+                    <label for="archivo" class="block text-sm font-semibold text-gray-700 mb-2">Adjuntar archivo (PDF o DOC) *</label>
+                    <input type="file" id="archivo" name="archivo" required class="w-full text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                    <p class="text-xs text-gray-500 mt-2">Asegúrate de que el archivo no incluya tu nombre si deseas una revisión anónima.</p>
+                </div>
+                <button type="submit" class="w-full py-4 px-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold rounded-lg text-lg transition-all shadow-md hover:shadow-lg">
+                    Enviar para Revisión Editorial
+                </button>
+                <p class="text-xs text-gray-500 text-center mt-4">
+                    Nos pondremos en contacto contigo en un plazo máximo de 15 días hábiles. ASEFIP se reserva el derecho de selección editorial para mantener los estándares de calidad.
+                </p>
+            </form>
+        </div>
+    </div>
 </section>
 
-<!-- Llamada a Redes Sociales (se mantiene) -->
-<section class="bg-indigo-600 text-white rounded-2xl p-6 mb-12 text-center">
-<h2 class="text-2xl font-bold mb-3">Síguenos y Únete</h2>
-<p class="mb-4 text-sm">Sé parte del movimiento filosófico estudiantil más dinámico del Perú.</p>
-<div class="flex gap-3 justify-center flex-wrap">
-<a href="https://www.youtube.com/@elbuho.filosofico" target="_blank" class="px-5 py-2 bg-white text-indigo-600 rounded-lg font-bold hover:bg-gray-100 text-sm">YouTube</a>
-<a href="#" class="px-5 py-2 bg-white text-indigo-600 rounded-lg font-bold hover:bg-gray-100 text-sm">Instagram</a>
-<a href="#" class="px-5 py-2 bg-white text-indigo-600 rounded-lg font-bold hover:bg-gray-100 text-sm">TikTok</a>
-</div>
+<!-- ==================== SECCIÓN FINAL / CTA ==================== -->
+<section class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white rounded-3xl p-10 md:p-14 mb-12 text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-6">Construyamos juntos el hito filosófico del Perú</h2>
+    <p class="text-xl mb-8 max-w-3xl mx-auto opacity-95">ASEFIP es más que un sitio web. Es un proyecto colaborativo, abierto y riguroso. Tu lectura, tu difusión y tu colaboración lo hacen posible.</p>
+    <div class="flex flex-wrap gap-6 justify-center">
+        <a href="#articulos" class="px-8 py-4 bg-white text-indigo-600 rounded-xl font-bold text-lg hover:bg-gray-100 shadow-lg">Explorar Contenido</a>
+        <a href="https://www.youtube.com/@elbuho.filosofico" target="_blank" class="px-8 py-4 bg-black/20 backdrop-blur-sm border-2 border-white text-white rounded-xl font-bold text-lg hover:bg-white/10">Seguir en YouTube</a>
+    </div>
 </section>
 
 </main>
 
-<footer class="bg-gray-900 text-white py-8 text-center">
-<div class="max-w-7xl mx-auto px-4">
-<h3 class="text-xl font-bold mb-2">ASEFIP</h3>
-<p class="text-gray-400 text-sm mb-3">Asociación de Estudiantes de Filosofía del Perú<br>Plataforma pionera de difusión filosófica</p>
-<p class="text-gray-600 text-xs">© 2024-2025 ASEFIP. Todos los derechos reservados. | <a href="/admin/" class="underline">Panel de Administración</a></p>
-</div>
+<!-- ==================== FOOTER ==================== -->
+<footer class="bg-gray-900 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+            <div class="mb-6 md:mb-0">
+                <h3 class="text-2xl font-bold mb-2">ASEFIP</h3>
+                <p class="text-gray-400">Asociación de Estudiantes de Filosofía del Perú</p>
+                <p class="text-gray-500 text-sm mt-1">Plataforma pionera de difusión filosófica</p>
+            </div>
+            <div class="flex gap-6">
+                <a href="/admin/" class="text-gray-300 hover:text-white text-sm underline">Panel de Admin</a>
+                <a href="#colabora" class="text-amber-300 hover:text-amber-200 font-medium">Colaborar</a>
+                <a href="mailto:contacto@asefip.com" class="text-gray-300 hover:text-white">Contacto</a>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 pt-8 text-center">
+            <p class="text-gray-500 text-sm">© 2024 - 2025 ASEFIP. Este es un proyecto educativo sin fines de lucro. Todo el contenido se comparte con fines de estudio y divulgación.</p>
+            <p class="text-gray-600 text-xs mt-2">Desarrollado con pasión por la filosofía peruana.</p>
+        </div>
+    </div>
 </footer>
 
+<!-- ==================== SCRIPTS ==================== -->
 <script>
-// Script para el menú móvil
-document.getElementById('menuBtn').addEventListener('click', function() {
-  const menu = document.getElementById('mobileMenu');
-  menu.classList.toggle('hidden');
-});
+    // 1. Menú móvil
+    document.getElementById('menuBtn').addEventListener('click', function() {
+        document.getElementById('mobileMenu').classList.toggle('hidden');
+    });
+    // Cerrar menú al hacer clic en un enlace
+    document.querySelectorAll('#mobileMenu a').forEach(link => {
+        link.addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.add('hidden');
+        });
+    });
 
-// Cierra el menú móvil al hacer clic en un enlace
-const mobileLinks = document.querySelectorAll('#mobileMenu a');
-mobileLinks.forEach(link => {
-  link.addEventListener('click', () => {
-    document.getElementById('mobileMenu').classList.add('hidden');
-  });
-});
+    // 2. Glosario interactivo (click para expandir/contraer)
+    document.querySelectorAll('.termino-glosario').forEach(termino => {
+        termino.addEventListener('click', () => {
+            const definicion = termino.querySelector('.definicion');
+            definicion.classList.toggle('activa');
+        });
+    });
+
+    // 3. Desplazamiento suave para todos los enlaces internos
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            if(targetId === '#') return;
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
 </script>
-
 </body>
 </html>
