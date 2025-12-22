@@ -1,2 +1,2 @@
 # Asociación de estudiantes de filosofía de Perú 
-Plataforma pionera de difusión filosófica en Perú"
+La Asociación de Estudiantes de Filosofía del Perú (ASEFIP) es la primera plataforma digital pionera dedicada a difundir el pensamiento filosófico en el Perú. Nuestro objetivo para 2025 es construir un hito de referencia donde estudiantes y aficionados encuentren artículos, videos, ensayos y recursos organizados para descubrir cómo la filosofía sirve para entender el mundo actual.
