@@ -1,40 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Panel de Administración - Ágora Peruana</title>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Administrador de ASEFIP</title>
+    <!-- Carga la versión moderna de Decap CMS -->
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </head>
 <body>
-  <!-- Include the script that builds the page and powers Netlify CMS -->
-  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
-  
-  <script>
-    // Personalización del CMS
-    CMS.registerPreviewStyle("https://cdn.tailwindcss.com");
-    
-    // Preview personalizado para artículos
-    const ArticuloPreview = createClass({
-      render: function() {
-        const entry = this.props.entry;
-        const title = entry.getIn(['data', 'title']);
-        const body = entry.getIn(['data', 'body']);
-        const author = entry.getIn(['data', 'author']);
-        const category = entry.getIn(['data', 'category']);
-        
-        return h('div', {"className": "p-6 max-w-4xl mx-auto"},
-          h('div', {"className": "mb-4"},
-            h('span', {"className": "text-sm font-semibold text-amber-600 bg-amber-50 px-3 py-1 rounded-full"}, category)
-          ),
-          h('h1', {"className": "text-4xl font-bold mb-4"}, title),
-          h('p', {"className": "text-gray-600 mb-6"}, "Por: " + author),
-          h('div', {"className": "prose prose-lg"}, this.props.widgetFor('body'))
-        );
-      }
-    });
-    
-    CMS.registerPreviewTemplate("articulos", ArticuloPreview);
-  </script>
+    <!-- El CMS se cargará automáticamente aquí -->
 </body>
 </html>
