@@ -1,162 +1,686 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aprender Filosofía - ASEFIP</title>
-<script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprender - ASEFIP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .logo {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            line-height: 60px;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        h1 {
+            color: #2d3748;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #718096;
+            font-size: 1.1em;
+        }
+        
+        .back-link {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .intro {
+            background: #f7fafc;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .intro h2 {
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .intro p {
+            color: #4a5568;
+            line-height: 1.8;
+            font-size: 1.05em;
+        }
+        
+        h2 {
+            color: #2d3748;
+            font-size: 2em;
+            margin: 50px 0 25px 0;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        h3 {
+            color: #2d3748;
+            font-size: 1.5em;
+            margin: 30px 0 15px 0;
+        }
+        
+        /* TABS NAVEGACIÓN */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .tab {
+            padding: 12px 25px;
+            background: #e2e8f0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .tab:hover {
+            background: #cbd5e0;
+        }
+        
+        .tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* CARDS DE CONTENIDO */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .content-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+        
+        .content-card h3 {
+            color: #2d3748;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        
+        .content-card p {
+            color: #718096;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+        
+        .content-card ul {
+            color: #4a5568;
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+        
+        .content-card li {
+            margin-bottom: 8px;
+        }
+        
+        /* SECCIÓN DE VIDEO/TEXTO */
+        .lesson-section {
+            background: #f7fafc;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .lesson-section h3 {
+            margin-top: 0;
+        }
+        
+        .video-placeholder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 300px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4em;
+            margin: 20px 0;
+        }
+        
+        /* TIMELINE */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            margin: 30px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: #667eea;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-left: 20px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -33px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+        
+        .timeline-item h4 {
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-item p {
+            color: #4a5568;
+            line-height: 1.7;
+        }
+        
+        /* QUOTE BOX */
+        .quote-box {
+            background: #f7fafc;
+            border-left: 5px solid #667eea;
+            padding: 20px 25px;
+            margin: 25px 0;
+            font-style: italic;
+            color: #4a5568;
+        }
+        
+        .quote-box .author {
+            font-style: normal;
+            font-weight: bold;
+            color: #2d3748;
+            margin-top: 10px;
+        }
+        
+        /* BOTONES */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.2s;
+            margin-top: 15px;
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #e2e8f0;
+            color: #718096;
+        }
+    </style>
 </head>
-<body class="bg-gradient-to-br from-blue-50 to-indigo-50">
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Volver al Inicio</a>
+        
+        <header>
+            <div class="logo">AS</div>
+            <h1>Centro de Aprendizaje</h1>
+            <p class="subtitle">Recursos educativos para tu formación filosófica</p>
+        </header>
+        
+        <div class="intro">
+            <h2>📚 Bienvenido al Centro de Aprendizaje</h2>
+            <p>Aquí encontrarás lecciones, guías y contenido educativo para fortalecer tu formación filosófica. Desde conceptos básicos hasta temas avanzados, todo diseñado para acompañar tu camino en la filosofía.</p>
+        </div>
 
-<header class="bg-white shadow-lg p-4 sticky top-0 z-50">
-<div class="max-w-7xl mx-auto flex items-center justify-between">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">AS</div>
-<div>
-<h1 class="text-lg font-bold">ASEFIP</h1>
-<p class="text-xs text-gray-600">Asociación de Estudiantes de Filosofía del Perú</p>
-</div>
-</div>
-<a href="index.html" class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm">← Inicio</a>
-</div>
-</header>
+        <!-- TABS DE NAVEGACIÓN -->
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('introduccion')">Introducción</button>
+            <button class="tab" onclick="showTab('corrientes')">Corrientes Filosóficas</button>
+            <button class="tab" onclick="showTab('metodos')">Métodos de Estudio</button>
+            <button class="tab" onclick="showTab('escritura')">Escritura Filosófica</button>
+        </div>
 
-<main class="max-w-7xl mx-auto p-4 py-12">
+        <!-- CONTENIDO TAB 1: INTRODUCCIÓN -->
+        <div id="introduccion" class="tab-content active">
+            <h2>🎓 Introducción a la Filosofía</h2>
+            
+            <div class="lesson-section">
+                <h3>¿Qué es la Filosofía?</h3>
+                <p>La filosofía (del griego φιλοσοφία, "amor por la sabiduría") es la disciplina que busca comprender los fundamentos de la realidad, el conocimiento, la existencia y la moral a través del pensamiento crítico y la reflexión sistemática.</p>
+                
+                <div class="quote-box">
+                    "La filosofía comienza con el asombro."
+                    <div class="author">— Aristóteles</div>
+                </div>
+                
+                <h3>Las Grandes Preguntas</h3>
+                <p>La filosofía se organiza tradicionalmente en torno a preguntas fundamentales:</p>
+            </div>
+            
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>🤔 Metafísica</h3>
+                    <p><strong>¿Qué es la realidad?</strong></p>
+                    <ul>
+                        <li>¿Qué existe realmente?</li>
+                        <li>¿Cuál es la naturaleza del ser?</li>
+                        <li>¿Existe Dios?</li>
+                        <li>¿Qué es el tiempo y el espacio?</li>
+                    </ul>
+                </div>
+                
+                <div class="content-card">
+                    <h3>🧠 Epistemología</h3>
+                    <p><strong>¿Qué podemos conocer?</strong></p>
+                    <ul>
+                        <li>¿Qué es el conocimiento?</li>
+                        <li>¿Cómo sabemos lo que sabemos?</li>
+                        <li>¿Cuáles son los límites del conocimiento?</li>
+                        <li>¿Qué es la verdad?</li>
+                    </ul>
+                </div>
+                
+                <div class="content-card">
+                    <h3>⚖️ Ética</h3>
+                    <p><strong>¿Cómo debemos vivir?</strong></p>
+                    <ul>
+                        <li>¿Qué es el bien y el mal?</li>
+                        <li>¿Qué hace que una acción sea correcta?</li>
+                        <li>¿Cuál es el propósito de la vida?</li>
+                        <li>¿Qué es la justicia?</li>
+                    </ul>
+                </div>
+                
+                <div class="content-card">
+                    <h3>🎨 Estética</h3>
+                    <p><strong>¿Qué es la belleza?</strong></p>
+                    <ul>
+                        <li>¿Qué es el arte?</li>
+                        <li>¿Qué hace que algo sea bello?</li>
+                        <li>¿Cómo experimentamos lo estético?</li>
+                        <li>¿Cuál es el valor del arte?</li>
+                    </ul>
+                </div>
+                
+                <div class="content-card">
+                    <h3>🏛️ Filosofía Política</h3>
+                    <p><strong>¿Cómo debemos organizarnos?</strong></p>
+                    <ul>
+                        <li>¿Qué es la justicia social?</li>
+                        <li>¿Cuál es el papel del Estado?</li>
+                        <li>¿Qué son los derechos?</li>
+                        <li>¿Qué es la libertad?</li>
+                    </ul>
+                </div>
+                
+                <div class="content-card">
+                    <h3>🔬 Lógica</h3>
+                    <p><strong>¿Cómo razonamos correctamente?</strong></p>
+                    <ul>
+                        <li>¿Qué es un argumento válido?</li>
+                        <li>¿Cómo detectar falacias?</li>
+                        <li>¿Qué es la inferencia?</li>
+                        <li>¿Cómo estructurar el pensamiento?</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="lesson-section">
+                <h3>🎯 Por qué estudiar filosofía</h3>
+                <ul>
+                    <li><strong>Desarrollo del pensamiento crítico:</strong> Aprende a analizar argumentos y evaluar ideas de manera rigurosa.</li>
+                    <li><strong>Comprensión profunda:</strong> Explora los fundamentos de otras disciplinas y del pensamiento humano.</li>
+                    <li><strong>Habilidades transferibles:</strong> La filosofía desarrolla capacidades útiles en cualquier campo profesional.</li>
+                    <li><strong>Enriquecimiento personal:</strong> Reflexiona sobre cuestiones fundamentales de la existencia humana.</li>
+                </ul>
+            </div>
+        </div>
 
-<div class="text-center mb-12">
-<h2 class="text-4xl font-bold mb-4">Aprende Filosofía <span class="text-indigo-600">Desde Cero</span></h2>
-<p class="text-xl text-gray-600">Rutas de aprendizaje diseñadas para estudiantes peruanos</p>
-</div>
+        <!-- CONTENIDO TAB 2: CORRIENTES FILOSÓFICAS -->
+        <div id="corrientes" class="tab-content">
+            <h2>🌊 Corrientes Filosóficas</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Filosofía Antigua (600 a.C. - 500 d.C.)</h4>
+                    <p><strong>Presocráticos:</strong> Tales, Heráclito, Parménides - Buscaban el principio (arjé) de todas las cosas.</p>
+                    <p><strong>Periodo Clásico:</strong> Sócrates, Platón, Aristóteles - Establecieron las bases de la filosofía occidental.</p>
+                    <p><strong>Periodo Helenístico:</strong> Estoicos, Epicúreos, Escépticos - Enfocados en la ética y la felicidad.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4>Filosofía Medieval (500 - 1500)</h4>
+                    <p>Síntesis entre filosofía griega y religión cristiana. Figuras clave: San Agustín, Santo Tomás de Aquino, Avicena.</p>
+                    <p>Temas: Existencia de Dios, fe y razón, universales.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4>Filosofía Moderna (1500 - 1800)</h4>
+                    <p><strong>Racionalismo:</strong> Descartes, Spinoza, Leibniz - La razón como fuente del conocimiento.</p>
+                    <p><strong>Empirismo:</strong> Locke, Berkeley, Hume - La experiencia como base del conocimiento.</p>
+                    <p><strong>Idealismo:</strong> Kant, Hegel - Síntesis entre racionalismo y empirismo.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4>Filosofía Contemporánea (1800 - presente)</h4>
+                    <p><strong>S. XIX:</strong> Nietzsche, Marx, Kierkegaard - Crítica de la modernidad.</p>
+                    <p><strong>S. XX:</strong> Fenomenología, Existencialismo, Filosofía Analítica, Postmodernismo.</p>
+                    <p><strong>S. XXI:</strong> Filosofía de la mente, ética aplicada, filosofía de la tecnología.</p>
+                </div>
+            </div>
+            
+            <h3>Corrientes Principales del S. XX</h3>
+            
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>Fenomenología</h3>
+                    <p><strong>Fundador:</strong> Edmund Husserl</p>
+                    <p>Estudio de las estructuras de la conciencia y la experiencia. "A las cosas mismas" - análisis de cómo aparecen los fenómenos en la conciencia.</p>
+                    <p><strong>Filósofos clave:</strong> Heidegger, Merleau-Ponty</p>
+                </div>
+                
+                <div class="content-card">
+                    <h3>Existencialismo</h3>
+                    <p><strong>Temas:</strong> Libertad, angustia, autenticidad</p>
+                    <p>"La existencia precede a la esencia" - Somos lo que hacemos de nosotros mismos a través de nuestras elecciones.</p>
+                    <p><strong>Filósofos clave:</strong> Sartre, Camus, Beauvoir</p>
+                </div>
+                
+                <div class="content-card">
+                    <h3>Filosofía Analítica</h3>
+                    <p><strong>Enfoque:</strong> Análisis lógico del lenguaje</p>
+                    <p>Uso de la lógica formal y el análisis lingüístico para resolver problemas filosóficos.</p>
+                    <p><strong>Filósofos clave:</strong> Russell, Wittgenstein, Quine</p>
+                </div>
+            </div>
+        </div>
 
-<div class="grid md:grid-cols-3 gap-6 mb-12">
-<div class="bg-gradient-to-br from-green-400 to-green-600 text-white rounded-2xl p-6 shadow-xl">
-<div class="text-5xl mb-4">🌱</div>
-<h3 class="text-2xl font-bold mb-2">Principiante</h3>
-<p class="mb-4">Empieza tu viaje filosófico con conceptos básicos y autores fundamentales</p>
-<div class="space-y-2 text-sm">
-<div class="flex items-center gap-2"><span>✓</span> ¿Qué es la filosofía?</div>
-<div class="flex items-center gap-2"><span>✓</span> Historia de la filosofía</div>
-<div class="flex items-center gap-2"><span>✓</span> Corrientes principales</div>
-</div>
-</div>
+        <!-- CONTENIDO TAB 3: MÉTODOS DE ESTUDIO -->
+        <div id="metodos" class="tab-content">
+            <h2>📖 Métodos de Estudio en Filosofía</h2>
+            
+            <div class="lesson-section">
+                <h3>Cómo Leer Textos Filosóficos</h3>
+                <p>Los textos filosóficos requieren una lectura activa y cuidadosa. Aquí te presentamos un método probado:</p>
+            </div>
+            
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>1️⃣ Primera Lectura: Panorama General</h3>
+                    <ul>
+                        <li>Lee sin detenerte demasiado</li>
+                        <li>Identifica el tema principal</li>
+                        <li>Observa la estructura del texto</li>
+                        <li>Anota tus impresiones iniciales</li>
+                    </ul>
+                </div>
+                
+                <div class="content-card">
+                    <h3>2️⃣ Segunda Lectura: Análisis Profundo</h3>
+                    <ul>
+                        <li>Lee párrafo por párrafo</li>
+                        <li>Subraya conceptos clave</li>
+                        <li>Identifica los argumentos</li>
+                        <li>Anota preguntas y dudas</li>
+                    </ul>
+                </div>
+                
+                <div class="content-card">
+                    <h3>3️⃣ Tercera Lectura: Síntesis</h3>
+                    <ul>
+                        <li>Reconstruye el argumento principal</li>
+                        <li>Conecta las ideas clave</li>
+                        <li>Evalúa la coherencia</li>
+                        <li>Formula tu crítica</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="lesson-section">
+                <h3>🎯 Técnica de Anotación Filosófica</h3>
+                <p>Al leer, usa un sistema de símbolos para marcar el texto:</p>
+                <ul>
+                    <li><strong>?</strong> - No entiendo / Tengo dudas</li>
+                    <li><strong>!</strong> - Idea importante</li>
+                    <li><strong>★</strong> - Tesis principal</li>
+                    <li><strong>→</strong> - Argumento / Inferencia</li>
+                    <li><strong>✗</strong> - Posible objeción</li>
+                    <li><strong>Ej.</strong> - Ejemplo útil</li>
+                </ul>
+            </div>
+            
+            <div class="lesson-section">
+                <h3>💡 Estrategias de Comprensión</h3>
+                
+                <h4>Para textos difíciles:</h4>
+                <ul>
+                    <li><strong>Busca comentarios:</strong> Lee introducciones y guías de lectura</li>
+                    <li><strong>Contextualiza:</strong> Investiga sobre el autor y su época</li>
+                    <li><strong>Lee en voz alta:</strong> Ayuda a procesar ideas complejas</li>
+                    <li><strong>Parafrasea:</strong> Reescribe los argumentos con tus propias palabras</li>
+                    <li><strong>Discute:</strong> Habla sobre el texto con otros estudiantes</li>
+                </ul>
+                
+                <h4>Para preparar clases:</h4>
+                <ul>
+                    <li>Lee el material asignado con 2-3 días de anticipación</li>
+                    <li>Prepara 2-3 preguntas sobre el texto</li>
+                    <li>Identifica las tesis principales</li>
+                    <li>Conecta con lecturas anteriores</li>
+                </ul>
+            </div>
+        </div>
 
-<div class="bg-gradient-to-br from-blue-400 to-blue-600 text-white rounded-2xl p-6 shadow-xl">
-<div class="text-5xl mb-4">🎓</div>
-<h3 class="text-2xl font-bold mb-2">Intermedio</h3>
-<p class="mb-4">Profundiza en ramas específicas y desarrolla pensamiento crítico</p>
-<div class="space-y-2 text-sm">
-<div class="flex items-center gap-2"><span>✓</span> Ética y moral</div>
-<div class="flex items-center gap-2"><span>✓</span> Epistemología</div>
-<div class="flex items-center gap-2"><span>✓</span> Filosofía política</div>
-</div>
-</div>
+        <!-- CONTENIDO TAB 4: ESCRITURA FILOSÓFICA -->
+        <div id="escritura" class="tab-content">
+            <h2>✍️ Escritura Filosófica</h2>
+            
+            <div class="lesson-section">
+                <h3>Estructura de un Ensayo Filosófico</h3>
+                <p>Un buen ensayo filosófico tiene una estructura clara y argumentos bien desarrollados:</p>
+            </div>
+            
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>📝 Introducción</h3>
+                    <p><strong>Qué incluir:</strong></p>
+                    <ul>
+                        <li>Pregunta o problema filosófico</li>
+                        <li>Tu tesis (posición)</li>
+                        <li>Roadmap (estructura del ensayo)</li>
+                        <li>Por qué es importante el tema</li>
+                    </ul>
+                    <p><strong>Extensión:</strong> 10-15% del ensayo</p>
+                </div>
+                
+                <div class="content-card">
+                    <h3>🧱 Desarrollo</h3>
+                    <p><strong>Organización:</strong></p>
+                    <ul>
+                        <li>Un argumento por párrafo</li>
+                        <li>Evidencia y ejemplos</li>
+                        <li>Considera objeciones</li>
+                        <li>Responde a contraargumentos</li>
+                    </ul>
+                    <p><strong>Extensión:</strong> 70-80% del ensayo</p>
+                </div>
+                
+                <div class="content-card">
+                    <h3>🎯 Conclusión</h3>
+                    <p><strong>Qué incluir:</strong></p>
+                    <ul>
+                        <li>Resumen de tu argumento</li>
+                        <li>Reafirmación de tu tesis</li>
+                        <li>Implicaciones de tu posición</li>
+                        <li>Posibles extensiones</li>
+                    </ul>
+                    <p><strong>Extensión:</strong> 10-15% del ensayo</p>
+                </div>
+            </div>
+            
+            <div class="lesson-section">
+                <h3>⚡ Principios de Buena Escritura Filosófica</h3>
+                
+                <div class="quote-box">
+                    "En filosofía, la claridad es cortesía."
+                    <div class="author">— José Ortega y Gasset</div>
+                </div>
+                
+                <h4>1. Claridad sobre todo</h4>
+                <ul>
+                    <li>Usa oraciones simples y directas</li>
+                    <li>Define términos técnicos</li>
+                    <li>Evita ambigüedades</li>
+                    <li>Un punto por párrafo</li>
+                </ul>
+                
+                <h4>2. Argumenta, no describas</h4>
+                <ul>
+                    <li>No solo expongas lo que dijeron otros</li>
+                    <li>Desarrolla TUS propios argumentos</li>
+                    <li>Evalúa críticamente las posiciones</li>
+                    <li>Defiende tu tesis con razones</li>
+                </ul>
+                
+                <h4>3. Anticipate objeciones</h4>
+                <ul>
+                    <li>Considera contraargumentos</li>
+                    <li>Responde a posibles críticas</li>
+                    <li>Fortalece tu posición</li>
+                </ul>
+                
+                <h4>4. Revisa y edita</h4>
+                <ul>
+                    <li>Primera versión: volcá tus ideas</li>
+                    <li>Segunda versión: estructura argumentos</li>
+                    <li>Tercera versión: clarifica y pule</li>
+                    <li>Lee en voz alta antes de entregar</li>
+                </ul>
+            </div>
+            
+            <div class="lesson-section">
+                <h3>❌ Errores Comunes a Evitar</h3>
+                <ul>
+                    <li><strong>Ser demasiado vago:</strong> "Platón tiene ideas interesantes" → Sé específico</li>
+                    <li><strong>Usar jerga innecesaria:</strong> Prefiere la claridad a sonar "filosófico"</li>
+                    <li><strong>No tener tesis clara:</strong> El lector debe saber tu posición desde el inicio</li>
+                    <li><strong>Citar en exceso:</strong> Usa citas con moderación y siempre explicándolas</li>
+                    <li><strong>Ser dogmático:</strong> Reconoce las limitaciones de tu argumento</li>
+                </ul>
+            </div>
+            
+            <a href="recursos.html" class="btn">Ver Guías y Plantillas de Escritura →</a>
+        </div>
 
-<div class="bg-gradient-to-br from-purple-400 to-purple-600 text-white rounded-2xl p-6 shadow-xl">
-<div class="text-5xl mb-4">🚀</div>
-<h3 class="text-2xl font-bold mb-2">Avanzado</h3>
-<p class="mb-4">Investiga, publica y participa en debates académicos</p>
-<div class="space-y-2 text-sm">
-<div class="flex items-center gap-2"><span>✓</span> Investigación filosófica</div>
-<div class="flex items-center gap-2"><span>✓</span> Metodología</div>
-<div class="flex items-center gap-2"><span>✓</span> Publicación de ensayos</div>
-</div>
-</div>
-</div>
+        <footer>
+            <p>© 2024-2025 ASEFIP - Asociación de Estudiantes de Filosofía del Perú</p>
+            <p style="margin-top: 10px;">¿Tienes sugerencias para mejorar este contenido? <a href="index.html#contacto" style="color: #667eea;">Contáctanos</a></p>
+        </footer>
+    </div>
 
-<section class="mb-12">
-<h3 class="text-3xl font-bold mb-6">📚 Cursos Estructurados</h3>
-
-<div class="space-y-4">
-<div class="bg-white rounded-xl p-6 shadow-lg border-l-4 border-green-500">
-<div class="flex items-start justify-between">
-<div class="flex-1">
-<span class="text-xs bg-green-100 text-green-800 px-3 py-1 rounded-full font-semibold">PRINCIPIANTE</span>
-<h4 class="text-xl font-bold mt-3 mb-2">Introducción a la Filosofía</h4>
-<p class="text-gray-600 mb-4">10 videos • 5 lecturas • 3 ejercicios</p>
-<div class="flex flex-wrap gap-2">
-<span class="text-xs bg-gray-100 px-3 py-1 rounded-full">Historia</span>
-<span class="text-xs bg-gray-100 px-3 py-1 rounded-full">Conceptos básicos</span>
-<span class="text-xs bg-gray-100 px-3 py-1 rounded-full">Autores clave</span>
-</div>
-</div>
-<button class="px-6 py-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 whitespace-nowrap">Empezar →</button>
-</div>
-</div>
-
-<div class="bg-white rounded-xl p-6 shadow-lg border-l-4 border-blue-500">
-<div class="flex items-start justify-between">
-<div class="flex-1">
-<span class="text-xs bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-semibold">INTERMEDIO</span>
-<h4 class="text-xl font-bold mt-3 mb-2">Ética Contemporánea</h4>
-<p class="text-gray-600 mb-4">8 videos • 12 lecturas • 5 ejercicios</p>
-<div class="flex flex-wrap gap-2">
-<span class="text-xs bg-gray-100 px-3 py-1 rounded-full">Ética aplicada</span>
-<span class="text-xs bg-gray-100 px-3 py-1 rounded-full">Dilemas morales</span>
-<span class="text-xs bg-gray-100 px-3 py-1 rounded-full">Casos peruanos</span>
-</div>
-</div>
-<button class="px-6 py-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 whitespace-nowrap">Empezar →</button>
-</div>
-</div>
-
-<div class="bg-white rounded-xl p-6 shadow-lg border-l-4 border-purple-500">
-<div class="flex items-start justify-between">
-<div class="flex-1">
-<span class="text-xs bg-purple-100 text-purple-800 px-3 py-1 rounded-full font-semibold">AVANZADO</span>
-<h4 class="text-xl font-bold mt-3 mb-2">Filosofía Peruana Contemporánea</h4>
-<p class="text-gray-600 mb-4">6 videos • 15 lecturas • Proyecto final</p>
-<div class="flex flex-wrap gap-2">
-<span class="text-xs bg-gray-100 px-3 py-1 rounded-full">Salazar Bondy</span>
-<span class="text-xs bg-gray-100 px-3 py-1 rounded-full">Sobrevilla</span>
-<span class="text-xs bg-gray-100 px-3 py-1 rounded-full">Pensamiento andino</span>
-</div>
-</div>
-<button class="px-6 py-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 whitespace-nowrap">Empezar →</button>
-</div>
-</div>
-
-</div>
-</section>
-
-<section class="mb-12 bg-white rounded-2xl p-8 shadow-xl">
-<h3 class="text-3xl font-bold mb-6">🎯 ¿Por qué aprender con ASEFIP?</h3>
-<div class="grid md:grid-cols-2 gap-6">
-<div class="flex gap-4">
-<div class="text-4xl">👥</div>
-<div>
-<h4 class="font-bold text-lg mb-2">Por estudiantes, para estudiantes</h4>
-<p class="text-gray-600">Contenido diseñado por quienes entienden tus necesidades académicas</p>
-</div>
-</div>
-<div class="flex gap-4">
-<div class="text-4xl">🇵🇪</div>
-<div>
-<h4 class="font-bold text-lg mb-2">Contexto peruano</h4>
-<p class="text-gray-600">Ejemplos, casos y autores relevantes para nuestra realidad nacional</p>
-</div>
-</div>
-<div class="flex gap-4">
-<div class="text-4xl">📱</div>
-<div>
-<h4 class="font-bold text-lg mb-2">100% gratuito y accesible</h4>
-<p class="text-gray-600">Aprende a tu ritmo desde cualquier dispositivo, sin costo</p>
-</div>
-</div>
-<div class="flex gap-4">
-<div class="text-4xl">🏆</div>
-<div>
-<h4 class="font-bold text-lg mb-2">Certificado de participación</h4>
-<p class="text-gray-600">Recibe reconocimiento por completar nuestras rutas de aprendizaje</p>
-</div>
-</div>
-</div>
-</section>
-
-</main>
-
-<footer class="bg-gray-900 text-white py-8 text-center">
-<p class="text-sm">© 2024-2025 ASEFIP - Asociación de Estudiantes de Filosofía del Perú</p>
-</footer>
-
+    <script>
+        function showTab(tabId) {
+            // Ocultar todos los contenidos
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Quitar clase active de todos los tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Mostrar el contenido seleccionado
+            document.getElementById(tabId).classList.add('active');
+            
+            // Activar el tab clickeado
+            event.target.classList.add('active');
+        }
+    </script>
 </body>
 </html>
