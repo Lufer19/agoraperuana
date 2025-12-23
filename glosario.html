@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glosario Filosófico - ASEFIP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .logo {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            line-height: 60px;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        h1 {
+            color: #2d3748;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #718096;
+            font-size: 1.1em;
+        }
+        
+        .back-link {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* BÚSQUEDA */
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1.1em;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        /* ALFABETO */
+        .alphabet {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        
+        .letter-btn {
+            width: 40px;
+            height: 40px;
+            background: #e2e8f0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s;
+        }
+        
+        .letter-btn:hover {
+            background: #cbd5e0;
+        }
+        
+        .letter-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        /* TÉRMINOS */
+        .terminos-lista {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .termino-card {
+            background: #f7fafc;
+            border-left: 5px solid #667eea;
+            padding: 25px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        
+        .termino-card:hover {
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.2);
+            transform: translateX(5px);
+        }
+        
+        .termino-titulo {
+            color: #2d3748;
+            font-size: 1.6em;
+            margin-bottom: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .termino-titulo:hover {
+            color: #667eea;
+        }
+        
+        .toggle-icon {
+            font-size: 0.8em;
+            color: #718096;
+        }
+        
+        .termino-tags {
+            margin-bottom: 15px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            margin-right: 8px;
+            font-weight: 600;
+        }
+        
+        .termino-definicion {
+            color: #4a5568;
+            line-height: 1.8;
+            font-size: 1.05em;
+            margin-bottom: 15px;
+        }
+        
+        .termino-ejemplo {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #90cdf4;
+            margin-top: 15px;
+            font-style: italic;
+            color: #2d3748;
+        }
+        
+        .termino-relacionados {
+            margin-top: 15px;
+            color: #718096;
+            font-size: 0.95em;
+        }
+        
+        .termino-relacionados a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .termino-relacionados a:hover {
+            text-decoration: underline;
+        }
+        
+        .letra-section {
+            margin: 50px 0;
+        }
+        
+        .letra-titulo {
+            font-size: 2.5em;
+            color: #2d3748;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #e2e8f0;
+            color: #718096;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Volver al Inicio</a>
+        
+        <header>
+            <div class="logo">AS</div>
+            <h1>Glosario Filosófico</h1>
+            <p class="subtitle">Diccionario de conceptos y términos fundamentales</p>
+        </header>
+        
+        <!-- BÚSQUEDA -->
+        <div class="search-box">
+            <input type="text" class="search-input" id="searchInput" 
+                   placeholder="Buscar término filosófico..." 
+                   onkeyup="buscarTermino()">
+        </div>
+        
+        <!-- ALFABETO -->
+        <div class="alphabet">
+            <button class="letter-btn" onclick="filtrarPorLetra('todas')">TODAS</button>
+            <button class="letter-btn" onclick="filtrarPorLetra('A')">A</button>
+            <button class="letter-btn" onclick="filtrarPorLetra('B')">B</button>
+            <button class="letter-btn" onclick="filtrarPorLetra('C')">C</button>
+            <button class="letter-btn" onclick="filtrarPorLetra('D')">D</button>
+            <button class="letter-btn" onclick="filtrarPorLetra('E')">E</button>
+            <button class="letter-btn" onclick="filtrarPorLetra('F')">F</button>
+            <button class="letter-btn" onclick="filtrarPorLetra('M')">M</button>
+            <button class="letter-btn" onclick="filtrarPorLetra('N')">N</button>
+            <button class="letter-btn" onclick="filtrarPorLetra('O')">O</button>
+            <button class="letter-btn" onclick="filtrarPorLetra('P')">P</button>
+        </div>
+        
+        <!-- TÉRMINOS -->
+        <div id="terminosContainer">
+            <!-- LETRA A -->
+            <div class="letra-section" data-letra="A">
+                <h2 class="letra-titulo">A</h2>
+                <div class="terminos-lista">
+                    <div class="termino-card" data-termino="Absoluto">
+                        <div class="termino-titulo">
+                            Absoluto
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="termino-tags">
+                            <span class="tag">Metafísica</span>
+                            <span class="tag">Hegel</span>
+                        </div>
+                        <div class="termino-definicion">
+                            En filosofía, lo absoluto es aquello que existe por sí mismo, sin depender de nada más. 
+                            Es incondicionado, perfecto y completo. En Hegel, el Absoluto es la realidad última 
+                            que se despliega dialécticamente en la historia.
+                        </div>
+                        <div class="termino-ejemplo">
+                            <strong>Ejemplo:</strong> Para Hegel, el Absoluto no es un Dios trascendente, sino el 
+                            proceso mismo de la realidad que se conoce a sí misma a través del Espíritu.
+                        </div>
+                        <div class="termino-relacionados">
+                            <strong>Ver también:</strong> 
+                            <a href="#">Dialéctica</a>, 
+                            <a href="#">Espíritu</a>, 
+                            <a href="#">Metafísica</a>
+                        </div>
+                    </div>
+                    
+                    <div class="termino-card" data-termino="A priori / A posteriori">
+                        <div class="termino-titulo">
+                            A priori / A posteriori
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="termino-tags">
+                            <span class="tag">Epistemología</span>
+                            <span class="tag">Kant</span>
+                        </div>
+                        <div class="termino-definicion">
+                            <strong>A priori:</strong> Conocimiento independiente de la experiencia, universal y necesario. 
+                            <strong>A posteriori:</strong> Conocimiento derivado de la experiencia, contingente y particular. 
+                            Kant utilizó esta distinción para fundamentar su filosofía crítica.
+                        </div>
+                        <div class="termino-ejemplo">
+                            <strong>Ejemplo:</strong> "Todos los solteros son no casados" es a priori (verdadero por definición). 
+                            "El cielo es azul" es a posteriori (depende de la observación).
+                        </div>
+                        <div class="termino-relacionados">
+                            <strong>Ver también:</strong> 
+                            <a href="#">Analítico/Sintético</a>, 
+                            <a href="#">Juicio</a>
+                        </div>
+                    </div>
+                    
+                    <div class="termino-card" data-termino="Alienación">
+                        <div class="termino-titulo">
+                            Alienación
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="termino-tags">
+                            <span class="tag">Filosofía Social</span>
+                            <span class="tag">Marx</span>
+                        </div>
+                        <div class="termino-definicion">
+                            Estado en el que el ser humano pierde su esencia o se vuelve ajeno a sí mismo. 
+                            En Marx, la alienación ocurre cuando el trabajador no se reconoce en el producto de su trabajo 
+                            bajo el capitalismo.
+                        </div>
+                        <div class="termino-ejemplo">
+                            <strong>Ejemplo:</strong> Un obrero en una fábrica que produce objetos en cadena sin poder 
+                            ver el resultado final ni tener control sobre su proceso de trabajo está alienado.
+                        </div>
+                        <div class="termino-relacionados">
+                            <strong>Ver también:</strong> 
+                            <a href="#">Materialismo Histórico</a>, 
+                            <a href="#">Plusvalía</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- LETRA E -->
+            <div class="letra-section" data-letra="E">
+                <h2 class="letra-titulo">E</h2>
+                <div class="terminos-lista">
+                    <div class="termino-card" data-termino="Epistemología">
+                        <div class="termino-titulo">
+                            Epistemología
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="termino-tags">
+                            <span class="tag">Teoría del Conocimiento</span>
+                        </div>
+                        <div class="termino-definicion">
+                            Rama de la filosofía que estudia la naturaleza, el origen y los límites del conocimiento. 
+                            Se pregunta: ¿Qué podemos conocer? ¿Cómo sabemos que sabemos? ¿Qué es la verdad?
+                        </div>
+                        <div class="termino-ejemplo">
+                            <strong>Ejemplo:</strong> La discusión entre racionalistas (Descartes) y empiristas (Hume) 
+                            sobre si el conocimiento proviene de la razón o de la experiencia es un debate epistemológico.
+                        </div>
+                        <div class="termino-relacionados">
+                            <strong>Ver también:</strong> 
+                            <a href="#">A priori/A posteriori</a>, 
+                            <a href="#">Verdad</a>, 
+                            <a href="#">Justificación</a>
+                        </div>
+                    </div>
+                    
+                    <div class="termino-card" data-termino="Existencialismo">
+                        <div class="termino-titulo">
+                            Existencialismo
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="termino-tags">
+                            <span class="tag">Corriente Filosófica</span>
+                            <span class="tag">Sartre</span>
+                            <span class="tag">Camus</span>
+                        </div>
+                        <div class="termino-definicion">
+                            Corriente filosófica que enfatiza la existencia individual, la libertad y la responsabilidad. 
+                            "La existencia precede a la esencia": no tenemos una naturaleza predeterminada, sino que 
+                            nos creamos a nosotros mismos a través de nuestras elecciones.
+                        </div>
+                        <div class="termino-ejemplo">
+                            <strong>Ejemplo:</strong> Según Sartre, estamos "condenados a ser libres": incluso no elegir 
+                            es una elección, y somos totalmente responsables de nuestras acciones.
+                        </div>
+                        <div class="termino-relacionados">
+                            <strong>Ver también:</strong> 
+                            <a href="#">Libertad</a>, 
+                            <a href="#">Angustia</a>, 
+                            <a href="#">Absurdo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- LETRA M -->
+            <div class="letra-section" data-letra="M">
+                <h2 class="letra-titulo">M</h2>
+                <div class="terminos-lista">
+                    <div class="termino-card" data-termino="Metafísica">
+                        <div class="termino-titulo">
+                            Metafísica
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="termino-tags">
+                            <span class="tag">Ontología</span>
+                            <span class="tag">Aristóteles</span>
+                        </div>
+                        <div class="termino-definicion">
+                            Rama de la filosofía que estudia la naturaleza fundamental de la realidad y la existencia. 
+                            Se pregunta: ¿Qué es el ser? ¿Qué existe realmente? ¿Cuál es la naturaleza de la realidad?
+                        </div>
+                        <div class="termino-ejemplo">
+                            <strong>Ejemplo:</strong> Preguntas metafísicas incluyen: ¿Existe Dios? ¿Qué es el tiempo? 
+                            ¿Tenemos libre albedrío? ¿Qué es la causación?
+                        </div>
+                        <div class="termino-relacionados">
+                            <strong>Ver también:</strong> 
+                            <a href="#">Ontología</a>, 
+                            <a href="#">Ser</a>, 
+                            <a href="#">Esencia</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- LETRA N -->
+            <div class="letra-section" data-letra="N">
+                <h2 class="letra-titulo">N</h2>
+                <div class="terminos-lista">
+                    <div class="termino-card" data-termino="Nihilismo">
+                        <div class="termino-titulo">
+                            Nihilismo
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="termino-tags">
+                            <span class="tag">Nietzsche</span>
+                            <span class="tag">Valores</span>
+                        </div>
+                        <div class="termino-definicion">
+                            Posición filosófica que sostiene que la vida carece de significado objetivo, propósito o 
+                            valor intrínseco. Para Nietzsche, el nihilismo es la consecuencia de la "muerte de Dios" 
+                            y el colapso de los valores tradicionales.
+                        </div>
+                        <div class="termino-ejemplo">
+                            <strong>Ejemplo:</strong> Nietzsche ve el nihilismo como una crisis pero también como una 
+                            oportunidad: al reconocer que no hay valores absolutos, podemos crear nuevos valores.
+                        </div>
+                        <div class="termino-relacionados">
+                            <strong>Ver también:</strong> 
+                            <a href="#">Voluntad de Poder</a>, 
+                            <a href="#">Übermensch</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- LETRA O -->
+            <div class="letra-section" data-letra="O">
+                <h2 class="letra-titulo">O</h2>
+                <div class="terminos-lista">
+                    <div class="termino-card" data-termino="Ontología">
+                        <div class="termino-titulo">
+                            Ontología
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="termino-tags">
+                            <span class="tag">Metafísica</span>
+                            <span class="tag">Ser</span>
+                        </div>
+                        <div class="termino-definicion">
+                            Estudio del ser en cuanto ser. Es la rama de la metafísica que investiga qué cosas existen 
+                            y cómo se pueden categorizar. Se pregunta: ¿Qué significa existir?
+                        </div>
+                        <div class="termino-ejemplo">
+                            <strong>Ejemplo:</strong> Preguntas ontológicas: ¿Existen los números? ¿Son reales los 
+                            universales (como "rojez")? ¿Existe la mente independiente del cuerpo?
+                        </div>
+                        <div class="termino-relacionados">
+                            <strong>Ver también:</strong> 
+                            <a href="#">Metafísica</a>, 
+                            <a href="#">Ser</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- LETRA P -->
+            <div class="letra-section" data-letra="P">
+                <h2 class="letra-titulo">P</h2>
+                <div class="terminos-lista">
+                    <div class="termino-card" data-termino="Fenomenología">
+                        <div class="termino-titulo">
+                            Fenomenología
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="termino-tags">
+                            <span class="tag">Husserl</span>
+                            <span class="tag">Conciencia</span>
+                        </div>
+                        <div class="termino-definicion">
+                            Método filosófico que estudia las estructuras de la experiencia y la conciencia. 
+                            Husserl propuso ir "a las cosas mismas", describiendo cómo los fenómenos aparecen 
+                            en nuestra experiencia sin prejuicios teóricos.
+                        </div>
+                        <div class="termino-ejemplo">
+                            <strong>Ejemplo:</strong> En lugar de preguntarse si una mesa existe realmente, 
+                            la fenomenología examina cómo experimentamos la mesa en nuestra conciencia.
+                        </div>
+                        <div class="termino-relacionados">
+                            <strong>Ver también:</strong> 
+                            <a href="#">Intencionalidad</a>, 
+                            <a href="#">Noema/Noesis</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2024-2025 ASEFIP - Asociación de Estudiantes de Filosofía del Perú</p>
+            <p style="margin-top: 10px;">Este glosario está en construcción. Estamos agregando más términos regularmente.</p>
+        </footer>
+    </div>
+    
+    <script>
+        function filtrarPorLetra(letra) {
+            const secciones = document.querySelectorAll('.letra-section');
+            const botones = document.querySelectorAll('.letter-btn');
+            
+            // Actualizar botones
+            botones.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Mostrar/ocultar secciones
+            if (letra === 'todas') {
+                secciones.forEach(s => s.style.display = 'block');
+            } else {
+                secciones.forEach(s => {
+                    s.style.display = s.dataset.letra === letra ? 'block' : 'none';
+                });
+            }
+        }
+        
+        function buscarTermino() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const terminos = document.querySelectorAll('.termino-card');
+            let hayResultados = false;
+            
+            terminos.forEach(termino => {
+                const titulo = termino.dataset.termino.toLowerCase();
+                const definicion = termino.querySelector('.termino-definicion').textContent.toLowerCase();
+                const tags = Array.from(termino.querySelectorAll('.tag'))
+                    .map(t => t.textContent.toLowerCase())
+                    .join(' ');
+                
+                const match = titulo.includes(input) || definicion.includes(input) || tags.includes(input);
+                termino.style.display = match || input === '' ? 'block' : 'none';
+                
+                if (match) hayResultados = true;
+            });
+            
+            // Mostrar/ocultar secciones completas
+            const secciones = document.querySelectorAll('.letra-section');
+            secciones.forEach(seccion => {
+                const terminosVisibles = Array.from(seccion.querySelectorAll('.termino-card'))
+                    .filter(t => t.style.display !== 'none');
+                seccion.style.display = terminosVisibles.length > 0 || input === '' ? 'block' : 'none';
+            });
+        }
+    </script>
+</body>
+  </html>
