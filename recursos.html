@@ -1,336 +1,235 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recursos y Herramientas - ASEFIP</title>
-    <meta name="description" content="Glosario filosófico interactivo, plantillas, herramientas de estudio y más recursos útiles.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet>
-    <!-- Librería para búsqueda simple -->
-    <script src="https://unpkg.com/lunr/lunr.js"></script>
-    <style>
-        html { font-family: 'Inter', sans-serif; }
-        h1, h2, h3 { font-family: 'Playfair Display', serif; }
-        .termino { transition: all 0.2s; cursor: pointer; }
-        .termino:hover { background-color: #f0f9ff; }
-        .definicion { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
-        .definicion.activa { max-height: 300px; }
-        #resultadosBusqueda:empty { display: none; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recursos - ASEFIP</title>
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-b from-emerald-50 to-white min-h-screen text-gray-800">
+<body class="bg-gradient-to-br from-blue-50 to-indigo-50">
 
-<!-- Navegación -->
-<header class="bg-white shadow-sm border-b sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <a href="index.html" class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-lg flex items-center justify-center text-white font-bold">AS</div>
-            <div>
-                <h1 class="text-xl font-bold text-gray-900">ASEFIP</h1>
-                <p class="text-xs text-gray-600">Portal de Filosofía Peruana</p>
-            </div>
-        </a>
-        <nav class="hidden md:flex space-x-1">
-            <a href="index.html" class="px-4 py-2 font-medium text-gray-600 hover:text-emerald-700 hover:bg-emerald-50 rounded-lg">Inicio</a>
-            <a href="aprender.html" class="px-4 py-2 font-medium text-gray-600 hover:text-emerald-700 hover:bg-emerald-50 rounded-lg">Aprender</a>
-            <a href="investigar.html" class="px-4 py-2 font-medium text-gray-600 hover:text-emerald-700 hover:bg-emerald-50 rounded-lg">Investigar</a>
-            <a href="comunidad.html" class="px-4 py-2 font-medium text-gray-600 hover:text-emerald-700 hover:bg-emerald-50 rounded-lg">Comunidad</a>
-            <a href="recursos.html" class="px-4 py-2 font-medium text-emerald-700 border-b-2 border-emerald-700">Recursos</a>
-        </nav>
-        <button id="menuBtn" class="md:hidden text-2xl text-gray-700">☰</button>
-    </div>
-    <div id="mobileMenu" class="hidden md:hidden bg-white border-t px-4 py-3">
-        <a href="index.html" class="block py-3 px-2 text-gray-700 hover:bg-gray-100 rounded">Inicio</a>
-        <a href="aprender.html" class="block py-3 px-2 text-gray-700 hover:bg-gray-100 rounded">Aprender</a>
-        <a href="investigar.html" class="block py-3 px-2 text-gray-700 hover:bg-gray-100 rounded">Investigar</a>
-        <a href="comunidad.html" class="block py-3 px-2 text-gray-700 hover:bg-gray-100 rounded">Comunidad</a>
-        <a href="recursos.html" class="block py-3 px-2 font-medium text-emerald-700 bg-emerald-50 rounded">Recursos</a>
-    </div>
+<header class="bg-white shadow-lg p-4 sticky top-0 z-50">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">AS</div>
+<div>
+<h1 class="text-lg font-bold">ASEFIP</h1>
+<p class="text-xs text-gray-600">Asociación de Estudiantes de Filosofía del Perú</p>
+</div>
+</div>
+<a href="index.html" class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm">← Inicio</a>
+</div>
 </header>
 
-<main class="max-w-6xl mx-auto px-4 py-12">
-    <!-- Título -->
-    <section class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-bold mb-6">Herramientas para el <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-600">Estudio Filosófico</span></h2>
-        <p class="text-xl text-gray-700 max-w-3xl mx-auto">Accede a utilidades interactivas, descargas y recursos curados para potenciar tu aprendizaje e investigación.</p>
-    </section>
+<main class="max-w-7xl mx-auto p-4 py-12">
 
-    <!-- GLOSARIO INTERACTIVO CON BÚSQUEDA -->
-    <section class="mb-16">
-        <div class="flex items-center justify-between mb-8">
-            <div>
-                <h3 class="text-3xl font-bold mb-2">📖 Glosario Filosófico Interactivo</h3>
-                <p class="text-gray-600">Busca y explora definiciones de términos clave. Haz clic en cualquier término para expandir su explicación.</p>
-            </div>
-            <div class="relative w-full md:w-64">
-                <input type="text" id="buscadorGlosario" placeholder="Buscar término (ej: dialéctica, a priori)" class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
-                <div class="absolute left-3 top-3.5 text-gray-400">🔍</div>
-            </div>
-        </div>
-        
-        <!-- Contenedor de Resultados de Búsqueda -->
-        <div id="resultadosBusqueda" class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg hidden"></div>
-        
-        <!-- Lista de Términos -->
-        <div id="listaGlosario" class="grid md:grid-cols-2 gap-4">
-            <!-- Los términos se insertarán aquí por JavaScript -->
-        </div>
-    </section>
-
-    <!-- HERRAMIENTAS PRÁCTICAS -->
-    <section class="mb-16">
-        <h3 class="text-3xl font-bold mb-8">🛠️ Herramientas y Utilidades</h3>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-200 text-center hover:shadow-lg transition-shadow">
-                <div class="text-4xl mb-4">📝</div>
-                <h4 class="font-bold text-xl mb-3">Generador de Citas APA</h4>
-                <p class="text-gray-600 mb-4">Genera automáticamente referencias bibliográficas en formato APA para libros, artículos y páginas web.</p>
-                <button onclick="mostrarGeneradorCitas()" class="px-4 py-2 bg-emerald-100 text-emerald-700 rounded-lg font-semibold hover:bg-emerald-200">Usar Herramienta</button>
-            </div>
-            <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-200 text-center hover:shadow-lg transition-shadow">
-                <div class="text-4xl mb-4">⏳</div>
-                <h4 class="font-bold text-xl mb-3">Línea de Tiempo Filosófica</h4>
-                <p class="text-gray-600 mb-4">Explora visualmente las principales corrientes y filósofos a lo largo de la historia occidental y peruana.</p>
-                <a href="#linea-tiempo" class="px-4 py-2 bg-emerald-100 text-emerald-700 rounded-lg font-semibold hover:bg-emerald-200 inline-block">Ver Línea</a>
-            </div>
-            <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-200 text-center hover:shadow-lg transition-shadow">
-                <div class="text-4xl mb-4">🧠</div>
-                <h4 class="font-bold text-xl mb-3">Mapa de Conceptos</h4>
-                <p class="text-gray-600 mb-4">Visualiza cómo se relacionan conceptos filosóficos complejos entre sí (epistemología, ética, metafísica).</p>
-                <button class="px-4 py-2 bg-gray-200 text-gray-600 rounded-lg font-semibold cursor-not-allowed" disabled>Próximamente</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- BIBLIOTECA DE DESCARGAS -->
-    <section class="bg-white rounded-3xl p-8 border border-gray-200 shadow-sm">
-        <h3 class="text-3xl font-bold mb-8">📚 Biblioteca de Descargas</h3>
-        <p class="text-gray-600 mb-8">Plantillas, guías y documentos útiles para tus trabajos académicos.</p>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="border border-gray-300 rounded-2xl p-6 hover:border-emerald-400 transition-colors">
-                <h4 class="font-bold text-lg mb-3">Plantilla para Ensayos (Word)</h4>
-                <p class="text-gray-600 text-sm mb-4">Formato preconfigurado con normas APA, portada y estructura básica para ensayos filosóficos.</p>
-                <a href="#" class="inline-flex items-center text-emerald-600 font-semibold text-sm">
-                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
-                    Descargar (.docx)
-                </a>
-            </div>
-            <div class="border border-gray-300 rounded-2xl p-6 hover:border-emerald-400 transition-colors">
-                <h4 class="font-bold text-lg mb-3">Guía de Argumentación</h4>
-                <p class="text-gray-600 text-sm mb-4">Esquemas de argumentos válidos, falacias comunes y cómo estructurar un debate filosófico.</p>
-                <a href="#" class="inline-flex items-center text-emerald-600 font-semibold text-sm">
-                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
-                    Descargar (PDF)
-                </a>
-            </div>
-            <div class="border border-gray-300 rounded-2xl p-6 hover:border-emerald-400 transition-colors">
-                <h4 class="font-bold text-lg mb-3">Lista de Filósofos Peruanos</h4>
-                <p class="text-gray-600 text-sm mb-4">Directorio con las figuras más importantes del pensamiento peruano, con obras y periodos.</p>
-                <a href="#" class="inline-flex items-center text-emerald-600 font-semibold text-sm">
-                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
-                    Descargar (PDF)
-                </a>
-            </div>
-        </div>
-    </section>
-</main>
-
-<footer class="bg-gray-900 text-white mt-20 py-10">
-    <div class="max-w-6xl mx-auto px-4 text-center">
-        <h3 class="text-2xl font-bold mb-2">ASEFIP</h3>
-        <p class="text-gray-400 mb-6">Portal de referencia para la filosofía en el Perú.</p>
-        <p class="text-gray-500 text-sm">© 2024 - 2025 ASEFIP. Proyecto educativo sin fines de lucro.</p>
-    </div>
-</footer>
-
-<!-- MODAL para el Generador de Citas (oculto por defecto) -->
-<div id="modalCitas" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-md w-full p-6 max-h-[90vh] overflow-y-auto">
-        <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-bold">Generador de Citas APA</h3>
-            <button onclick="cerrarModal()" class="text-2xl text-gray-500 hover:text-gray-800">&times;</button>
-        </div>
-        <div id="contenidoGenerador">
-            <!-- El contenido se cargará aquí -->
-            <p class="text-gray-600">Selecciona el tipo de fuente:</p>
-            <div class="space-y-3 mt-4">
-                <button onclick="mostrarFormularioCita('libro')" class="w-full p-3 text-left border rounded-lg hover:bg-gray-50">📚 Libro</button>
-                <button onclick="mostrarFormularioCita('articulo')" class="w-full p-3 text-left border rounded-lg hover:bg-gray-50">📰 Artículo de Revista</button>
-                <button onclick="mostrarFormularioCita('web')" class="w-full p-3 text-left border rounded-lg hover:bg-gray-50">🌐 Página Web</button>
-            </div>
-        </div>
-    </div>
+<div class="text-center mb-12">
+<h2 class="text-4xl font-bold mb-4">Caja de <span class="text-indigo-600">Herramientas</span></h2>
+<p class="text-xl text-gray-600">Todo lo que necesitas para destacar en tus estudios filosóficos</p>
 </div>
 
-<!-- SECCIÓN Línea de Tiempo (inicialmente colapsada) -->
-<section id="linea-tiempo" class="max-w-6xl mx-auto px-4 py-12 hidden">
-    <h3 class="text-3xl font-bold mb-8">⏳ Línea de Tiempo Filosófica</h3>
-    <div class="bg-white p-6 rounded-2xl border">
-        <p class="text-gray-600 mb-6">Esta herramienta interactiva está en desarrollo. Pronto podrás explorar periodos y filósofos.</p>
-        <div class="h-48 bg-gradient-to-r from-blue-100 to-emerald-100 rounded-lg flex items-center justify-center">
-            <p class="text-gray-500">Visualización de línea de tiempo interactiva (próximamente)</p>
-        </div>
-    </div>
+<section class="mb-12">
+<h3 class="text-3xl font-bold mb-6">📚 Libros y Textos Filosóficos</h3>
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+<div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition text-center">
+<div class="text-5xl mb-4">📖</div>
+<h4 class="font-bold mb-2">Platón</h4>
+<p class="text-sm text-gray-600 mb-4">República, Fedón, El Banquete</p>
+<button class="w-full py-2 bg-indigo-600 text-white rounded-lg text-sm font-semibold hover:bg-indigo-700">Descargar PDF</button>
+</div>
+
+<div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition text-center">
+<div class="text-5xl mb-4">📖</div>
+<h4 class="font-bold mb-2">Aristóteles</h4>
+<p class="text-sm text-gray-600 mb-4">Ética a Nicómaco, Política</p>
+<button class="w-full py-2 bg-indigo-600 text-white rounded-lg text-sm font-semibold hover:bg-indigo-700">Descargar PDF</button>
+</div>
+
+<div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition text-center">
+<div class="text-5xl mb-4">📖</div>
+<h4 class="font-bold mb-2">Kant</h4>
+<p class="text-sm text-gray-600 mb-4">Crítica de la Razón Pura</p>
+<button class="w-full py-2 bg-indigo-600 text-white rounded-lg text-sm font-semibold hover:bg-indigo-700">Descargar PDF</button>
+</div>
+
+<div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition text-center">
+<div class="text-5xl mb-4">📖</div>
+<h4 class="font-bold mb-2">Nietzsche</h4>
+<p class="text-sm text-gray-600 mb-4">Así Habló Zaratustra</p>
+<button class="w-full py-2 bg-indigo-600 text-white rounded-lg text-sm font-semibold hover:bg-indigo-700">Descargar PDF</button>
+</div>
+
+</div>
+<div class="text-center mt-6">
+<button class="px-8 py-3 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700">Ver Biblioteca Completa (200+ Libros)</button>
+</div>
 </section>
 
-<script>
-// ==================== DATOS DEL GLOSARIO ====================
-const glosario = [
-    { termino: "A priori", definicion: "Conocimiento que es independiente de la experiencia, derivado de la razón pura. Ejemplo: 'Todo efecto tiene una causa' o las verdades de la matemática. Se contrapone a <em>a posteriori</em>." },
-    { termino: "Dialéctica", definicion: "Método de razonamiento que procede mediante el conflicto de tesis opuestas. En Platón, es el diálogo para alcanzar la verdad. En Hegel, es el proceso histórico donde una idea (tesis) genera su opuesta (antítesis) y ambas se resuelven en una síntesis superior." },
-    { termino: "Epistemología", definicion: "Rama de la filosofía que estudia el conocimiento: su naturaleza, origen, alcance y límites. Se pregunta: ¿Qué es saber? ¿Cómo justificamos nuestras creencias? ¿Cuáles son las fuentes del conocimiento (razón, experiencia)?" },
-    { termino: "Ética", definicion: "Disciplina filosófica que reflexiona sobre la moral, es decir, sobre lo que es bueno, correcto o virtuoso. Busca principios para guiar la acción y definir una 'vida buena'. Se distingue de la moral, que es el conjunto de normas concretas de una sociedad." },
-    { termino: "Fenomenología", definicion: "Método filosófico iniciado por Husserl que busca describir las estructuras de la experiencia tal como se presentan a la conciencia, 'suspendingo' (<em>epoché</em>) los supuestos sobre la realidad externa." },
-    { termino: "Hermenéutica", definicion: "Teoría y práctica de la interpretación, originalmente de textos sagrados, extendida a toda comprensión humana. Gadamer enfatizó que interpretamos desde nuestros prejuicios (en el sentido de pre-juicios) históricos." },
-    { termino: "Metafísica", definicion: "Rama de la filosofía que investiga la naturaleza fundamental de la realidad, el ser y la existencia. Preguntas típicas: ¿Qué es real? ¿Existe Dios? ¿Tenemos libre albedrío? ¿Qué es la identidad personal?" },
-    { termino: "Ontología", definicion: "Parte de la metafísica que estudia el <em>ser</em> en cuanto ser. Se ocupa de categorías fundamentales como sustancia, propiedad, relación, posibilidad y existencia. Examina qué tipos de entidades existen." },
-    { termino: "Paradigma", definicion: "En filosofía de la ciencia (Kuhn), un marco conceptual ampliamente aceptado que define, por un tiempo, los problemas y métodos legítimos de una disciplina científica. Un cambio de paradigma es una revolución científica." },
-    { termino: "Pragmatismo", definicion: "Corriente filosófica que evalúa las teorías por sus consecuencias prácticas. Para William James, la verdad es 'lo que funciona' en la experiencia. Charles S. Peirce la vinculó al método científico y la comunidad de investigadores." }
-];
+<section class="mb-12">
+<h3 class="text-3xl font-bold mb-6">🛠️ Herramientas Interactivas</h3>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-// ==================== FUNCIONES DEL GLOSARIO ====================
-function inicializarGlosario() {
-    const lista = document.getElementById('listaGlosario');
-    lista.innerHTML = '';
-    
-    glosario.forEach((item, index) => {
-        const div = document.createElement('div');
-        div.className = 'termino bg-white p-5 rounded-xl border border-gray-200';
-        div.innerHTML = `
-            <h4 class="font-bold text-lg text-gray-900 mb-2">${item.termino}</h4>
-            <div class="definicion">
-                <p class="text-gray-700">${item.definicion}</p>
-            </div>
-        `;
-        div.addEventListener('click', () => {
-            div.querySelector('.definicion').classList.toggle('activa');
-        });
-        lista.appendChild(div);
-    });
-}
+<div class="bg-white rounded-xl p-6 shadow-lg border-t-4 border-blue-500">
+<div class="text-4xl mb-4">🧭</div>
+<h4 class="font-bold text-lg mb-3">Mapa Conceptual Interactivo</h4>
+<p class="text-gray-600 mb-4">Explora conexiones entre filósofos, corrientes y conceptos filosóficos</p>
+<button class="w-full py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700">Abrir Mapa</button>
+</div>
 
-// ==================== BÚSQUEDA EN EL GLOSARIO ====================
-document.getElementById('buscadorGlosario').addEventListener('input', function(e) {
-    const query = e.target.value.toLowerCase().trim();
-    const resultadosDiv = document.getElementById('resultadosBusqueda');
-    const lista = document.getElementById('listaGlosario');
-    
-    if (query.length < 2) {
-        resultadosDiv.classList.add('hidden');
-        lista.classList.remove('hidden');
-        return;
-    }
-    
-    // Filtrado simple (podría mejorarse con Lunr.js)
-    const resultados = glosario.filter(item => 
-        item.termino.toLowerCase().includes(query) || 
-        item.definicion.toLowerCase().includes(query)
-    );
-    
-    if (resultados.length === 0) {
-        resultadosDiv.innerHTML = `<p class="text-gray-700">No se encontraron términos para "<strong>${query}</strong>". Intenta con otra palabra.</p>`;
-        resultadosDiv.classList.remove('hidden');
-        lista.classList.add('hidden');
-    } else {
-        resultadosDiv.innerHTML = `
-            <p class="font-semibold text-gray-800 mb-3">Resultados para "<strong>${query}</strong>" (${resultados.length}):</p>
-            <div class="space-y-3">
-                ${resultados.map(item => `
-                    <div class="p-3 bg-white rounded border">
-                        <h5 class="font-bold">${item.termino}</h5>
-                        <p class="text-sm text-gray-600">${item.definicion.substring(0, 150)}...</p>
-                    </div>
-                `).join('')}
-            </div>
-        `;
-        resultadosDiv.classList.remove('hidden');
-        lista.classList.add('hidden');
-    }
-});
+<div class="bg-white rounded-xl p-6 shadow-lg border-t-4 border-purple-500">
+<div class="text-4xl mb-4">⏳</div>
+<h4 class="font-bold text-lg mb-3">Línea de Tiempo Filosófica</h4>
+<p class="text-gray-600 mb-4">Visualiza la historia de la filosofía desde los presocráticos hasta hoy</p>
+<button class="w-full py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700">Ver Línea de Tiempo</button>
+</div>
 
-// ==================== GENERADOR DE CITAS (Funcionalidad básica) ====================
-function mostrarGeneradorCitas() {
-    document.getElementById('modalCitas').classList.remove('hidden');
-}
+<div class="bg-white rounded-xl p-6 shadow-lg border-t-4 border-green-500">
+<div class="text-4xl mb-4">📝</div>
+<h4 class="font-bold text-lg mb-3">Generador de Citas APA</h4>
+<p class="text-gray-600 mb-4">Crea referencias bibliográficas en formato APA 7 automáticamente</p>
+<button class="w-full py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700">Usar Generador</button>
+</div>
 
-function cerrarModal() {
-    document.getElementById('modalCitas').classList.add('hidden');
-}
+<div class="bg-white rounded-xl p-6 shadow-lg border-t-4 border-red-500">
+<div class="text-4xl mb-4">🔍</div>
+<h4 class="font-bold text-lg mb-3">Buscador Académico</h4>
+<p class="text-gray-600 mb-4">Busca artículos y papers en múltiples bases de datos simultáneamente</p>
+<button class="w-full py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700">Buscar Papers</button>
+</div>
 
-function mostrarFormularioCita(tipo) {
-    let formulario = '';
-    if (tipo === 'libro') {
-        formulario = `
-            <h4 class="font-bold mb-4">Citar un Libro</h4>
-            <div class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium mb-1">Apellido del Autor</label>
-                    <input type="text" id="autorLibro" class="w-full p-2 border rounded">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium mb-1">Año de publicación</label>
-                    <input type="number" id="anoLibro" class="w-full p-2 border rounded">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium mb-1">Título del libro</label>
-                    <input type="text" id="tituloLibro" class="w-full p-2 border rounded">
-                </div>
-                <button onclick="generarCitaLibro()" class="w-full py-2 bg-emerald-600 text-white rounded font-semibold">Generar Cita APA</button>
-            </div>
-        `;
-    }
-    document.getElementById('contenidoGenerador').innerHTML = formulario;
-}
+<div class="bg-white rounded-xl p-6 shadow-lg border-t-4 border-yellow-500">
+<div class="text-4xl mb-4">📚</div>
+<h4 class="font-bold text-lg mb-3">Diccionario Filosófico</h4>
+<p class="text-gray-600 mb-4">Más de 1,000 términos filosóficos definidos con ejemplos</p>
+<button class="w-full py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700">Consultar Diccionario</button>
+</div>
 
-function generarCitaLibro() {
-    const autor = document.getElementById('autorLibro').value || 'Apellido, I.';
-    const ano = document.getElementById('anoLibro').value || '(s.f.)';
-    const titulo = document.getElementById('tituloLibro').value || 'Título del libro';
-    
-    const cita = `${autor}. (${ano}). <em>${titulo}</em>.`;
-    
-    document.getElementById('contenidoGenerador').innerHTML = `
-        <h4 class="font-bold mb-4">Tu cita generada:</h4>
-        <div class="p-4 bg-gray-100 rounded-lg mb-4">
-            <p>${cita}</p>
-        </div>
-        <p class="text-sm text-gray-600 mb-4">Copia este texto y pégalo en tu bibliografía.</p>
-        <div class="flex gap-2">
-            <button onclick="copiarAlPortapapeles('${cita.replace(/'/g, "\\'")}')" class="flex-1 py-2 bg-blue-600 text-white rounded font-semibold">📋 Copiar</button>
-            <button onclick="mostrarGeneradorCitas()" class="flex-1 py-2 border rounded font-semibold">← Nueva Cita</button>
-        </div>
-    `;
-}
+<div class="bg-white rounded-xl p-6 shadow-lg border-t-4 border-pink-500">
+<div class="text-4xl mb-4">💡</div>
+<h4 class="font-bold text-lg mb-3">Generador de Ideas</h4>
+<p class="text-gray-600 mb-4">Encuentra temas para tu ensayo o investigación filosófica</p>
+<button class="w-full py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700">Generar Ideas</button>
+</div>
 
-function copiarAlPortapapeles(texto) {
-    navigator.clipboard.writeText(texto.replace(/<[^>]*>/g, ''));
-    alert('¡Cita copiada al portapapeles!');
-}
+</div>
+</section>
 
-// ==================== FUNCIONALIDAD ADICIONAL ====================
-// Para el enlace de la Línea de Tiempo
-document.querySelector('a[href="#linea-tiempo"]').addEventListener('click', (e) => {
-    e.preventDefault();
-    document.getElementById('linea-tiempo').classList.toggle('hidden');
-});
+<section class="mb-12">
+<h3 class="text-3xl font-bold mb-6">📋 Guías de Estudio</h3>
+<div class="space-y-4">
 
-// ==================== MENÚ MÓVIL ====================
-document.getElementById('menuBtn').addEventListener('click', function() {
-    document.getElementById('mobileMenu').classList.toggle('hidden');
-});
+<div class="bg-white rounded-xl p-6 shadow-lg flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+<span class="text-2xl">📄</span>
+</div>
+<div>
+<h4 class="font-bold">Guía para Escribir un Ensayo Filosófico</h4>
+<p class="text-sm text-gray-600">Estructura, argumentación y estilo académico • 2,345 descargas</p>
+</div>
+</div>
+<button class="px-6 py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 whitespace-nowrap">Descargar</button>
+</div>
 
-// ==================== INICIALIZAR TODO AL CARGAR ====================
-document.addEventListener('DOMContentLoaded', function() {
-    inicializarGlosario();
-    // Cierra el menú móvil al hacer clic en un enlace
-    document.querySelectorAll('#mobileMenu a').forEach(link => {
-        link.addEventListener('click', () => {
-            document.getElementById('mobileMenu').classList.add('hidden');
-        });
-    });
-});
-</script>
+<div class="bg-white rounded-xl p-6 shadow-lg flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+<span class="text-2xl">📄</span>
+</div>
+<div>
+<h4 class="font-bold">Metodología de la Investigación Filosófica</h4>
+<p class="text-sm text-gray-600">Paso a paso para desarrollar tu tesis • 1,892 descargas</p>
+</div>
+</div>
+<button class="px-6 py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 whitespace-nowrap">Descargar</button>
+</div>
+
+<div class="bg-white rounded-xl p-6 shadow-lg flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+<span class="text-2xl">📄</span>
+</div>
+<div>
+<h4 class="font-bold">Técnicas de Lectura Filosófica</h4>
+<p class="text-sm text-gray-600">Cómo leer y comprender textos densos • 3,156 descargas</p>
+</div>
+</div>
+<button class="px-6 py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 whitespace-nowrap">Descargar</button>
+</div>
+
+<div class="bg-white rounded-xl p-6 shadow-lg flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+<span class="text-2xl">📄</span>
+</div>
+<div>
+<h4 class="font-bold">Preparación para Exámenes de Filosofía</h4>
+<p class="text-sm text-gray-600">Estrategias de estudio y repaso efectivo • 2,678 descargas</p>
+</div>
+</div>
+<button class="px-6 py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 whitespace-nowrap">Descargar</button>
+</div>
+
+</div>
+</section>
+
+<section class="mb-12 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-2xl p-8">
+<h3 class="text-3xl font-bold mb-4">🎨 Plantillas Descargables</h3>
+<p class="text-lg mb-6">Formatos listos para usar en tus trabajos académicos</p>
+<div class="grid md:grid-cols-3 gap-4">
+<div class="bg-white/10 backdrop-blur rounded-xl p-4">
+<h4 class="font-bold mb-2">Plantilla de Ensayo</h4>
+<p class="text-sm mb-3 opacity-90">Word/Google Docs</p>
+<button class="w-full py-2 bg-white text-purple-600 rounded-lg font-semibold hover:bg-gray-100">Descargar</button>
+</div>
+<div class="bg-white/10 backdrop-blur rounded-xl p-4">
+<h4 class="font-bold mb-2">Formato de Tesis</h4>
+<p class="text-sm mb-3 opacity-90">Word/Google Docs</p>
+<button class="w-full py-2 bg-white text-purple-600 rounded-lg font-semibold hover:bg-gray-100">Descargar</button>
+</div>
+<div class="bg-white/10 backdrop-blur rounded-xl p-4">
+<h4 class="font-bold mb-2">Presentación Académica</h4>
+<p class="text-sm mb-3 opacity-90">PowerPoint/Slides</p>
+<button class="w-full py-2 bg-white text-purple-600 rounded-lg font-semibold hover:bg-gray-100">Descargar</button>
+</div>
+</div>
+</section>
+
+<section>
+<h3 class="text-3xl font-bold mb-6">🎓 Cursos y Tutoriales en Video</h3>
+<div class="grid md:grid-cols-2 gap-6">
+
+<div class="bg-white rounded-xl overflow-hidden shadow-lg">
+<div class="bg-gradient-to-r from-blue-500 to-blue-600 p-6 text-white">
+<h4 class="font-bold text-xl mb-2">Cómo Leer Filosofía</h4>
+<p class="text-sm opacity-90">Serie de 5 videos • 45 minutos</p>
+</div>
+<div class="p-6">
+<p class="text-gray-600 mb-4">Aprende técnicas efectivas para comprender textos filosóficos complejos</p>
+<button class="w-full py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700">Ver Serie</button>
+</div>
+</div>
+
+<div class="bg-white rounded-xl overflow-hidden shadow-lg">
+<div class="bg-gradient-to-r from-purple-500 to-purple-600 p-6 text-white">
+<h4 class="font-bold text-xl mb-2">Argumentación Filosófica</h4>
+<p class="text-sm opacity-90">Serie de 7 videos • 60 minutos</p>
+</div>
+<div class="p-6">
+<p class="text-gray-600 mb-4">Construye argumentos sólidos y evita falacias lógicas</p>
+<button class="w-full py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700">Ver Serie</button>
+</div>
+</div>
+
+</div>
+</section>
+
+</main>
+
+<footer class="bg-gray-900 text-white py-8 text-center mt-12">
+<p class="text-sm">© 2024-2025 ASEFIP - Asociación de Estudiantes de Filosofía del Perú</p>
+</footer>
+
 </body>
-      </html>
+</html>
