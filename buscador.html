@@ -1,1 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buscador - ASEFIP</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-50 min-h-screen">
 
+<header class="bg-white shadow-lg p-4 sticky top-0 z-50">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">AS</div>
+<div>
+<h1 class="text-lg font-bold">ASEFIP</h1>
+<p class="text-xs text-gray-600">Buscador Filosófico</p>
+</div>
+</div>
+<a href="index.html" class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm">← Inicio</a>
+</div>
+</header>
+
+<main class="max-w-7xl mx-auto p-4 py-12">
+
+<div class="text-center mb-12">
+<h2 class="text-4xl font-bold mb-4">Encuentra lo que <span class="text-indigo-600">Buscas</span></h2>
+<p class="text-xl text-gray-600">Explora videos, artículos, libros y más en un solo lugar</p>
+</div>
+
+<div class="max-w-3xl mx-auto mb-12">
+<div class="bg-white rounded-2xl shadow-2xl p-4">
+<div class="flex gap-2">
+<input 
+  type="text" 
+  id="searchInput"
+  placeholder="Busca por autor, tema, concepto filosófico..." 
+  class="flex-1 px-6 py-4 text-lg rounded-xl border-2 border-gray-200 focus:border-indigo-600 outline-none"
+>
+<button onclick="buscar()" class="px-8 py-4 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 transition">
+  🔍 Buscar
+</button>
+</div>
+<div class="flex gap-2 mt-4 flex-wrap">
+<button class="px-4 py-2 bg-indigo-100 text-indigo-800 rounded-lg text-sm font-semibold hover:bg-indigo-200">Videos</button>
+<button class="px-4 py-2 bg-purple-100 text-purple-800 rounded-lg text-sm font-semibold hover:bg-purple-200">Artículos</button>
+<button class="px-4 py-2 bg-blue-100 text-blue-800 rounded-lg text-sm font-semibold hover:bg-blue-200">Libros</button>
+<button class="px-4 py-2 bg-green-100 text-green-800 rounded-lg text-sm font-semibold hover:bg-green-200">Recursos</button>
+</div>
+</div>
+</div>
+
+<div class="mb-8">
+<h3 class="text-2xl font-bold mb-4">🔥 Búsquedas Populares</h3>
+<div class="flex flex-wrap gap-3">
+<span class="px-4 py-2 bg-white rounded-full shadow cursor-pointer hover:shadow-lg transition">Ética</span>
+<span class="px-4 py-2 bg-white rounded-full shadow cursor-pointer hover:shadow-lg transition">Nietzsche</span>
+<span class="px-4 py-2 bg-white rounded-full shadow cursor-pointer hover:shadow-lg transition">Epistemología</span>
+<span class="px-4 py-2 bg-white rounded-full shadow cursor-pointer hover:shadow-lg transition">Kant</span>
+<span class="px-4 py-2 bg-white rounded-full shadow cursor-pointer hover:shadow-lg transition">Filosofía Política</span>
+<span class="px-4 py-2 bg-white rounded-full shadow cursor-pointer hover:shadow-lg transition">Platón</span>
+<span class="px-4 py-2 bg-white rounded-full shadow cursor-pointer hover:shadow-lg transition">Fenomenología</span>
+<span class="px-4 py-2 bg-white rounded-full shadow cursor-pointer hover:shadow-lg transition">Existencialismo</span>
+</div>
+</div>
+
+<div id="resultados" class="hidden">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-2xl font-bold">Resultados de búsqueda</h3>
+<span class="text-gray-600">23 resultados encontrados</span>
+</div>
+
+<div class="space-y-6">
+
+<div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition">
+<div class="flex items-start gap-4">
+<div class="w-16 h-16 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-3xl">🎥</span>
+</div>
+<div class="flex-1">
+<span class="text-xs bg-red-100 text-red-800 px-3 py-1 rounded-full font-semibold">VIDEO</span>
+<h4 class="font-bold text-lg mt-2 mb-2">Introducción a la Ética Kantiana</h4>
+<p class="text-gray-600 text-sm mb-3">Exploración de los conceptos fundamentales de la ética deontológica de Immanuel Kant...</p>
+<div class="flex items-center gap-4 text-sm text-gray-500">
+<span>📅 15 Nov 2024</span>
+<span>👁️ 2.3K vistas</span>
+<span>⏱️ 45 min</span>
+</div>
+</div>
+<button class="px-6 py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 whitespace-nowrap">Ver Video</button>
+</div>
+</div>
+
+<div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition">
+<div class="flex items-start gap-4">
+<div class="w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-3xl">📝</span>
+</div>
+<div class="flex-1">
+<span class="text-xs bg-purple-100 text-purple-800 px-3 py-1 rounded-full font-semibold">ARTÍCULO</span>
+<h4 class="font-bold text-lg mt-2 mb-2">La Ética del Deber en Kant</h4>
+<p class="text-gray-600 text-sm mb-3">Análisis profundo del imperativo categórico y su aplicación en la moral contemporánea...</p>
+<div class="flex items-center gap-4 text-sm text-gray-500">
+<span>📅 8 Nov 2024</span>
+<span>👁️ 456 lecturas</span>
+<span>⏱️ 8 min</span>
+</div>
+</div>
+<button class="px-6 py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 whitespace-nowrap">Leer</button>
+</div>
+</div>
+
+<div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition">
+<div class="flex items-start gap-4">
+<div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-3xl">📚</span>
+</div>
+<div class="flex-1">
+<span class="text-xs bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-semibold">LIBRO</span>
+<h4 class="font-bold text-lg mt-2 mb-2">Crítica de la Razón Práctica - Kant</h4>
+<p class="text-gray-600 text-sm mb-3">Texto fundamental sobre la ética kantiana. Edición en español con notas explicativas...</p>
+<div class="flex items-center gap-4 text-sm text-gray-500">
+<span>📄 320 páginas</span>
+<span>⬇️ 1.2K descargas</span>
+<span>📖 PDF</span>
+</div>
+</div>
+<button class="px-6 py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 whitespace-nowrap">Descargar</button>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="mt-12 grid md:grid-cols-3 gap-6">
+<div class="bg-white rounded-xl p-6 shadow-lg text-center">
+<div class="text-5xl mb-4">📚</div>
+<h4 class="font-bold text-xl mb-2">200+ Libros</h4>
+<p class="text-gray-600">Biblioteca digital completa</p>
+</div>
+<div class="bg-white rounded-xl p-6 shadow-lg text-center">
+<div class="text-5xl mb-4">🎥</div>
+<h4 class="font-bold text-xl mb-2">50+ Videos</h4>
+<p class="text-gray-600">Contenido audiovisual educativo</p>
+</div>
+<div class="bg-white rounded-xl p-6 shadow-lg text-center">
+<div class="text-5xl mb-4">📝</div>
+<h4 class="font-bold text-xl mb-2">100+ Artículos</h4>
+<p class="text-gray-600">Ensayos y análisis filosóficos</p>
+</div>
+</div>
+
+</main>
+
+<footer class="bg-gray-900 text-white py-8 text-center mt-12">
+<p class="text-sm">© 2024-2025 ASEFIP - Asociación de Estudiantes de Filosofía del Perú</p>
+</footer>
+
+<script>
+function buscar() {
+  const input = document.getElementById('searchInput');
+  const resultados = document.getElementById('resultados');
+  
+  if(input.value.trim()) {
+    resultados.classList.remove('hidden');
+    window.scrollTo({
+      top: resultados.offsetTop - 100,
+      behavior: 'smooth'
+    });
+  }
+}
+
+document.getElementById('searchInput').addEventListener('keypress', function(e) {
+  if(e.key === 'Enter') {
+    buscar();
+  }
+});
+</script>
+
+</body>
+</html>
