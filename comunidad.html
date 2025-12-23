@@ -1,1 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunidad Filosófica - ASEFIP</title>
+    <meta name="description" content="Envía tus ensayos para revisión editorial y conecta con la comunidad de estudiantes de filosofía del Perú.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        html { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+    </style>
+</head>
+<body class="bg-gradient-to-b from-amber-50 to-white min-h-screen text-gray-800">
 
+<!-- Navegación (MISMA que en index.html) -->
+<header class="bg-white shadow-sm border-b sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <a href="index.html" class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-gradient-to-br from-amber-600 to-orange-600 rounded-lg flex items-center justify-center text-white font-bold">AS</div>
+            <div>
+                <h1 class="text-xl font-bold text-gray-900">ASEFIP</h1>
+                <p class="text-xs text-gray-600">Portal de Filosofía Peruana</p>
+            </div>
+        </a>
+        <nav class="hidden md:flex space-x-1">
+            <a href="index.html" class="px-4 py-2 font-medium text-gray-600 hover:text-amber-700 hover:bg-amber-50 rounded-lg">Inicio</a>
+            <a href="aprender.html" class="px-4 py-2 font-medium text-gray-600 hover:text-amber-700 hover:bg-amber-50 rounded-lg">Aprender</a>
+            <a href="investigar.html" class="px-4 py-2 font-medium text-gray-600 hover:text-amber-700 hover:bg-amber-50 rounded-lg">Investigar</a>
+            <a href="comunidad.html" class="px-4 py-2 font-medium text-amber-700 border-b-2 border-amber-700">Comunidad</a>
+            <a href="recursos.html" class="px-4 py-2 font-medium text-gray-600 hover:text-amber-700 hover:bg-amber-50 rounded-lg">Recursos</a>
+        </nav>
+        <button id="menuBtn" class="md:hidden text-2xl text-gray-700">☰</button>
+    </div>
+    <!-- Menú Móvil -->
+    <div id="mobileMenu" class="hidden md:hidden bg-white border-t px-4 py-3">
+        <a href="index.html" class="block py-3 px-2 text-gray-700 hover:bg-gray-100 rounded">Inicio</a>
+        <a href="aprender.html" class="block py-3 px-2 text-gray-700 hover:bg-gray-100 rounded">Aprender</a>
+        <a href="investigar.html" class="block py-3 px-2 text-gray-700 hover:bg-gray-100 rounded">Investigar</a>
+        <a href="comunidad.html" class="block py-3 px-2 font-medium text-amber-700 bg-amber-50 rounded">Comunidad</a>
+        <a href="recursos.html" class="block py-3 px-2 text-gray-700 hover:bg-gray-100 rounded">Recursos</a>
+    </div>
+</header>
+
+<main class="max-w-5xl mx-auto px-4 py-12">
+    <!-- Introducción al Proceso -->
+    <section class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6">Tu Voz en la <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-600">Filosofía Peruana</span></h2>
+        <p class="text-xl text-gray-700 mb-6 max-w-3xl mx-auto">
+            ASEFIP es un proyecto colaborativo. Esta sección está dedicada a <strong>publicar los ensayos y artículos de estudiantes y egresados</strong> que pasen nuestro proceso de revisión editorial.
+        </p>
+        <div class="bg-white border-l-4 border-amber-500 p-6 rounded-r-xl shadow-sm max-w-3xl mx-auto text-left">
+            <h3 class="font-bold text-lg text-gray-900 mb-3">📝 ¿Cómo funciona el proceso?</h3>
+            <ol class="list-decimal pl-5 space-y-2 text-gray-700">
+                <li><strong>Envías tu trabajo</strong> usando el formulario a continuación.</li>
+                <li>Nuestro <strong>equipo editorial revisa</strong> el contenido para asegurar rigor académico, claridad y aporte a la discusión filosófica peruana.</li>
+                <li>Si es aprobado, <strong>te contactaremos</strong> para coordinar detalles y una posible edición menor.</li>
+                <li>Finalmente, <strong>publicaremos tu trabajo</strong> con tu crédito completo en una futura sección de "Ensayos Publicados".</li>
+            </ol>
+            <p class="mt-4 text-sm text-gray-600"><em>Nota: La recepción del trabajo no garantiza su publicación. Nos reservamos el derecho de selección editorial.</em></p>
+        </div>
+    </section>
+
+    <!-- FORMULARIO DE ENVÍO (El corazón de esta página) -->
+    <section class="mb-16">
+        <div class="bg-gradient-to-r from-amber-500/5 to-orange-500/5 rounded-3xl p-8 md:p-12 border border-amber-200">
+            <h3 class="text-3xl font-bold mb-2 text-center">Envía tu Ensayo para Revisión</h3>
+            <p class="text-gray-600 text-center mb-8">Completa todos los campos a continuación. Asegúrate de que tu archivo esté en formato PDF o DOC.</p>
+
+            <!-- Formulario con Netlify Forms -->
+            <form name="envio-ensayo-comunidad" method="POST" netlify action="/gracias.html" class="space-y-8 bg-white p-8 rounded-2xl shadow-lg">
+                <!-- Nombre y Email en una fila -->
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="nombre_comunidad" class="block text-sm font-semibold text-gray-700 mb-2">Nombre Completo *</label>
+                        <input type="text" id="nombre_comunidad" name="nombre" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                    </div>
+                    <div>
+                        <label for="email_comunidad" class="block text-sm font-semibold text-gray-700 mb-2">Correo Electrónico *</label>
+                        <input type="email" id="email_comunidad" name="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                    </div>
+                </div>
+                <!-- Universidad y Título -->
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="universidad" class="block text-sm font-semibold text-gray-700 mb-2">Universidad o Afiliación *</label>
+                        <input type="text" id="universidad" name="universidad" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" placeholder="Ej: UNMSM, PUCP, Independiente...">
+                    </div>
+                    <div>
+                        <label for="titulo_ensayo" class="block text-sm font-semibold text-gray-700 mb-2">Título del Trabajo *</label>
+                        <input type="text" id="titulo_ensayo" name="titulo_del_trabajo" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                    </div>
+                </div>
+                <!-- Resumen -->
+                <div>
+                    <label for="resumen_ensayo" class="block text-sm font-semibold text-gray-700 mb-2">Resumen o Abstract *</label>
+                    <p class="text-xs text-gray-500 mb-2">Describe el tema, tu tesis principal y las conclusiones (máx. 300 palabras).</p>
+                    <textarea id="resumen_ensayo" name="resumen" rows="5" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"></textarea>
+                </div>
+                <!-- Subida de Archivo -->
+                <div>
+                    <label for="archivo_ensayo" class="block text-sm font-semibold text-gray-700 mb-2">Adjuntar archivo (PDF o DOC) *</label>
+                    <p class="text-xs text-gray-500 mb-2">Asegúrate de que el documento no incluya tu nombre en el contenido si deseas una revisión anónima inicial.</p>
+                    <input type="file" id="archivo_ensayo" name="archivo" required accept=".pdf,.doc,.docx" class="w-full text-gray-700 file:mr-4 file:py-3 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-amber-50 file:text-amber-700 hover:file:bg-amber-100">
+                </div>
+                <!-- Botón de Envío -->
+                <div class="pt-4">
+                    <button type="submit" class="w-full py-4 px-4 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-bold rounded-xl text-lg transition-all shadow-md hover:shadow-lg">
+                        ✨ Enviar para Revisión Editorial
+                    </button>
+                    <p class="text-xs text-gray-500 text-center mt-4">
+                        Al enviar, aceptas nuestro proceso de revisión. Te contactaremos en un plazo máximo de 20 días hábiles.
+                    </p>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Espacio para Futuros Ensayos Publicados -->
+    <section class="bg-white rounded-3xl p-8 border border-gray-200 shadow-sm">
+        <h3 class="text-3xl font-bold mb-6 text-center">📢 Próximamente: Ensayos de la Comunidad</h3>
+        <p class="text-gray-600 text-center mb-8">
+            Una vez que comencemos a recibir y aprobar trabajos, los publicaremos aquí con el nombre de sus autores. Esta sección se convertirá en un <strong>archivo vivo del pensamiento filosófico joven del Perú</strong>.
+        </p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Tarjeta de ejemplo (placeholder) -->
+            <div class="border-2 border-dashed border-gray-300 rounded-2xl p-6 text-center text-gray-400 flex flex-col items-center justify-center min-h-[200px]">
+                <div class="text-4xl mb-4">📄</div>
+                <p class="font-medium">Tu ensayo podría ser el primero</p>
+            </div>
+            <div class="border-2 border-dashed border-gray-300 rounded-2xl p-6 text-center text-gray-400 flex flex-col items-center justify-center min-h-[200px]">
+                <div class="text-4xl mb-4">🤔</div>
+                <p class="font-medium">Un espacio para el debate serio</p>
+            </div>
+            <div class="border-2 border-dashed border-gray-300 rounded-2xl p-6 text-center text-gray-400 flex flex-col items-center justify-center min-h-[200px]">
+                <div class="text-4xl mb-4">🌟</div>
+                <p class="font-medium">Reconocimiento para autores noveles</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Pie de Página (MISMO que en index.html) -->
+<footer class="bg-gray-900 text-white mt-20 py-10">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+        <h3 class="text-2xl font-bold mb-2">ASEFIP</h3>
+        <p class="text-gray-400 mb-6">Portal de referencia para la filosofía en el Perú.</p>
+        <p class="text-gray-500 text-sm">© 2024 - 2025 ASEFIP. Proyecto educativo sin fines de lucro. Todo el contenido se comparte con fines de estudio y divulgación.</p>
+        <!-- El enlace "/admin/" ha sido ELIMINADO del pie de página público -->
+    </div>
+</footer>
+
+<script>
+    // Script para el menú móvil
+    document.getElementById('menuBtn').addEventListener('click', function() {
+        document.getElementById('mobileMenu').classList.toggle('hidden');
+    });
+</script>
+</body>
+          </html>
