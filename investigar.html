@@ -1,186 +1,206 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Investigar en Filosofía - ASEFIP</title>
-    <meta name="description" content="Acceso a revistas indexadas, bases de datos académicas y recursos de investigación filosófica confiables.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        html { font-family: 'Inter', sans-serif; }
-        h1, h2, h3 { font-family: 'Playfair Display', serif; }
-        .resource-card { transition: all 0.3s ease; border-left: 4px solid transparent; }
-        .resource-card:hover { transform: translateX(5px); border-left-color: #1e40af; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08); }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investigar - ASEFIP</title>
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-b from-gray-50 to-white min-h-screen">
+<body class="bg-gradient-to-br from-blue-50 to-indigo-50">
 
-<!-- Navegación (MISMA que en index.html - copia el header de tu index actual) -->
-<header class="bg-white shadow-sm border-b sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <a href="index.html" class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-gradient-to-br from-indigo-700 to-blue-800 rounded-lg flex items-center justify-center text-white font-bold">AS</div>
-            <div>
-                <h1 class="text-xl font-bold text-gray-900">ASEFIP</h1>
-                <p class="text-xs text-gray-600">Portal de Filosofía Peruana</p>
-            </div>
-        </a>
-        <nav class="hidden md:flex space-x-1">
-            <a href="index.html" class="px-4 py-2 font-medium text-gray-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg">Inicio</a>
-            <a href="aprender.html" class="px-4 py-2 font-medium text-gray-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg">Aprender</a>
-            <a href="investigar.html" class="px-4 py-2 font-medium text-blue-700 border-b-2 border-blue-700">Investigar</a>
-            <a href="comunidad.html" class="px-4 py-2 font-medium text-gray-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg">Comunidad</a>
-            <a href="recursos.html" class="px-4 py-2 font-medium text-gray-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg">Recursos</a>
-        </nav>
-        <button id="menuBtn" class="md:hidden text-2xl text-gray-700">☰</button>
-    </div>
-    <div id="mobileMenu" class="hidden md:hidden bg-white border-t px-4 py-3">
-        <a href="index.html" class="block py-3 px-2 text-gray-700 hover:bg-gray-100 rounded">Inicio</a>
-        <a href="aprender.html" class="block py-3 px-2 text-gray-700 hover:bg-gray-100 rounded">Aprender</a>
-        <a href="investigar.html" class="block py-3 px-2 font-medium text-blue-700 bg-blue-50 rounded">Investigar</a>
-        <a href="comunidad.html" class="block py-3 px-2 text-gray-700 hover:bg-gray-100 rounded">Comunidad</a>
-        <a href="recursos.html" class="block py-3 px-2 text-gray-700 hover:bg-gray-100 rounded">Recursos</a>
-    </div>
+<header class="bg-white shadow-lg p-4 sticky top-0 z-50">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">AS</div>
+<div>
+<h1 class="text-lg font-bold">ASEFIP</h1>
+<p class="text-xs text-gray-600">Asociación de Estudiantes de Filosofía del Perú</p>
+</div>
+</div>
+<a href="index.html" class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm">← Inicio</a>
+</div>
 </header>
 
-<main class="max-w-6xl mx-auto px-4 py-12">
-    <!-- Introducción -->
-    <section class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">Investigar con <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-indigo-700">Rigor Académico</span></h2>
-        <p class="text-xl text-gray-700 mb-6 max-w-3xl mx-auto">
-            Esta sección está dedicada a estudiantes avanzados, egresados e investigadores. Aquí encontrarás <strong>acceso directo a las fuentes primarias, revistas especializadas indexadas y las herramientas bibliográficas más importantes</strong> del mundo filosófico.
-        </p>
-        <p class="text-gray-600 max-w-3xl mx-auto">
-            <strong>Consejo:</strong> Muchas universidades peruanas tienen suscripciones institucionales a estas bases de datos. Consulta con tu biblioteca universitaria para acceder a artículos de pago.
-        </p>
-    </section>
+<main class="max-w-7xl mx-auto p-4 py-12">
 
-    <!-- Sección: Revistas Indexadas -->
-    <section class="mb-16">
-        <div class="flex items-center gap-3 mb-8">
-            <div class="w-2 h-10 bg-blue-700 rounded"></div>
-            <h3 class="text-3xl font-bold">Revistas Filosóficas Indexadas</h3>
-        </div>
-        <p class="text-gray-600 mb-8">Publicaciones de referencia donde encontrarás investigación filosófica actual y de calidad, evaluada por pares.</p>
-        
-        <div class="grid md:grid-cols-2 gap-6">
-            <a href="https://www.journals.uchicago.edu/toc/phos/current" target="_blank" class="resource-card bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex items-start gap-4">
-                <div class="text-3xl mt-1">📰</div>
-                <div>
-                    <h4 class="font-bold text-lg text-gray-900 mb-2">Philosophy of Science</h4>
-                    <p class="text-gray-700 text-sm mb-2">Una de las revistas líderes en filosofía de la ciencia. Indexada en Scopus, JCR.</p>
-                    <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full">En inglés</span>
-                </div>
-            </a>
-            <a href="https://www.pdcnet.org/philtoday" target="_blank" class="resource-card bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex items-start gap-4">
-                <div class="text-3xl mt-1">🏛️</div>
-                <div>
-                    <h4 class="font-bold text-lg text-gray-900 mb-2">The Philosophical Review</h4>
-                    <p class="text-gray-700 text-sm mb-2">Publicación histórica y de gran prestigio en filosofía general. Indexada en los principales sistemas.</p>
-                    <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full">En inglés</span>
-                </div>
-            </a>
-            <a href="https://www.revistas.unal.edu.co/index.php/idval" target="_blank" class="resource-card bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex items-start gap-4">
-                <div class="text-3xl mt-1">🌎</div>
-                <div>
-                    <h4 class="font-bold text-lg text-gray-900 mb-2">Ideas y Valores</h4>
-                    <p class="text-gray-700 text-sm mb-2">Revista colombiana de filosofía, una de las más importantes de Latinoamérica. Indexada en SciELO, Latindex.</p>
-                    <span class="inline-block px-3 py-1 bg-green-100 text-green-800 text-xs font-semibold rounded-full">En español</span>
-                </div>
-            </a>
-            <a href="https://sisbib.unmsm.edu.pe/bibvirtual/publicaciones/argumentos/" target="_blank" class="resource-card bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex items-start gap-4">
-                <div class="text-3xl mt-1">🇵🇪</div>
-                <div>
-                    <h4 class="font-bold text-lg text-gray-900 mb-2">Argumentos (UNMSM)</h4>
-                    <p class="text-gray-700 text-sm mb-2">Revista de la Universidad Nacional Mayor de San Marcos. Un referente de la filosofía peruana.</p>
-                    <span class="inline-block px-3 py-1 bg-green-100 text-green-800 text-xs font-semibold rounded-full">En español | Peruana</span>
-                </div>
-            </a>
-        </div>
-    </section>
+<div class="text-center mb-12">
+<h2 class="text-4xl font-bold mb-4">Centro de <span class="text-indigo-600">Investigación</span></h2>
+<p class="text-xl text-gray-600">Recursos académicos de alto nivel para estudiantes e investigadores</p>
+</div>
 
-    <!-- Sección: Bases de Datos Académicas -->
-    <section class="mb-16">
-        <div class="flex items-center gap-3 mb-8">
-            <div class="w-2 h-10 bg-indigo-700 rounded"></div>
-            <h3 class="text-3xl font-bold">Bases de Datos y Bibliotecas Digitales</h3>
-        </div>
-        <p class="text-gray-600 mb-8">Plataformas donde puedes buscar miles de artículos, libros y disertaciones filosóficas.</p>
-        
-        <div class="grid md:grid-cols-2 gap-6">
-            <a href="https://www.jstor.org/" target="_blank" class="resource-card bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="text-3xl">📚</div>
-                    <h4 class="font-bold text-lg text-gray-900">JSTOR</h4>
-                </div>
-                <p class="text-gray-700 text-sm">Una de las bibliotecas digitales más importantes. Incluye archivos completos de cientos de revistas de filosofía. Acceso mediante suscripción institucional.</p>
-            </a>
-            <a href="https://philpapers.org/" target="_blank" class="resource-card bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="text-3xl">🔍</div>
-                    <h4 class="font-bold text-lg text-gray-900">PhilPapers</h4>
-                </div>
-                <p class="text-gray-700 text-sm">Índice masivo y actualizado de artículos, libros y preprint en filosofía. Incluye enlaces a texto completo cuando está disponible gratuitamente.</p>
-            </a>
-            <a href="https://www.academia.edu/" target="_blank" class="resource-card bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="text-3xl">👨‍🏫</div>
-                    <h4 class="font-bold text-lg text-gray-900">Academia.edu</h4>
-                </div>
-                <p class="text-gray-700 text-sm">Red social académica donde investigadores comparten sus trabajos (artículos, ponencias). Gran fuente para encontrar investigación reciente.</p>
-            </a>
-            <a href="https://dialnet.unirioja.es/" target="_blank" class="resource-card bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="text-3xl">🇪🇸</div>
-                    <h4 class="font-bold text-lg text-gray-900">Dialnet</h4>
-                </div>
-                <p class="text-gray-700 text-sm">Hemeroteca digital hispana. Excelente para encontrar artículos de revistas filosóficas en español. Muchos contenidos son de acceso abierto.</p>
-            </a>
-        </div>
-    </section>
+<div class="grid md:grid-cols-4 gap-4 mb-12">
+<div class="bg-white p-6 rounded-xl shadow-lg text-center">
+<div class="text-3xl font-bold text-indigo-600 mb-2">150+</div>
+<div class="text-sm text-gray-600">Artículos Indexados</div>
+</div>
+<div class="bg-white p-6 rounded-xl shadow-lg text-center">
+<div class="text-3xl font-bold text-indigo-600 mb-2">20+</div>
+<div class="text-sm text-gray-600">Revistas Filosóficas</div>
+</div>
+<div class="bg-white p-6 rounded-xl shadow-lg text-center">
+<div class="text-3xl font-bold text-indigo-600 mb-2">500+</div>
+<div class="text-sm text-gray-600">Papers Disponibles</div>
+</div>
+<div class="bg-white p-6 rounded-xl shadow-lg text-center">
+<div class="text-3xl font-bold text-indigo-600 mb-2">50+</div>
+<div class="text-sm text-gray-600">Libros Digitales</div>
+</div>
+</div>
 
-    <!-- Sección: Recursos de Acceso Abierto -->
-    <section>
-        <div class="flex items-center gap-3 mb-8">
-            <div class="w-2 h-10 bg-green-600 rounded"></div>
-            <h3 class="text-3xl font-bold">Repositorios de Acceso Abierto</h3>
-        </div>
-        <p class="text-gray-600 mb-8">Fuentes donde el conocimiento filosófico es completamente gratuito y abierto.</p>
-        
-        <div class="grid md:grid-cols-2 gap-6">
-            <a href="https://plato.stanford.edu/" target="_blank" class="resource-card bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="text-3xl">🏫</div>
-                    <h4 class="font-bold text-lg text-gray-900">Stanford Encyclopedia of Philosophy</h4>
-                </div>
-                <p class="text-gray-700 text-sm">Enciclopedia de referencia escrita por expertos y actualizada constantemente. El estándar de oro para definiciones y estados del arte.</p>
-            </a>
-            <a href="https://www.proyectofilosofia.org/" target="_blank" class="resource-card bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="text-3xl">📖</div>
-                    <h4 class="font-bold text-lg text-gray-900">Proyecto Filosofía en Español</h4>
-                </div>
-                <p class="text-gray-700 text-sm">Extensa biblioteca digital con obras clásicas y contemporáneas de filosofía en español. Un recurso invaluable.</p>
-            </a>
-        </div>
-    </section>
+<section class="mb-12">
+<h3 class="text-3xl font-bold mb-6">📖 Revistas Filosóficas Indexadas</h3>
+<div class="grid md:grid-cols-2 gap-6">
+
+<div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition">
+<div class="flex items-start justify-between mb-4">
+<div>
+<h4 class="text-xl font-bold mb-2">Areté - Revista de Filosofía</h4>
+<p class="text-sm text-gray-600">PUCP • Scopus, SciELO</p>
+</div>
+<span class="text-xs bg-green-100 text-green-800 px-3 py-1 rounded-full font-semibold">Indexada</span>
+</div>
+<p class="text-gray-600 mb-4">Revista académica peruana con más de 30 años de trayectoria</p>
+<div class="flex gap-2">
+<a href="https://revistas.pucp.edu.pe/index.php/arete" target="_blank" class="flex-1 py-2 bg-indigo-600 text-white rounded-lg text-center text-sm font-semibold hover:bg-indigo-700">Visitar Revista</a>
+<button class="px-4 py-2 border-2 border-indigo-600 text-indigo-600 rounded-lg text-sm font-semibold hover:bg-indigo-50">Ver Archivo</button>
+</div>
+</div>
+
+<div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition">
+<div class="flex items-start justify-between mb-4">
+<div>
+<h4 class="text-xl font-bold mb-2">Estudios de Filosofía</h4>
+<p class="text-sm text-gray-600">Universidad de Antioquia • Latindex</p>
+</div>
+<span class="text-xs bg-green-100 text-green-800 px-3 py-1 rounded-full font-semibold">Indexada</span>
+</div>
+<p class="text-gray-600 mb-4">Publicación semestral de filosofía latinoamericana</p>
+<div class="flex gap-2">
+<a href="#" class="flex-1 py-2 bg-indigo-600 text-white rounded-lg text-center text-sm font-semibold hover:bg-indigo-700">Visitar Revista</a>
+<button class="px-4 py-2 border-2 border-indigo-600 text-indigo-600 rounded-lg text-sm font-semibold hover:bg-indigo-50">Ver Archivo</button>
+</div>
+</div>
+
+<div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition">
+<div class="flex items-start justify-between mb-4">
+<div>
+<h4 class="text-xl font-bold mb-2">Revista de Filosofía - UNMSM</h4>
+<p class="text-sm text-gray-600">UNMSM • Latindex, Dialnet</p>
+</div>
+<span class="text-xs bg-green-100 text-green-800 px-3 py-1 rounded-full font-semibold">Indexada</span>
+</div>
+<p class="text-gray-600 mb-4">Publicación oficial de la Facultad de Letras de San Marcos</p>
+<div class="flex gap-2">
+<a href="#" class="flex-1 py-2 bg-indigo-600 text-white rounded-lg text-center text-sm font-semibold hover:bg-indigo-700">Visitar Revista</a>
+<button class="px-4 py-2 border-2 border-indigo-600 text-indigo-600 rounded-lg text-sm font-semibold hover:bg-indigo-50">Ver Archivo</button>
+</div>
+</div>
+
+<div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition">
+<div class="flex items-start justify-between mb-4">
+<div>
+<h4 class="text-xl font-bold mb-2">Theoría - Revista del Colegio de Filosofía</h4>
+<p class="text-sm text-gray-600">UNAM • Scopus</p>
+</div>
+<span class="text-xs bg-green-100 text-green-800 px-3 py-1 rounded-full font-semibold">Indexada</span>
+</div>
+<p class="text-gray-600 mb-4">Una de las revistas filosóficas más prestigiosas de Latinoamérica</p>
+<div class="flex gap-2">
+<a href="#" class="flex-1 py-2 bg-indigo-600 text-white rounded-lg text-center text-sm font-semibold hover:bg-indigo-700">Visitar Revista</a>
+<button class="px-4 py-2 border-2 border-indigo-600 text-indigo-600 rounded-lg text-sm font-semibold hover:bg-indigo-50">Ver Archivo</button>
+</div>
+</div>
+
+</div>
+</section>
+
+<section class="mb-12">
+<h3 class="text-3xl font-bold mb-6">🔬 Bases de Datos Académicas</h3>
+<div class="grid md:grid-cols-3 gap-4">
+
+<div class="bg-white rounded-xl p-6 shadow-lg text-center hover:shadow-xl transition cursor-pointer">
+<div class="text-5xl mb-4">📚</div>
+<h4 class="font-bold text-lg mb-2">PhilPapers</h4>
+<p class="text-sm text-gray-600 mb-4">La base de datos más completa de filosofía</p>
+<a href="https://philpapers.org" target="_blank" class="inline-block px-6 py-2 bg-indigo-600 text-white rounded-lg text-sm font-semibold hover:bg-indigo-700">Explorar</a>
+</div>
+
+<div class="bg-white rounded-xl p-6 shadow-lg text-center hover:shadow-xl transition cursor-pointer">
+<div class="text-5xl mb-4">🌐</div>
+<h4 class="font-bold text-lg mb-2">SciELO</h4>
+<p class="text-sm text-gray-600 mb-4">Publicaciones científicas latinoamericanas</p>
+<a href="https://scielo.org" target="_blank" class="inline-block px-6 py-2 bg-indigo-600 text-white rounded-lg text-sm font-semibold hover:bg-indigo-700">Explorar</a>
+</div>
+
+<div class="bg-white rounded-xl p-6 shadow-lg text-center hover:shadow-xl transition cursor-pointer">
+<div class="text-5xl mb-4">📖</div>
+<h4 class="font-bold text-lg mb-2">JSTOR</h4>
+<p class="text-sm text-gray-600 mb-4">Archivo digital de revistas académicas</p>
+<a href="https://jstor.org" target="_blank" class="inline-block px-6 py-2 bg-indigo-600 text-white rounded-lg text-sm font-semibold hover:bg-indigo-700">Explorar</a>
+</div>
+
+</div>
+</section>
+
+<section class="mb-12 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-2xl p-8">
+<h3 class="text-3xl font-bold mb-4">✍️ Publica con Nosotros</h3>
+<p class="text-lg mb-6">¿Tienes una investigación o ensayo filosófico? Compártelo con la comunidad académica peruana</p>
+<div class="grid md:grid-cols-3 gap-6 mb-6">
+<div>
+<div class="text-4xl mb-2">📝</div>
+<h4 class="font-bold mb-2">Envía tu Ensayo</h4>
+<p class="text-sm opacity-90">Formato académico con referencias APA</p>
+</div>
+<div>
+<div class="text-4xl mb-2">👥</div>
+<h4 class="font-bold mb-2">Revisión por Pares</h4>
+<p class="text-sm opacity-90">Evaluación académica rigurosa</p>
+</div>
+<div>
+<div class="text-4xl mb-2">🏆</div>
+<h4 class="font-bold mb-2">Publicación</h4>
+<p class="text-sm opacity-90">Difusión en nuestra plataforma</p>
+</div>
+</div>
+<button class="px-8 py-3 bg-white text-indigo-600 rounded-xl font-bold hover:bg-gray-100 transition">Enviar Investigación</button>
+</section>
+
+<section class="mb-12">
+<h3 class="text-3xl font-bold mb-6">🛠️ Herramientas para Investigadores</h3>
+<div class="grid md:grid-cols-2 gap-4">
+
+<div class="bg-white rounded-xl p-6 shadow-lg">
+<h4 class="font-bold text-lg mb-3">📋 Generador de Citas APA</h4>
+<p class="text-gray-600 mb-4">Crea referencias bibliográficas en formato APA automáticamente</p>
+<button class="w-full py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700">Usar Herramienta</button>
+</div>
+
+<div class="bg-white rounded-xl p-6 shadow-lg">
+<h4 class="font-bold text-lg mb-3">📚 Gestor de Referencias</h4>
+<p class="text-gray-600 mb-4">Organiza y guarda tus fuentes bibliográficas</p>
+<button class="w-full py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700">Usar Herramienta</button>
+</div>
+
+<div class="bg-white rounded-xl p-6 shadow-lg">
+<h4 class="font-bold text-lg mb-3">🔍 Buscador Académico</h4>
+<p class="text-gray-600 mb-4">Busca papers y artículos en múltiples bases de datos</p>
+<button class="w-full py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700">Usar Herramienta</button>
+</div>
+
+<div class="bg-white rounded-xl p-6 shadow-lg">
+<h4 class="font-bold text-lg mb-3">📖 Diccionario Filosófico</h4>
+<p class="text-gray-600 mb-4">Definiciones precisas de términos filosóficos</p>
+<button class="w-full py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700">Usar Herramienta</button>
+</div>
+
+</div>
+</section>
+
 </main>
 
-<!-- Pie de Página (MISMO que en index.html) -->
-<footer class="bg-gray-900 text-white mt-20 py-10">
-    <div class="max-w-6xl mx-auto px-4 text-center">
-        <h3 class="text-2xl font-bold mb-2">ASEFIP</h3>
-        <p class="text-gray-400 mb-6">Portal de referencia para la filosofía en el Perú.</p>
-        <p class="text-gray-500 text-sm">© 2024 - 2025 ASEFIP. Proyecto educativo sin fines de lucro. Todo el contenido se comparte con fines de estudio y divulgación.</p>
-    </div>
+<footer class="bg-gray-900 text-white py-8 text-center">
+<p class="text-sm">© 2024-2025 ASEFIP - Asociación de Estudiantes de Filosofía del Perú</p>
 </footer>
 
-<script>
-    // Script para el menú móvil
-    document.getElementById('menuBtn').addEventListener('click', function() {
-        document.getElementById('mobileMenu').classList.toggle('hidden');
-    });
-</script>
 </body>
 </html>
