@@ -1,203 +1,162 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aprender Filosofía - ASEFIP</title>
-    <meta name="description" content="Aprende filosofía desde cero con nuestra biblioteca de videos educativos, organizados por temas y niveles.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        html { scroll-behavior: smooth; font-family: 'Inter', sans-serif; }
-        h1, h2, h3 { font-family: 'Playfair Display', serif; }
-        .video-card { transition: all 0.3s ease; }
-        .video-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.3); }
-        .filtro-activo { background-color: #1e40af; color: white; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aprender Filosofía - ASEFIP</title>
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-b from-blue-50 to-white min-h-screen text-gray-800">
+<body class="bg-gradient-to-br from-blue-50 to-indigo-50">
 
-    <!-- Navegación (MISMA que en index.html) -->
-    <header class="bg-white shadow-sm border-b sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="index.html" class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-gradient-to-br from-indigo-700 to-blue-800 rounded-lg flex items-center justify-center text-white font-bold">AS</div>
-                <div>
-                    <h1 class="text-xl font-bold text-gray-900">ASEFIP</h1>
-                    <p class="text-xs text-gray-600">Portal de Filosofía Peruana</p>
-                </div>
-            </a>
-            <nav class="hidden md:flex space-x-1">
-                <a href="index.html" class="px-4 py-2 font-medium text-gray-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg">Inicio</a>
-                <a href="aprender.html" class="px-4 py-2 font-medium text-blue-700 border-b-2 border-blue-700">Aprender</a>
-                <a href="investigar.html" class="px-4 py-2 font-medium text-gray-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg">Investigar</a>
-                <a href="comunidad.html" class="px-4 py-2 font-medium text-gray-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg">Comunidad</a>
-                <a href="recursos.html" class="px-4 py-2 font-medium text-gray-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg">Recursos</a>
-            </nav>
-            <button id="menuBtn" class="md:hidden text-2xl text-gray-700">☰</button>
-        </div>
-        <div id="mobileMenu" class="hidden md:hidden bg-white border-t px-4 py-3">
-            <a href="index.html" class="block py-3 px-2 text-gray-700 hover:bg-gray-100 rounded">Inicio</a>
-            <a href="aprender.html" class="block py-3 px-2 font-medium text-blue-700 bg-blue-50 rounded">Aprender</a>
-            <a href="investigar.html" class="block py-3 px-2 text-gray-700 hover:bg-gray-100 rounded">Investigar</a>
-            <a href="comunidad.html" class="block py-3 px-2 text-gray-700 hover:bg-gray-100 rounded">Comunidad</a>
-            <a href="recursos.html" class="block py-3 px-2 text-gray-700 hover:bg-gray-100 rounded">Recursos</a>
-        </div>
-    </header>
+<header class="bg-white shadow-lg p-4 sticky top-0 z-50">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">AS</div>
+<div>
+<h1 class="text-lg font-bold">ASEFIP</h1>
+<p class="text-xs text-gray-600">Asociación de Estudiantes de Filosofía del Perú</p>
+</div>
+</div>
+<a href="index.html" class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm">← Inicio</a>
+</div>
+</header>
 
-    <!-- Contenido Principal de la Página "Aprender" -->
-    <main class="max-w-7xl mx-auto px-4 py-8 md:py-12">
-        <!-- Sección de Presentación -->
-        <section class="text-center mb-12">
-            <h2 class="text-4xl md:text-5xl font-bold mb-6">
-                Aprende <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-indigo-600">Filosofía</span> desde la Base
-            </h2>
-            <p class="text-xl text-gray-700 max-w-3xl mx-auto mb-10">
-                Esta biblioteca está diseñada para guiarte paso a paso. Comienza con los conceptos fundamentales y explora temas más complejos a tu propio ritmo. Cada video ha sido seleccionado por su claridad y valor educativo.
-            </p>
-            <div class="inline-flex items-center bg-blue-100 text-blue-800 px-4 py-3 rounded-xl font-medium">
-                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                Recomendación: Sigue el orden de las categorías para un aprendizaje estructurado.
-            </div>
-        </section>
+<main class="max-w-7xl mx-auto p-4 py-12">
 
-        <!-- Filtros por Categoría -->
-        <section class="mb-12">
-            <h3 class="text-2xl font-bold mb-6 text-gray-800">Explorar por Categoría</h3>
-            <div class="flex flex-wrap gap-3 mb-8" id="filtrosCategoria">
-                <button class="filtro-categoria px-5 py-2.5 bg-white border-2 border-blue-200 text-blue-700 font-semibold rounded-xl hover:bg-blue-50 hover:border-blue-300 filtro-activo" data-categoria="todas">
-                    Todas 🎬
-                </button>
-                <button class="filtro-categoria px-5 py-2.5 bg-white border-2 border-blue-200 text-blue-700 font-semibold rounded-xl hover:bg-blue-50 hover:border-blue-300" data-categoria="introduccion">
-                    Introducción 📚
-                </button>
-                <button class="filtro-categoria px-5 py-2.5 bg-white border-2 border-blue-200 text-blue-700 font-semibold rounded-xl hover:bg-blue-50 hover:border-blue-300" data-categoria="historia">
-                    Historia 📖
-                </button>
-                <button class="filtro-categoria px-5 py-2.5 bg-white border-2 border-blue-200 text-blue-700 font-semibold rounded-xl hover:bg-blue-50 hover:border-blue-300" data-categoria="etica">
-                    Ética ⚖️
-                </button>
-                <button class="filtro-categoria px-5 py-2.5 bg-white border-2 border-blue-200 text-blue-700 font-semibold rounded-xl hover:bg-blue-50 hover:border-blue-300" data-categoria="mente">
-                    Filosofía de la Mente 🧠
-                </button>
-                <button class="filtro-categoria px-5 py-2.5 bg-white border-2 border-blue-200 text-blue-700 font-semibold rounded-xl hover:bg-blue-50 hover:border-blue-300" data-categoria="especiales">
-                    Temas Especiales 🎯
-                </button>
-            </div>
-            <p class="text-gray-600" id="contadorVideos">Mostrando <span id="totalVideos">0</span> videos disponibles.</p>
-        </section>
+<div class="text-center mb-12">
+<h2 class="text-4xl font-bold mb-4">Aprende Filosofía <span class="text-indigo-600">Desde Cero</span></h2>
+<p class="text-xl text-gray-600">Rutas de aprendizaje diseñadas para estudiantes peruanos</p>
+</div>
 
-        <!-- Grid de Videos (AQUÍ IRÁ TU BIBLIOTECA) -->
-        <section>
-            <h3 class="text-2xl font-bold mb-8 text-gray-800">Biblioteca de Videos Educativos</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="contenedorVideos">
-                <!--
-                ================================================================================
-                INSTRUCCIÓN CRUCIAL: AQUÍ DEBES PEGAR TU BLOQUE ORIGINAL DE VIDEOS.
-                ================================================================================
-                1. Encuentra en tu archivo antiguo TODA la sección de videos.
-                2. Busca el primer div con clase "grid" dentro de <section id="videos">.
-                3. Copia TODO su contenido interno (los múltiples bloques de video-card) y
-                   péguelo aquí, reemplazando este comentario.
-                4. A cada contenedor de video (ej: <div class="bg-white rounded-xl... video-card">),
-                   AÑÁDELE un atributo: data-categoria="introduccion" (o la que corresponda).
-                Ejemplo:
-                <div class="video-card bg-white rounded-xl..." data-categoria="introduccion">
-                -->
-                <p class="text-center text-gray-500 col-span-3 p-8 bg-white rounded-2xl border-2 border-dashed border-blue-200">
-                    🔧 <strong>Zona de carga de videos.</strong><br>
-                    Para restaurar tu biblioteca, pega aquí el código HTML de tus videos, organizados en tarjetas. No olvides añadir el atributo <code>data-categoria</code> a cada una.
-                </p>
-                <!-- Pega tu código arriba de este comentario -->
-                <!-- ================================================================================ -->
-            </div>
-        </section>
+<div class="grid md:grid-cols-3 gap-6 mb-12">
+<div class="bg-gradient-to-br from-green-400 to-green-600 text-white rounded-2xl p-6 shadow-xl">
+<div class="text-5xl mb-4">🌱</div>
+<h3 class="text-2xl font-bold mb-2">Principiante</h3>
+<p class="mb-4">Empieza tu viaje filosófico con conceptos básicos y autores fundamentales</p>
+<div class="space-y-2 text-sm">
+<div class="flex items-center gap-2"><span>✓</span> ¿Qué es la filosofía?</div>
+<div class="flex items-center gap-2"><span>✓</span> Historia de la filosofía</div>
+<div class="flex items-center gap-2"><span>✓</span> Corrientes principales</div>
+</div>
+</div>
 
-        <!-- Sección de Guía de Estudio -->
-        <section class="mt-20 bg-gradient-to-r from-blue-100 to-indigo-100 rounded-3xl p-8 md:p-12">
-            <h3 class="text-3xl font-bold mb-6 text-gray-900">¿Cómo aprovechar al máximo esta biblioteca?</h3>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white/80 p-6 rounded-2xl backdrop-blur-sm">
-                    <div class="text-3xl mb-4">1️⃣</div>
-                    <h4 class="font-bold text-xl mb-3">Comienza por lo Básico</h4>
-                    <p class="text-gray-700">Ve primero los videos de <strong>Introducción</strong>. Entender los conceptos fundamentales te dará las herramientas para abordar temas más complejos.</p>
-                </div>
-                <div class="bg-white/80 p-6 rounded-2xl backdrop-blur-sm">
-                    <div class="text-3xl mb-4">2️⃣</div>
-                    <h4 class="font-bold text-xl mb-3">Toma Notas y Reflexiona</h4>
-                    <p class="text-gray-700">Pausa el video para anotar ideas clave. Al final, pregúntate: ¿Qué aprendí? ¿Con qué estoy de acuerdo o en desacuerdo? ¿Cómo se aplica esto?</p>
-                </div>
-                <div class="bg-white/80 p-6 rounded-2xl backdrop-blur-sm">
-                    <div class="text-3xl mb-4">3️⃣</div>
-                    <h4 class="font-bold text-xl mb-3">Profundiza y Conecta</h4>
-                    <p class="text-gray-700">Usa los temas vistos como puente para explorar la sección <a href="investigar.html" class="text-blue-700 underline font-medium">Investigar</a>. Busca artículos o fuentes primarias sobre lo que más te interese.</p>
-                </div>
-            </div>
-        </section>
-    </main>
+<div class="bg-gradient-to-br from-blue-400 to-blue-600 text-white rounded-2xl p-6 shadow-xl">
+<div class="text-5xl mb-4">🎓</div>
+<h3 class="text-2xl font-bold mb-2">Intermedio</h3>
+<p class="mb-4">Profundiza en ramas específicas y desarrolla pensamiento crítico</p>
+<div class="space-y-2 text-sm">
+<div class="flex items-center gap-2"><span>✓</span> Ética y moral</div>
+<div class="flex items-center gap-2"><span>✓</span> Epistemología</div>
+<div class="flex items-center gap-2"><span>✓</span> Filosofía política</div>
+</div>
+</div>
 
-    <!-- Pie de Página -->
-    <footer class="bg-gray-900 text-white mt-20 py-10">
-        <div class="max-w-6xl mx-auto px-4 text-center">
-            <h3 class="text-2xl font-bold mb-2">ASEFIP</h3>
-            <p class="text-gray-400 mb-6">Portal de referencia para la filosofía en el Perú.</p>
-            <p class="text-gray-500 text-sm">© 2024 - 2025 ASEFIP. Proyecto educativo sin fines de lucro.</p>
-        </div>
-    </footer>
+<div class="bg-gradient-to-br from-purple-400 to-purple-600 text-white rounded-2xl p-6 shadow-xl">
+<div class="text-5xl mb-4">🚀</div>
+<h3 class="text-2xl font-bold mb-2">Avanzado</h3>
+<p class="mb-4">Investiga, publica y participa en debates académicos</p>
+<div class="space-y-2 text-sm">
+<div class="flex items-center gap-2"><span>✓</span> Investigación filosófica</div>
+<div class="flex items-center gap-2"><span>✓</span> Metodología</div>
+<div class="flex items-center gap-2"><span>✓</span> Publicación de ensayos</div>
+</div>
+</div>
+</div>
 
-    <!-- Scripts para funcionalidad -->
-    <script>
-        // 1. Menú móvil (mismo funcionamiento que index.html)
-        document.getElementById('menuBtn').addEventListener('click', function() {
-            document.getElementById('mobileMenu').classList.toggle('hidden');
-        });
+<section class="mb-12">
+<h3 class="text-3xl font-bold mb-6">📚 Cursos Estructurados</h3>
 
-        // 2. Filtrado de videos por categoría
-        const filtros = document.querySelectorAll('.filtro-categoria');
-        const videos = document.querySelectorAll('.video-card'); // Seleccionará tus videos
-        const contadorTotal = document.getElementById('totalVideos');
-        const contadorFiltrado = document.getElementById('contadorVideos');
+<div class="space-y-4">
+<div class="bg-white rounded-xl p-6 shadow-lg border-l-4 border-green-500">
+<div class="flex items-start justify-between">
+<div class="flex-1">
+<span class="text-xs bg-green-100 text-green-800 px-3 py-1 rounded-full font-semibold">PRINCIPIANTE</span>
+<h4 class="text-xl font-bold mt-3 mb-2">Introducción a la Filosofía</h4>
+<p class="text-gray-600 mb-4">10 videos • 5 lecturas • 3 ejercicios</p>
+<div class="flex flex-wrap gap-2">
+<span class="text-xs bg-gray-100 px-3 py-1 rounded-full">Historia</span>
+<span class="text-xs bg-gray-100 px-3 py-1 rounded-full">Conceptos básicos</span>
+<span class="text-xs bg-gray-100 px-3 py-1 rounded-full">Autores clave</span>
+</div>
+</div>
+<button class="px-6 py-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 whitespace-nowrap">Empezar →</button>
+</div>
+</div>
 
-        // Función para filtrar
-        function filtrarVideos(categoria) {
-            let videosVisibles = 0;
-            videos.forEach(video => {
-                const videoCategoria = video.getAttribute('data-categoria');
-                // Si la categoría es "todas" o coincide, mostrar
-                if (categoria === 'todas' || videoCategoria === categoria) {
-                    video.classList.remove('hidden');
-                    videosVisibles++;
-                } else {
-                    video.classList.add('hidden');
-                }
-            });
-            // Actualizar texto del contador
-            if (categoria === 'todas') {
-                contadorFiltrado.textContent = `Mostrando todos los ${videosVisibles} videos disponibles.`;
-            } else {
-                const nombreCategoria = document.querySelector(`[data-categoria="${categoria}"]`).textContent.trim();
-                contadorFiltrado.textContent = `Mostrando ${videosVisibles} videos de la categoría: ${nombreCategoria}.`;
-            }
-        }
+<div class="bg-white rounded-xl p-6 shadow-lg border-l-4 border-blue-500">
+<div class="flex items-start justify-between">
+<div class="flex-1">
+<span class="text-xs bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-semibold">INTERMEDIO</span>
+<h4 class="text-xl font-bold mt-3 mb-2">Ética Contemporánea</h4>
+<p class="text-gray-600 mb-4">8 videos • 12 lecturas • 5 ejercicios</p>
+<div class="flex flex-wrap gap-2">
+<span class="text-xs bg-gray-100 px-3 py-1 rounded-full">Ética aplicada</span>
+<span class="text-xs bg-gray-100 px-3 py-1 rounded-full">Dilemas morales</span>
+<span class="text-xs bg-gray-100 px-3 py-1 rounded-full">Casos peruanos</span>
+</div>
+</div>
+<button class="px-6 py-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 whitespace-nowrap">Empezar →</button>
+</div>
+</div>
 
-        // Añadir evento a cada botón de filtro
-        filtros.forEach(boton => {
-            boton.addEventListener('click', function() {
-                // Remover clase activa de todos los botones
-                filtros.forEach(b => b.classList.remove('filtro-activo'));
-                // Añadir clase activa al botón clickeado
-                this.classList.add('filtro-activo');
-                // Filtrar videos según la categoría del botón
-                const categoriaSeleccionada = this.getAttribute('data-categoria');
-                filtrarVideos(categoriaSeleccionada);
-            });
-        });
+<div class="bg-white rounded-xl p-6 shadow-lg border-l-4 border-purple-500">
+<div class="flex items-start justify-between">
+<div class="flex-1">
+<span class="text-xs bg-purple-100 text-purple-800 px-3 py-1 rounded-full font-semibold">AVANZADO</span>
+<h4 class="text-xl font-bold mt-3 mb-2">Filosofía Peruana Contemporánea</h4>
+<p class="text-gray-600 mb-4">6 videos • 15 lecturas • Proyecto final</p>
+<div class="flex flex-wrap gap-2">
+<span class="text-xs bg-gray-100 px-3 py-1 rounded-full">Salazar Bondy</span>
+<span class="text-xs bg-gray-100 px-3 py-1 rounded-full">Sobrevilla</span>
+<span class="text-xs bg-gray-100 px-3 py-1 rounded-full">Pensamiento andino</span>
+</div>
+</div>
+<button class="px-6 py-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 whitespace-nowrap">Empezar →</button>
+</div>
+</div>
 
-        // Inicializar: Contar y mostrar todos los videos al cargar
-        document.addEventListener('DOMContentLoaded', function() {
-            contadorTotal.textContent = videos.length;
-            filtrarVideos('todas'); // Mostrar todos inicialmente
-        });
-    </script>
+</div>
+</section>
+
+<section class="mb-12 bg-white rounded-2xl p-8 shadow-xl">
+<h3 class="text-3xl font-bold mb-6">🎯 ¿Por qué aprender con ASEFIP?</h3>
+<div class="grid md:grid-cols-2 gap-6">
+<div class="flex gap-4">
+<div class="text-4xl">👥</div>
+<div>
+<h4 class="font-bold text-lg mb-2">Por estudiantes, para estudiantes</h4>
+<p class="text-gray-600">Contenido diseñado por quienes entienden tus necesidades académicas</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="text-4xl">🇵🇪</div>
+<div>
+<h4 class="font-bold text-lg mb-2">Contexto peruano</h4>
+<p class="text-gray-600">Ejemplos, casos y autores relevantes para nuestra realidad nacional</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="text-4xl">📱</div>
+<div>
+<h4 class="font-bold text-lg mb-2">100% gratuito y accesible</h4>
+<p class="text-gray-600">Aprende a tu ritmo desde cualquier dispositivo, sin costo</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="text-4xl">🏆</div>
+<div>
+<h4 class="font-bold text-lg mb-2">Certificado de participación</h4>
+<p class="text-gray-600">Recibe reconocimiento por completar nuestras rutas de aprendizaje</p>
+</div>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer class="bg-gray-900 text-white py-8 text-center">
+<p class="text-sm">© 2024-2025 ASEFIP - Asociación de Estudiantes de Filosofía del Perú</p>
+</footer>
+
 </body>
 </html>
