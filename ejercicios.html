@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios - ASEFIP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .logo {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            line-height: 60px;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        h1 {
+            color: #2d3748;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #718096;
+            font-size: 1.1em;
+        }
+        
+        .back-link {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* NIVELES */
+        .niveles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        
+        .nivel-card {
+            background: white;
+            border: 3px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .nivel-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+            border-color: #667eea;
+        }
+        
+        .nivel-card.principiante {
+            border-color: #48bb78;
+        }
+        
+        .nivel-card.intermedio {
+            border-color: #ed8936;
+        }
+        
+        .nivel-card.avanzado {
+            border-color: #e53e3e;
+        }
+        
+        .nivel-icon {
+            font-size: 4em;
+            margin-bottom: 15px;
+        }
+        
+        .nivel-card h3 {
+            color: #2d3748;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        
+        .nivel-descripcion {
+            color: #718096;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .nivel-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            font-size: 0.85em;
+            color: #718096;
+        }
+        
+        /* QUIZ */
+        .quiz-container {
+            display: none;
+        }
+        
+        .quiz-container.active {
+            display: block;
+        }
+        
+        .quiz-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .quiz-header h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+        
+        .quiz-progress {
+            background: rgba(255,255,255,0.2);
+            height: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+        
+        .quiz-progress-bar {
+            background: white;
+            height: 100%;
+            transition: width 0.3s;
+        }
+        
+        .question-card {
+            background: #f7fafc;
+            border-radius: 15px;
+            padding: 35px;
+            margin-bottom: 30px;
+        }
+        
+        .question-number {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .question-text {
+            color: #2d3748;
+            font-size: 1.3em;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+        
+        .options {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .option {
+            background: white;
+            border: 2px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .option:hover {
+            border-color: #667eea;
+            background: #ebf4ff;
+        }
+        
+        .option.selected {
+            border-color: #667eea;
+            background: #ebf4ff;
+        }
+        
+        .option.correct {
+            border-color: #48bb78;
+            background: #f0fff4;
+        }
+        
+        .option.incorrect {
+            border-color: #e53e3e;
+            background: #fff5f5;
+        }
+        
+        .option-letter {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .option-text {
+            color: #2d3748;
+            line-height: 1.6;
+        }
+        
+        .explanation {
+            background: #fffaf0;
+            border-left: 4px solid: #ed8936;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .explanation.show {
+            display: block;
+        }
+        
+        .explanation-title {
+            color: #2d3748;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .explanation-text {
+            color: #4a5568;
+            line-height: 1.7;
+        }
+        
+        .quiz-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #2d3748;
+        }
+        
+        .btn-secondary:hover {
+            background: #cbd5e0;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* RESULTADOS */
+        .results {
+            display: none;
+            text-align: center;
+            padding: 50px 30px;
+        }
+        
+        .results.show {
+            display: block;
+        }
+        
+        .results-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+        }
+        
+        .results h2 {
+            color: #2d3748;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        
+        .score {
+            font-size: 4em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .results-message {
+            color: #4a5568;
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+        
+        .results-details {
+            background: #f7fafc;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #e2e8f0;
+            color: #718096;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="aprender.html" class="back-link">← Volver a Aprender</a>
+        
+        <header>
+            <div class="logo">AS</div>
+            <h1>Ejercicios Interactivos</h1>
+            <p class="subtitle">Pon a prueba tus conocimientos filosóficos</p>
+        </header>
+        
+        <!-- SELECCIÓN DE NIVEL -->
+        <div id="nivelSelection">
+            <div class="niveles-grid">
+                <div class="nivel-card principiante" onclick="iniciarQuiz('principiante')">
+                    <div class="nivel-icon">🌱</div>
+                    <h3>Principiante</h3>
+                    <p class="nivel-descripcion">
+                        Conceptos básicos y filósofos fundamentales. Ideal para comenzar tu camino en la filosofía.
+                    </p>
+                    <div class="nivel-stats">
+                        <div class="stat">
+                            <div class="stat-number">10</div>
+                            <div class="stat-label">Preguntas</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">15</div>
+                            <div class="stat-label">Minutos</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="nivel-card intermedio" onclick="iniciarQuiz('intermedio')">
+                    <div class="nivel-icon">📚</div>
+                    <h3>Intermedio</h3>
+                    <p class="nivel-descripcion">
+                        Corrientes filosóficas y argumentos. Requiere comprensión de textos y conceptos complejos.
+                    </p>
+                    <div class="nivel-stats">
+                        <div class="stat">
+                            <div class="stat-number">15</div>
+                            <div class="stat-label">Preguntas</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">25</div>
+                            <div class="stat-label">Minutos</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="nivel-card avanzado" onclick="iniciarQuiz('avanzado')">
+                    <div class="nivel-icon">🎓</div>
+                    <h3>Avanzado</h3>
+                    <p class="nivel-descripcion">
+                        Análisis profundo y debates contemporáneos. Para estudiantes con sólida formación filosófica.
+                    </p>
+                    <div class="nivel-stats">
+                        <div class="stat">
+                            <div class="stat-number">20</div>
+                            <div class="stat-label">Preguntas</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">35</div>
+                            <div class="stat-label">Minutos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- QUIZ -->
+        <div id="quizContainer" class="quiz-container">
+            <div class="quiz-header">
+                <h2 id="quizTitle">Quiz de Filosofía</h2>
+                <p id="quizSubtitle">Pregunta <span id="currentQuestion">1</span> de <span id="totalQuestions">10</span></p>
+                <div class="quiz-progress">
+                    <div class="quiz-progress-bar" id="progressBar" style="width: 10%"></div>
+                </div>
+            </div>
+            
+            <div id="questionContainer"></div>
+            
+            <div class="quiz-actions">
+                <button class="btn btn-secondary" onclick="volverNiveles()">Abandonar</button>
+                <button class="btn btn-primary" id="nextBtn" onclick="siguientePregunta()">Siguiente</button>
+            </div>
+        </div>
+        
+        <!-- RESULTADOS -->
+        <div id="results" class="results">
+            <div class="results-icon" id="resultsIcon">🎉</div>
+            <h2>¡Quiz Completado!</h2>
+            <div class="score" id="finalScore">0/10</div>
+            <p class="results-message" id="resultsMessage"></p>
+            
+            <div class="results-details">
+                <div class="detail-row">
+                    <span><strong>Correctas:</strong></span>
+                    <span id="correctCount">0</span>
+                </div>
+                <div class="detail-row">
+                    <span><strong>Incorrectas:</strong></span>
+                    <span id="incorrectCount">0</span>
+                </div>
+                <div class="detail-row">
+                    <span><strong>Porcentaje:</strong></span>
+                    <span id="percentage">0%</span>
+                </div>
+            </div>
+            
+            <div class="quiz-actions">
+                <button class="btn btn-secondary" onclick="volverNiveles()">Elegir Otro Nivel</button>
+                <button class="btn btn-primary" onclick="reiniciarQuiz()">Repetir Quiz</button>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2024-2025 ASEFIP - Asociación de Estudiantes de Filosofía del Perú</p>
+        </footer>
+    </div>
+    
+    <script>
+        const quizzes = {
+            principiante: [
+                {
+                    pregunta: "¿Quién es considerado el padre de la filosofía occidental?",
+                    opciones: [
+                        "Platón",
+                        "Sócrates",
+                        "Aristóteles",
+                        "Tales de Mileto"
+                    ],
+                    correcta: 1,
+                    explicacion: "Sócrates es considerado el padre de la filosofía occidental por revolucionar el método filosófico, centrándose en cuestiones éticas y el autoconocimiento mediante el diálogo."
+                },
+                {
+                    pregunta: "¿Qué filósofo escribió 'La República'?",
+                    opciones: [
+                        "Sócrates",
+                        "Aristóteles",
+                        "Platón",
+                        "Epicuro"
+                    ],
+                    correcta: 2,
+                    explicacion: "Platón escribió 'La República', una de las obras más influyentes de la filosofía política, donde expone su teoría del Estado ideal y la justicia."
+                },
+                {
+                    pregunta: "¿Qué significa 'filosofía' etimológicamente?",
+                    opciones: [
+                        "Conocimiento de la verdad",
+                        "Amor a la sabiduría",
+                        "Búsqueda de la felicidad",
+                        "Estudio del ser"
+                    ],
+                    correcta: 1,
+                    explicacion: "Filosofía proviene del griego 'philos' (amor) y 'sophia' (sabiduría), literalmente significa 'amor a la sabiduría'."
+                },
+                {
+                    pregunta: "¿Cuál es la frase más famosa de Descartes?",
+                    opciones: [
+                        "Sólo sé que no sé nada",
+                        "Pienso, luego existo",
+                        "El hombre es la medida de todas las cosas",
+                        "Conócete a ti mismo"
+                    ],
+                    correcta: 1,
+                    explicacion: "'Cogito, ergo sum' (Pienso, luego existo) es el fundamento del racionalismo cartesiano y el punto de partida indudable de su filosofía."
+                },
+                {
+                    pregunta: "¿Qué estudia la ética?",
+                    opciones: [
+                        "La naturaleza del conocimiento",
+                        "La estructura del razonamiento",
+                        "El bien, el mal y cómo debemos vivir",
+                        "La existencia de Dios"
+                    ],
+                    correcta: 2,
+                    explicacion: "La ética es la rama de la filosofía que estudia la moral, el bien y el mal, y cómo debemos vivir y actuar."
+                },
+                {
+                    pregunta: "¿Quién dijo 'El hombre es un animal político'?",
+                    opciones: [
+                        "Platón",
+                        "Aristóteles",
+                        "Hobbes",
+                        "Rousseau"
+                    ],
+                    correcta: 1,
+                    explicacion: "Aristóteles afirmó que el ser humano es por naturaleza un 'animal político' (zoon politikon), destinado a vivir en sociedad."
+                },
+                {
+                    pregunta: "¿Qué es la mayéutica socrática?",
+                    opciones: [
+                        "Un tipo de lógica formal",
+                        "Un método de enseñanza mediante preguntas",
+                        "Una teoría sobre el alma",
+                        "Un argumento sobre la existencia de Dios"
+                    ],
+                    correcta: 1,
+                    explicacion: "La mayéutica es el método socrático de enseñanza mediante preguntas que ayudan al interlocutor a 'dar a luz' el conocimiento que lleva dentro."
+                },
+                {
+                    pregunta: "¿Qué propone el imperativo categórico de Kant?",
+                    opciones: [
+                        "Actuar según tu felicidad",
+                        "Actuar según máximas universalizables",
+                        "Seguir las leyes del Estado",
+                        "Obedecer a la autoridad religiosa"
+                    ],
+                    correcta: 1,
+                    explicacion: "El imperativo categórico kantiano dice: 'Actúa solo según una máxima que puedas querer que se convierta en ley universal', es el fundamento de su ética."
+                },
+                {
+                    pregunta: "¿Qué es la epistemología?",
+                    opciones: [
+                        "El estudio del ser",
+                        "El estudio de la belleza",
+                        "El estudio del conocimiento",
+                        "El estudio de la política"
+                    ],
+                    correcta: 2,
+                    explicacion: "La epistemología es la rama de la filosofía que estudia la naturaleza, el origen y los límites del conocimiento."
+                },
+                {
+                    pregunta: "¿Cuál es la alegoría más famosa de Platón?",
+                    opciones: [
+                        "El mito del carro alado",
+                        "La caverna",
+                        "El anillo de Giges",
+                        "El banquete"
+                    ],
+                    correcta: 1,
+                    explicacion: "La alegoría de la caverna ilustra la teoría de las Ideas de Platón, mostrando cómo la mayoría vive en la ignorancia de la verdadera realidad."
+                }
+            ],
+            intermedio: [
+                {
+                    pregunta: "Según Nietzsche, ¿qué significa 'la muerte de Dios'?",
+                    opciones: [
+                        "Que Dios nunca existió",
+                        "El fin de los valores absolutos tradicionales",
+                        "La victoria del ateísmo científico",
+                        "El triunfo del materialismo"
+                    ],
+                    correcta: 1,
+                    explicacion: "Para Nietzsche, 'Dios ha muerto' significa que la cultura occidental ha perdido su fundamento en valores absolutos, abriendo paso al nihilismo."
+                },
+                {
+                    pregunta: "¿Qué es el 'velo de ignorancia' en la teoría de Rawls?",
+                    opciones: [
+                        "Un argumento escéptico sobre el conocimiento",
+                        "Una metáfora sobre la ignorancia humana",
+                        "Un experimento mental para determinar principios de justicia",
+                        "Una crítica a la democracia"
+                    ],
+                    correcta: 2,
+                    explicacion: "El 'velo de ignorancia' de Rawls es un experimento mental donde las personas eligen principios de justicia sin saber su posición futura en la sociedad."
+                },
+                {
+                    pregunta: "En el existencialismo de Sartre, ¿qué precede a la esencia?",
+                    opciones: [
+                        "La naturaleza humana",
+                        "La existencia",
+                        "Dios",
+                        "La sociedad"
+                    ],
+                    correcta: 1,
+                    explicacion: "Para Sartre, 'la existencia precede a la esencia': no tenemos una naturaleza predeterminada, nos creamos a través de nuestras elecciones."
+                }
+            ],
+            avanzado: [
+                {
+                    pregunta: "¿Qué es el 'giro lingüístico' en filosofía?",
+                    opciones: [
+                        "El estudio de la gramática en textos filosóficos",
+                        "El cambio de enfoque hacia el análisis del lenguaje",
+                        "La traducción de textos clásicos",
+                        "El rechazo del uso de metáforas"
+                    ],
+                    correcta: 1,
+                    explicacion: "El giro lingüístico fue un cambio en la filosofía del siglo XX donde el análisis del lenguaje se convirtió en el método central para resolver problemas filosóficos."
+                },
+                {
+                    pregunta: "¿Qué sostiene el naturalismo moral?",
+                    opciones: [
+                        "Que la moral viene de la naturaleza divina",
+                        "Que los hechos morales son reducibles a hechos naturales",
+                        "Que debemos vivir según la naturaleza",
+                        "Que no existe la moralidad"
+                    ],
+                    correcta: 1,
+                    explicacion: "El naturalismo moral sostiene que las propiedades morales pueden ser reducidas o identificadas con propiedades naturales del mundo."
+                }
+            ]
+        };
+        
+        let nivelActual = '';
+        let preguntaActual = 0;
+        let respuestasUsuario = [];
+        let quizActual = [];
+        
+        function iniciarQuiz(nivel) {
+            nivelActual = nivel;
+            quizActual = [...quizzes[nivel]];
+            preguntaActual = 0;
+            respuestasUsuario = [];
+            
+            document.getElementById('nivelSelection').style.display = 'none';
+            document.getElementById('quizContainer').classList.add('active');
+            document.getElementById('results').classList.remove('show');
+            
+            const titulo = nivel.charAt(0).toUpperCase() + nivel.slice(1);
+            document.getElementById('quizTitle').textContent = `Quiz ${titulo}`;
+            document.getElementById('totalQuestions').textContent = quizActual.length;
+            
+            mostrarPregunta();
+        }
+        
+        function mostrarPregunta() {
+            const pregunta = quizActual[preguntaActual];
+            document.getElementById('currentQuestion').textContent = preguntaActual + 1;
+            
+            const progress = ((preguntaActual + 1) / quizActual.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            
+            let html = `
+                <div class="question-card">
+                    <div class="question-number">Pregunta ${preguntaActual + 1}</div>
+                    <div class="question-text">${pregunta.pregunta}</div>
+                    <div class="options">
+            `;
+            
+            pregunta.opciones.forEach((opcion, index) => {
+                const letra = String.fromCharCode(65 + index);
+                html += `
+                    <div class="option" onclick="seleccionarOpcion(${index})">
+                        <div class="option-letter">${letra}</div>
+                        <div class="option-text">${opcion}</div>
+                    </div>
+                `;
+            });
+            
+            html += `
+                    </div>
+                    <div class="explanation" id="explanation">
+                        <div class="explanation-title">📚 Explicación:</div>
+                        <div class="explanation-text">${pregunta.explicacion}</div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('questionContainer').innerHTML = html;
+            document.getElementById('nextBtn').disabled = true;
+        }
+        
+        function seleccionarOpcion(index) {
+            const opciones = document.querySelectorAll('.option');
+            opciones.forEach(opt => opt.classList.remove('selected'));
+            opciones[index].classList.add('selected');
+            
+            respuestasUsuario[preguntaActual] = index;
+            document.getElementById('nextBtn').disabled = false;
+        }
+        
+        function siguientePregunta() {
+            const pregunta = quizActual[preguntaActual];
+            const opciones = document.querySelectorAll('.option');
+            
+            opciones.forEach((opt, index) => {
+                if (index === pregunta.correcta) {
+                    opt.classList.add('correct');
+                } else if (index === respuestasUsuario[preguntaActual]) {
+                    opt.classList.add('incorrect');
+                }
+            });
+            
+            document.getElementById('explanation').classList.add('show');
+            document.getElementById('nextBtn').textContent = preguntaActual === quizActual.length - 1 ? 'Ver Resultados' : 'Siguiente';
+            document.getElementById('nextBtn').onclick = () => {
+                if (preguntaActual < quizActual.length - 1) {
+                    preguntaActual++;
+                    mostrarPregunta();
+                    document.getElementById('nextBtn').textContent = 'Siguiente';
+                    document.getElementById('nextBtn').onclick = siguientePregunta;
+                } else {
+                    mostrarResultados();
+                }
+            };
+        }
+        
+        function mostrarResultados() {
+            let correctas = 0;
+            quizActual.forEach((pregunta, index) => {
+                if (respuestasUsuario[index] === pregunta.correcta) {
+                    correctas++;
+                }
+            });
+            
+            const porcentaje = Math.round((correctas / quizActual.length) * 100);
+            
+            document.getElementById('quizContainer').classList.remove('active');
+            document.getElementById('results').classList.add('show');
+            
+            document.getElementById('finalScore').textContent = `${correctas}/${quizActual.length}`;
+            document.getElementById('correctCount').textContent = correctas;
+            document.getElementById('incorrectCount').textContent = quizActual.length - correctas;
+            document.getElementById('percentage').textContent = porcentaje + '%';
+            
+            let mensaje, icono;
+            if (porcentaje >= 90) {
+                mensaje = "¡Excelente! Dominas este nivel. Considera intentar el siguiente nivel.";
+                icono = "🏆";
+            } else if (porcentaje >= 70) {
+                mensaje = "¡Muy bien! Tienes un buen conocimiento del tema.";
+                icono = "🎉";
+            } else if (porcentaje >= 50) {
+                mensaje = "Buen intento. Revisa los temas y vuelve a intentarlo.";
+                icono = "👍";
+            } else {
+                mensaje = "Sigue estudiando. La práctica hace al maestro.";
+                icono = "📚";
+            }
+            
+            document.getElementById('resultsMessage').textContent = mensaje;
+            document.getElementById('resultsIcon').textContent = icono;
+        }
+        
+        function volverNiveles() {
+            document.getElementById('nivelSelection').style.display = 'block';
+            document.getElementById('quizContainer').classList.remove('active');
+            document.getElementById('results').classList.remove('show');
+        }
+        
+        function reiniciarQuiz() {
+            iniciarQuiz(nivelActual);
+        }
+    </script
