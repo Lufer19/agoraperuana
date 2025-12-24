@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASEFIP - Asociación de Estudiantes de Filosofía del Perú</title>
+    <title>Ejercicios - ASEFIP</title>
     <style>
         * {
             margin: 0;
@@ -13,611 +13,841 @@
         
         body {
             font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .logo {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            line-height: 60px;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        h1 {
+            color: #2d3748;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #718096;
+            font-size: 1.1em;
+        }
+        
+        .back-link {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* NIVELES */
+        .niveles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        
+        .nivel-card {
+            background: white;
+            border: 3px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .nivel-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+            border-color: #667eea;
+        }
+        
+        .nivel-card.principiante {
+            border-color: #48bb78;
+        }
+        
+        .nivel-card.intermedio {
+            border-color: #ed8936;
+        }
+        
+        .nivel-card.avanzado {
+            border-color: #e53e3e;
+        }
+        
+        .nivel-icon {
+            font-size: 4em;
+            margin-bottom: 15px;
+        }
+        
+        .nivel-card h3 {
+            color: #2d3748;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        
+        .nivel-descripcion {
+            color: #718096;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .nivel-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            font-size: 0.85em;
+            color: #718096;
+        }
+        
+        /* QUIZ */
+        .quiz-container {
+            display: none;
+        }
+        
+        .quiz-container.active {
+            display: block;
+        }
+        
+        .quiz-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .quiz-header h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+        
+        .quiz-progress {
+            background: rgba(255,255,255,0.2);
+            height: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+        
+        .quiz-progress-bar {
+            background: white;
+            height: 100%;
+            transition: width 0.3s;
+        }
+        
+        .question-card {
+            background: #f7fafc;
+            border-radius: 15px;
+            padding: 35px;
+            margin-bottom: 30px;
+        }
+        
+        .question-number {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .question-text {
+            color: #2d3748;
+            font-size: 1.3em;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+        
+        .options {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .option {
+            background: white;
+            border: 2px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .option:hover {
+            border-color: #667eea;
+            background: #ebf4ff;
+        }
+        
+        .option.selected {
+            border-color: #667eea;
+            background: #ebf4ff;
+        }
+        
+        .option.correct {
+            border-color: #48bb78;
+            background: #f0fff4;
+        }
+        
+        .option.incorrect {
+            border-color: #e53e3e;
+            background: #fff5f5;
+        }
+        
+        .option-letter {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .option-text {
             color: #2d3748;
             line-height: 1.6;
         }
         
-        /* NAVEGACIÓN */
-        nav {
-            background: #1a202c;
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        nav .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-        }
-        
-        .logo-nav {
-            color: white;
-            font-size: 1.5em;
-            font-weight: bold;
-            text-decoration: none;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-        
-        .nav-links a {
-            color: #e2e8f0;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-weight: 500;
-        }
-        
-        .nav-links a:hover {
-            color: #90cdf4;
-        }
-
-        .menu-toggle {
+        .explanation {
+            background: #fffaf0;
+            border-left: 4px solid #ed8936;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
             display: none;
-            background: transparent;
-            border: 2px solid transparent;
-            color: #e2e8f0;
-            font-size: 1.2rem;
-            padding: 6px 10px;
-            border-radius: 6px;
-            cursor: pointer;
         }
         
-        /* HERO SECTION */
-        .hero {
-            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
-            color: white;
-            padding: 100px 20px;
-            text-align: center;
+        .explanation.show {
+            display: block;
         }
         
-        .hero h1 {
-            font-size: 3.5em;
-            margin-bottom: 20px;
-            font-weight: 700;
+        .explanation-title {
+            color: #2d3748;
+            font-weight: bold;
+            margin-bottom: 10px;
         }
         
-        .hero .subtitle {
-            font-size: 1.5em;
-            margin-bottom: 15px;
-            color: #cbd5e0;
+        .explanation-text {
+            color: #4a5568;
+            line-height: 1.7;
         }
         
-        .hero .description {
-            font-size: 1.1em;
-            max-width: 800px;
-            margin: 0 auto 40px;
-            color: #e2e8f0;
-            line-height: 1.8;
-        }
-        
-        .cta-buttons {
+        .quiz-actions {
             display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
         }
         
         .btn {
-            padding: 15px 35px;
+            flex: 1;
+            padding: 15px 30px;
+            border: none;
             border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
             font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
             transition: all 0.3s;
-            display: inline-block;
+            font-family: inherit;
         }
         
         .btn-primary {
-            background: #4299e1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
         }
         
         .btn-primary:hover {
-            background: #3182ce;
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(66, 153, 225, 0.3);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
         }
         
         .btn-secondary {
-            background: transparent;
-            border: 2px solid white;
-            color: white;
+            background: #e2e8f0;
+            color: #2d3748;
         }
         
         .btn-secondary:hover {
-            background: white;
+            background: #cbd5e0;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* RESULTADOS */
+        .results {
+            display: none;
+            text-align: center;
+            padding: 50px 30px;
+        }
+        
+        .results.show {
+            display: block;
+        }
+        
+        .results-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+        }
+        
+        .results h2 {
             color: #2d3748;
-        }
-        
-        /* SECCIONES */
-        section {
-            padding: 80px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        section h2 {
             font-size: 2.5em;
-            margin-bottom: 15px;
-            color: #2d3748;
-            text-align: center;
+            margin-bottom: 20px;
         }
         
-        section .section-subtitle {
-            text-align: center;
-            color: #718096;
+        .score {
+            font-size: 4em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .results-message {
+            color: #4a5568;
             font-size: 1.2em;
-            margin-bottom: 50px;
-        }
-        
-        /* SOBRE NOSOTROS */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-        
-        .about-text {
-            font-size: 1.1em;
             line-height: 1.8;
+            margin-bottom: 30px;
         }
         
-        .about-text h3 {
-            color: #2d3748;
-            margin: 20px 0 10px;
-            font-size: 1.5em;
-        }
-        
-        .about-image {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            height: 400px;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 8em;
-        }
-        
-        /* PILARES */
-        .pilares-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-        
-        .pilar-card {
-            background: white;
+        .results-details {
+            background: #f7fafc;
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: all 0.3s;
-            border-top: 4px solid #4299e1;
+            margin-bottom: 30px;
         }
         
-        .pilar-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-        
-        .pilar-icon {
-            font-size: 3em;
-            margin-bottom: 15px;
-        }
-        
-        .pilar-card h3 {
-            color: #2d3748;
-            font-size: 1.5em;
-            margin-bottom: 15px;
-        }
-        
-        .pilar-card p {
-            color: #718096;
-            line-height: 1.8;
-        }
-        
-        /* ÚLTIMAS NOTICIAS */
-        .noticias-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .noticia-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: all 0.3s;
-        }
-        
-        .noticia-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-        
-        .noticia-imagen {
-            height: 200px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .detail-row {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4em;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 2px solid #e2e8f0;
         }
         
-        .noticia-content {
-            padding: 25px;
+        .detail-row:last-child {
+            border-bottom: none;
         }
         
-        .noticia-fecha {
-            color: #4299e1;
-            font-size: 0.9em;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-        
-        .noticia-card h3 {
-            color: #2d3748;
-            font-size: 1.3em;
-            margin-bottom: 15px;
-        }
-        
-        .noticia-card p {
-            color: #718096;
-            line-height: 1.7;
-            margin-bottom: 15px;
-        }
-        
-        .leer-mas {
-            color: #4299e1;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        
-        .leer-mas:hover {
-            text-decoration: underline;
-        }
-        
-        /* LLAMADO A LA ACCIÓN */
-        .cta-section {
-            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
-            color: white;
-            text-align: center;
-            padding: 80px 20px;
-            border-radius: 20px;
-            margin: 50px auto;
-        }
-        
-        .cta-section h2 {
-            color: white;
-            margin-bottom: 20px;
-        }
-        
-        .cta-section p {
-            font-size: 1.2em;
-            margin-bottom: 30px;
-            color: #e2e8f0;
-        }
-        
-        /* FOOTER */
         footer {
-            background: #1a202c;
-            color: #e2e8f0;
-            padding: 50px 20px 30px;
-        }
-        
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 30px;
-        }
-        
-        .footer-section h3 {
-            color: white;
-            margin-bottom: 20px;
-        }
-        
-        .footer-section ul {
-            list-style: none;
-        }
-        
-        .footer-section li {
-            margin-bottom: 10px;
-        }
-        
-        .footer-section a {
-            color: #cbd5e0;
-            text-decoration: none;
-        }
-        
-        .footer-section a:hover {
-            color: #90cdf4;
-        }
-        
-        .footer-bottom {
             text-align: center;
+            margin-top: 50px;
             padding-top: 30px;
-            border-top: 1px solid #4a5568;
-            color: #a0aec0;
-        }
-        
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5em;
-            }
-            
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .nav-links {
-                position: absolute;
-                top: 64px;
-                right: 20px;
-                background: #1a202c;
-                flex-direction: column;
-                gap: 10px;
-                padding: 10px;
-                border-radius: 8px;
-                display: none;
-                width: calc(100% - 40px);
-            }
-
-            .menu-toggle {
-                display: inline-block;
-            }
+            border-top: 2px solid #e2e8f0;
+            color: #718096;
         }
     </style>
 </head>
 <body>
-    <!-- NAVEGACIÓN -->
-    <nav>
-        <div class="container">
-            <a href="index.html" class="logo-nav">ASEFIP</a>
-            <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks">☰</button>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="#nosotros">Nosotros</a></li>
-                <li><a href="aprender.html">Aprender</a></li>
-                <li><a href="recursos.html">Recursos</a></li>
-                <li><a href="glosario.html">Glosario</a></li>
-                <li><a href="ejercicios.html">Ejercicios</a></li>
-                <li><a href="linea-tiempo.html">Línea de tiempo</a></li>
-                <li><a href="comunidad.html">Comunidad</a></li>
-                <li><a href="Blog.html">Blog</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- HERO SECTION -->
-    <section class="hero" id="inicio">
-        <h1>ASEFIP</h1>
-        <p class="subtitle">Asociación de Estudiantes de Filosofía del Perú</p>
-        <p class="description">
-            Uniendo a estudiantes de filosofía de todo el Perú para fortalecer el pensamiento crítico, 
-            promover el diálogo filosófico y construir una comunidad académica sólida y comprometida con 
-            el desarrollo intelectual de nuestro país.
-        </p>
-        <div class="cta-buttons">
-            <a href="#nosotros" class="btn btn-primary">Conoce Más</a>
-            <a href="#contacto" class="btn btn-secondary">Únete a Nosotros</a>
-        </div>
-    </section>
-
-    <!-- SOBRE NOSOTROS -->
-    <section id="nosotros">
-        <h2>¿Quiénes Somos?</h2>
-        <p class="section-subtitle">Una red nacional de estudiantes comprometidos con la filosofía</p>
+    <div class="container">
+        <a href="aprender.html" class="back-link">← Volver a Aprender</a>
         
-        <div class="about-content">
-            <div class="about-text">
-                <p>
-                    <strong>ASEFIP</strong> nació el 21 de diciembre de 2024 de una reunión histórica que reunió 
-                    a estudiantes de filosofía de diversas universidades del Perú. Somos una asociación que busca 
-                    fortalecer la comunidad filosófica estudiantil a nivel nacional.
-                </p>
+        <header>
+            <div class="logo">AS</div>
+            <h1>Ejercicios Interactivos</h1>
+            <p class="subtitle">Pon a prueba tus conocimientos filosóficos</p>
+        </header>
+        
+        <!-- SELECCIÓN DE NIVEL -->
+        <div id="nivelSelection">
+            <div class="niveles-grid">
+                <div class="nivel-card principiante" onclick="iniciarQuiz('principiante')">
+                    <div class="nivel-icon">🌱</div>
+                    <h3>Principiante</h3>
+                    <p class="nivel-descripcion">
+                        Conceptos básicos y filósofos fundamentales. Ideal para comenzar tu camino en la filosofía.
+                    </p>
+                    <div class="nivel-stats">
+                        <div class="stat">
+                            <div class="stat-number">10</div>
+                            <div class="stat-label">Preguntas</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">15</div>
+                            <div class="stat-label">Minutos</div>
+                        </div>
+                    </div>
+                </div>
                 
-                <h3>Nuestra Misión</h3>
-                <p>
-                    Promover el desarrollo del pensamiento crítico y filosófico entre los estudiantes peruanos, 
-                    creando espacios de diálogo, debate y formación académica que contribuyan al crecimiento 
-                    intelectual de nuestra comunidad.
-                </p>
+                <div class="nivel-card intermedio" onclick="iniciarQuiz('intermedio')">
+                    <div class="nivel-icon">📚</div>
+                    <h3>Intermedio</h3>
+                    <p class="nivel-descripcion">
+                        Corrientes filosóficas y argumentos. Requiere comprensión de textos y conceptos complejos.
+                    </p>
+                    <div class="nivel-stats">
+                        <div class="stat">
+                            <div class="stat-number">15</div>
+                            <div class="stat-label">Preguntas</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">25</div>
+                            <div class="stat-label">Minutos</div>
+                        </div>
+                    </div>
+                </div>
                 
-                <h3>Nuestra Visión</h3>
-                <p>
-                    Ser la red de estudiantes de filosofía más importante del Perú, reconocida por su compromiso 
-                    con la excelencia académica, el pensamiento crítico y la promoción de valores humanistas en 
-                    la sociedad peruana.
-                </p>
-            </div>
-            
-            <div class="about-image" aria-hidden="true">
-                🎓
-            </div>
-        </div>
-    </section>
-
-    <!-- NUESTROS PILARES -->
-    <section style="background: #f7fafc;">
-        <h2>Nuestros Pilares</h2>
-        <p class="section-subtitle">Los valores que guían nuestro trabajo</p>
-        
-        <div class="pilares-grid">
-            <div class="pilar-card">
-                <div class="pilar-icon">💭</div>
-                <h3>Pensamiento Crítico</h3>
-                <p>Fomentamos el análisis riguroso, el cuestionamiento reflexivo y la argumentación sólida como herramientas fundamentales del quehacer filosófico.</p>
-            </div>
-            
-            <div class="pilar-card">
-                <div class="pilar-icon">🤝</div>
-                <h3>Comunidad</h3>
-                <p>Construimos redes de apoyo entre estudiantes de diferentes universidades, promoviendo la colaboración y el intercambio de ideas.</p>
-            </div>
-            
-            <div class="pilar-card">
-                <div class="pilar-icon">📚</div>
-                <h3>Formación Académica</h3>
-                <p>Ofrecemos recursos, talleres y espacios de estudio que complementan la formación universitaria de nuestros miembros.</p>
-            </div>
-            
-            <div class="pilar-card">
-                <div class="pilar-icon">🗣️</div>
-                <h3>Diálogo Plural</h3>
-                <p>Valoramos la diversidad de perspectivas filosóficas y promovemos el debate respetuoso entre diferentes corrientes de pensamiento.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ÚLTIMAS NOTICIAS -->
-    <section>
-        <h2>Últimas Noticias</h2>
-        <p class="section-subtitle">Mantente al día con nuestras actividades</p>
-        
-        <div class="noticias-grid">
-            <div class="noticia-card">
-                <div class="noticia-imagen">🎉</div>
-                <div class="noticia-content">
-                    <p class="noticia-fecha">21 de Diciembre, 2024</p>
-                    <h3>¡Nace ASEFIP!</h3>
-                    <p>Reunión fundacional con estudiantes de diversas universidades del Perú marca el inicio de nuestra asociación.</p>
-                    <a href="articulo-salazar-bondy.html" class="leer-mas">Leer más →</a>
-                </div>
-            </div>
-            
-            <div class="noticia-card">
-                <div class="noticia-imagen">📖</div>
-                <div class="noticia-content">
-                    <p class="noticia-fecha">Próximamente</p>
-                    <h3>Primer Seminario Nacional</h3>
-                    <p>Prepárate para nuestro primer evento académico que reunirá a estudiantes de todo el Perú.</p>
-                    <a href="#" class="leer-mas">Más información →</a>
-                </div>
-            </div>
-            
-            <div class="noticia-card">
-                <div class="noticia-imagen">🌐</div>
-                <div class="noticia-content">
-                    <p class="noticia-fecha">Disponible ahora</p>
-                    <h3>Recursos Gratuitos</h3>
-                    <p>Accede a nuestra biblioteca digital con textos filosóficos, cursos y herramientas académicas.</p>
-                    <a href="recursos.html" class="leer-mas">Ver recursos →</a>
+                <div class="nivel-card avanzado" onclick="iniciarQuiz('avanzado')">
+                    <div class="nivel-icon">🎓</div>
+                    <h3>Avanzado</h3>
+                    <p class="nivel-descripcion">
+                        Análisis profundo y debates contemporáneos. Para estudiantes con sólida formación filosófica.
+                    </p>
+                    <div class="nivel-stats">
+                        <div class="stat">
+                            <div class="stat-number">20</div>
+                            <div class="stat-label">Preguntas</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">35</div>
+                            <div class="stat-label">Minutos</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- LLAMADO A LA ACCIÓN -->
-    <section class="cta-section">
-        <h2>¿Listo para Unirte?</h2>
-        <p>Forma parte de la comunidad de estudiantes de filosofía más activa del Perú</p>
-        <a href="#contacto" class="btn btn-primary">Únete Ahora</a>
-    </section>
-
-    <!-- FOOTER -->
-    <footer id="contacto">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>ASEFIP</h3>
-                <p>Asociación de Estudiantes de Filosofía del Perú</p>
-                <p style="margin-top: 15px;">Uniendo mentes, construyendo pensamiento.</p>
+        
+        <!-- QUIZ -->
+        <div id="quizContainer" class="quiz-container">
+            <div class="quiz-header">
+                <h2 id="quizTitle">Quiz de Filosofía</h2>
+                <p id="quizSubtitle">Pregunta <span id="currentQuestion">1</span> de <span id="totalQuestions">10</span></p>
+                <div class="quiz-progress">
+                    <div class="quiz-progress-bar" id="progressBar" style="width: 10%"></div>
+                </div>
             </div>
             
-            <div class="footer-section">
-                <h3>Enlaces Rápidos</h3>
-                <ul>
-                    <li><a href="#nosotros">Sobre Nosotros</a></li>
-                    <li><a href="aprender.html">Aprender</a></li>
-                    <li><a href="recursos.html">Recursos</a></li>
-                    <li><a href="glosario.html">Glosario</a></li>
-                    <li><a href="ejercicios.html">Ejercicios</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
-                </ul>
-            </div>
+            <div id="questionContainer"></div>
             
-            <div class="footer-section">
-                <h3>Contacto</h3>
-                <ul>
-                    <li>📧 Email: contacto@asefip.org</li>
-                    <li>📱 WhatsApp: [Número]</li>
-                    <li>📍 Lima, Perú</li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Síguenos</h3>
-                <ul>
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Instagram</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">LinkedIn</a></li>
-                </ul>
+            <div class="quiz-actions">
+                <button class="btn btn-secondary" onclick="volverNiveles()">Abandonar</button>
+                <button class="btn btn-primary" id="nextBtn">Siguiente</button>
             </div>
         </div>
         
-        <div class="footer-bottom">
+        <!-- RESULTADOS -->
+        <div id="results" class="results">
+            <div class="results-icon" id="resultsIcon">🎉</div>
+            <h2>¡Quiz Completado!</h2>
+            <div class="score" id="finalScore">0/10</div>
+            <p class="results-message" id="resultsMessage"></p>
+            
+            <div class="results-details">
+                <div class="detail-row">
+                    <span><strong>Correctas:</strong></span>
+                    <span id="correctCount">0</span>
+                </div>
+                <div class="detail-row">
+                    <span><strong>Incorrectas:</strong></span>
+                    <span id="incorrectCount">0</span>
+                </div>
+                <div class="detail-row">
+                    <span><strong>Porcentaje:</strong></span>
+                    <span id="percentage">0%</span>
+                </div>
+            </div>
+            
+            <div class="quiz-actions">
+                <button class="btn btn-secondary" onclick="volverNiveles()">Elegir Otro Nivel</button>
+                <button class="btn btn-primary" onclick="reiniciarQuiz()">Repetir Quiz</button>
+            </div>
+        </div>
+        
+        <footer>
             <p>© 2024-2025 ASEFIP - Asociación de Estudiantes de Filosofía del Perú</p>
-            <p style="margin-top: 10px;">Hecho con 💙 por estudiantes para estudiantes</p>
-        </div>
-    </footer>
-
+        </footer>
+    </div>
+    
     <script>
-        // Menú móvil: mostrar/ocultar
-        (function(){
-            const toggle = document.getElementById('menuToggle');
-            const nav = document.getElementById('navLinks');
-            toggle.addEventListener('click', function(){
-                const expanded = this.getAttribute('aria-expanded') === 'true';
-                this.setAttribute('aria-expanded', String(!expanded));
-                if(nav.style.display === 'flex'){
-                    nav.style.display = 'none';
-                } else {
-                    nav.style.display = 'flex';
-                    nav.style.flexDirection = 'column';
+        const quizzes = {
+            principiante: [
+                {
+                    pregunta: "¿Quién es considerado el padre de la filosofía occidental?",
+                    opciones: [
+                        "Platón",
+                        "Sócrates",
+                        "Aristóteles",
+                        "Tales de Mileto"
+                    ],
+                    correcta: 1,
+                    explicacion: "Sócrates es considerado el padre de la filosofía occidental por revolucionar el método filosófico, centrándose en cuestiones éticas y el autoconocimiento mediante el diálogo."
+                },
+                {
+                    pregunta: "¿Qué filósofo escribió 'La República'?",
+                    opciones: [
+                        "Sócrates",
+                        "Aristóteles",
+                        "Platón",
+                        "Epicuro"
+                    ],
+                    correcta: 2,
+                    explicacion: "Platón escribió 'La República', una de las obras más influyentes de la filosofía política, donde expone su teoría del Estado ideal y la justicia."
+                },
+                {
+                    pregunta: "¿Qué significa 'filosofía' etimológicamente?",
+                    opciones: [
+                        "Conocimiento de la verdad",
+                        "Amor a la sabiduría",
+                        "Búsqueda de la felicidad",
+                        "Estudio del ser"
+                    ],
+                    correcta: 1,
+                    explicacion: "Filosofía proviene del griego 'philos' (amor) y 'sophia' (sabiduría), literalmente significa 'amor a la sabiduría'."
+                },
+                {
+                    pregunta: "¿Cuál es la frase más famosa de Descartes?",
+                    opciones: [
+                        "Sólo sé que no sé nada",
+                        "Pienso, luego existo",
+                        "El hombre es la medida de todas las cosas",
+                        "Conócete a ti mismo"
+                    ],
+                    correcta: 1,
+                    explicacion: "'Cogito, ergo sum' (Pienso, luego existo) es el fundamento del racionalismo cartesiano y el punto de partida indudable de su filosofía."
+                },
+                {
+                    pregunta: "¿Qué estudia la ética?",
+                    opciones: [
+                        "La naturaleza del conocimiento",
+                        "La estructura del razonamiento",
+                        "El bien, el mal y cómo debemos vivir",
+                        "La existencia de Dios"
+                    ],
+                    correcta: 2,
+                    explicacion: "La ética es la rama de la filosofía que estudia la moral, el bien y el mal, y cómo debemos vivir y actuar."
+                },
+                {
+                    pregunta: "¿Quién dijo 'El hombre es un animal político'?",
+                    opciones: [
+                        "Platón",
+                        "Aristóteles",
+                        "Hobbes",
+                        "Rousseau"
+                    ],
+                    correcta: 1,
+                    explicacion: "Aristóteles afirmó que el ser humano es por naturaleza un 'animal político' (zoon politikon), destinado a vivir en sociedad."
+                },
+                {
+                    pregunta: "¿Qué es la mayéutica socrática?",
+                    opciones: [
+                        "Un tipo de lógica formal",
+                        "Un método de enseñanza mediante preguntas",
+                        "Una teoría sobre el alma",
+                        "Un argumento sobre la existencia de Dios"
+                    ],
+                    correcta: 1,
+                    explicacion: "La mayéutica es el método socrático de enseñanza mediante preguntas que ayudan al interlocutor a 'dar a luz' el conocimiento que lleva dentro."
+                },
+                {
+                    pregunta: "¿Qué propone el imperativo categórico de Kant?",
+                    opciones: [
+                        "Actuar según tu felicidad",
+                        "Actuar según máximas universalizables",
+                        "Seguir las leyes del Estado",
+                        "Obedecer a la autoridad religiosa"
+                    ],
+                    correcta: 1,
+                    explicacion: "El imperativo categórico kantiano dice: 'Actúa solo según una máxima que puedas querer que se convierta en ley universal', es el fundamento de su ética."
+                },
+                {
+                    pregunta: "¿Qué es la epistemología?",
+                    opciones: [
+                        "El estudio del ser",
+                        "El estudio de la belleza",
+                        "El estudio del conocimiento",
+                        "El estudio de la política"
+                    ],
+                    correcta: 2,
+                    explicacion: "La epistemología es la rama de la filosofía que estudia la naturaleza, el origen y los límites del conocimiento."
+                },
+                {
+                    pregunta: "¿Cuál es la alegoría más famosa de Platón?",
+                    opciones: [
+                        "El mito del carro alado",
+                        "La caverna",
+                        "El anillo de Giges",
+                        "El banquete"
+                    ],
+                    correcta: 1,
+                    explicacion: "La alegoría de la caverna ilustra la teoría de las Ideas de Platón, mostrando cómo la mayoría vive en la ignorancia de la verdadera realidad."
                 }
-            });
+            ],
+            intermedio: [
+                {
+                    pregunta: "Según Nietzsche, ¿qué significa 'la muerte de Dios'?",
+                    opciones: [
+                        "Que Dios nunca existió",
+                        "El fin de los valores absolutos tradicionales",
+                        "La victoria del ateísmo científico",
+                        "El triunfo del materialismo"
+                    ],
+                    correcta: 1,
+                    explicacion: "Para Nietzsche, 'Dios ha muerto' significa que la cultura occidental ha perdido su fundamento en valores absolutos, abriendo paso al nihilismo."
+                },
+                {
+                    pregunta: "¿Qué es el 'velo de ignorancia' en la teoría de Rawls?",
+                    opciones: [
+                        "Un argumento escéptico sobre el conocimiento",
+                        "Una metáfora sobre la ignorancia humana",
+                        "Un experimento mental para determinar principios de justicia",
+                        "Una crítica a la democracia"
+                    ],
+                    correcta: 2,
+                    explicacion: "El 'velo de ignorancia' de Rawls es un experimento mental donde las personas eligen principios de justicia sin saber su posición futura en la sociedad."
+                },
+                {
+                    pregunta: "En el existencialismo de Sartre, ¿qué precede a la esencia?",
+                    opciones: [
+                        "La naturaleza humana",
+                        "La existencia",
+                        "Dios",
+                        "La sociedad"
+                    ],
+                    correcta: 1,
+                    explicacion: "Para Sartre, 'la existencia precede a la esencia': no tenemos una naturaleza predeterminada, nos creamos a través de nuestras elecciones."
+                }
+            ],
+            avanzado: [
+                {
+                    pregunta: "¿Qué es el 'giro lingüístico' en filosofía?",
+                    opciones: [
+                        "El estudio de la gramática en textos filosóficos",
+                        "El cambio de enfoque hacia el análisis del lenguaje",
+                        "La traducción de textos clásicos",
+                        "El rechazo del uso de metáforas"
+                    ],
+                    correcta: 1,
+                    explicacion: "El giro lingüístico fue un cambio en la filosofía del siglo XX donde el análisis del lenguaje se convirtió en el método central para resolver problemas filosóficos."
+                },
+                {
+                    pregunta: "¿Qué sostiene el naturalismo moral?",
+                    opciones: [
+                        "Que la moral viene de la naturaleza divina",
+                        "Que los hechos morales son reducibles a hechos naturales",
+                        "Que debemos vivir según la naturaleza",
+                        "Que no existe la moralidad"
+                    ],
+                    correcta: 1,
+                    explicacion: "El naturalismo moral sostiene que las propiedades morales pueden ser reducidas o identificadas con propiedades naturales del mundo."
+                }
+            ]
+        };
+        
+        let nivelActual = '';
+        let preguntaActual = 0;
+        let respuestasUsuario = [];
+        let quizActual = [];
+        
+        const nextBtn = document.getElementById('nextBtn');
 
-            // Cerrar menú cuando se hace clic en un enlace (útil en móviles)
-            Array.from(nav.querySelectorAll('a')).forEach(a => {
-                a.addEventListener('click', function(){
-                    if (window.innerWidth <= 768) {
-                        nav.style.display = 'none';
-                        toggle.setAttribute('aria-expanded', 'false');
-                    }
+        function iniciarQuiz(nivel) {
+            if (!quizzes[nivel]) return;
+            nivelActual = nivel;
+            quizActual = [...quizzes[nivel]];
+            preguntaActual = 0;
+            respuestasUsuario = [];
+            
+            document.getElementById('nivelSelection').style.display = 'none';
+            document.getElementById('quizContainer').classList.add('active');
+            document.getElementById('results').classList.remove('show');
+            
+            const titulo = nivel.charAt(0).toUpperCase() + nivel.slice(1);
+            document.getElementById('quizTitle').textContent = `Quiz ${titulo}`;
+            document.getElementById('totalQuestions').textContent = quizActual.length;
+            
+            mostrarPregunta();
+            // Asegurar que el botón nextBtn tenga la acción por defecto
+            nextBtn.textContent = 'Siguiente';
+            nextBtn.disabled = true;
+            nextBtn.onclick = siguientePregunta;
+        }
+        
+        function mostrarPregunta() {
+            const pregunta = quizActual[preguntaActual];
+            if (!pregunta) return;
+            document.getElementById('currentQuestion').textContent = preguntaActual + 1;
+            
+            const progress = ((preguntaActual + 1) / quizActual.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            
+            let html = `
+                <div class="question-card">
+                    <div class="question-number">Pregunta ${preguntaActual + 1}</div>
+                    <div class="question-text">${pregunta.pregunta}</div>
+                    <div class="options">
+            `;
+            
+            pregunta.opciones.forEach((opcion, index) => {
+                const letra = String.fromCharCode(65 + index);
+                html += `
+                    <div class="option" data-index="${index}">
+                        <div class="option-letter">${letra}</div>
+                        <div class="option-text">${opcion}</div>
+                    </div>
+                `;
+            });
+            
+            html += `
+                    </div>
+                    <div class="explanation" id="explanation">
+                        <div class="explanation-title">📚 Explicación:</div>
+                        <div class="explanation-text">${pregunta.explicacion}</div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('questionContainer').innerHTML = html;
+            document.getElementById('nextBtn').disabled = true;
+
+            // Añadir manejadores a las opciones
+            const opciones = document.querySelectorAll('.option');
+            opciones.forEach(opt => {
+                opt.addEventListener('click', function(){
+                    const idx = parseInt(this.getAttribute('data-index'), 10);
+                    seleccionarOpcion(idx);
                 });
             });
+        }
+        
+        function seleccionarOpcion(index) {
+            const opciones = document.querySelectorAll('.option');
+            opciones.forEach(opt => opt.classList.remove('selected'));
+            if (opciones[index]) opciones[index].classList.add('selected');
+            
+            respuestasUsuario[preguntaActual] = index;
+            document.getElementById('nextBtn').disabled = false;
+        }
+        
+        function siguientePregunta() {
+            const pregunta = quizActual[preguntaActual];
+            if (!pregunta) return;
+            const opciones = document.querySelectorAll('.option');
 
-            // Asegura que el menú se muestre correctamente al redimensionar
-            window.addEventListener('resize', function(){
-                if(window.innerWidth > 768){
-                    nav.style.display = 'flex';
-                    nav.style.flexDirection = 'row';
-                    toggle.setAttribute('aria-expanded', 'false');
-                } else {
-                    nav.style.display = 'none';
+            // Marcar correctas e incorrectas
+            opciones.forEach((opt, index) => {
+                if (index === pregunta.correcta) {
+                    opt.classList.add('correct');
+                } else if (index === respuestasUsuario[preguntaActual]) {
+                    opt.classList.add('incorrect');
                 }
             });
+            
+            const explanationEl = document.getElementById('explanation');
+            if (explanationEl) explanationEl.classList.add('show');
 
-            // Estado inicial según tamaño
-            if(window.innerWidth <= 768) nav.style.display = 'none';
-            else nav.style.display = 'flex';
-        })();
+            // Si es la última pregunta, ajustar botón
+            if (preguntaActual === quizActual.length - 1) {
+                nextBtn.textContent = 'Ver Resultados';
+                nextBtn.onclick = mostrarResultados;
+            } else {
+                // retraso breve para permitir ver feedback antes de siguiente
+                nextBtn.textContent = 'Continuar';
+                nextBtn.onclick = function(){
+                    preguntaActual++;
+                    mostrarPregunta();
+                    nextBtn.textContent = 'Siguiente';
+                    nextBtn.disabled = true;
+                    nextBtn.onclick = siguientePregunta;
+                };
+            }
+        }
+        
+        function mostrarResultados() {
+            let correctas = 0;
+            quizActual.forEach((pregunta, index) => {
+                if (respuestasUsuario[index] === pregunta.correcta) {
+                    correctas++;
+                }
+            });
+            
+            const porcentaje = Math.round((correctas / quizActual.length) * 100);
+            
+            document.getElementById('quizContainer').classList.remove('active');
+            document.getElementById('results').classList.add('show');
+            
+            document.getElementById('finalScore').textContent = `${correctas}/${quizActual.length}`;
+            document.getElementById('correctCount').textContent = correctas;
+            document.getElementById('incorrectCount').textContent = quizActual.length - correctas;
+            document.getElementById('percentage').textContent = porcentaje + '%';
+            
+            let mensaje, icono;
+            if (porcentaje >= 90) {
+                mensaje = "¡Excelente! Dominas este nivel. Considera intentar el siguiente nivel.";
+                icono = "🏆";
+            } else if (porcentaje >= 70) {
+                mensaje = "¡Muy bien! Tienes un buen conocimiento del tema.";
+                icono = "🎉";
+            } else if (porcentaje >= 50) {
+                mensaje = "Buen intento. Revisa los temas y vuelve a intentarlo.";
+                icono = "👍";
+            } else {
+                mensaje = "Sigue estudiando. La práctica hace al maestro.";
+                icono = "📚";
+            }
+            
+            document.getElementById('resultsMessage').textContent = mensaje;
+            document.getElementById('resultsIcon').textContent = icono;
+        }
+        
+        function volverNiveles() {
+            document.getElementById('nivelSelection').style.display = 'block';
+            document.getElementById('quizContainer').classList.remove('active');
+            document.getElementById('results').classList.remove('show');
+            // Resetear estado del botón
+            nextBtn.textContent = 'Siguiente';
+            nextBtn.disabled = true;
+            nextBtn.onclick = siguientePregunta;
+        }
+        
+        function reiniciarQuiz() {
+            iniciarQuiz(nivelActual);
+        }
     </script>
 </body>
 </html>
