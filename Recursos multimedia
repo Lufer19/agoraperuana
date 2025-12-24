@@ -1,0 +1,344 @@
+import React, { useState } from 'react';
+import { Play, Headphones, Image, BookOpen, ExternalLink, Filter } from 'lucide-react';
+
+const RecursosMultimedia = () => {
+  const [tipoFiltro, setTipoFiltro] = useState('todos');
+  const [nivelFiltro, setNivelFiltro] = useState('todos');
+
+  const recursos = [
+    {
+      tipo: 'video',
+      titulo: 'La Alegoría de la Caverna de Platón',
+      autor: 'Platón',
+      descripcion: 'Animación explicativa del famoso mito platónico sobre el conocimiento y la realidad.',
+      duracion: '8:30',
+      nivel: 'Básico',
+      url: 'https://www.youtube.com/watch?v=1RWOpQXTltA',
+      temas: ['Epistemología', 'Metafísica', 'Platón']
+    },
+    {
+      tipo: 'video',
+      titulo: 'Introducción a Kant y la Crítica de la Razón Pura',
+      autor: 'Immanuel Kant',
+      descripcion: 'Video educativo sobre los conceptos fundamentales del pensamiento kantiano.',
+      duracion: '15:00',
+      nivel: 'Intermedio',
+      url: 'https://www.youtube.com/results?search_query=kant+critica+razon+pura',
+      temas: ['Epistemología', 'Ilustración', 'Kant']
+    },
+    {
+      tipo: 'video',
+      titulo: 'Nietzsche y la Muerte de Dios',
+      autor: 'Friedrich Nietzsche',
+      descripcion: 'Análisis del concepto nietzscheano de la muerte de Dios y sus implicaciones.',
+      duracion: '12:45',
+      nivel: 'Avanzado',
+      url: 'https://www.youtube.com/results?search_query=nietzsche+muerte+de+dios',
+      temas: ['Nihilismo', 'Ética', 'Nietzsche']
+    },
+    {
+      tipo: 'podcast',
+      titulo: 'Historia de la Filosofía: Los Presocráticos',
+      autor: 'Varios',
+      descripcion: 'Serie de podcast sobre los primeros filósofos griegos y sus ideas sobre el arjé.',
+      duracion: '45:00',
+      nivel: 'Básico',
+      url: '#',
+      temas: ['Filosofía Antigua', 'Presocráticos', 'Cosmología']
+    },
+    {
+      tipo: 'podcast',
+      titulo: 'Descartes: El Método y la Duda',
+      autor: 'René Descartes',
+      descripcion: 'Episodio sobre el método cartesiano y el cogito como primera certeza.',
+      duracion: '35:20',
+      nivel: 'Intermedio',
+      url: '#',
+      temas: ['Racionalismo', 'Epistemología', 'Descartes']
+    },
+    {
+      tipo: 'podcast',
+      titulo: 'Sartre y la Libertad Radical',
+      autor: 'Jean-Paul Sartre',
+      descripcion: 'Análisis del existencialismo sartreano y el concepto de libertad.',
+      duracion: '40:15',
+      nivel: 'Avanzado',
+      url: '#',
+      temas: ['Existencialismo', 'Libertad', 'Sartre']
+    },
+    {
+      tipo: 'infografia',
+      titulo: 'Línea de Tiempo: Historia de la Filosofía',
+      autor: 'General',
+      descripcion: 'Infografía visual de los períodos filosóficos desde la Antigüedad hasta hoy.',
+      duracion: 'Estático',
+      nivel: 'Básico',
+      url: '#',
+      temas: ['Historia', 'Períodos', 'General']
+    },
+    {
+      tipo: 'infografia',
+      titulo: 'Mapa Conceptual: El Pensamiento de Aristóteles',
+      autor: 'Aristóteles',
+      descripcion: 'Diagrama visual de las principales ideas aristotélicas y sus relaciones.',
+      duracion: 'Estático',
+      nivel: 'Intermedio',
+      url: '#',
+      temas: ['Aristóteles', 'Metafísica', 'Ética']
+    },
+    {
+      tipo: 'infografia',
+      titulo: 'Cuadro Comparativo: Racionalismo vs Empirismo',
+      autor: 'Varios',
+      descripcion: 'Tabla comparativa de las dos grandes corrientes de la filosofía moderna.',
+      duracion: 'Estático',
+      nivel: 'Intermedio',
+      url: '#',
+      temas: ['Epistemología', 'Racionalismo', 'Empirismo']
+    },
+    {
+      tipo: 'lectura',
+      titulo: 'Meditaciones Metafísicas (Fragmento)',
+      autor: 'René Descartes',
+      descripcion: 'Primera meditación de Descartes donde plantea la duda metódica.',
+      duracion: '10 min lectura',
+      nivel: 'Intermedio',
+      url: '#',
+      temas: ['Descartes', 'Epistemología', 'Textos clásicos']
+    },
+    {
+      tipo: 'lectura',
+      titulo: 'La República - Libro VII (Alegoría de la Caverna)',
+      autor: 'Platón',
+      descripcion: 'Texto original de Platón sobre el mito de la caverna.',
+      duracion: '15 min lectura',
+      nivel: 'Básico',
+      url: '#',
+      temas: ['Platón', 'Epistemología', 'Textos clásicos']
+    },
+    {
+      tipo: 'video',
+      titulo: 'Aristóteles: Las Cuatro Causas',
+      autor: 'Aristóteles',
+      descripcion: 'Explicación animada de la teoría aristotélica de la causalidad.',
+      duracion: '10:20',
+      nivel: 'Básico',
+      url: 'https://www.youtube.com/results?search_query=aristoteles+cuatro+causas',
+      temas: ['Aristóteles', 'Metafísica', 'Causalidad']
+    }
+  ];
+
+  const tiposRecurso = {
+    video: { icon: Play, color: 'bg-red-500', label: 'Videos' },
+    podcast: { icon: Headphones, color: 'bg-purple-500', label: 'Podcasts' },
+    infografia: { icon: Image, color: 'bg-blue-500', label: 'Infografías' },
+    lectura: { icon: BookOpen, color: 'bg-green-500', label: 'Lecturas' }
+  };
+
+  const recursosFiltrados = recursos.filter(r => {
+    const coincideTipo = tipoFiltro === 'todos' || r.tipo === tipoFiltro;
+    const coincideNivel = nivelFiltro === 'todos' || r.nivel === nivelFiltro;
+    return coincideTipo && coincideNivel;
+  });
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 p-4 md:p-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <div className="flex items-center justify-center mb-4">
+            <Play className="w-12 h-12 text-purple-600 mr-3" />
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-800">
+              Recursos Multimedia
+            </h1>
+          </div>
+          <p className="text-xl text-gray-600">
+            Videos, podcasts, infografías y lecturas para aprender filosofía
+          </p>
+        </div>
+
+        {/* Filtros */}
+        <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
+          <div className="grid md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-bold text-gray-700 mb-2">
+                Tipo de Recurso
+              </label>
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={() => setTipoFiltro('todos')}
+                  className={`px-4 py-2 rounded-lg font-medium transition ${
+                    tipoFiltro === 'todos'
+                      ? 'bg-indigo-600 text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  Todos
+                </button>
+                {Object.entries(tiposRecurso).map(([tipo, config]) => {
+                  const Icon = config.icon;
+                  return (
+                    <button
+                      key={tipo}
+                      onClick={() => setTipoFiltro(tipo)}
+                      className={`px-4 py-2 rounded-lg font-medium transition flex items-center ${
+                        tipoFiltro === tipo
+                          ? `${config.color} text-white`
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      }`}
+                    >
+                      <Icon className="w-4 h-4 mr-2" />
+                      {config.label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-bold text-gray-700 mb-2">
+                Nivel de Dificultad
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {['todos', 'Básico', 'Intermedio', 'Avanzado'].map(nivel => (
+                  <button
+                    key={nivel}
+                    onClick={() => setNivelFiltro(nivel)}
+                    className={`px-4 py-2 rounded-lg font-medium transition ${
+                      nivelFiltro === nivel
+                        ? 'bg-purple-600 text-white'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    {nivel === 'todos' ? 'Todos' : nivel}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-4 text-sm text-gray-600">
+            Mostrando {recursosFiltrados.length} de {recursos.length} recursos
+          </div>
+        </div>
+
+        {/* Grid de recursos */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {recursosFiltrados.map((recurso, idx) => {
+            const Icon = tiposRecurso[recurso.tipo].icon;
+            const colorClass = tiposRecurso[recurso.tipo].color;
+            
+            return (
+              <div
+                key={idx}
+                className="bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden group"
+              >
+                {/* Header con tipo de recurso */}
+                <div className={`${colorClass} p-4 flex items-center justify-between`}>
+                  <div className="flex items-center text-white">
+                    <Icon className="w-6 h-6 mr-2" />
+                    <span className="font-bold uppercase text-sm">
+                      {tiposRecurso[recurso.tipo].label}
+                    </span>
+                  </div>
+                  <span className="bg-white/20 px-3 py-1 rounded-full text-xs text-white font-medium">
+                    {recurso.duracion}
+                  </span>
+                </div>
+
+                {/* Contenido */}
+                <div className="p-5">
+                  <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-purple-600 transition">
+                    {recurso.titulo}
+                  </h3>
+                  
+                  <p className="text-sm text-gray-600 mb-1">
+                    <span className="font-semibold">Autor:</span> {recurso.autor}
+                  </p>
+                  
+                  <p className="text-gray-700 text-sm mb-4 leading-relaxed">
+                    {recurso.descripcion}
+                  </p>
+
+                  {/* Nivel */}
+                  <div className="flex items-center justify-between mb-4">
+                    <span className={`px-3 py-1 rounded-full text-xs font-bold ${
+                      recurso.nivel === 'Básico' ? 'bg-green-100 text-green-700' :
+                      recurso.nivel === 'Intermedio' ? 'bg-yellow-100 text-yellow-700' :
+                      'bg-red-100 text-red-700'
+                    }`}>
+                      {recurso.nivel}
+                    </span>
+                  </div>
+
+                  {/* Tags de temas */}
+                  <div className="flex flex-wrap gap-1 mb-4">
+                    {recurso.temas.slice(0, 3).map((tema, i) => (
+                      <span
+                        key={i}
+                        className="px-2 py-1 bg-purple-50 text-purple-700 text-xs rounded"
+                      >
+                        {tema}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Botón de acceso */}
+                  <a
+                    href={recurso.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`block text-center ${colorClass} text-white py-3 rounded-lg font-medium hover:opacity-90 transition flex items-center justify-center`}
+                  >
+                    <ExternalLink className="w-4 h-4 mr-2" />
+                    Acceder al Recurso
+                  </a>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Sección de recomendaciones */}
+        <div className="mt-12 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-2xl p-8 shadow-lg">
+          <h2 className="text-3xl font-bold mb-6">💡 Cómo Aprovechar los Recursos</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <h3 className="text-xl font-bold mb-3">Para Videos:</h3>
+              <ul className="space-y-2 text-white/90">
+                <li>• Toma notas de conceptos clave</li>
+                <li>• Pausa y reflexiona sobre las ideas</li>
+                <li>• Revisa videos complejos varias veces</li>
+                <li>• Complementa con lecturas del tema</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-xl font-bold mb-3">Para Podcasts:</h3>
+              <ul className="space-y-2 text-white/90">
+                <li>• Escucha durante desplazamientos</li>
+                <li>• Haz resúmenes posteriores</li>
+                <li>• Discute ideas con compañeros</li>
+                <li>• Combina con otros formatos</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Contribuir */}
+        <div className="mt-8 bg-white rounded-2xl shadow-lg p-6 text-center">
+          <h3 className="text-2xl font-bold text-gray-800 mb-3">
+            ¿Conoces un buen recurso?
+          </h3>
+          <p className="text-gray-600 mb-4">
+            Ayúdanos a ampliar esta biblioteca compartiendo videos, podcasts o materiales útiles
+          </p>
+          <button className="bg-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-700 transition">
+            Sugerir Recurso
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default RecursosMultimedia;
