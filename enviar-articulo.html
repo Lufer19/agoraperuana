@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Enviar Artículo - ASEFIP</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Georgia, 'Times New Roman', serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;padding:20px}
+    .container{max-width:900px;margin:0 auto;background:#fff;border-radius:12px;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+    h1{color:#2d3748;margin-bottom:6px}
+    p.subtitle{color:#718096;margin-bottom:18px}
+    label{display:block;margin-top:12px;font-weight:600;color:#334155}
+    input[type="text"], input[type="email"], textarea, select {width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:8px;margin-top:6px}
+    textarea{min-height:200px;resize:vertical}
+    .form-actions{margin-top:18px;display:flex;gap:12px}
+    .btn{padding:10px 20px;border-radius:8px;border:0;cursor:pointer;font-weight:700}
+    .btn-primary{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff}
+    .helper{color:#64748b;font-size:.95em;margin-top:8px}
+    footer{margin-top:18px;color:#94a3b8;text-align:center}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="Blog.html" style="color:#667eea;text-decoration:none;font-weight:600">← Volver al Blog</a>
+    <header>
+      <h1>Enviar Artículo</h1>
+      <p class="subtitle">Completa este formulario para enviar tu ensayo a revisión.</p>
+    </header>
+
+    <!-- Formulario que usa Formspree -->
+    <!-- Reemplaza {your-id} por tu endpoint de Formspree: https://formspree.io/f/{your-id} -->
+    <form id="sendArticleForm" action="https://formspree.io/f/{your-id}" method="POST">
+      <label for="title">Título del artículo</label>
+      <input type="text" id="title" name="title" required>
+
+      <label for="author">Nombre del autor</label>
+      <input type="text" id="author" name="author" required>
+
+      <label for="email">Correo electrónico (para contacto)</label>
+      <input type="email" id="email" name="_replyto" required>
+
+      <label for="university">Universidad / Facultad</label>
+      <input type="text" id="university" name="university">
+
+      <label for="category">Categoría</label>
+      <select id="category" name="category">
+        <option value="ensayo">Ensayo</option>
+        <option value="reflexion">Reflexión</option>
+        <option value="resena">Reseña</option>
+        <option value="analisis">Análisis</option>
+        <option value="peruana">Filosofía Peruana</option>
+      </select>
+
+      <label for="content">Texto del artículo (pega aquí tu ensayo)</label>
+      <textarea id="content" name="content" placeholder="Escribe o pega tu artículo aquí..." required></textarea>
+      <div class="helper">Nota: si quieres enviar un archivo (PDF/DOCX), indícalo en el texto y podremos coordinar vía email (Formspree en su plan gratuito limita cargas de archivo).</div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Enviar para revisión</button>
+        <button type="reset" class="btn" style="background:#e2e8f0">Limpiar</button>
+      </div>
+    </form>
+
+    <footer>
+      <p>Tras enviar, el equipo revisará tu artículo. Si se aprueba, lo publicaremos en el blog y te notificaremos por email.</p>
+    </footer>
+  </div>
+
+  <script>
+    // Pequeña confirmación UX al enviar
+    const form = document.getElementById('sendArticleForm');
+    form.addEventListener('submit', (e) => {
+      // Si no has cambiado {your-id} advertimos al usuario
+      if (form.action.includes('{your-id}')) {
+        e.preventDefault();
+        alert('Antes de enviar debes configurar el endpoint de Formspree: reemplaza {your-id} en el atributo action del formulario por tu id (ver instrucciones en la descripción del PR o en la guía). Si quieres, puedo configurar esto por ti.');
+        return;
+      }
+      // Dejar que se envíe al endpoint configurado
+      alert('Enviando artículo... serás redirigido/a a la página de confirmación de Formspree.');
+    });
+  </script>
+</body>
+</html>
