@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Blog - ASEFIP</title>
   <style>
-    /* (Retengo y adapto tu estilo original, con pequeños ajustes para modal y botones) */
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:Georgia, 'Times New Roman', serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;padding:20px}
     .container{max-width:1200px;margin:0 auto;background:white;border-radius:20px;padding:40px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
@@ -32,6 +31,7 @@
     .article-author{display:flex;align-items:center;gap:12px;padding-top:14px;border-top:1px solid #f1f5f9;margin-top:12px}
     .author-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;font-weight:700}
     .read-more{color:#667eea;text-decoration:none;font-weight:700}
+    .not-available { color:#c03636; font-weight:700; margin-left:8px; font-size:.95rem; }
     /* Modal */
     .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:10000}
     .modal.open{display:flex}
@@ -67,7 +67,7 @@
     </div>
 
     <div class="articles-grid" id="articles">
-      <!-- Artículo 1 (en repo: articulo-salazar-bondy.html) -->
+      <!-- Artículo 1: apunta a archivo existente -->
       <article class="article-card" data-category="peruana">
         <div class="article-header">📝</div>
         <div class="article-content">
@@ -75,7 +75,7 @@
           <div class="article-meta"><span>📅 15 de Enero, 2025</span><span>⏱️ 8 min lectura</span></div>
           <h3>El Problema del Libre Albedrío en la Era Digital</h3>
           <p class="article-excerpt">¿Somos realmente libres cuando algoritmos predicen nuestras decisiones? Un análisis sobre la libertad humana frente a la inteligencia artificial y el determinismo tecnológico.</p>
-          <!-- enlaza al archivo real si existe; fallback: abrir modal -->
+          <!-- apunta al artículo que sí existe en el repo -->
           <a href="articulo-salazar-bondy.html" class="read-more" data-src="articulo-salazar-bondy.html">Leer artículo completo →</a>
           <div class="article-author">
             <div class="author-avatar">M</div>
@@ -84,7 +84,7 @@
         </div>
       </article>
 
-      <!-- Artículo 2 (si no tienes archivo individual, se abrirá modal con mensaje) -->
+      <!-- Artículo 2: archivo no existe en repo: se marcará y ofrecerá opciones -->
       <article class="article-card" data-category="reflexion">
         <div class="article-header">🤔</div>
         <div class="article-content">
@@ -93,6 +93,7 @@
           <h3>Apuntes sobre la Alienación Estudiantil</h3>
           <p class="article-excerpt">Reflexiones desde Marx sobre la experiencia universitaria contemporánea y la mercantilización del conocimiento.</p>
           <a href="#" class="read-more" data-src="articulos/apuntes-alienacion-estudiantil.html">Leer artículo completo →</a>
+          <span class="not-available" aria-hidden="true"></span>
           <div class="article-author">
             <div class="author-avatar">C</div>
             <div class="author-info"><div class="author-name">Carlos Mendoza</div><div class="author-university">UNMSM - 4to año</div></div>
@@ -100,7 +101,7 @@
         </div>
       </article>
 
-      <!-- Artículo 3 -->
+      <!-- Artículo 3: archivo no existe en repo -->
       <article class="article-card" data-category="resena">
         <div class="article-header">📚</div>
         <div class="article-content">
@@ -109,6 +110,7 @@
           <h3>Reseña: "Así Habló Zaratustra" de Nietzsche</h3>
           <p class="article-excerpt">Un recorrido por la obra cumbre de Nietzsche: Übermensch, eterno retorno y la muerte de Dios.</p>
           <a href="#" class="read-more" data-src="articulos/resena-zaratustra.html">Leer artículo completo →</a>
+          <span class="not-available" aria-hidden="true"></span>
           <div class="article-author">
             <div class="author-avatar">A</div>
             <div class="author-info"><div class="author-name">Ana Flores</div><div class="author-university">UL - 3er año</div></div>
@@ -116,7 +118,7 @@
         </div>
       </article>
 
-      <!-- Artículo 4 (existe: articulo-salazar-bondy.html — lo usamos también como ejemplo) -->
+      <!-- Artículo 4: apunta al archivo que existe (ejemplo) -->
       <article class="article-card" data-category="peruana">
         <div class="article-header">🇵🇪</div>
         <div class="article-content">
@@ -160,7 +162,7 @@
   </div>
 
   <script>
-    // Filtro simple por categoría
+    // Filtrado por categoría
     document.querySelectorAll('.filter-btn').forEach(btn=>{
       btn.addEventListener('click', () => {
         document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
@@ -176,41 +178,111 @@
       });
     });
 
-    // Modal + carga de artículos
+    // Modal y carga de artículos con manejo robusto de errores
     const modal = document.getElementById('articleModal');
     const modalContent = document.getElementById('modalContent');
     const closeModal = document.getElementById('closeModal');
 
-    // Maneja clicks en "Leer artículo completo"
-    document.querySelectorAll('.read-more').forEach(link => {
-      link.addEventListener('click', async (e) => {
-        // Fallback: si el enlace apunta a una página real y el usuario quiere abrir en nueva pestaña, mantén Ctrl/Meta
-        if (e.ctrlKey || e.metaKey) return;
-
-        e.preventDefault();
-        const src = link.getAttribute('data-src') || link.getAttribute('href');
-
-        if (!src || src === '#') {
-          modalContent.innerHTML = '<h3>Artículo no disponible</h3><p>El artículo completo aún no fue subido. Puedes enviarlo para revisión desde "Enviar Artículo".</p>';
-          openModal();
-          return;
-        }
-
+    async function checkExists(url) {
+      try {
+        // Intentamos con HEAD primero
+        const res = await fetch(url, { method: 'HEAD' });
+        return res.ok;
+      } catch (e) {
+        // Si falla (CORS o bloqueo), intentamos GET silencioso pero sin procesar todo
         try {
-          const res = await fetch(src);
-          if (!res.ok) throw new Error('No encontrado');
-          const text = await res.text();
-          // Intento simple: extraer el contenido dentro de <body> del documento remoto
-          const bodyMatch = text.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-          const fragment = bodyMatch ? bodyMatch[1] : text;
-          modalContent.innerHTML = fragment;
-          openModal();
-        } catch (err) {
-          // Si no se puede cargar, ofrecer abrir en nueva pestaña (fallback)
-          modalContent.innerHTML = '<h3>No se pudo cargar el artículo</h3><p>Es posible que el archivo no exista. Puedes abrirlo en una nueva pestaña o revisarlo en el repositorio.</p><p><a href="'+src+'" target="_blank" rel="noopener">Abrir en nueva pestaña</a></p>';
-          openModal();
+          const res2 = await fetch(url, { method: 'GET' });
+          return res2.ok;
+        } catch (e2) {
+          return false;
         }
-      });
+      }
+    }
+
+    // Inicialización: comprueba si los archivos existen y marca visualmente los que no
+    document.addEventListener('DOMContentLoaded', async () => {
+      const repoBase = 'https://github.com/Lufer19/agoraperuana/blob/main/';
+      const readMoreLinks = document.querySelectorAll('.read-more');
+      for (const link of readMoreLinks) {
+        const src = link.dataset.src || link.getAttribute('href');
+        const badge = link.parentElement.querySelector('.not-available');
+        if (!src || src === '#') {
+          if (badge) badge.textContent = 'No disponible';
+          link.setAttribute('aria-disabled','true');
+          continue;
+        }
+        const exists = await checkExists(src);
+        if (!exists) {
+          // marcar como no disponible y cambiar el enlace para que apunte al archivo en GitHub (para que el administrador lo revise)
+          if (badge) badge.innerHTML = 'No encontrado · ';
+          link.setAttribute('data-missing','true');
+          // modifica el enlace para que abra en GitHub (blob) en nueva pestaña
+          link.setAttribute('href', repoBase + src);
+          link.setAttribute('target','_blank');
+          if (badge) {
+            const a = document.createElement('a');
+            a.href = repoBase + src;
+            a.target = '_blank';
+            a.rel = 'noopener';
+            a.textContent = 'Ver en repo';
+            a.style.color = '#667eea';
+            a.style.fontWeight = '700';
+            a.style.marginLeft = '6px';
+            badge.appendChild(a);
+          }
+        } else {
+          // existe: aseguro href correcto
+          if (!link.getAttribute('href') || link.getAttribute('href') === '#') {
+            link.setAttribute('href', src);
+          }
+        }
+      }
+    });
+
+    // Maneja clicks en "Leer artículo completo"
+    document.addEventListener('click', async (e) => {
+      const link = e.target.closest('.read-more');
+      if (!link) return;
+
+      // Si el link fue marcado como "missing", permitimos que abra en nueva pestaña (ya apuntamos al repo)
+      if (link.dataset.missing === 'true') {
+        // allow default behavior (opens blob on GitHub)
+        return;
+      }
+
+      // Si el usuario quiere abrir en nueva pestaña (ctrl/meta), dejamos que el navegador lo haga
+      if (e.ctrlKey || e.metaKey) return;
+
+      e.preventDefault();
+      const src = link.dataset.src || link.getAttribute('href');
+
+      if (!src || src === '#') {
+        modalContent.innerHTML = '<h3>Artículo no disponible</h3><p>El artículo completo aún no fue subido. Puedes enviarlo para revisión desde "Enviar Artículo".</p><p><a href="enviar-articulo.html">Enviar Artículo</a></p>';
+        openModal();
+        return;
+      }
+
+      try {
+        const res = await fetch(src);
+        if (!res.ok) throw new Error('No encontrado');
+        const text = await res.text();
+        // Extraer <body> si existe, si no, usar todo
+        const bodyMatch = text.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+        const fragment = bodyMatch ? bodyMatch[1] : text;
+        modalContent.innerHTML = fragment;
+
+        // Asegurar que los enlaces dentro del artículo abran en nueva pestaña para no salir del modal
+        modalContent.querySelectorAll('a').forEach(a => {
+          if (!a.target) a.target = '_blank';
+        });
+
+        openModal();
+      } catch (err) {
+        // Fallback: ofrecer abrir en GitHub o enviar artículo
+        const repoUrl = 'https://github.com/Lufer19/agoraperuana/blob/main/' + src;
+        modalContent.innerHTML = `<h3>No se pudo cargar el artículo</h3><p>Es posible que el archivo no exista. Puedes abrirlo en el repositorio o enviar tu artículo para revisión.</p><p><a href="${repoUrl}" target="_blank" rel="noopener">Ver en repo</a> · <a href="enviar-articulo.html">Enviar Artículo</a></p>`;
+        openModal();
+      }
     });
 
     function openModal(){
@@ -227,13 +299,6 @@
     closeModal.addEventListener('click', closeModalFunc);
     modal.addEventListener('click', (e)=> { if(e.target === modal) closeModalFunc(); });
 
-    // Mejora: si hay links en contenido cargado que son relativas, permitan abrir en nueva pestaña:
-    modal.addEventListener('click', () => {
-      // delegación ligera: después de abrir contenido, convierto links relativos a target _blank
-      modalContent.querySelectorAll('a').forEach(a => {
-        if(!a.target) a.target = '_blank';
-      });
-    });
   </script>
 </body>
 </html>
