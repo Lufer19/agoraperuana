@@ -4,43 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Blog - ASEFIP</title>
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:Georgia, 'Times New Roman', serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;padding:20px}
-    .container{max-width:1200px;margin:0 auto;background:white;border-radius:20px;padding:40px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
-    header{text-align:center;margin-bottom:50px}
-    .logo{display:inline-block;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;width:60px;height:60px;border-radius:50%;line-height:60px;font-size:24px;font-weight:700;margin-bottom:15px}
-    h1{color:#2d3748;font-size:2.2em;margin-bottom:8px}
-    .subtitle{color:#718096;font-size:1.05em}
-    .back-link{display:inline-block;color:#667eea;text-decoration:none;margin-bottom:20px;font-weight:500}
-    .write-cta{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:36px;border-radius:18px;text-align:center;margin-bottom:36px}
-    .write-cta h2{font-size:1.6em;margin-bottom:8px}
-    .write-cta p{opacity:.95;margin-bottom:18px}
-    .btn{display:inline-block;padding:12px 28px;background:#fff;color:#667eea;text-decoration:none;border-radius:8px;font-weight:600}
-    .filters{display:flex;gap:10px;margin-bottom:30px;justify-content:center;flex-wrap:wrap}
-    .filter-btn{padding:8px 18px;background:#e2e8f0;border-radius:20px;border:0;cursor:pointer;font-weight:600}
-    .articles-grid{display:grid;gap:20px;margin-bottom:40px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
-    .article-card{background:#fff;border:2px solid #e2e8f0;border-radius:12px;overflow:hidden;transition:all .2s}
-    .article-card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(102,126,234,.18);border-color:#667eea}
-    .article-header{height:150px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:3rem;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%)}
-    .article-content{padding:22px}
-    .article-category{background:#e6fffa;color:#234e52;padding:6px 12px;border-radius:20px;font-weight:700;font-size:.85em;display:inline-block;margin-bottom:10px}
-    .article-meta{display:flex;gap:12px;color:#718096;font-size:.9em;margin-bottom:12px;flex-wrap:wrap}
-    .article-card h3{color:#2d3748;font-size:1.2rem;margin-bottom:10px}
-    .article-excerpt{color:#4a5568;line-height:1.6;margin-bottom:12px}
-    .article-author{display:flex;align-items:center;gap:12px;padding-top:14px;border-top:1px solid #f1f5f9;margin-top:12px}
-    .author-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;font-weight:700}
-    .read-more{color:#667eea;text-decoration:none;font-weight:700}
-    .not-available { color:#c03636; font-weight:700; margin-left:8px; font-size:.95rem; }
-    /* Modal */
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:10000}
-    .modal.open{display:flex}
-    .modal-dialog{background:#fff;border-radius:10px;max-width:900px;width:100%;max-height:90vh;overflow:auto;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
-    .modal-close{float:right;background:#e2e8f0;border:0;padding:6px 10px;border-radius:6px;cursor:pointer}
-    .article-full{color:#2d3748;line-height:1.7}
-    footer{text-align:center;margin-top:24px;color:#718096}
-    @media (max-width:768px){.article-header{height:120px;font-size:2.2rem}}
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="container">
@@ -51,251 +15,117 @@
       <p class="subtitle">Artículos y ensayos escritos por nuestra comunidad</p>
     </header>
 
-    <div class="write-cta">
-      <h2>✍️ ¿Tienes algo que decir?</h2>
-      <p>Comparte tus reflexiones filosóficas con la comunidad. Todos los artículos son revisados antes de publicarse.</p>
-      <a href="enviar-articulo.html" class="btn">Enviar mi Artículo</a>
-    </div>
-
-    <div class="filters" role="toolbar" aria-label="Filtros">
-      <button class="filter-btn active" data-filter="todos">📚 Todos</button>
-      <button class="filter-btn" data-filter="ensayo">📖 Ensayos</button>
-      <button class="filter-btn" data-filter="reflexion">💭 Reflexiones</button>
-      <button class="filter-btn" data-filter="resena">📰 Reseñas</button>
-      <button class="filter-btn" data-filter="analisis">🎓 Análisis</button>
-      <button class="filter-btn" data-filter="peruana">🌍 Filosofía Peruana</button>
-    </div>
-
     <div class="articles-grid" id="articles">
-      <!-- Artículo 1: apunta a archivo existente -->
-      <article>
-  <h2>Introducción</h2>
-  <p>Este artículo explora cómo la ética del cuidado complementa la visión tradicional de los derechos humanos...</p>
 
-  <h2>Desarrollo</h2>
-  <p>La ética del cuidado surge como una crítica a la excesiva abstracción de la justicia...</p>
-  <p>Este enfoque reconoce que las personas no viven aisladas, sino en redes de interdependencia...</p>
-
-  <h2>Conclusión</h2>
-  <p>El cuidado no reemplaza la justicia, sino que la enriquece...</p>
-</article>
-
-
-      <!-- Artículo 2: archivo no existe en repo: se marcará y ofrecerá opciones -->
-      <article class="article-card" data-category="reflexion">
-        <div class="article-header">🤔</div>
+      <!-- Artículo 1 -->
+      <article class="article-card" data-category="ensayo">
+        <div class="article-header">📝</div>
         <div class="article-content">
-          <span class="article-category">Reflexión</span>
-          <div class="article-meta"><span>📅 12 de Enero, 2025</span><span>⏱️ 5 min lectura</span></div>
-          <h3>Apuntes sobre la Alienación Estudiantil</h3>
-          <p class="article-excerpt">Reflexiones desde Marx sobre la experiencia universitaria contemporánea y la mercantilización del conocimiento.</p>
-          <a href="#" class="read-more" data-src="articulos/apuntes-alienacion-estudiantil.html">Leer artículo completo →</a>
-          <span class="not-available" aria-hidden="true"></span>
+          <span class="article-category">Ensayo</span>
+          <h3>Más allá de la justicia: el rol de la ética del cuidado</h3>
+          <p class="article-excerpt">Un estudio sobre cómo la ética del cuidado ha influido en el desarrollo reciente de los derechos humanos.</p>
+          <a href="articulos/articulo-etica-cuidado-zafra.html">Leer artículo completo →</a>
           <div class="article-author">
-            <div class="author-avatar">C</div>
-            <div class="author-info"><div class="author-name">Carlos Mendoza</div><div class="author-university">UNMSM - 4to año</div></div>
+            <div class="author-avatar">R</div>
+            <div class="author-info">
+              <div class="author-name">Rita del Pilar Lucila Zafra Ramos</div>
+              <div class="author-university">PUCP</div>
+            </div>
           </div>
         </div>
       </article>
 
-      <!-- Artículo 3: archivo no existe en repo -->
-      <article class="article-card" data-category="resena">
+      <!-- Artículo 2 -->
+      <article class="article-card" data-category="analisis">
+        <div class="article-header">📖</div>
+        <div class="article-content">
+          <span class="article-category">Artículo</span>
+          <h3>Democracia en disputa: una mirada crítica desde Ernesto Laclau</h3>
+          <p class="article-excerpt">Análisis de las movilizaciones contra Manuel Merino y Dina Boluarte desde la teoría de Laclau.</p>
+          <a href="articulos/democracia-en-disputa.html">Leer artículo completo →</a>
+          <div class="article-author">
+            <div class="author-avatar">M</div>
+            <div class="author-info">
+              <div class="author-name">Martín Córdova Pacheco</div>
+              <div class="author-university">Cuadernos de Ética y Filosofía Política</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Artículo 3 -->
+      <article class="article-card" data-category="analisis">
+        <div class="article-header">🌍</div>
+        <div class="article-content">
+          <span class="article-category">Artículo</span>
+          <h3>Imperialismo cultural en el genocidio de Ruanda</h3>
+          <p class="article-excerpt">Un análisis sobre el papel del imperialismo cultural en el genocidio de Ruanda.</p>
+          <a href="articulos/imperialismo-cultural-ruanda.html">Leer artículo completo →</a>
+          <div class="article-author">
+            <div class="author-avatar">J</div>
+            <div class="author-info">
+              <div class="author-name">Joselyn Lizet Ñaccha Palomino y Claudia Alejandra Díaz Rodríguez</div>
+              <div class="author-university">Cuadernos de Ética y Filosofía Política</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Artículo 4 -->
+      <article class="article-card" data-category="analisis">
         <div class="article-header">📚</div>
         <div class="article-content">
-          <span class="article-category">Reseña</span>
-          <div class="article-meta"><span>📅 8 de Enero, 2025</span><span>⏱️ 6 min lectura</span></div>
-          <h3>Reseña: "Así Habló Zaratustra" de Nietzsche</h3>
-          <p class="article-excerpt">Un recorrido por la obra cumbre de Nietzsche: Übermensch, eterno retorno y la muerte de Dios.</p>
-          <a href="#" class="read-more" data-src="articulos/resena-zaratustra.html">Leer artículo completo →</a>
-          <span class="not-available" aria-hidden="true"></span>
-          <div class="article-author">
-            <div class="author-avatar">A</div>
-            <div class="author-info"><div class="author-name">Ana Flores</div><div class="author-university">UL - 3er año</div></div>
-          </div>
-        </div>
-      </article>
-
-      <!-- Artículo 4: apunta al archivo que existe (ejemplo) -->
-      <article class="article-card" data-category="peruana">
-        <div class="article-header">🇵🇪</div>
-        <div class="article-content">
-          <span class="article-category">Filosofía Peruana</span>
-          <div class="article-meta"><span>📅 5 de Enero, 2025</span><span>⏱️ 10 min lectura</span></div>
-          <h3>Augusto Salazar Bondy y la Filosofía de la Dominación</h3>
-          <p class="article-excerpt">Explorando el pensamiento del filósofo peruano sobre autenticidad filosófica latinoamericana y su crítica a la dependencia intelectual.</p>
-          <a href="articulo-salazar-bondy.html" class="read-more" data-src="articulo-salazar-bondy.html">Leer artículo completo →</a>
+          <span class="article-category">Artículo</span>
+          <h3>Hegel y La república de Platón</h3>
+          <p class="article-excerpt">Debate filosófico sobre la justicia y la libertad.</p>
+          <a href="articulos/hegel-republica-platon.html">Leer artículo completo →</a>
           <div class="article-author">
             <div class="author-avatar">L</div>
-            <div class="author-info"><div class="author-name">Luis Vargas</div><div class="author-university">UNFV - 5to año</div></div>
+            <div class="author-info">
+              <div class="author-name">Luis Burneo Seminario</div>
+              <div class="author-university">Cuadernos de Ética y Filosofía Política</div>
+            </div>
           </div>
         </div>
       </article>
 
-      <!-- Placeholder / invitación -->
-      <article class="article-card" style="border:3px dashed #cbd5e0">
-        <div class="article-header" style="background:#f7fafc;color:#718096">✨</div>
-        <div class="article-content" style="text-align:center">
-          <h3 style="color:#718096">Tu artículo podría estar aquí</h3>
-          <p class="article-excerpt">Comparte tu voz con la comunidad. Envíanos tu ensayo y lo revisaremos.</p>
-          <a href="enviar-articulo.html" class="btn" style="background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff">Enviar Artículo</a>
+      <!-- Artículo 5 -->
+      <article class="article-card" data-category="analisis">
+        <div class="article-header">✨</div>
+        <div class="article-content">
+          <span class="article-category">Artículo</span>
+          <h3>El nacimiento de la filosofía desde lo sublime</h3>
+          <p class="article-excerpt">Reflexión sobre la contemplación de lo sublime como origen de la filosofía.</p>
+          <a href="articulos/nacimiento-filosofia-sublime.html">Leer artículo completo →</a>
+          <div class="article-author">
+            <div class="author-avatar">M</div>
+            <div class="author-info">
+              <div class="author-name">Mario García Jarrín</div>
+              <div class="author-university">Cuadernos de Ética y Filosofía Política</div>
+            </div>
+          </div>
         </div>
       </article>
+
+      <!-- Artículo 6 -->
+      <article class="article-card" data-category="resena">
+        <div class="article-header">📰</div>
+        <div class="article-content">
+          <span class="article-category">Reseña</span>
+          <h3>Reseña: Dialéctica de la política en Marx</h3>
+          <p class="article-excerpt">Una reseña crítica sobre la obra de Marx.</p>
+          <a href="articulos/resena-marx.html">Leer artículo completo →</a>
+          <div class="article-author">
+            <div class="author-avatar">S</div>
+            <div class="author-info">
+              <div class="author-name">Sergio Saez Díaz</div>
+              <div class="author-university">Cuadernos de Ética y Filosofía Política</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
     </div>
-
-    <footer>
-      <p>© 2024-2025 ASEFIP - Asociación de Estudiantes de Filosofía del Perú</p>
-      <p style="margin-top:6px;color:#94a3b8">Todos los artículos reflejan las opiniones de sus autores</p>
-    </footer>
   </div>
-
-  <!-- Modal para mostrar artículo completo -->
-  <div id="articleModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <button id="closeModal" class="modal-close" aria-label="Cerrar">Cerrar ✕</button>
-      <div id="modalContent" class="article-full">
-        <!-- Contenido cargado dinámicamente -->
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // Filtrado por categoría
-    document.querySelectorAll('.filter-btn').forEach(btn=>{
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.getAttribute('data-filter');
-        document.querySelectorAll('#articles > article').forEach(article => {
-          if(filter === 'todos' || article.getAttribute('data-category') === filter) {
-            article.style.display = '';
-          } else {
-            article.style.display = 'none';
-          }
-        });
-      });
-    });
-
-    // Modal y carga de artículos con manejo robusto de errores
-    const modal = document.getElementById('articleModal');
-    const modalContent = document.getElementById('modalContent');
-    const closeModal = document.getElementById('closeModal');
-
-    async function checkExists(url) {
-      try {
-        // Intentamos con HEAD primero
-        const res = await fetch(url, { method: 'HEAD' });
-        return res.ok;
-      } catch (e) {
-        // Si falla (CORS o bloqueo), intentamos GET silencioso pero sin procesar todo
-        try {
-          const res2 = await fetch(url, { method: 'GET' });
-          return res2.ok;
-        } catch (e2) {
-          return false;
-        }
-      }
-    }
-
-    // Inicialización: comprueba si los archivos existen y marca visualmente los que no
-    document.addEventListener('DOMContentLoaded', async () => {
-      const repoBase = 'https://github.com/Lufer19/agoraperuana/blob/main/';
-      const readMoreLinks = document.querySelectorAll('.read-more');
-      for (const link of readMoreLinks) {
-        const src = link.dataset.src || link.getAttribute('href');
-        const badge = link.parentElement.querySelector('.not-available');
-        if (!src || src === '#') {
-          if (badge) badge.textContent = 'No disponible';
-          link.setAttribute('aria-disabled','true');
-          continue;
-        }
-        const exists = await checkExists(src);
-        if (!exists) {
-          // marcar como no disponible y cambiar el enlace para que apunte al archivo en GitHub (para que el administrador lo revise)
-          if (badge) badge.innerHTML = 'No encontrado · ';
-          link.setAttribute('data-missing','true');
-          // modifica el enlace para que abra en GitHub (blob) en nueva pestaña
-          link.setAttribute('href', repoBase + src);
-          link.setAttribute('target','_blank');
-          if (badge) {
-            const a = document.createElement('a');
-            a.href = repoBase + src;
-            a.target = '_blank';
-            a.rel = 'noopener';
-            a.textContent = 'Ver en repo';
-            a.style.color = '#667eea';
-            a.style.fontWeight = '700';
-            a.style.marginLeft = '6px';
-            badge.appendChild(a);
-          }
-        } else {
-          // existe: aseguro href correcto
-          if (!link.getAttribute('href') || link.getAttribute('href') === '#') {
-            link.setAttribute('href', src);
-          }
-        }
-      }
-    });
-
-    // Maneja clicks en "Leer artículo completo"
-    document.addEventListener('click', async (e) => {
-      const link = e.target.closest('.read-more');
-      if (!link) return;
-
-      // Si el link fue marcado como "missing", permitimos que abra en nueva pestaña (ya apuntamos al repo)
-      if (link.dataset.missing === 'true') {
-        // allow default behavior (opens blob on GitHub)
-        return;
-      }
-
-      // Si el usuario quiere abrir en nueva pestaña (ctrl/meta), dejamos que el navegador lo haga
-      if (e.ctrlKey || e.metaKey) return;
-
-      e.preventDefault();
-      const src = link.dataset.src || link.getAttribute('href');
-
-      if (!src || src === '#') {
-        modalContent.innerHTML = '<h3>Artículo no disponible</h3><p>El artículo completo aún no fue subido. Puedes enviarlo para revisión desde "Enviar Artículo".</p><p><a href="enviar-articulo.html">Enviar Artículo</a></p>';
-        openModal();
-        return;
-      }
-
-      try {
-        const res = await fetch(src);
-        if (!res.ok) throw new Error('No encontrado');
-        const text = await res.text();
-        // Extraer <body> si existe, si no, usar todo
-        const bodyMatch = text.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-        const fragment = bodyMatch ? bodyMatch[1] : text;
-        modalContent.innerHTML = fragment;
-
-        // Asegurar que los enlaces dentro del artículo abran en nueva pestaña para no salir del modal
-        modalContent.querySelectorAll('a').forEach(a => {
-          if (!a.target) a.target = '_blank';
-        });
-
-        openModal();
-      } catch (err) {
-        // Fallback: ofrecer abrir en GitHub o enviar artículo
-        const repoUrl = 'https://github.com/Lufer19/agoraperuana/blob/main/' + src;
-        modalContent.innerHTML = `<h3>No se pudo cargar el artículo</h3><p>Es posible que el archivo no exista. Puedes abrirlo en el repositorio o enviar tu artículo para revisión.</p><p><a href="${repoUrl}" target="_blank" rel="noopener">Ver en repo</a> · <a href="enviar-articulo.html">Enviar Artículo</a></p>`;
-        openModal();
-      }
-    });
-
-    function openModal(){
-      modal.classList.add('open');
-      modal.setAttribute('aria-hidden','false');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeModalFunc(){
-      modal.classList.remove('open');
-      modal.setAttribute('aria-hidden','true');
-      modalContent.innerHTML = '';
-      document.body.style.overflow = '';
-    }
-    closeModal.addEventListener('click', closeModalFunc);
-    modal.addEventListener('click', (e)=> { if(e.target === modal) closeModalFunc(); });
-
-  </script>
 </body>
 </html>
