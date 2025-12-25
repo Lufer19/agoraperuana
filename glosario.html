@@ -1,66 +1,767 @@
-// Añade esto al final del <script> en glosario.html
-document.addEventListener('DOMContentLoaded', function() {
-    // Hacer que los títulos sean clickeables para expandir/contraer
-    const titulos = document.querySelectorAll('.termino-titulo');
-    titulos.forEach(titulo => {
-        titulo.addEventListener('click', function() {
-            const icono = this.querySelector('.toggle-icon');
-            const definicion = this.closest('.termino-card');
-            
-            if (icono.textContent === '▼') {
-                icono.textContent = '▲';
-                definicion.style.paddingBottom = '35px';
-            } else {
-                icono.textContent = '▼';
-                definicion.style.paddingBottom = '25px';
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glosario Filosófico - ASEFIP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #2d3748;
+            line-height: 1.6;
+            background: #f8f9fa;
+        }
+        
+        /* NAVEGACIÓN */
+        nav {
+            background: #1a202c;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo-nav {
+            color: white;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #e2e8f0;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .nav-links a:hover {
+            color: #90cdf4;
+        }
+
+        /* Enlace destacado del glosario */
+        .glosario-menu-link {
+            background: #f0f9ff;
+            color: #0369a1;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            border: 2px solid #0ea5e9;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(14, 165, 233, 0.2);
+        }
+
+        .glosario-menu-link:hover {
+            background: #e0f2fe;
+            color: #0284c7;
+            border-color: #38bdf8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(14, 165, 233, 0.3);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            border: 2px solid transparent;
+            color: #e2e8f0;
+            font-size: 1.2rem;
+            padding: 6px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        /* HEADER DEL GLOSARIO */
+        .glosario-header {
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .glosario-header h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+        }
+        
+        .glosario-header .subtitle {
+            font-size: 1.3em;
+            color: #cbd5e0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* CONTENEDOR PRINCIPAL */
+        .glosario-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* BARRA DE BÚSQUEDA */
+        .search-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .search-container h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .search-box {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+            gap: 10px;
+        }
+        
+        #searchInput {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-family: 'Georgia', serif;
+        }
+        
+        #searchInput:focus {
+            outline: none;
+            border-color: #4299e1;
+        }
+        
+        .search-btn {
+            padding: 15px 30px;
+            background: #4299e1;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .search-btn:hover {
+            background: #3182ce;
+        }
+
+        /* ALFABETO */
+        .alphabet {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .letter-btn {
+            padding: 10px 15px;
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #4a5568;
+            transition: all 0.3s;
+        }
+        
+        .letter-btn:hover {
+            background: #edf2f7;
+            border-color: #cbd5e0;
+        }
+        
+        .letter-btn.active {
+            background: #4299e1;
+            color: white;
+            border-color: #4299e1;
+        }
+
+        /* TÉRMINOS */
+        .letra-section {
+            margin-bottom: 50px;
+        }
+        
+        .letra-titulo {
+            font-size: 2em;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #4299e1;
+        }
+        
+        .termino-card {
+            background: white;
+            margin-bottom: 20px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        
+        .termino-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .termino-titulo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+        
+        .termino-titulo h3 {
+            color: #2d3748;
+            font-size: 1.4em;
+            margin: 0;
+        }
+        
+        .toggle-icon {
+            font-size: 1.2em;
+            color: #4299e1;
+        }
+        
+        .termino-definicion {
+            color: #4a5568;
+            line-height: 1.8;
+            padding-top: 15px;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .termino-relacionados {
+            margin-top: 15px;
+            font-style: italic;
+            color: #718096;
+        }
+        
+        .termino-relacionados a {
+            color: #4299e1;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .termino-relacionados a:hover {
+            text-decoration: underline;
+        }
+
+        /* SIN RESULTADOS */
+        .no-resultados {
+            text-align: center;
+            padding: 50px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .no-resultados h3 {
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .no-resultados p {
+            color: #718096;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 50px 20px 30px;
+            margin-top: 80px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-section a {
+            color: #cbd5e0;
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            color: #90cdf4;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #4a5568;
+            color: #a0aec0;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 64px;
+                right: 20px;
+                background: #1a202c;
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+                border-radius: 8px;
+                display: none;
+                width: calc(100% - 40px);
             }
+
+            .menu-toggle {
+                display: inline-block;
+            }
+            
+            .glosario-header h1 {
+                font-size: 2.2em;
+            }
+            
+            .search-box {
+                flex-direction: column;
+            }
+            
+            .alphabet {
+                gap: 8px;
+            }
+            
+            .letter-btn {
+                padding: 8px 12px;
+                font-size: 1em;
+            }
+            
+            .glosario-menu-link {
+                padding: 6px 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVEGACIÓN -->
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo-nav">ASEFIP</a>
+            <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="index.html#nosotros">Nosotros</a></li>
+                <li><a href="aprender.html">Aprender</a></li>
+                <li><a href="recursos.html">Recursos</a></li>
+                <li><a href="glosario.html" class="glosario-menu-link">📖 Glosario</a></li>
+                <li><a href="ejercicios.html">Ejercicios</a></li>
+                <li><a href="linea-tiempo.html">Línea de tiempo</a></li>
+                <li><a href="comunidad.html">Comunidad</a></li>
+                <li><a href="Blog.html">Blog</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HEADER DEL GLOSARIO -->
+    <div class="glosario-header">
+        <h1>📚 Glosario Filosófico</h1>
+        <p class="subtitle">Diccionario especializado para estudiantes de filosofía. Define conceptos clave de forma clara y accesible.</p>
+    </div>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="glosario-container">
+        <!-- BARRA DE BÚSQUEDA -->
+        <div class="search-container">
+            <h2>Buscar Término Filosófico</h2>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Ej: metafísica, epistemología, ética..." onkeypress="if(event.key === 'Enter') buscarTermino()">
+                <button class="search-btn" onclick="buscarTermino()">Buscar</button>
+            </div>
+        </div>
+
+        <!-- ALFABETO -->
+        <div class="alphabet">
+            <!-- Los botones se generarán con JavaScript -->
+        </div>
+
+        <!-- SECCIONES DE TÉRMINOS -->
+        <div id="glosarioContent">
+            <!-- Los términos se cargarán aquí con JavaScript -->
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer id="contacto">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ASEFIP</h3>
+                <p>Asociación de Estudiantes de Filosofía del Perú</p>
+                <p style="margin-top: 15px;">Uniendo mentes, construyendo pensamiento.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Enlaces Rápidos</h3>
+                <ul>
+                    <li><a href="index.html#nosotros">Sobre Nosotros</a></li>
+                    <li><a href="aprender.html">Aprender</a></li>
+                    <li><a href="recursos.html">Recursos</a></li>
+                    <li><a href="glosario.html">Glosario</a></li>
+                    <li><a href="ejercicios.html">Ejercicios</a></li>
+                    <li><a href="index.html#contacto">Contacto</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <ul>
+                    <li>📧 Email: contacto@asefip.org</li>
+                    <li>📱 WhatsApp: [Número]</li>
+                    <li>📍 Lima, Perú</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Síguenos</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2024-2025 ASEFIP - Asociación de Estudiantes de Filosofía del Perú</p>
+            <p style="margin-top: 10px;">Hecho con 💙 por estudiantes para estudiantes</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPT DEL GLOSARIO -->
+    <script>
+        // Datos del glosario (puedes agregar más términos)
+        const terminosGlosario = [
+            {
+                termino: "Metafísica",
+                definicion: "Rama de la filosofía que estudia la naturaleza fundamental de la realidad, incluyendo la relación entre mente y materia, sustancia y atributo, posibilidad y realidad. La metafísica busca responder preguntas fundamentales sobre la existencia, el ser, el tiempo y el espacio.",
+                relacionados: ["Ontología", "Epistemología", "Cosmología"],
+                letra: "M"
+            },
+            {
+                termino: "Epistemología",
+                definicion: "Rama de la filosofía que estudia el conocimiento: su naturaleza, origen, alcance y límites. Se ocupa de preguntas como: ¿Qué es el conocimiento? ¿Cómo lo adquirimos? ¿Cuáles son los criterios de verdad?",
+                relacionados: ["Gnoseología", "Teoría del conocimiento", "Verdad"],
+                letra: "E"
+            },
+            {
+                termino: "Ética",
+                definicion: "Rama de la filosofía que estudia la moral, las acciones humanas y los valores que guían la conducta. Se pregunta: ¿Qué es el bien? ¿Cómo debemos actuar? ¿Qué hace que una acción sea correcta o incorrecta?",
+                relacionados: ["Moral", "Deontología", "Virtud"],
+                letra: "E"
+            },
+            {
+                termino: "Ontología",
+                definicion: "Parte de la metafísica que estudia el ser en cuanto ser. Se ocupa de la naturaleza de la existencia y la realidad, analizando categorías fundamentales como sustancia, propiedad, relación y estado.",
+                relacionados: ["Metafísica", "Ser", "Existencia"],
+                letra: "O"
+            },
+            {
+                termino: "Lógica",
+                definicion: "Estudio de los principios del razonamiento válido. Analiza la estructura de los argumentos y desarrolla sistemas formales para distinguir entre razonamientos correctos e incorrectos.",
+                relacionados: ["Argumento", "Silogismo", "Verdad lógica"],
+                letra: "L"
+            },
+            {
+                termino: "Dialéctica",
+                definicion: "Método de argumentación que procede mediante el contraste y superación de tesis opuestas. En Hegel, es el proceso mediante el cual la realidad se desarrolla a través de contradicciones.",
+                relacionados: ["Contradicción", "Síntesis", "Hegel"],
+                letra: "D"
+            },
+            {
+                termino: "Axiología",
+                definicion: "Rama de la filosofía que estudia los valores, tanto éticos como estéticos. Investiga qué es lo valioso, cómo se jerarquizan los valores y su relación con la acción humana.",
+                relacionados: ["Valor", "Ética", "Estética"],
+                letra: "A"
+            },
+            {
+                termino: "Hermenéutica",
+                definicion: "Teoría de la interpretación de textos, especialmente textos filosóficos, religiosos y literarios. Se ocupa de las condiciones de posibilidad de la comprensión humana.",
+                relacionados: ["Interpretación", "Fenomenología", "Gadamer"],
+                letra: "H"
+            },
+            {
+                termino: "Fenomenología",
+                definicion: "Método filosófico que estudia los fenómenos tal como se manifiestan en la conciencia, sin presuponer teorías sobre su realidad objetiva. Desarrollada por Husserl.",
+                relacionados: ["Conciencia", "Intencionalidad", "Husserl"],
+                letra: "F"
+            },
+            {
+                termino: "Deconstrucción",
+                definicion: "Método de análisis filosófico y literario desarrollado por Jacques Derrida que examina las oposiciones binarias en los textos y muestra cómo se deshacen sus significados.",
+                relacionados: ["Derrida", "Posestructuralismo", "Texto"],
+                letra: "D"
+            }
+        ];
+
+        // Variables
+        let terminosFiltrados = [...terminosGlosario];
+
+        // Inicializar cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', function() {
+            inicializarGlosario();
+            inicializarMenuMovil();
         });
-    });
-    
-    // Mejorar enlaces "Ver también"
-    const enlaces = document.querySelectorAll('.termino-relacionados a');
-    enlaces.forEach(enlace => {
-        enlace.addEventListener('click', function(e) {
-            e.preventDefault();
-            const terminoBuscado = this.textContent.trim();
-            const input = document.getElementById('searchInput');
+
+        // Función para inicializar el glosario
+        function inicializarGlosario() {
+            generarAlfabeto();
+            mostrarTerminos();
+            configurarEventos();
+        }
+
+        // Generar botones del alfabeto
+        function generarAlfabeto() {
+            const alfabeto = document.querySelector('.alphabet');
+            if (!alfabeto) return;
+
+            const letras = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
             
-            // Poner el término en la búsqueda
-            input.value = terminoBuscado;
+            // Botón TODAS
+            const todasBtn = document.createElement('button');
+            todasBtn.className = 'letter-btn active';
+            todasBtn.textContent = 'TODAS';
+            todasBtn.onclick = () => filtrarPorLetra('todas');
+            alfabeto.appendChild(todasBtn);
             
-            // Ejecutar búsqueda
-            buscarTermino();
-            
-            // Desplazar al resultado
-            setTimeout(() => {
-                const seccionesVisibles = document.querySelectorAll('.letra-section[style="display: block;"]');
-                if (seccionesVisibles.length > 0) {
-                    seccionesVisibles[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Botones por letra
+            letras.forEach(letra => {
+                const btn = document.createElement('button');
+                btn.className = 'letter-btn';
+                btn.textContent = letra;
+                btn.onclick = () => filtrarPorLetra(letra);
+                alfabeto.appendChild(btn);
+            });
+        }
+
+        // Filtrar por letra
+        function filtrarPorLetra(letra) {
+            // Actualizar botones activos
+            document.querySelectorAll('.letter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent === letra || (letra === 'todas' && btn.textContent === 'TODAS')) {
+                    btn.classList.add('active');
                 }
+            });
+            
+            // Filtrar términos
+            if (letra === 'todas') {
+                terminosFiltrados = [...terminosGlosario];
+            } else {
+                terminosFiltrados = terminosGlosario.filter(termino => 
+                    termino.letra === letra
+                );
+            }
+            
+            mostrarTerminos();
+        }
+
+        // Buscar término
+        function buscarTermino() {
+            const input = document.getElementById('searchInput');
+            const busqueda = input.value.trim().toLowerCase();
+            
+            if (!busqueda) {
+                filtrarPorLetra('todas');
+                return;
+            }
+            
+            terminosFiltrados = terminosGlosario.filter(termino => 
+                termino.termino.toLowerCase().includes(busqueda) ||
+                termino.definicion.toLowerCase().includes(busqueda) ||
+                termino.relacionados.some(r => r.toLowerCase().includes(busqueda))
+            );
+            
+            mostrarTerminos();
+            
+            // Expandir todos los resultados
+            setTimeout(() => {
+                document.querySelectorAll('.termino-titulo').forEach(titulo => {
+                    const icono = titulo.querySelector('.toggle-icon');
+                    const definicion = titulo.nextElementSibling;
+                    if (definicion) {
+                        icono.textContent = '▲';
+                        definicion.style.display = 'block';
+                        titulo.closest('.termino-card').style.paddingBottom = '35px';
+                    }
+                });
             }, 100);
-        });
-    });
-    
-    // Añadir más letras al alfabeto
-    const letrasCompletas = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
-    const alfabeto = document.querySelector('.alphabet');
-    
-    // Limpiar y reconstruir alfabeto
-    alfabeto.innerHTML = '';
-    
-    // Botón TODAS
-    const todasBtn = document.createElement('button');
-    todasBtn.className = 'letter-btn active';
-    todasBtn.textContent = 'TODAS';
-    todasBtn.onclick = () => filtrarPorLetra('todas');
-    alfabeto.appendChild(todasBtn);
-    
-    // Botones por letra
-    letrasCompletas.forEach(letra => {
-        const btn = document.createElement('button');
-        btn.className = 'letter-btn';
-        btn.textContent = letra;
-        btn.onclick = () => filtrarPorLetra(letra);
-        alfabeto.appendChild(btn);
-    });
-});
+        }
+
+        // Mostrar términos
+        function mostrarTerminos() {
+            const container = document.getElementById('glosarioContent');
+            if (!container) return;
+            
+            // Agrupar por letra
+            const terminosPorLetra = {};
+            terminosFiltrados.forEach(termino => {
+                if (!terminosPorLetra[termino.letra]) {
+                    terminosPorLetra[termino.letra] = [];
+                }
+                terminosPorLetra[termino.letra].push(termino);
+            });
+            
+            let html = '';
+            Object.keys(terminosPorLetra).sort().forEach(letra => {
+                html += `<div class="letra-section">
+                            <h2 class="letra-titulo">${letra}</h2>`;
+                
+                terminosPorLetra[letra].forEach(termino => {
+                    html += `<div class="termino-card">
+                                <div class="termino-titulo">
+                                    <h3>${termino.termino}</h3>
+                                    <span class="toggle-icon">▼</span>
+                                </div>
+                                <div class="termino-definicion" style="display: none;">
+                                    <p>${termino.definicion}</p>
+                                    <div class="termino-relacionados">
+                                        <strong>Ver también:</strong> 
+                                        ${termino.relacionados.map(r => 
+                                            `<a href="#" onclick="buscarPorTermino('${r}')">${r}</a>`
+                                        ).join(', ')}
+                                    </div>
+                                </div>
+                            </div>`;
+                });
+                
+                html += `</div>`;
+            });
+            
+            if (terminosFiltrados.length === 0) {
+                html = `<div class="no-resultados">
+                            <h3>No se encontraron términos</h3>
+                            <p>Intenta con otra búsqueda o revisa otra letra del alfabeto.</p>
+                        </div>`;
+            }
+            
+            container.innerHTML = html;
+            configurarEventos();
+        }
+
+        // Buscar por término específico (para enlaces "Ver también")
+        function buscarPorTermino(termino) {
+            const input = document.getElementById('searchInput');
+            input.value = termino;
+            buscarTermino();
+        }
+
+        // Configurar eventos
+        function configurarEventos() {
+            // Títulos clickeables
+            document.querySelectorAll('.termino-titulo').forEach(titulo => {
+                titulo.addEventListener('click', function() {
+                    const icono = this.querySelector('.toggle-icon');
+                    const definicion = this.nextElementSibling;
+                    const card = this.closest('.termino-card');
+                    
+                    if (icono.textContent === '▼') {
+                        icono.textContent = '▲';
+                        definicion.style.display = 'block';
+                        card.style.paddingBottom = '35px';
+                    } else {
+                        icono.textContent = '▼';
+                        definicion.style.display = 'none';
+                        card.style.paddingBottom = '25px';
+                    }
+                });
+            });
+        }
+
+        // Menú móvil (copiado de tu index.html)
+        function inicializarMenuMovil() {
+            const toggle = document.getElementById('menuToggle');
+            const nav = document.getElementById('navLinks');
+            
+            if (!toggle || !nav) return;
+            
+            toggle.addEventListener('click', function(){
+                const expanded = this.getAttribute('aria-expanded') === 'true';
+                this.setAttribute('aria-expanded', String(!expanded));
+                if(nav.style.display === 'flex'){
+                    nav.style.display = 'none';
+                } else {
+                    nav.style.display = 'flex';
+                    nav.style.flexDirection = 'column';
+                }
+            });
+
+            Array.from(nav.querySelectorAll('a')).forEach(a => {
+                a.addEventListener('click', function(){
+                    if (window.innerWidth <= 768) {
+                        nav.style.display = 'none';
+                        toggle.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
+
+            window.addEventListener('resize', function(){
+                if(window.innerWidth > 768){
+                    nav.style.display = 'flex';
+                    nav.style.flexDirection = 'row';
+                    toggle.setAttribute('aria-expanded', 'false');
+                } else {
+                    nav.style.display = 'none';
+                }
+            });
+
+            if(window.innerWidth <= 768) nav.style.display = 'none';
+            else nav.style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
