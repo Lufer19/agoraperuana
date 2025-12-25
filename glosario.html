@@ -1,140 +1,66 @@
-<!-- ============================================ -->
-<!-- GLOSARIO FILOSÓFICO                          -->
-<!-- Añade esto en tu index.html                 -->
-<!-- ============================================ -->
-<section style="padding: 80px 20px; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);">
-    <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
-        
-        <!-- Encabezado -->
-        <div style="margin-bottom: 50px;">
-            <h2 style="font-size: 2.8rem; color: #0369a1; margin-bottom: 15px;">
-                📖 Glosario Filosófico
-            </h2>
-            <p style="color: #0c4a6e; font-size: 1.2rem; max-width: 800px; margin: 0 auto;">
-                Diccionario con <strong>10 términos fundamentales</strong> explicados con ejemplos, 
-                sistema de búsqueda y organización por letras.
-            </p>
-        </div>
-        
-        <!-- Muestra de términos -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 50px;">
+// Añade esto al final del <script> en glosario.html
+document.addEventListener('DOMContentLoaded', function() {
+    // Hacer que los títulos sean clickeables para expandir/contraer
+    const titulos = document.querySelectorAll('.termino-titulo');
+    titulos.forEach(titulo => {
+        titulo.addEventListener('click', function() {
+            const icono = this.querySelector('.toggle-icon');
+            const definicion = this.closest('.termino-card');
             
-            <!-- Término 1 -->
-            <div style="background: white; border-radius: 15px; padding: 25px; box-shadow: 0 10px 25px rgba(3, 105, 161, 0.1); border-left: 5px solid #0369a1;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
-                    <h3 style="color: #1e293b; font-size: 1.4rem;">A priori / A posteriori</h3>
-                    <span style="background: #dbeafe; color: #1d4ed8; padding: 4px 12px; border-radius: 15px; font-size: 0.85rem; font-weight: 600;">
-                        Epistemología
-                    </span>
-                </div>
-                <p style="color: #475569; line-height: 1.6; margin-bottom: 15px; font-size: 0.95rem;">
-                    Distinción kantiana entre conocimiento independiente de la experiencia (a priori) 
-                    y conocimiento derivado de la experiencia (a posteriori).
-                </p>
-                <a href="glosario.html#A" style="color: #0369a1; font-weight: 600; text-decoration: none;">
-                    Ver definición completa →
-                </a>
-            </div>
+            if (icono.textContent === '▼') {
+                icono.textContent = '▲';
+                definicion.style.paddingBottom = '35px';
+            } else {
+                icono.textContent = '▼';
+                definicion.style.paddingBottom = '25px';
+            }
+        });
+    });
+    
+    // Mejorar enlaces "Ver también"
+    const enlaces = document.querySelectorAll('.termino-relacionados a');
+    enlaces.forEach(enlace => {
+        enlace.addEventListener('click', function(e) {
+            e.preventDefault();
+            const terminoBuscado = this.textContent.trim();
+            const input = document.getElementById('searchInput');
             
-            <!-- Término 2 -->
-            <div style="background: white; border-radius: 15px; padding: 25px; box-shadow: 0 10px 25px rgba(3, 105, 161, 0.1); border-left: 5px solid #10b981;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
-                    <h3 style="color: #1e293b; font-size: 1.4rem;">Alienación</h3>
-                    <span style="background: #d1fae5; color: #065f46; padding: 4px 12px; border-radius: 15px; font-size: 0.85rem; font-weight: 600;">
-                        Marx
-                    </span>
-                </div>
-                <p style="color: #475569; line-height: 1.6; margin-bottom: 15px; font-size: 0.95rem;">
-                    Estado en que el ser humano pierde su esencia o se vuelve ajeno a sí mismo, 
-                    especialmente bajo condiciones capitalistas de producción.
-                </p>
-                <a href="glosario.html#A" style="color: #0369a1; font-weight: 600; text-decoration: none;">
-                    Ver definición completa →
-                </a>
-            </div>
+            // Poner el término en la búsqueda
+            input.value = terminoBuscado;
             
-            <!-- Término 3 -->
-            <div style="background: white; border-radius: 15px; padding: 25px; box-shadow: 0 10px 25px rgba(3, 105, 161, 0.1); border-left: 5px solid #8b5cf6;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
-                    <h3 style="color: #1e293b; font-size: 1.4rem;">Nihilismo</h3>
-                    <span style="background: #ede9fe; color: #5b21b6; padding: 4px 12px; border-radius: 15px; font-size: 0.85rem; font-weight: 600;">
-                        Nietzsche
-                    </span>
-                </div>
-                <p style="color: #475569; line-height: 1.6; margin-bottom: 15px; font-size: 0.95rem;">
-                    Posición que sostiene que la vida carece de significado objetivo, consecuencia 
-                    de la "muerte de Dios" y colapso de valores tradicionales.
-                </p>
-                <a href="glosario.html#N" style="color: #0369a1; font-weight: 600; text-decoration: none;">
-                    Ver definición completa →
-                </a>
-            </div>
+            // Ejecutar búsqueda
+            buscarTermino();
             
-        </div>
-        
-        <!-- Características del glosario -->
-        <div style="background: white; border-radius: 20px; padding: 40px; box-shadow: 0 15px 35px rgba(3, 105, 161, 0.1); margin-bottom: 40px;">
-            <h3 style="color: #0369a1; font-size: 1.8rem; margin-bottom: 30px; text-align: center;">
-                ✨ ¿Por qué este glosario es útil?
-            </h3>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
-                <div style="text-align: center;">
-                    <div style="font-size: 2rem; margin-bottom: 15px;">🔍</div>
-                    <p style="font-weight: bold; color: #1e293b; margin-bottom: 10px;">Búsqueda rápida</p>
-                    <p style="color: #64748b; font-size: 0.95rem;">Encuentra términos por nombre, concepto o etiqueta.</p>
-                </div>
-                
-                <div style="text-align: center;">
-                    <div style="font-size: 2rem; margin-bottom: 15px;">📚</div>
-                    <p style="font-weight: bold; color: #1e293b; margin-bottom: 10px;">Ejemplos claros</p>
-                    <p style="color: #64748b; font-size: 0.95rem;">Cada término incluye ejemplos concretos para mejor comprensión.</p>
-                </div>
-                
-                <div style="text-align: center;">
-                    <div style="font-size: 2rem; margin-bottom: 15px;">🏷️</div>
-                    <p style="font-weight: bold; color: #1e293b; margin-bottom: 10px;">Tags temáticos</p>
-                    <p style="color: #64748b; font-size: 0.95rem;">Identifica rápidamente la rama filosófica y autores clave.</p>
-                </div>
-                
-                <div style="text-align: center;">
-                    <div style="font-size: 2rem; margin-bottom: 15px;">🔄</div>
-                    <p style="font-weight: bold; color: #1e293b; margin-bottom: 10px;">Términos relacionados</p>
-                    <p style="color: #64748b; font-size: 0.95rem;">Descubre conceptos conectados para estudio profundo.</p>
-                </div>
-            </div>
-            
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="glosario.html" 
-                   style="display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #0369a1 0%, #0c4a6e 100%); color: white; padding: 18px 40px; border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 1.1rem;">
-                   📘 Explorar glosario completo
-                </a>
-                <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 15px;">
-                    10 términos fundamentales + sistema de búsqueda + navegación por letras
-                </p>
-            </div>
-        </div>
-        
-        <!-- Cómo usar para estudio -->
-        <div style="margin-top: 40px; padding: 30px; background: rgba(3, 105, 161, 0.1); border-radius: 15px;">
-            <h3 style="color: #0369a1; font-size: 1.5rem; margin-bottom: 20px;">
-                🎯 Estrategias de estudio con el glosario
-            </h3>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; text-align: left;">
-                <div>
-                    <p style="color: #1e293b; font-weight: 600; margin-bottom: 8px;">Para lectura de textos:</p>
-                    <p style="color: #475569; font-size: 0.95rem;">Cuando encuentres un término desconocido en un texto filosófico, búscalo aquí para entender el contexto.</p>
-                </div>
-                <div>
-                    <p style="color: #1e293b; font-weight: 600; margin-bottom: 8px;">Para preparar exámenes:</p>
-                    <p style="color: #475569; font-size: 0.95rem;">Usa los términos relacionados para estudiar conceptos en red, no de forma aislada.</p>
-                </div>
-                <div>
-                    <p style="color: #1e293b; font-weight: 600; margin-bottom: 8px;">Para escritura académica:</p>
-                    <p style="color: #475569; font-size: 0.95rem;">Verifica que estás usando los términos filosóficos con precisión en tus ensayos.</p>
-                </div>
-            </div>
-        </div>
-        
-    </div>
-</section>
+            // Desplazar al resultado
+            setTimeout(() => {
+                const seccionesVisibles = document.querySelectorAll('.letra-section[style="display: block;"]');
+                if (seccionesVisibles.length > 0) {
+                    seccionesVisibles[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }, 100);
+        });
+    });
+    
+    // Añadir más letras al alfabeto
+    const letrasCompletas = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+    const alfabeto = document.querySelector('.alphabet');
+    
+    // Limpiar y reconstruir alfabeto
+    alfabeto.innerHTML = '';
+    
+    // Botón TODAS
+    const todasBtn = document.createElement('button');
+    todasBtn.className = 'letter-btn active';
+    todasBtn.textContent = 'TODAS';
+    todasBtn.onclick = () => filtrarPorLetra('todas');
+    alfabeto.appendChild(todasBtn);
+    
+    // Botones por letra
+    letrasCompletas.forEach(letra => {
+        const btn = document.createElement('button');
+        btn.className = 'letter-btn';
+        btn.textContent = letra;
+        btn.onclick = () => filtrarPorLetra(letra);
+        alfabeto.appendChild(btn);
+    });
+});
