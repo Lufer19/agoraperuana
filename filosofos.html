@@ -3,620 +3,631 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Filósofos - ASEFIP</title>
+    <title>Galeria de Filósofos - ASEFIP</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* ESTILOS GALERÍA FILÓSOFOS */
+        :root {
+            --color-marmol: #F5F5F5;
+            --color-bronce: #CD7F32;
+            --color-papiro: #F5E6CA;
+            --color-oscuro: #2C1810;
         }
         
-        body {
-            font-family: 'Georgia', 'Times New Roman', serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-        
-        header {
+        .filosofos-hero {
+            background: linear-gradient(rgba(44, 24, 16, 0.9), rgba(44, 24, 16, 0.9)), 
+                        url('https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 0;
             text-align: center;
-            margin-bottom: 50px;
         }
         
-        .logo {
-            display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            line-height: 60px;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 15px;
+        .filosofos-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-family: 'Times New Roman', serif;
         }
         
-        h1 {
-            color: #2d3748;
-            font-size: 2.5em;
-            margin-bottom: 10px;
+        /* FILTROS */
+        .filtros-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin: -50px auto 3rem;
+            max-width: 1200px;
+            position: relative;
+            z-index: 10;
         }
         
-        .subtitle {
-            color: #718096;
-            font-size: 1.1em;
-        }
-        
-        .back-link {
-            display: inline-block;
-            color: #667eea;
-            text-decoration: none;
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-        
-        .back-link:hover {
-            text-decoration: underline;
-        }
-        
-        /* BÚSQUEDA */
-        .search-section {
-            margin-bottom: 40px;
-        }
-        
-        .search-box {
+        .periodos-filtro {
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .search-input {
-            flex: 1;
-            padding: 15px 20px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-size: 1.1em;
-            transition: border-color 0.3s;
-        }
-        
-        .search-input:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-        
-        .search-btn {
-            padding: 15px 30px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        
-        .search-btn:hover {
-            transform: scale(1.05);
-        }
-        
-        /* FILTROS POR ÉPOCA */
-        .filter-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 40px;
             flex-wrap: wrap;
+            gap: 10px;
             justify-content: center;
         }
         
-        .filter-tab {
-            padding: 12px 25px;
-            background: #e2e8f0;
-            border: none;
-            border-radius: 25px;
+        .periodo-btn {
+            padding: 10px 25px;
+            background: var(--color-marmol);
+            border: 2px solid #ddd;
+            border-radius: 30px;
             cursor: pointer;
-            font-size: 1em;
-            font-weight: 600;
+            font-weight: 500;
             transition: all 0.3s;
         }
         
-        .filter-tab:hover {
-            background: #cbd5e0;
-        }
-        
-        .filter-tab.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .periodo-btn:hover, .periodo-btn.activo {
+            background: var(--color-oscuro);
             color: white;
-        }
-        
-        /* SECCIÓN DE ÉPOCA */
-        .epoca-section {
-            margin-bottom: 60px;
-        }
-        
-        .epoca-title {
-            font-size: 2em;
-            color: #2d3748;
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #667eea;
-        }
-        
-        .epoca-description {
-            color: #4a5568;
-            line-height: 1.8;
-            margin-bottom: 30px;
-            font-size: 1.05em;
+            border-color: var(--color-oscuro);
         }
         
         /* GRID DE FILÓSOFOS */
         .filosofos-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
+            gap: 2rem;
+            margin: 3rem 0;
         }
         
         .filosofo-card {
             background: white;
-            border: 2px solid #e2e8f0;
             border-radius: 15px;
-            padding: 25px;
-            transition: all 0.3s;
-            cursor: pointer;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.4s;
+            position: relative;
         }
         
         .filosofo-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-            border-color: #667eea;
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
         }
         
-        .filosofo-avatar {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 50%;
+        .filosofo-imagen {
+            height: 250px;
+            background: var(--color-papiro);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 2.5em;
+            font-size: 5rem;
+            color: var(--color-oscuro);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .filosofo-imagen::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.3));
+        }
+        
+        .filosofo-contenido {
+            padding: 2rem;
+        }
+        
+        .filosofo-nombre {
+            font-size: 1.8rem;
+            color: var(--color-oscuro);
+            margin-bottom: 0.5rem;
+            font-family: 'Times New Roman', serif;
+        }
+        
+        .filosofo-periodo {
+            color: var(--color-bronce);
             font-weight: bold;
+            margin-bottom: 1rem;
+            display: block;
         }
         
-        .filosofo-card h3 {
-            color: #2d3748;
-            font-size: 1.4em;
-            margin-bottom: 8px;
-            text-align: center;
+        .filosofo-fechas {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
         }
         
-        .filosofo-years {
-            color: #667eea;
-            text-align: center;
-            font-weight: 600;
-            margin-bottom: 15px;
-            font-size: 0.95em;
+        .filosofo-resumen {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
         }
         
-        .filosofo-tag {
-            display: inline-block;
-            background: #f7fafc;
-            color: #4a5568;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.85em;
-            margin: 3px;
+        .filosofo-obras {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px dashed #ddd;
         }
         
-        .filosofo-tags {
-            text-align: center;
-            margin-bottom: 15px;
+        .filosofo-obras h4 {
+            color: var(--color-oscuro);
+            margin-bottom: 0.5rem;
         }
         
-        .filosofo-summary {
-            color: #718096;
-            line-height: 1.6;
-            font-size: 0.95em;
-            margin-bottom: 15px;
+        .obras-lista {
+            list-style: none;
+            font-size: 0.9rem;
+            color: #666;
         }
         
-        .filosofo-links {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 2px solid #e2e8f0;
+        .obras-lista li {
+            margin-bottom: 0.3rem;
+            padding-left: 1rem;
+            position: relative;
         }
         
-        .btn-small {
-            flex: 1;
-            padding: 8px 15px;
-            background: #e2e8f0;
-            color: #2d3748;
-            text-decoration: none;
-            border-radius: 6px;
-            text-align: center;
-            font-size: 0.9em;
-            font-weight: 600;
-            transition: background 0.3s;
+        .obras-lista li:before {
+            content: "📖";
+            position: absolute;
+            left: 0;
         }
         
-        .btn-small:hover {
-            background: #cbd5e0;
-        }
-        
-        .btn-small.primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        /* ETIQUETA FILOSOFÍA PERUANA */
+        .etiqueta-peruana {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #C00;
             color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 2;
         }
         
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            padding-top: 30px;
-            border-top: 2px solid #e2e8f0;
-            color: #718096;
+        /* BARRA DE BÚSQUEDA FILÓSOFOS */
+        .buscador-filosofos {
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+        
+        .buscador-filosofos input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid var(--color-oscuro);
+            border-radius: 50px;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        
+        .buscador-filosofos input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(44, 24, 16, 0.2);
+        }
+        
+        /* TIMELINE VISUAL */
+        .timeline-visual {
+            margin: 4rem 0;
+            padding: 2rem;
+            background: var(--color-papiro);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .timeline-bar {
+            height: 4px;
+            background: var(--color-bronce);
+            position: relative;
+            margin: 2rem 0;
+        }
+        
+        .timeline-punto {
+            position: absolute;
+            top: -8px;
+            width: 20px;
+            height: 20px;
+            background: var(--color-oscuro);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .timeline-punto:hover {
+            transform: scale(1.5);
+            background: var(--color-bronce);
+        }
+        
+        /* FILÓSOFO DESTACADO */
+        .filosofo-destacado {
+            background: linear-gradient(135deg, var(--color-oscuro) 0%, #4A2C2C 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            margin: 3rem 0;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
         }
         
         @media (max-width: 768px) {
+            .filosofo-destacado {
+                grid-template-columns: 1fr;
+            }
+            
             .filosofos-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .filtros-container {
+                margin: 0 auto 2rem;
+                padding: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">🏛️ ASEFIP</a>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="glosario.html">Glosario</a></li>
+                    <li><a href="filosofos.html" style="color: #CD7F32;">Filósofos</a></li>
+                    <li><a href="ejercicios.html">Ejercicios</a></li>
+                    <li><a href="linea-tiempo.html">Línea del Tiempo</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="filosofos-hero">
+        <div class="container">
+            <h1>👨‍🏫 Galería de Filósofos</h1>
+            <p style="max-width: 800px; margin: 0 auto; font-size: 1.2rem;">
+                Desde los presocráticos hasta los pensadores contemporáneos. Conoce la vida, obra y legado de los grandes filósofos, incluidos pensadores peruanos.
+            </p>
+        </div>
+    </section>
+
     <div class="container">
-        <a href="index.html" class="back-link">← Volver al Inicio</a>
-        
-        <header>
-            <div class="logo">AS</div>
-            <h1>Biblioteca de Filósofos</h1>
-            <p class="subtitle">Explora el pensamiento de los grandes maestros de la filosofía</p>
-        </header>
-        
-        <!-- BÚSQUEDA -->
-        <div class="search-section">
-            <div class="search-box">
-                <input type="text" class="search-input" placeholder="Buscar filósofo por nombre o concepto..." id="searchInput">
-                <button class="search-btn" onclick="buscarFilosofo()">🔍 Buscar</button>
-            </div>
-        </div>
-        
         <!-- FILTROS -->
-        <div class="filter-tabs">
-            <button class="filter-tab active" onclick="mostrarEpoca('todas')">📚 Todas las épocas</button>
-            <button class="filter-tab" onclick="mostrarEpoca('antigua')">🏛️ Antigua</button>
-            <button class="filter-tab" onclick="mostrarEpoca('medieval')">⛪ Medieval</button>
-            <button class="filter-tab" onclick="mostrarEpoca('moderna')">🔬 Moderna</button>
-            <button class="filter-tab" onclick="mostrarEpoca('contemporanea')">🌐 Contemporánea</button>
-        </div>
-        
-        <!-- FILOSOFÍA ANTIGUA -->
-        <div class="epoca-section" id="antigua">
-            <h2 class="epoca-title">🏛️ Filosofía Antigua (600 a.C. - 500 d.C.)</h2>
-            <p class="epoca-description">
-                El nacimiento de la filosofía occidental en Grecia. Los primeros filósofos buscaban explicar 
-                el origen y naturaleza del cosmos a través de la razón, alejándose de explicaciones míticas.
-            </p>
+        <div class="filtros-container">
+            <div class="buscador-filosofos">
+                <input type="text" 
+                       id="buscadorFilosofos" 
+                       placeholder="🔍 Buscar filósofo (ej: 'Platón', 'Kant', 'peruano')...">
+            </div>
             
-            <div class="filosofos-grid">
-                <div class="filosofo-card">
-                    <div class="filosofo-avatar">S</div>
-                    <h3>Sócrates</h3>
-                    <p class="filosofo-years">470-399 a.C.</p>
-                    <div class="filosofo-tags">
-                        <span class="filosofo-tag">Ética</span>
-                        <span class="filosofo-tag">Mayéutica</span>
-                        <span class="filosofo-tag">Virtud</span>
-                    </div>
-                    <p class="filosofo-summary">
-                        "Sólo sé que no sé nada". Padre de la filosofía occidental. Desarrolló el método socrático 
-                        de preguntas y respuestas para alcanzar el conocimiento.
-                    </p>
-                    <div class="filosofo-links">
-                        <a href="#" class="btn-small primary">Ver Biografía</a>
-                        <a href="#" class="btn-small">Leer Textos</a>
-                    </div>
-                </div>
-                
-                <div class="filosofo-card">
-                    <div class="filosofo-avatar">P</div>
-                    <h3>Platón</h3>
-                    <p class="filosofo-years">427-347 a.C.</p>
-                    <div class="filosofo-tags">
-                        <span class="filosofo-tag">Teoría de Ideas</span>
-                        <span class="filosofo-tag">República</span>
-                        <span class="filosofo-tag">Dualismo</span>
-                    </div>
-                    <p class="filosofo-summary">
-                        Fundador de la Academia. Su teoría de las Ideas plantea un mundo perfecto e inmutable 
-                        más allá de la realidad sensible. Autor de "La República".
-                    </p>
-                    <div class="filosofo-links">
-                        <a href="#" class="btn-small primary">Ver Biografía</a>
-                        <a href="#" class="btn-small">Leer Textos</a>
-                    </div>
-                </div>
-                
-                <div class="filosofo-card">
-                    <div class="filosofo-avatar">A</div>
-                    <h3>Aristóteles</h3>
-                    <p class="filosofo-years">384-322 a.C.</p>
-                    <div class="filosofo-tags">
-                        <span class="filosofo-tag">Lógica</span>
-                        <span class="filosofo-tag">Metafísica</span>
-                        <span class="filosofo-tag">Ética</span>
-                    </div>
-                    <p class="filosofo-summary">
-                        Discípulo de Platón y maestro de Alejandro Magno. Sistematizó la lógica y abarcó 
-                        todas las ciencias de su época. "El hombre es un animal político".
-                    </p>
-                    <div class="filosofo-links">
-                        <a href="#" class="btn-small primary">Ver Biografía</a>
-                        <a href="#" class="btn-small">Leer Textos</a>
-                    </div>
-                </div>
-                
-                <div class="filosofo-card">
-                    <div class="filosofo-avatar">E</div>
-                    <h3>Epicuro</h3>
-                    <p class="filosofo-years">341-270 a.C.</p>
-                    <div class="filosofo-tags">
-                        <span class="filosofo-tag">Hedonismo</span>
-                        <span class="filosofo-tag">Atomismo</span>
-                        <span class="filosofo-tag">Ataraxia</span>
-                    </div>
-                    <p class="filosofo-summary">
-                        Fundador del Epicureísmo. Propuso que el placer es el bien supremo, pero entendido 
-                        como ausencia de dolor (ataraxia) y vida simple.
-                    </p>
-                    <div class="filosofo-links">
-                        <a href="#" class="btn-small primary">Ver Biografía</a>
-                        <a href="#" class="btn-small">Leer Textos</a>
-                    </div>
-                </div>
+            <div class="periodos-filtro" id="periodosFiltro">
+                <button class="periodo-btn activo" data-periodo="todos">Todos</button>
+                <button class="periodo-btn" data-periodo="presocraticos">Presocráticos</button>
+                <button class="periodo-btn" data-periodo="antigua">Antigua</button>
+                <button class="periodo-btn" data-periodo="medieval">Medieval</button>
+                <button class="periodo-btn" data-periodo="renacimiento">Renacimiento</button>
+                <button class="periodo-btn" data-periodo="moderna">Moderna</button>
+                <button class="periodo-btn" data-periodo="contemporanea">Contemporánea</button>
+                <button class="periodo-btn" data-periodo="peruana">Peruana</button>
+                <button class="periodo-btn" data-periodo="femenina">Filosofía Femenina</button>
             </div>
         </div>
         
-        <!-- FILOSOFÍA MEDIEVAL -->
-        <div class="epoca-section" id="medieval">
-            <h2 class="epoca-title">⛪ Filosofía Medieval (500 - 1500)</h2>
-            <p class="epoca-description">
-                Síntesis entre filosofía griega y pensamiento cristiano, judío e islámico. 
-                Grandes debates sobre fe y razón, universales, y la existencia de Dios.
-            </p>
-            
-            <div class="filosofos-grid">
-                <div class="filosofo-card">
-                    <div class="filosofo-avatar">A</div>
-                    <h3>San Agustín</h3>
-                    <p class="filosofo-years">354-430</p>
-                    <div class="filosofo-tags">
-                        <span class="filosofo-tag">Neoplatonismo</span>
-                        <span class="filosofo-tag">Cristianismo</span>
-                        <span class="filosofo-tag">Tiempo</span>
-                    </div>
-                    <p class="filosofo-summary">
-                        Integró la filosofía platónica con el cristianismo. "Ama y haz lo que quieras". 
-                        Reflexionó sobre el tiempo, el mal y la gracia divina.
-                    </p>
-                    <div class="filosofo-links">
-                        <a href="#" class="btn-small primary">Ver Biografía</a>
-                        <a href="#" class="btn-small">Leer Textos</a>
-                    </div>
-                </div>
-                
-                <div class="filosofo-card">
-                    <div class="filosofo-avatar">T</div>
-                    <h3>Santo Tomás de Aquino</h3>
-                    <p class="filosofo-years">1225-1274</p>
-                    <div class="filosofo-tags">
-                        <span class="filosofo-tag">Escolástica</span>
-                        <span class="filosofo-tag">Aristotelismo</span>
-                        <span class="filosofo-tag">Teología</span>
-                    </div>
-                    <p class="filosofo-summary">
-                        Máximo exponente de la Escolástica. Armonizó la filosofía aristotélica con la fe cristiana. 
-                        Autor de la "Suma Teológica".
-                    </p>
-                    <div class="filosofo-links">
-                        <a href="#" class="btn-small primary">Ver Biografía</a>
-                        <a href="#" class="btn-small">Leer Textos</a>
-                    </div>
-                </div>
-            </div>
+        <!-- CONTADOR -->
+        <div style="text-align: center; margin: 2rem 0; color: var(--color-oscuro);">
+            <h3><span id="contadorFilosofos">65</span> filósofos en la galería</h3>
         </div>
         
-        <!-- FILOSOFÍA MODERNA -->
-        <div class="epoca-section" id="moderna">
-            <h2 class="epoca-title">🔬 Filosofía Moderna (1500 - 1800)</h2>
-            <p class="epoca-description">
-                Revolución del pensamiento con el giro hacia la subjetividad. Racionalismo vs Empirismo. 
-                Nacimiento de la ciencia moderna y crítica de la metafísica tradicional.
-            </p>
-            
-            <div class="filosofos-grid">
-                <div class="filosofo-card">
-                    <div class="filosofo-avatar">D</div>
-                    <h3>René Descartes</h3>
-                    <p class="filosofo-years">1596-1650</p>
-                    <div class="filosofo-tags">
-                        <span class="filosofo-tag">Racionalismo</span>
-                        <span class="filosofo-tag">Duda Metódica</span>
-                        <span class="filosofo-tag">Dualismo</span>
-                    </div>
-                    <p class="filosofo-summary">
-                        "Pienso, luego existo" (Cogito ergo sum). Padre del racionalismo moderno. 
-                        Aplicó el método matemático a la filosofía.
-                    </p>
-                    <div class="filosofo-links">
-                        <a href="#" class="btn-small primary">Ver Biografía</a>
-                        <a href="#" class="btn-small">Leer Textos</a>
-                    </div>
-                </div>
-                
-                <div class="filosofo-card">
-                    <div class="filosofo-avatar">K</div>
-                    <h3>Immanuel Kant</h3>
-                    <p class="filosofo-years">1724-1804</p>
-                    <div class="filosofo-tags">
-                        <span class="filosofo-tag">Criticismo</span>
-                        <span class="filosofo-tag">Imperativo Categórico</span>
-                        <span class="filosofo-tag">Ilustración</span>
-                    </div>
-                    <p class="filosofo-summary">
-                        Realizó la síntesis entre racionalismo y empirismo. Su "Crítica de la Razón Pura" 
-                        revolucionó la filosofía. Propuso el imperativo categórico en ética.
-                    </p>
-                    <div class="filosofo-links">
-                        <a href="#" class="btn-small primary">Ver Biografía</a>
-                        <a href="#" class="btn-small">Leer Textos</a>
-                    </div>
-                </div>
-                
-                <div class="filosofo-card">
-                    <div class="filosofo-avatar">H</div>
-                    <h3>David Hume</h3>
-                    <p class="filosofo-years">1711-1776</p>
-                    <div class="filosofo-tags">
-                        <span class="filosofo-tag">Empirismo</span>
-                        <span class="filosofo-tag">Escepticismo</span>
-                        <span class="filosofo-tag">Causalidad</span>
-                    </div>
-                    <p class="filosofo-summary">
-                        Empirista radical. Cuestionó la causalidad y la posibilidad de conocimiento metafísico. 
-                        Influyó enormemente en Kant.
-                    </p>
-                    <div class="filosofo-links">
-                        <a href="#" class="btn-small primary">Ver Biografía</a>
-                        <a href="#" class="btn-small">Leer Textos</a>
-                    </div>
-                </div>
-            </div>
+        <!-- FILÓSOFO DESTACADO (ALEATORIO) -->
+        <div class="filosofo-destacado" id="filosofoDestacado">
+            <!-- Se carga dinámicamente -->
         </div>
         
-        <!-- FILOSOFÍA CONTEMPORÁNEA -->
-        <div class="epoca-section" id="contemporanea">
-            <h2 class="epoca-title">🌐 Filosofía Contemporánea (1800 - Actualidad)</h2>
-            <p class="epoca-description">
-                Diversidad de corrientes: existencialismo, fenomenología, marxismo, filosofía analítica, 
-                postmodernismo. Crítica de la razón y surgimiento de nuevos paradigmas.
-            </p>
-            
-            <div class="filosofos-grid">
-                <div class="filosofo-card">
-                    <div class="filosofo-avatar">N</div>
-                    <h3>Friedrich Nietzsche</h3>
-                    <p class="filosofo-years">1844-1900</p>
-                    <div class="filosofo-tags">
-                        <span class="filosofo-tag">Nihilismo</span>
-                        <span class="filosofo-tag">Übermensch</span>
-                        <span class="filosofo-tag">Voluntad de poder</span>
-                    </div>
-                    <p class="filosofo-summary">
-                        "Dios ha muerto". Crítico radical de la moral occidental y el cristianismo. 
-                        Propuso el superhombre y la voluntad de poder como valores vitales.
-                    </p>
-                    <div class="filosofo-links">
-                        <a href="#" class="btn-small primary">Ver Biografía</a>
-                        <a href="#" class="btn-small">Leer Textos</a>
-                    </div>
-                </div>
-                
-                <div class="filosofo-card">
-                    <div class="filosofo-avatar">S</div>
-                    <h3>Jean-Paul Sartre</h3>
-                    <p class="filosofo-years">1905-1980</p>
-                    <div class="filosofo-tags">
-                        <span class="filosofo-tag">Existencialismo</span>
-                        <span class="filosofo-tag">Libertad</span>
-                        <span class="filosofo-tag">Absurdo</span>
-                    </div>
-                    <p class="filosofo-summary">
-                        "La existencia precede a la esencia". Filósofo existencialista. Enfatizó la libertad 
-                        absoluta y la responsabilidad humana.
-                    </p>
-                    <div class="filosofo-links">
-                        <a href="#" class="btn-small primary">Ver Biografía</a>
-                        <a href="#" class="btn-small">Leer Textos</a>
-                    </div>
-                </div>
-                
-                <div class="filosofo-card">
-                    <div class="filosofo-avatar">M</div>
-                    <h3>Michel Foucault</h3>
-                    <p class="filosofo-years">1926-1984</p>
-                    <div class="filosofo-tags">
-                        <span class="filosofo-tag">Poder</span>
-                        <span class="filosofo-tag">Discurso</span>
-                        <span class="filosofo-tag">Biopolítica</span>
-                    </div>
-                    <p class="filosofo-summary">
-                        Analizó las relaciones entre poder, conocimiento y discurso. Estudió la locura, 
-                        la sexualidad y las instituciones disciplinarias.
-                    </p>
-                    <div class="filosofo-links">
-                        <a href="#" class="btn-small primary">Ver Biografía</a>
-                        <a href="#" class="btn-small">Leer Textos</a>
-                    </div>
-                </div>
-            </div>
+        <!-- GRID DE FILÓSOFOS -->
+        <div class="filosofos-grid" id="filosofosGrid">
+            <!-- Se carga dinámicamente -->
         </div>
-        
-        <footer>
-            <p>© 2024-2025 ASEFIP - Asociación de Estudiantes de Filosofía del Perú</p>
-            <p style="margin-top: 10px;">Esta biblioteca está en construcción. Pronto agregaremos más filósofos y contenido.</p>
-        </footer>
     </div>
-    
-    <script>
-        function mostrarEpoca(epoca) {
-            // Actualizar tabs
-            const tabs = document.querySelectorAll('.filter-tab');
-            tabs.forEach(tab => tab.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            // Mostrar/ocultar secciones
-            const secciones = document.querySelectorAll('.epoca-section');
-            if (epoca === 'todas') {
-                secciones.forEach(s => s.style.display = 'block');
-            } else {
-                secciones.forEach(s => {
-                    s.style.display = s.id === epoca ? 'block' : 'none';
-                });
-            }
-        }
-        
-        function buscarFilosofo() {
-            const input = document.getElementById('searchInput').value.toLowerCase();
-            const cards = document.querySelectorAll('.filosofo-card');
-            
-            cards.forEach(card => {
-                const nombre = card.querySelector('h3').textContent.toLowerCase();
-                const tags = Array.from(card.querySelectorAll('.filosofo-tag'))
-                    .map(tag => tag.textContent.toLowerCase())
-                    .join(' ');
-                const resumen = card.querySelector('.filosofo-summary').textContent.toLowerCase();
+
+    <!-- FOOTER -->
+    <footer style="background: var(--color-oscuro); color: white; padding: 3rem 0 1.5rem;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                <div>
+                    <h3 style="color: #CD7F32; margin-bottom: 1rem;">ASEFIP Galería</h3>
+                    <p>La colección más completa de filósofos con perspectiva peruana.</p>
+                </div>
                 
-                const match = nombre.includes(input) || tags.includes(input) || resumen.includes(input);
-                card.style.display = match || input === '' ? 'block' : 'none';
+                <div>
+                    <h3 style="color: #CD7F32; margin-bottom: 1rem;">¿Falta algún filósofo?</h3>
+                    <p>Propón nuevos filósofos para incluir en la galería.</p>
+                    <a href="comunidad.html" style="color: #CD7F32; font-weight: bold;">Enviar propuesta →</a>
+                </div>
+                
+                <div>
+                    <h3 style="color: #CD7F32; margin-bottom: 1rem;">Recursos relacionados</h3>
+                    <ul style="list-style: none;">
+                        <li><a href="linea-tiempo.html" style="color: rgba(255,255,255,0.8);">• Línea del tiempo</a></li>
+                        <li><a href="ejercicios.html" style="color: rgba(255,255,255,0.8);">• Ejercicios sobre filósofos</a></li>
+                        <li><a href="articulos/" style="color: rgba(255,255,255,0.8);">• Artículos sobre filosofía</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>© 2024 ASEFIP - Galería de Filósofos</p>
+                <p style="margin-top: 0.5rem; opacity: 0.7; font-size: 0.9rem;">Para estudiantes de filosofía en Perú y Latinoamérica</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT Y DATOS -->
+    <script>
+        // BASE DE DATOS DE FILÓSOFOS
+        const filosofos = [
+            {
+                id: 1,
+                nombre: "Sócrates",
+                periodo: "Antigua",
+                fechas: "470-399 a.C.",
+                lugar: "Atenas, Grecia",
+                resumen: "Considerado el padre de la filosofía occidental. No dejó escritos; su pensamiento nos llega a través de Platón. Desarrolló el método mayéutico y se centró en la ética y el autoconocimiento.",
+                obras: ["No dejó escritos", "Su pensamiento en los diálogos de Platón"],
+                escuela: "Ética socrática",
+                influencia: "Platón, Aristóteles, filosofía occidental",
+                icono: "🏛️",
+                peruano: false
+            },
+            {
+                id: 2,
+                nombre: "Platón",
+                periodo: "Antigua",
+                fechas: "427-347 a.C.",
+                lugar: "Atenas, Grecia",
+                resumen: "Fundador de la Academia. Desarrolló la teoría de las Ideas, la alegoría de la caverna y propuso el gobierno de los filósofos en 'La República'.",
+                obras: ["La República", "Fedón", "El Banquete", "Fedro"],
+                escuela: "Platonismo",
+                influencia: "Filosofía occidental, cristianismo, neoplatonismo",
+                icono: "📜",
+                peruano: false
+            },
+            {
+                id: 3,
+                nombre: "Aristóteles",
+                periodo: "Antigua",
+                fechas: "384-322 a.C.",
+                lugar: "Estagira, Grecia",
+                resumen: "Discípulo de Platón y tutor de Alejandro Magno. Fundó el Liceo. Desarrolló la lógica formal, la ética de la virtud y la teoría del justo medio.",
+                obras: ["Ética a Nicómaco", "Política", "Metafísica", "Poética"],
+                escuela: "Aristotelismo",
+                influencia: "Tomás de Aquino, filosofía medieval, ciencia",
+                icono: "⚖️",
+                peruano: false
+            },
+            {
+                id: 4,
+                nombre: "Augusto Salazar Bondy",
+                periodo: "Peruana",
+                fechas: "1925-1974",
+                lugar: "Lima, Perú",
+                resumen: "Filósofo peruano que desarrolló una crítica al pensamiento colonial y defendió una filosofía de la liberación latinoamericana. Analizó la 'dominación cultural'.",
+                obras: ["¿Existe una filosofía de nuestra América?", "Dominación y liberación", "Historia de las ideas en el Perú"],
+                escuela: "Filosofía de la liberación",
+                influencia: "Filosofía latinoamericana, pensamiento crítico",
+                icono: "🇵🇪",
+                peruano: true
+            },
+            {
+                id: 5,
+                nombre: "Immanuel Kant",
+                periodo: "Moderna",
+                fechas: "1724-1804",
+                lugar: "Königsberg, Prusia",
+                resumen: "Pensador clave de la Ilustración. Desarrolló el idealismo transcendental, la ética del imperativo categórico y criticó la razón pura.",
+                obras: ["Crítica de la razón pura", "Fundamentación de la metafísica de las costumbres", "Crítica del juicio"],
+                escuela: "Idealismo alemán",
+                influencia: "Fichte, Hegel, filosofía contemporánea",
+                icono: "⏰",
+                peruano: false
+            },
+            {
+                id: 6,
+                nombre: "Friedrich Nietzsche",
+                periodo: "Contemporánea",
+                fechas: "1844-1900",
+                lugar: "Röcken, Alemania",
+                resumen: "Crítico de la moral cristiana y la metafísica tradicional. Propuso la transvaloración de todos los valores, el superhombre y la voluntad de poder.",
+                obras: ["Así habló Zaratustra", "Más allá del bien y del mal", "La genealogía de la moral"],
+                escuela: "Vitalismo, existencialismo",
+                influencia: "Heidegger, Foucault, posmodernismo",
+                icono: "☀️",
+                peruano: false
+            },
+            {
+                id: 7,
+                nombre: "Simone de Beauvoir",
+                periodo: "Contemporánea",
+                fechas: "1908-1986",
+                lugar: "París, Francia",
+                resumen: "Filósofa existencialista y feminista. En 'El segundo sexo' desarrolló la famosa frase 'No se nace mujer, se llega a serlo'.",
+                obras: ["El segundo sexo", "Para una moral de la ambigüedad", "Los mandarines"],
+                escuela: "Existencialismo, feminismo",
+                influencia: "Feminismo contemporáneo, teoría de género",
+                icono: "⚧️",
+                peruano: false,
+                femenina: true
+            },
+            {
+                id: 8,
+                nombre: "Josef Estermann",
+                periodo: "Peruana",
+                fechas: "1956-presente",
+                lugar: "Suiza/Perú",
+                resumen: "Filósofo y teólogo suizo-peruano que desarrolló la 'filosofía andina'. Estudia la cosmovisión andina y sus conceptos como pachamama, ayni, tinkuy.",
+                obras: ["Filosofía andina", "Crisis civilizatoria y buen vivir", "Interculturalidad"],
+                escuela: "Filosofía andina, interculturalidad",
+                influencia: "Pensamiento decolonial, filosofía latinoamericana",
+                icono: "🏔️",
+                peruano: true
+            },
+            // Añadir más filósofos aquí...
+            {
+                id: 9,
+                nombre: "María Jesús Alvarado Rivera",
+                periodo: "Peruana",
+                fechas: "1878-1971",
+                lugar: "Lima, Perú",
+                resumen: "Primera feminista peruana, educadora y filósofa. Luchó por los derechos de las mujeres y la educación femenina en el Perú.",
+                obras: ["El feminismo", "Nuevas cumbres", "Educación femenina"],
+                escuela: "Feminismo peruano",
+                influencia: "Movimiento feminista peruano",
+                icono: "👩‍🏫",
+                peruano: true,
+                femenina: true
+            }
+        ];
+
+        // INICIALIZACIÓN
+        document.addEventListener('DOMContentLoaded', function() {
+            cargarFilosofos();
+            configurarBuscador();
+            configurarFiltros();
+            mostrarFilosofoDestacado();
+        });
+
+        // CARGAR FILÓSOFOS
+        function cargarFilosofos(filtro = 'todos', busqueda = '') {
+            const grid = document.getElementById('filosofosGrid');
+            grid.innerHTML = '';
+            
+            let filosofosFiltrados = filosofos;
+            
+            // Filtrar por período
+            if (filtro !== 'todos') {
+                if (filtro === 'peruana') {
+                    filosofosFiltrados = filosofosFiltrados.filter(f => f.peruano === true);
+                } else if (filtro === 'femenina') {
+                    filosofosFiltrados = filosofosFiltrados.filter(f => f.femenina === true);
+                } else {
+                    filosofosFiltrados = filosofosFiltrados.filter(f => f.periodo === filtro);
+                }
+            }
+            
+            // Filtrar por búsqueda
+            if (busqueda) {
+                const busquedaLower = busqueda.toLowerCase();
+                filosofosFiltrados = filosofosFiltrados.filter(f => 
+                    f.nombre.toLowerCase().includes(busquedaLower) ||
+                    f.resumen.toLowerCase().includes(busquedaLower) ||
+                    f.escuela.toLowerCase().includes(busquedaLower) ||
+                    f.lugar.toLowerCase().includes(busquedaLower)
+                );
+            }
+            
+            // Actualizar contador
+            document.getElementById('contadorFilosofos').textContent = filosofosFiltrados.length;
+            
+            // Mostrar filósofos
+            filosofosFiltrados.forEach(filosofo => {
+                const card = document.createElement('div');
+                card.className = 'filosofo-card';
+                
+                card.innerHTML = `
+                    ${filosofo.peruano ? '<div class="etiqueta-peruana">🇵🇪 Peruano</div>' : ''}
+                    
+                    <div class="filosofo-imagen">
+                        <span style="font-size: 4rem;">${filosofo.icono}</span>
+                    </div>
+                    
+                    <div class="filosofo-contenido">
+                        <h2 class="filosofo-nombre">${filosofo.nombre}</h2>
+                        <span class="filosofo-periodo">${filosofo.periodo}</span>
+                        <div class="filosofo-fechas">${filosofo.fechas} | ${filosofo.lugar}</div>
+                        
+                        <p class="filosofo-resumen">${filosofo.resumen}</p>
+                        
+                        <div class="filosofo-obras">
+                            <h4>Obras principales:</h4>
+                            <ul class="obras-lista">
+                                ${filosofo.obras.map(obra => `<li>${obra}</li>`).join('')}
+                            </ul>
+                        </div>
+                        
+                        <div style="margin-top: 1rem; font-size: 0.9rem; color: #888;">
+                            <strong>Escuela:</strong> ${filosofo.escuela}
+                        </div>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
             });
         }
-        
-        // Búsqueda en tiempo real
-        document.getElementById('searchInput').addEventListener('input', buscarFilosofo);
+
+        // CONFIGURAR BUSCADOR
+        function configurarBuscador() {
+            const buscador = document.getElementById('buscadorFilosofos');
+            let timeout;
+            
+            buscador.addEventListener('input', function() {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => {
+                    const filtroActivo = document.querySelector('.periodo-btn.activo').dataset.periodo;
+                    cargarFilosofos(filtroActivo, this.value);
+                }, 300);
+            });
+        }
+
+        // CONFIGURAR FILTROS
+        function configurarFiltros() {
+            const filtros = document.querySelectorAll('.periodo-btn');
+            filtros.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filtros.forEach(b => b.classList.remove('activo'));
+                    this.classList.add('activo');
+                    cargarFilosofos(this.dataset.periodo);
+                });
+            });
+        }
+
+        // MOSTRAR FILÓSOFO DESTACADO (ALEATORIO)
+        function mostrarFilosofoDestacado() {
+            const destacado = document.getElementById('filosofoDestacado');
+            const filosofoAleatorio = filosofos[Math.floor(Math.random() * filosofos.length)];
+            
+            destacado.innerHTML = `
+                <div style="text-align: center;">
+                    <div style="font-size: 5rem; margin-bottom: 1rem;">${filosofoAleatorio.icono}</div>
+                    <h3 style="font-size: 1.5rem; color: #CD7F32;">Filósofo destacado del día</h3>
+                </div>
+                
+                <div>
+                    <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">${filosofoAleatorio.nombre}</h2>
+                    <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px; margin: 1rem 0;">
+                        <strong>${filosofoAleatorio.fechas}</strong> | ${filosofoAleatorio.lugar}
+                    </div>
+                    
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin: 1.5rem 0;">
+                        ${filosofoAleatorio.resumen}
+                    </p>
+                    
+                    ${filosofoAleatorio.peruano ? 
+                        '<div style="background: #C00; display: inline-block; padding: 5px 15px; border-radius: 20px; font-weight: bold; margin-top: 1rem;">🇵🇪 FILÓSOFO PERUANO</div>' 
+                        : ''}
+                </div>
+            `;
+        }
+
+        // FUNCIÓN PARA AÑADIR NUEVO FILÓSOFO (desde comunidad)
+        function sugerirNuevoFilosofo() {
+            const nombre = prompt("Nombre del filósofo:");
+            const periodo = prompt("Período (Antigua, Medieval, Moderna, Contemporánea, Peruana):");
+            const resumen = prompt("Breve resumen de su pensamiento:");
+            
+            if (nombre && periodo && resumen) {
+                alert(`¡Gracias por sugerir a ${nombre}! Revisaremos la propuesta y la añadiremos a la galería.`);
+                // Aquí se podría enviar a una base de datos o correo
+            }
+        }
     </script>
 </body>
 </html>
