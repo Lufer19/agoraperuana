@@ -269,7 +269,7 @@
             transform: translateY(-3px);
         }
         
-        /* SECCIÓN DE EFEMÉRIDES CON IA */
+        /* SECCIÓN DE EFEMÉRIDES CON IA - MODIFICADA */
         .ephemeris-section {
             padding: 6rem 0;
             background: rgba(30, 58, 95, 0.1);
@@ -490,7 +490,7 @@
             opacity: 0.9;
         }
         
-        /* WIDGET DE LECHUZA IA */
+        /* WIDGET DE LECHUZA IA - MEJORADO */
         .owl-ai-widget {
             position: fixed;
             bottom: 30px;
@@ -605,6 +605,33 @@
             border-radius: 15px 15px 5px 15px;
             border-right: 3px solid var(--philosophy-blue);
         }
+
+        /* Indicador de carga para la lechuza */
+        .typing-indicator {
+            display: flex;
+            padding: 10px 15px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 15px 15px 15px 5px;
+            border-left: 3px solid var(--gold-primary);
+            width: fit-content;
+        }
+
+        .typing-indicator span {
+            height: 8px;
+            width: 8px;
+            background: var(--gold-primary);
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-8px); }
+        }
         
         .chat-input {
             padding: 1.5rem;
@@ -636,6 +663,54 @@
         
         .chat-input button:hover {
             transform: scale(1.1);
+        }
+
+        /* Widget de Efemérides en tiempo real */
+        .live-ephemeris-widget {
+            background: linear-gradient(135deg, var(--philosophy-purple) 0%, #2c3e50 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: var(--shadow-medium);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .live-ephemeris-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .live-ephemeris-icon {
+            font-size: 2.5rem;
+            color: var(--gold-primary);
+        }
+
+        .live-ephemeris-text {
+            flex: 1;
+        }
+
+        .live-ephemeris-text h4 {
+            margin-bottom: 5px;
+            color: var(--gold-primary);
+        }
+
+        .live-ephemeris-refresh {
+            background: rgba(212, 175, 55, 0.2);
+            border: none;
+            color: var(--gold-primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .live-ephemeris-refresh:hover {
+            background: var(--gold-primary);
+            color: var(--philosophy-blue);
+            transform: rotate(180deg);
         }
         
         /* FOOTER PREMIUM */
@@ -804,22 +879,38 @@
                     <a href="#efemerides" class="cta-button">
                         <i class="fas fa-calendar-alt"></i> Ver Efemérides Hoy
                     </a>
-                    <a href="#owl-chat" class="btn-secondary">
+                    <a href="#owl-chat" class="btn-secondary" onclick="toggleOwlChat()">
                         <i class="fas fa-robot"></i> Hablar con la Lechuza IA
                     </a>
+                </div>
+
+                <!-- Widget de Efemérides en Tiempo Real -->
+                <div class="live-ephemeris-widget" id="liveEphemerisWidget" style="margin-top: 30px;">
+                    <div class="live-ephemeris-content">
+                        <div class="live-ephemeris-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="live-ephemeris-text">
+                            <h4>Efeméride del Día</h4>
+                            <p id="liveEphemerisText">Cargando reflexión filosófica del día...</p>
+                        </div>
+                        <button class="live-ephemeris-refresh" onclick="loadLiveEphemeris()">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
     
-    <!-- SECCIÓN EFEMÉRIDES CON IA -->
+    <!-- SECCIÓN EFEMÉRIDES CON IA - ACTUALIZADA -->
     <section class="ephemeris-section" id="efemerides">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title philosophy-font">Efemérides Filosóficas <span style="color: var(--gold-primary)">con IA</span></h2>
                 <p class="section-subtitle">
                     Eventos y nacimientos importantes generados automáticamente por nuestra inteligencia artificial.
-                    Actualizado diariamente.
+                    Actualizado diariamente desde nuestra API.
                 </p>
             </div>
             
@@ -838,14 +929,20 @@
                     </div>
                     <div class="ephemeris-content">
                         <h3>Generando efemérides filosóficas...</h3>
-                        <p>Nuestra IA está analizando la historia de la filosofía para traerte los eventos más relevantes de hoy.</p>
+                        <p>Nuestra API está analizando la historia de la filosofía para traerte los eventos más relevantes de hoy.</p>
                         <div class="ephemeris-tags">
-                            <span class="ephemeris-tag">IA</span>
+                            <span class="ephemeris-tag">API</span>
                             <span class="ephemeris-tag">Filosofía</span>
                             <span class="ephemeris-tag">Actualización automática</span>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="efemerides.html" class="btn-secondary" style="display: inline-flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-calendar-day"></i> Ver Calendario Completo de Efemérides
+                </a>
             </div>
         </div>
     </section>
@@ -925,26 +1022,26 @@
                     <div class="feature-icon">
                         <i class="fas fa-brain"></i>
                     </div>
-                    <h3 class="feature-title">Ejercicios con IA</h3>
+                    <h3 class="feature-title">Lechuza Filosófica IA</h3>
                     <p class="feature-description">
-                        Pruebas interactivas que se adaptan a tu nivel de conocimiento. La IA genera preguntas personalizadas.
+                        Chatbot especializado en filosofía peruana y universal. Responde preguntas y recomienda lecturas en tiempo real.
                     </p>
-                    <a href="content/ejercicios/" class="btn-secondary" style="margin-top: 1.5rem; display: inline-block;">
-                        Comenzar
-                    </a>
+                    <button onclick="toggleOwlChat()" class="btn-secondary" style="margin-top: 1.5rem; display: inline-block; cursor: pointer;">
+                        <i class="fas fa-robot"></i> Consultar Ahora
+                    </button>
                 </div>
                 
                 <!-- Recurso 2 -->
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-book-open"></i>
+                        <i class="fas fa-calendar-day"></i>
                     </div>
-                    <h3 class="feature-title">Glosario Inteligente</h3>
+                    <h3 class="feature-title">Efemérides Automáticas</h3>
                     <p class="feature-description">
-                        Más de 500 términos filosóficos con explicaciones generadas por IA y ejemplos contextualizados.
+                        Base de datos con cientos de eventos filosóficos. Actualización diaria automática desde nuestra API.
                     </p>
-                    <a href="content/glosario/" class="btn-secondary" style="margin-top: 1.5rem; display: inline-block;">
-                        Explorar
+                    <a href="efemerides.html" class="btn-secondary" style="margin-top: 1.5rem; display: inline-block;">
+                        <i class="fas fa-history"></i> Explorar Historia
                     </a>
                 </div>
                 
@@ -979,7 +1076,7 @@
         </div>
     </section>
     
-    <!-- WIDGET DE LECHUZA IA -->
+    <!-- WIDGET DE LECHUZA IA - MEJORADO CON API REAL -->
     <div class="owl-ai-widget" id="owl-chat">
         <div class="owl-toggle" id="owlToggle">
             <div class="owl-icon">🦉</div>
@@ -992,21 +1089,20 @@
                 </div>
                 <div class="chat-title">
                     <h3>Lechuza Filosófica</h3>
-                    <p>Tu asistente de IA especializado en filosofía</p>
+                    <p>Asistente IA especializado en filosofía - ASEFIP</p>
                 </div>
             </div>
             
             <div class="chat-body" id="chatBody">
                 <!-- Mensajes de chat -->
                 <div class="message owl">
-                    <p>¡Hola! Soy tu lechuza filosófica. ¿En qué puedo ayudarte hoy? Puedo explicar conceptos, recomendar lecturas o debatir ideas contigo.</p>
-                </div>
-                
-                <div class="message owl">
-                    <p>Prueba preguntarme cosas como:<br>
-                    • "Explícame la alegoría de la caverna"<br>
-                    • "¿Qué filósofo peruano recomiendas estudiar?"<br>
-                    • "Ayúdame con mi ensayo sobre ética"</p>
+                    <p>¡Hola filósofo! Soy Sapientia, tu lechuza sabia de ASEFIP. Estoy aquí para ayudarte con:</p>
+                    <p>• Explicación de conceptos filosóficos<br>
+                    • Recomendaciones de lectura peruana<br>
+                    • Análisis de textos filosóficos<br>
+                    • Preparación para exámenes<br>
+                    • Debate de ideas</p>
+                    <p><em>¿En qué puedo ayudarte hoy?</em></p>
                 </div>
             </div>
             
@@ -1047,13 +1143,13 @@
                 
                 <!-- Columna 2 -->
                 <div class="footer-column">
-                    <h3>Recursos</h3>
+                    <h3>Herramientas IA</h3>
                     <ul class="footer-links">
-                        <li><a href="content/articulos/">Artículos Académicos</a></li>
-                        <li><a href="content/ejercicios/">Ejercicios con IA</a></li>
-                        <li><a href="content/filosofos/">Galería de Filósofos</a></li>
-                        <li><a href="content/timeline/">Línea del Tiempo</a></li>
+                        <li><a href="javascript:void(0)" onclick="toggleOwlChat()">Lechuza Filosófica</a></li>
+                        <li><a href="efemerides.html">Efemérides Automáticas</a></li>
                         <li><a href="content/glosario/">Glosario Inteligente</a></li>
+                        <li><a href="content/ejercicios/">Ejercicios con IA</a></li>
+                        <li><a href="api/owl-chat.php">API Lechuza</a></li>
                     </ul>
                 </div>
                 
@@ -1061,7 +1157,7 @@
                 <div class="footer-column">
                     <h3>Comunidad</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Foro de Debate</a></li>
+                        <li><a href="comunidad.html">Foro de Debate</a></li>
                         <li><a href="#">Eventos en Vivo</a></li>
                         <li><a href="#">Grupos de Estudio</a></li>
                         <li><a href="#">Concurso de Ensayos</a></li>
@@ -1071,13 +1167,13 @@
                 
                 <!-- Columna 4 -->
                 <div class="footer-column">
-                    <h3>Contacto</h3>
+                    <h3>Recursos Técnicos</h3>
                     <ul class="footer-links">
-                        <li><a href="mailto:contacto@asefip.org">contacto@asefip.org</a></li>
-                        <li><a href="#">Soporte Técnico</a></li>
-                        <li><a href="#">Colaborar con ASEFIP</a></li>
-                        <li><a href="#">Prensa y Medios</a></li>
-                        <li><a href="#">Trabaja con Nosotros</a></li>
+                        <li><a href="api/owl-chat.php" target="_blank">API Chat Filosófico</a></li>
+                        <li><a href="api/efemerides.php" target="_blank">API Efemérides</a></li>
+                        <li><a href="#">Documentación Técnica</a></li>
+                        <li><a href="#">Código Fuente</a></li>
+                        <li><a href="#">Colaborar con el Proyecto</a></li>
                     </ul>
                 </div>
             </div>
@@ -1086,6 +1182,7 @@
                 <p>© 2024 ASEFIP - Asociación de Estudiantes de Filosofía del Perú. Todos los derechos reservados.</p>
                 <p style="margin-top: 0.5rem; font-size: 0.9rem;">
                     <i class="fas fa-code"></i> Desarrollado con pasión filosófica y tecnología de vanguardia.
+                    <br><i class="fas fa-server"></i> APIs activas: Lechuza Filosófica y Efemérides Automáticas
                 </p>
             </div>
         </div>
@@ -1095,9 +1192,42 @@
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     
     <script>
-        // INICIALIZACIÓN DE PARTÍCULAS
+        // ============================================
+        // CONFIGURACIÓN GLOBAL
+        // ============================================
+        let isOwlChatProcessing = false;
+        const API_BASE = window.location.hostname.includes('github.io') 
+            ? '/agoraperuana/api' 
+            : '/api';
+        
+        // ============================================
+        // INICIALIZACIÓN DE LA PÁGINA
+        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            // Configuración de partículas
+            // 1. Configurar partículas
+            setupParticles();
+            
+            // 2. Fecha actual
+            updateCurrentDate();
+            
+            // 3. Cargar efemérides automáticas
+            loadEphemeris();
+            loadLiveEphemeris();
+            
+            // 4. Configurar lechuza IA
+            setupOwlAI();
+            
+            // 5. Efecto de escritura
+            typeWriterEffect();
+            
+            // 6. Configurar scroll y header
+            setupScrollEffects();
+        });
+        
+        // ============================================
+        // 1. PARTÍCULAS
+        // ============================================
+        function setupParticles() {
             particlesJS('particles-js', {
                 particles: {
                     number: { value: 80, density: { enable: true, value_area: 800 } },
@@ -1130,25 +1260,321 @@
                     }
                 }
             });
-            
-            // Fecha actual
-            const now = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('currentDate').textContent = now.toLocaleDateString('es-ES', options);
-            
-            // Cargar efemérides
-            loadEphemeris();
-            
-            // Configurar lechuza IA
-            setupOwlAI();
-            
-            // Efecto de escritura para el título
-            typeWriterEffect();
-        });
+        }
         
-        // EFECTOS DE ESCRITURA
+        // ============================================
+        // 2. FECHA ACTUAL
+        // ============================================
+        function updateCurrentDate() {
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            const dateString = now.toLocaleDateString('es-ES', options);
+            document.getElementById('currentDate').textContent = dateString;
+        }
+        
+        // ============================================
+        // 3. EFEMÉRIDES AUTOMÁTICAS (API REAL)
+        // ============================================
+        async function loadEphemeris() {
+            const container = document.getElementById('ephemerisContainer');
+            
+            try {
+                // Llamar a la API real
+                const response = await fetch(`${API_BASE}/efemerides.php`);
+                const data = await response.json();
+                
+                // Limpiar contenedor
+                container.innerHTML = '';
+                
+                if (data.success && data.efemeride) {
+                    const efemeride = data.efemeride;
+                    const now = new Date();
+                    
+                    // Tarjeta principal con la efeméride del día
+                    const mainCard = document.createElement('div');
+                    mainCard.className = 'ephemeris-card';
+                    mainCard.style.border = '2px solid rgba(212, 175, 55, 0.3)';
+                    
+                    mainCard.innerHTML = `
+                        <div class="ephemeris-date">
+                            <div class="ephemeris-icon">
+                                <i class="fas fa-calendar-day"></i>
+                            </div>
+                            <div>
+                                <div class="ephemeris-day">${now.getDate()}</div>
+                                <div class="ephemeris-month">${efemeride.fecha_actual}</div>
+                            </div>
+                        </div>
+                        <div class="ephemeris-content">
+                            <h3>${efemeride.evento}</h3>
+                            <p>${efemeride.cita}</p>
+                            <div class="ephemeris-tags">
+                                <span class="ephemeris-tag">${efemeride.tipo}</span>
+                                <span class="ephemeris-tag">${efemeride.filosofo}</span>
+                                <span class="ephemeris-tag">Actual</span>
+                            </div>
+                        </div>
+                    `;
+                    
+                    container.appendChild(mainCard);
+                    
+                    // Tarjetas adicionales de ejemplo
+                    const additionalCards = [
+                        {
+                            day: now.getDate() - 1,
+                            month: now.toLocaleDateString('es-ES', { month: 'long' }),
+                            title: "Reflexión del Ayer",
+                            description: "La filosofía se construye día a día. Revisa lo aprendido y prepárate para nuevos conocimientos.",
+                            tags: ["Reflexión", "Aprendizaje", "Continuidad"]
+                        },
+                        {
+                            day: now.getDate() + 1,
+                            month: now.toLocaleDateString('es-ES', { month: 'long' }),
+                            title: "Próximos Eventos",
+                            description: "Mañana destacaremos un nuevo filósofo peruano. ¡Mantente atento a las actualizaciones!",
+                            tags: ["Próximo", "Evento", "Actualización"]
+                        }
+                    ];
+                    
+                    additionalCards.forEach(item => {
+                        const card = document.createElement('div');
+                        card.className = 'ephemeris-card';
+                        
+                        card.innerHTML = `
+                            <div class="ephemeris-date">
+                                <div class="ephemeris-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <div class="ephemeris-day">${item.day}</div>
+                                    <div class="ephemeris-month">${item.month}</div>
+                                </div>
+                            </div>
+                            <div class="ephemeris-content">
+                                <h3>${item.title}</h3>
+                                <p>${item.description}</p>
+                                <div class="ephemeris-tags">
+                                    ${item.tags.map(tag => `<span class="ephemeris-tag">${tag}</span>`).join('')}
+                                </div>
+                            </div>
+                        `;
+                        
+                        container.appendChild(card);
+                    });
+                    
+                } else {
+                    throw new Error('No se pudo cargar la efeméride');
+                }
+                
+            } catch (error) {
+                console.error('Error cargando efemérides:', error);
+                container.innerHTML = `
+                    <div class="ephemeris-card" style="border-color: #e74c3c;">
+                        <div class="ephemeris-date">
+                            <div class="ephemeris-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div>
+                                <div class="ephemeris-day">!</div>
+                                <div class="ephemeris-month">Error</div>
+                            </div>
+                        </div>
+                        <div class="ephemeris-content">
+                            <h3>Error al cargar efemérides</h3>
+                            <p>No se pudieron cargar las efemérides automáticas. Intenta recargar la página.</p>
+                            <button onclick="loadEphemeris()" class="btn-secondary" style="margin-top: 1rem;">Reintentar</button>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+        
+        // ============================================
+        // EFEMÉRIDE EN TIEMPO REAL
+        // ============================================
+        async function loadLiveEphemeris() {
+            const widget = document.getElementById('liveEphemerisText');
+            const button = document.querySelector('.live-ephemeris-refresh');
+            
+            // Mostrar estado de carga
+            widget.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Cargando...';
+            button.disabled = true;
+            
+            try {
+                const response = await fetch(`${API_BASE}/efemerides.php`);
+                const data = await response.json();
+                
+                if (data.success && data.efemeride) {
+                    const efemeride = data.efemeride;
+                    widget.textContent = `${efemeride.evento}: "${efemeride.cita.substring(0, 80)}..."`;
+                } else {
+                    widget.textContent = "Hoy es un buen día para filosofar. ¿Qué estás pensando?";
+                }
+                
+            } catch (error) {
+                widget.textContent = "La filosofía nos invita a reflexionar cada día. ¡Aprovecha este momento!";
+            } finally {
+                button.disabled = false;
+            }
+        }
+        
+        // ============================================
+        // 4. LECHUZA IA (API REAL)
+        // ============================================
+        function setupOwlAI() {
+            const owlToggle = document.getElementById('owlToggle');
+            const owlChat = document.getElementById('owlChat');
+            const chatInput = document.getElementById('chatInput');
+            const sendButton = document.getElementById('sendMessage');
+            const chatBody = document.getElementById('chatBody');
+            
+            // Alternar chat
+            owlToggle.addEventListener('click', toggleOwlChat);
+            
+            // Enviar mensaje
+            async function sendMessage() {
+                if (isOwlChatProcessing) return;
+                
+                const message = chatInput.value.trim();
+                if (!message) return;
+                
+                // Agregar mensaje del usuario
+                addUserMessage(message);
+                chatInput.value = '';
+                
+                // Mostrar indicador de carga
+                showTypingIndicator();
+                
+                try {
+                    isOwlChatProcessing = true;
+                    
+                    // Llamar a la API real
+                    const response = await fetch(`${API_BASE}/owl-chat.php`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ mensaje: message })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    // Remover indicador de carga
+                    removeTypingIndicator();
+                    
+                    // Agregar respuesta de la IA
+                    if (data.respuesta) {
+                        addOwlMessage(data.respuesta);
+                    } else if (data.error) {
+                        addOwlMessage(`Lo siento, hubo un error: ${data.error}. Intenta de nuevo.`);
+                    } else {
+                        addOwlMessage("No pude procesar tu pregunta. ¿Podrías reformularla?");
+                    }
+                    
+                } catch (error) {
+                    removeTypingIndicator();
+                    addOwlMessage("No pude conectarme con el servidor. ¿Podrías intentar más tarde?");
+                    console.error('Error en chat:', error);
+                } finally {
+                    isOwlChatProcessing = false;
+                }
+            }
+            
+            // Funciones auxiliares para el chat
+            function addUserMessage(text) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message user';
+                messageDiv.innerHTML = `<p>${text}</p>`;
+                chatBody.appendChild(messageDiv);
+                scrollChatToBottom();
+            }
+            
+            function addOwlMessage(text) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message owl';
+                // Convertir saltos de línea en <br>
+                const formattedText = text.replace(/\n/g, '<br>');
+                messageDiv.innerHTML = `<p>${formattedText}</p>`;
+                chatBody.appendChild(messageDiv);
+                scrollChatToBottom();
+            }
+            
+            function showTypingIndicator() {
+                const typingDiv = document.createElement('div');
+                typingDiv.className = 'typing-indicator';
+                typingDiv.id = 'typingIndicator';
+                typingDiv.innerHTML = `
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                `;
+                chatBody.appendChild(typingDiv);
+                scrollChatToBottom();
+            }
+            
+            function removeTypingIndicator() {
+                const typingIndicator = document.getElementById('typingIndicator');
+                if (typingIndicator) {
+                    typingIndicator.remove();
+                }
+            }
+            
+            function scrollChatToBottom() {
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+            
+            // Event listeners
+            sendButton.addEventListener('click', sendMessage);
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+            
+            // Preguntas sugeridas
+            setTimeout(() => {
+                const quickQuestions = document.createElement('div');
+                quickQuestions.style.marginTop = '1rem';
+                quickQuestions.innerHTML = `
+                    <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 0.5rem;">Preguntas sugeridas:</p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        <button class="ephemeris-tag" style="cursor: pointer; border: none; font-size: 0.8rem;" 
+                                onclick="document.getElementById('chatInput').value = '¿Qué es la filosofía?'; document.getElementById('chatInput').focus();">
+                            ¿Qué es la filosofía?
+                        </button>
+                        <button class="ephemeris-tag" style="cursor: pointer; border: none; font-size: 0.8rem;" 
+                                onclick="document.getElementById('chatInput').value = 'Explícame a Platón'; document.getElementById('chatInput').focus();">
+                            Explícame a Platón
+                        </button>
+                        <button class="ephemeris-tag" style="cursor: pointer; border: none; font-size: 0.8rem;" 
+                                onclick="document.getElementById('chatInput').value = 'Filósofos peruanos importantes'; document.getElementById('chatInput').focus();">
+                            Filósofos peruanos
+                        </button>
+                        <button class="ephemeris-tag" style="cursor: pointer; border: none; font-size: 0.8rem;" 
+                                onclick="document.getElementById('chatInput').value = 'Conceptos filosóficos básicos'; document.getElementById('chatInput').focus();">
+                            Conceptos básicos
+                        </button>
+                    </div>
+                `;
+                chatBody.appendChild(quickQuestions);
+            }, 500);
+        }
+        
+        // ============================================
+        // 5. EFECTO DE ESCRITURA
+        // ============================================
         function typeWriterEffect() {
             const title = document.querySelector('.hero-title');
+            if (!title) return;
+            
             const text = title.textContent;
             title.textContent = '';
             
@@ -1164,216 +1590,67 @@
             setTimeout(typeWriter, 1000);
         }
         
-        // CARGAR EFEMÉRIDES (simulación - en producción se conectaría a una API)
-        function loadEphemeris() {
-            const container = document.getElementById('ephemerisContainer');
-            
-            // Datos de ejemplo (en producción vendrían de una API con IA)
-            const ephemerisData = [
-                {
-                    day: now.getDate(),
-                    month: now.toLocaleDateString('es-ES', { month: 'long' }),
-                    year: now.getFullYear(),
-                    title: "Nacimiento de Sócrates",
-                    description: "Según la tradición, hoy se conmemora el nacimiento de Sócrates (470 a.C.), padre de la filosofía occidental y maestro de Platón.",
-                    tags: ["Antigua", "Grecia", "Ética"]
-                },
-                {
-                    day: now.getDate(),
-                    month: now.toLocaleDateString('es-ES', { month: 'long' }),
-                    year: 2024,
-                    title: "Día del Filósofo Peruano",
-                    description: "Celebramos la contribución de los pensadores peruanos a la filosofía universal, desde la escolástica colonial hasta el pensamiento andino contemporáneo.",
-                    tags: ["Perú", "Actual", "Celebración"]
-                },
-                {
-                    day: now.getDate(),
-                    month: now.toLocaleDateString('es-ES', { month: 'long' }),
-                    year: 1883,
-                    title: "Fallecimiento de Karl Marx",
-                    description: "Un día como hoy murió Karl Marx, cuya obra transformó el pensamiento político, económico y filosófico del siglo XX.",
-                    tags: ["Política", "Economía", "Siglo XIX"]
-                }
-            ];
-            
-            // Limpiar loading state
-            container.innerHTML = '';
-            
-            // Generar tarjetas de efemérides
-            ephemerisData.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'ephemeris-card';
-                
-                card.innerHTML = `
-                    <div class="ephemeris-date">
-                        <div class="ephemeris-icon">
-                            <i class="fas fa-history"></i>
-                        </div>
-                        <div>
-                            <div class="ephemeris-day">${item.day}</div>
-                            <div class="ephemeris-month">${item.month} ${item.year}</div>
-                        </div>
-                    </div>
-                    <div class="ephemeris-content">
-                        <h3>${item.title}</h3>
-                        <p>${item.description}</p>
-                        <div class="ephemeris-tags">
-                            ${item.tags.map(tag => `<span class="ephemeris-tag">${tag}</span>`).join('')}
-                        </div>
-                    </div>
-                `;
-                
-                container.appendChild(card);
+        // ============================================
+        // 6. EFECTOS DE SCROLL Y HEADER
+        // ============================================
+        function setupScrollEffects() {
+            // Scroll suave para enlaces
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Cerrar chat si está abierto
+                        document.getElementById('owlChat').classList.remove('active');
+                    }
+                });
             });
             
-            // Agregar tarjeta de IA generativa
-            const aiCard = document.createElement('div');
-            aiCard.className = 'ephemeris-card';
-            aiCard.style.border = '2px dashed rgba(212, 175, 55, 0.5)';
-            
-            aiCard.innerHTML = `
-                <div class="ephemeris-date">
-                    <div class="ephemeris-icon">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <div>
-                        <div class="ephemeris-day">IA</div>
-                        <div class="ephemeris-month">Generativa</div>
-                    </div>
-                </div>
-                <div class="ephemeris-content">
-                    <h3>Efemérides Generadas por IA</h3>
-                    <p>Estos eventos son seleccionados y descritos automáticamente por nuestro sistema de inteligencia artificial, que analiza bases de datos filosóficas históricas.</p>
-                    <div class="ephemeris-tags">
-                        <span class="ephemeris-tag">Inteligencia Artificial</span>
-                        <span class="ephemeris-tag">Automatizado</span>
-                        <span class="ephemeris-tag">Actualización diaria</span>
-                    </div>
-                </div>
-            `;
-            
-            container.appendChild(aiCard);
+            // Efecto en header al hacer scroll
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('.main-header');
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(10, 10, 10, 0.95)';
+                    header.style.backdropFilter = 'blur(15px)';
+                } else {
+                    header.style.background = 'rgba(10, 10, 10, 0.9)';
+                    header.style.backdropFilter = 'blur(10px)';
+                }
+            });
         }
         
-        // CONFIGURAR LECHUZA IA
-        function setupOwlAI() {
-            const owlToggle = document.getElementById('owlToggle');
+        // ============================================
+        // FUNCIONES GLOBALES
+        // ============================================
+        function toggleOwlChat() {
             const owlChat = document.getElementById('owlChat');
             const chatInput = document.getElementById('chatInput');
-            const sendButton = document.getElementById('sendMessage');
-            const chatBody = document.getElementById('chatBody');
             
-            // Alternar chat
-            owlToggle.addEventListener('click', function() {
-                owlChat.classList.toggle('active');
-                if (owlChat.classList.contains('active')) {
-                    chatInput.focus();
-                }
-            });
-            
-            // Enviar mensaje
-            function sendMessage() {
-                const message = chatInput.value.trim();
-                if (!message) return;
-                
-                // Agregar mensaje del usuario
-                const userMessage = document.createElement('div');
-                userMessage.className = 'message user';
-                userMessage.innerHTML = `<p>${message}</p>`;
-                chatBody.appendChild(userMessage);
-                
-                // Limpiar input
-                chatInput.value = '';
-                
-                // Scroll al final
-                chatBody.scrollTop = chatBody.scrollHeight;
-                
-                // Simular respuesta de IA (en producción conectaría a ChatGPT API)
+            owlChat.classList.toggle('active');
+            if (owlChat.classList.contains('active')) {
+                chatInput.focus();
+                // Scroll al final del chat
                 setTimeout(() => {
-                    const responses = [
-                        `Interesante pregunta sobre "${message}". En filosofía, esto se relaciona con...`,
-                        `Me hace recordar a lo que decía Aristóteles al respecto...`,
-                        `Como lechuza filosófica, te recomendaría leer sobre este tema en...`,
-                        `Desde una perspectiva peruana, podríamos analizar esto considerando...`,
-                        `Esa es una cuestión fundamental que ha sido debatida desde los tiempos de...`
-                    ];
-                    
-                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-                    
-                    const owlMessage = document.createElement('div');
-                    owlMessage.className = 'message owl';
-                    owlMessage.innerHTML = `<p>${randomResponse}</p>`;
-                    chatBody.appendChild(owlMessage);
-                    
-                    // Scroll al final
+                    const chatBody = document.getElementById('chatBody');
                     chatBody.scrollTop = chatBody.scrollHeight;
-                }, 1000 + Math.random() * 1000);
+                }, 100);
             }
-            
-            // Event listeners para enviar
-            sendButton.addEventListener('click', sendMessage);
-            chatInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    sendMessage();
-                }
-            });
-            
-            // Preguntas sugeridas
-            const suggestedQuestions = [
-                "¿Qué es la filosofía?",
-                "Explícame a Platón",
-                "Filósofos peruanos importantes",
-                "Ayuda con mi ensayo",
-                "Conceptos filosóficos básicos"
-            ];
-            
-            // Agregar preguntas rápidas
-            const quickQuestions = document.createElement('div');
-            quickQuestions.style.marginTop = '1rem';
-            quickQuestions.innerHTML = `
-                <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 0.5rem;">Preguntas rápidas:</p>
-                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                    ${suggestedQuestions.map(q => 
-                        `<button class="ephemeris-tag" style="cursor: pointer; border: none;" onclick="document.getElementById('chatInput').value = '${q}'; document.getElementById('chatInput').focus();">${q}</button>`
-                    ).join('')}
-                </div>
-            `;
-            
-            chatBody.appendChild(quickQuestions);
         }
         
-        // EFECTO DE SCROLL SUAVE PARA ENLACES
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Cerrar chat si está abierto
-                    document.getElementById('owlChat').classList.remove('active');
-                }
-            });
-        });
+        // Actualizar la fecha cada minuto
+        setInterval(updateCurrentDate, 60000);
         
-        // HEADER SCROLL EFFECT
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('.main-header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(10, 10, 10, 0.95)';
-                header.style.backdropFilter = 'blur(15px)';
-            } else {
-                header.style.background = 'rgba(10, 10, 10, 0.9)';
-                header.style.backdropFilter = 'blur(10px)';
-            }
-        });
+        // Actualizar efeméride cada hora
+        setInterval(loadLiveEphemeris, 3600000);
     </script>
 </body>
 </html>
