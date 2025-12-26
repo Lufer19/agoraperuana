@@ -3,388 +3,497 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recursos Académicos - ASEFIP</title>
+    <title>Recursos Filosóficos - ASEFIP</title>
+    
+    <!-- Mismos estilos que index.html -->
+    <link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    
     <style>
-        :root {
-            --primary: #2C3E50;
-            --secondary: #E74C3C;
-            --accent: #F39C12;
-            --light: #ECF0F1;
-            --dark: #1A252F;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* HEADER - Mismo estilo que index.html */
-        header {
-            background: var(--primary);
-            color: white;
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .logo span {
-            color: var(--accent);
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-        
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-            padding: 5px 10px;
-            border-radius: 4px;
-        }
-        
-        nav a:hover {
-            color: var(--accent);
-            background: rgba(255,255,255,0.1);
-        }
-        
-        /* HERO RECURSOS */
+        /* Estilos específicos para recursos */
         .hero-recursos {
-            background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            background-position: center;
+            background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
             color: white;
-            padding: 4rem 0;
+            padding: 5rem 0;
             text-align: center;
-            border-bottom: 5px solid var(--accent);
         }
         
-        .hero-recursos h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        /* CATEGORÍAS */
-        .categorias {
+        .resources-categories {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin: 3rem 0;
         }
         
-        .categoria {
+        .category-card {
             background: white;
-            border-radius: 10px;
             padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-top: 5px solid #d69e2e;
         }
         
-        .categoria:hover {
+        .category-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
         }
         
-        .categoria h3 {
-            color: var(--primary);
+        .category-icon {
+            font-size: 3rem;
+            color: #d69e2e;
             margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
         
-        .categoria ul {
-            list-style: none;
-        }
-        
-        .categoria li {
-            margin-bottom: 0.8rem;
-            padding-left: 1.5rem;
+        .resource-search {
+            margin: 3rem 0;
             position: relative;
         }
         
-        .categoria li:before {
-            content: "•";
-            color: var(--secondary);
-            font-size: 1.5rem;
+        .search-input {
+            width: 100%;
+            padding: 1rem 3rem 1rem 1.5rem;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            font-size: 1rem;
+        }
+        
+        .search-button {
             position: absolute;
-            left: 0;
-            top: -3px;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #d69e2e;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
         }
         
-        .categoria a {
-            color: var(--dark);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .categoria a:hover {
-            color: var(--secondary);
-            text-decoration: underline;
-        }
-        
-        /* BIBLIOTECA */
-        .biblioteca {
-            background: var(--light);
-            padding: 3rem 0;
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
             margin: 3rem 0;
         }
         
-        .libros-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-        
-        .libro {
+        .resource-item {
             background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
         }
         
-        .libro-icon {
-            font-size: 2rem;
+        .resource-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .resource-type {
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
             margin-bottom: 1rem;
-            color: var(--primary);
         }
         
-        /* FOOTER - Mismo estilo que index.html */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 3rem 0 1rem;
-            margin-top: 3rem;
+        .resource-type.libro {
+            background: rgba(52, 152, 219, 0.1);
+            color: #3498db;
         }
         
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 2rem;
+        .resource-type.articulo {
+            background: rgba(46, 204, 113, 0.1);
+            color: #2ecc71;
         }
         
-        .social-links {
+        .resource-type.video {
+            background: rgba(231, 76, 60, 0.1);
+            color: #e74c3c;
+        }
+        
+        .resource-type.descargable {
+            background: rgba(155, 89, 182, 0.1);
+            color: #9b59b6;
+        }
+        
+        .resource-actions {
             display: flex;
             gap: 1rem;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
         }
         
-        .social-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-        
-        .social-icon:hover {
-            background: var(--secondary);
-            transform: translateY(-3px);
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.7);
+        .download-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
             font-size: 0.9rem;
+            color: #666;
         }
     </style>
 </head>
 <body>
-    <header>
+    <!-- Header igual que index.html -->
+    <header class="main-header">
         <div class="container header-container">
             <a href="index.html" class="logo">
-                🏛️ ASEF<span>IP</span>
+                <div class="logo-icon">🦉</div>
+                <div class="logo-text">
+                    <h1>ASEFIP</h1>
+                    <p>Asociación de Estudiantes de Filosofía del Perú</p>
+                </div>
             </a>
-            <nav>
+            
+            <nav class="main-nav">
                 <ul>
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="index.html#articulos">Artículos</a></li>
-                    <li><a href="recursos.html" style="color: var(--accent);">Recursos</a></li>
-                    <li><a href="index.html#unete">Únete</a></li>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="aprender.html"><i class="fas fa-graduation-cap"></i> Aprender</a></li>
+                    <li><a href="filósofos.html"><i class="fas fa-users"></i> Filósofos</a></li>
+                    <li><a href="blog.html"><i class="fas fa-blog"></i> Blog</a></li>
+                    <li><a href="comunidad.html"><i class="fas fa-comments"></i> Comunidad</a></li>
+                    <li><a href="recursos.html" class="active"><i class="fas fa-tools"></i> Recursos</a></li>
+                    <li><a href="ejercicios.html"><i class="fas fa-brain"></i> Ejercicios</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero-recursos">
         <div class="container">
-            <h1>📚 Biblioteca Digital ASEFIP</h1>
-            <p>Accede a recursos académicos gratuitos, textos filosóficos, herramientas de estudio y materiales exclusivos para miembros.</p>
+            <h1 style="color: white; font-size: 3rem; margin-bottom: 1rem;">Recursos Filosóficos</h1>
+            <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto;">
+                Biblioteca digital, material didáctico y herramientas para tu formación filosófica
+            </p>
         </div>
     </section>
 
-    <div class="container">
-        <section>
-            <h2 style="color: var(--primary); margin-bottom: 2rem; text-align: center;">Categorías de Recursos</h2>
+    <!-- Contenido Principal -->
+    <div class="container" style="padding: 3rem 0;">
+        <!-- Categorías -->
+        <div class="resources-categories">
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h3>Biblioteca Digital</h3>
+                <p>Libros, ensayos y textos filosóficos en formato digital</p>
+                <a href="#" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">
+                    Explorar
+                </a>
+            </div>
             
-            <div class="categorias">
-                <!-- ARTÍCULOS -->
-                <div class="categoria">
-                    <h3>📝 Artículos Académicos</h3>
-                    <p>Publicaciones originales de nuestros miembros:</p>
-                    <ul>
-                        <li><a href="articulos/democracia-en-disputa.html">La Democracia en Disputa</a></li>
-                        <li><a href="articulos/hegel-republica-platon.html">Hegel y la República de Platón</a></li>
-                        <li><a href="articulos/articulo-etica-cuidado-zafra.html">Ética del Cuidado</a></li>
-                        <li><a href="articulos/nacimiento-filosofia-subirme.html">Filosofía en Sumeria</a></li>
-                        <li><a href="articulos/imperialismo-cultural-ruanda.html">Imperialismo Cultural</a></li>
-                        <li><a href="articulos/resena-max.html">Reseña: Max Horkheimer</a></li>
-                    </ul>
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-file-alt"></i>
                 </div>
-                
-                <!-- GUÍAS -->
-                <div class="categoria">
-                    <h3>🗺️ Guías de Estudio</h3>
-                    <p>Materiales para el aprendizaje filosófico:</p>
-                    <ul>
-                        <li><a href="#">Cómo escribir un ensayo filosófico</a></li>
-                        <li><a href="#">Metodología de investigación filosófica</a></li>
-                        <li><a href="#">Glosario de términos filosóficos</a></li>
-                        <li><a href="#">Linea del tiempo: Historia de la filosofía</a></li>
-                        <li><a href="#">Bibliografía básica por período</a></li>
-                        <li><a href="#">Recursos para TFG/Tesis</a></li>
-                    </ul>
+                <h3>Artículos Académicos</h3>
+                <p>Investigaciones y papers de filosofía peruana e internacional</p>
+                <a href="#" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">
+                    Explorar
+                </a>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-video"></i>
                 </div>
-                
-                <!-- MULTIMEDIA -->
-                <div class="categoria">
-                    <h3>🎥 Contenido Multimedia</h3>
-                    <p>Recursos en diferentes formatos:</p>
-                    <ul>
-                        <li><a href="https://www.tiktok.com/@asefip01" target="_blank">Videos cortos en TikTok</a></li>
-                        <li><a href="https://www.instagram.com/asefip_" target="_blank">Contenido en Instagram</a></li>
-                        <li><a href="#">Grabaciones de seminarios</a></li>
-                        <li><a href="#">Podcast "Diálogos Filosóficos"</a></li>
-                        <li><a href="#">Presentaciones descargables</a></li>
-                        <li><a href="#">Infografías educativas</a></li>
-                    </ul>
+                <h3>Video-lecciones</h3>
+                <p>Clases grabadas, conferencias y tutoriales en video</p>
+                <a href="#" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">
+                    Explorar
+                </a>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-download"></i>
+                </div>
+                <h3>Material Descargable</h3>
+                <p>Presentaciones, guías de estudio y plantillas</p>
+                <a href="recursos-descargables.html" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">
+                    Explorar
+                </a>
+            </div>
+        </div>
+        
+        <!-- Búsqueda -->
+        <div class="resource-search">
+            <input type="text" class="search-input" placeholder="Buscar recursos por título, autor o tema...">
+            <button class="search-button">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        
+        <!-- Recursos Destacados -->
+        <h2 style="text-align: center; margin: 4rem 0 2rem; color: #1a365d;">
+            Recursos Destacados
+        </h2>
+        
+        <div class="resource-grid">
+            <!-- Recurso 1 -->
+            <div class="resource-item">
+                <span class="resource-type libro">Libro</span>
+                <h3 style="margin-bottom: 1rem;">"7 Ensayos de Interpretación de la Realidad Peruana"</h3>
+                <p style="color: #666; margin-bottom: 1rem;">José Carlos Mariátegui</p>
+                <p>Edición digital completa con introducción y notas críticas.</p>
+                <div class="download-stats">
+                    <span><i class="fas fa-download"></i> 1,245 descargas</span>
+                    <span>PDF • 2.3 MB</span>
+                </div>
+                <div class="resource-actions">
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-eye"></i> Vista Previa
+                    </a>
+                    <a href="#" class="btn btn-secondary">
+                        <i class="fas fa-download"></i> Descargar
+                    </a>
                 </div>
             </div>
-        </section>
-        
-        <section class="biblioteca">
-            <h2 style="color: var(--primary); margin-bottom: 2rem; text-align: center;">📖 Biblioteca Recomendada</h2>
-            <p style="text-align: center; margin-bottom: 2rem;">Textos fundamentales disponibles online (enlaces a versiones públicas)</p>
             
-            <div class="libros-grid">
-                <div class="libro">
-                    <div class="libro-icon">📕</div>
-                    <h4>La República</h4>
-                    <p>Platón</p>
+            <!-- Recurso 2 -->
+            <div class="resource-item">
+                <span class="resource-type articulo">Artículo</span>
+                <h3 style="margin-bottom: 1rem;">"La filosofía peruana: ¿auténtica o inauténtica?"</h3>
+                <p style="color: #666; margin-bottom: 1rem;">Augusto Salazar Bondy</p>
+                <p>Artículo fundamental sobre la identidad de la filosofía peruana.</p>
+                <div class="download-stats">
+                    <span><i class="fas fa-download"></i> 890 descargas</span>
+                    <span>PDF • 1.1 MB</span>
                 </div>
-                <div class="libro">
-                    <div class="libro-icon">📗</div>
-                    <h4>Ética a Nicómaco</h4>
-                    <p>Aristóteles</p>
-                </div>
-                <div class="libro">
-                    <div class="libro-icon">📘</div>
-                    <h4>Crítica de la Razón Pura</h4>
-                    <p>Kant</p>
-                </div>
-                <div class="libro">
-                    <div class="libro-icon">📙</div>
-                    <h4>Así habló Zaratustra</h4>
-                    <p>Nietzsche</p>
-                </div>
-                <div class="libro">
-                    <div class="libro-icon">📔</div>
-                    <h4>El ser y la nada</h4>
-                    <p>Sartre</p>
-                </div>
-                <div class="libro">
-                    <div class="libro-icon">📒</div>
-                    <h4>Filosofía de la liberación</h4>
-                    <p>Dussel</p>
+                <div class="resource-actions">
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-eye"></i> Vista Previa
+                    </a>
+                    <a href="#" class="btn btn-secondary">
+                        <i class="fas fa-download"></i> Descargar
+                    </a>
                 </div>
             </div>
-        </section>
+            
+            <!-- Recurso 3 -->
+            <div class="resource-item">
+                <span class="resource-type video">Video</span>
+                <h3 style="margin-bottom: 1rem;">"Introducción a la Filosofía Andina"</h3>
+                <p style="color: #666; margin-bottom: 1rem;">Conferencia completa</p>
+                <p>Conferencia sobre los principios fundamentales del pensamiento andino.</p>
+                <div class="download-stats">
+                    <span><i class="fas fa-eye"></i> 3,450 vistas</span>
+                    <span>MP4 • 45 min</span>
+                </div>
+                <div class="resource-actions">
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-play"></i> Ver Video
+                    </a>
+                    <a href="#" class="btn btn-secondary">
+                        <i class="fas fa-download"></i> Descargar
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Recurso 4 -->
+            <div class="resource-item">
+                <span class="resource-type descargable">Plantilla</span>
+                <h3 style="margin-bottom: 1rem;">Plantilla para Ensayos Filosóficos</h3>
+                <p style="color: #666; margin-bottom: 1rem;">Formato académico</p>
+                <p>Plantilla en Word con estructura y normas APA para ensayos filosóficos.</p>
+                <div class="download-stats">
+                    <span><i class="fas fa-download"></i> 2,100 descargas</span>
+                    <span>DOCX • 0.5 MB</span>
+                </div>
+                <div class="resource-actions">
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-eye"></i> Vista Previa
+                    </a>
+                    <a href="#" class="btn btn-secondary">
+                        <i class="fas fa-download"></i> Descargar
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Recurso 5 -->
+            <div class="resource-item">
+                <span class="resource-type libro">Libro</span>
+                <h3 style="margin-bottom: 1rem;">"La República" de Platón</h3>
+                <p style="color: #666; margin-bottom: 1rem;">Traducción al español</p>
+                <p>Edición digital con introducción y notas explicativas.</p>
+                <div class="download-stats">
+                    <span><i class="fas fa-download"></i> 1,800 descargas</span>
+                    <span>PDF • 3.2 MB</span>
+                </div>
+                <div class="resource-actions">
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-eye"></i> Vista Previa
+                    </a>
+                    <a href="#" class="btn btn-secondary">
+                        <i class="fas fa-download"></i> Descargar
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Recurso 6 -->
+            <div class="resource-item">
+                <span class="resource-type articulo">Artículo</span>
+                <h3 style="margin-bottom: 1rem;">"Ética en la era digital"</h3>
+                <p style="color: #666; margin-bottom: 1rem;">Investigación actual</p>
+                <p>Análisis de los desafíos éticos planteados por las nuevas tecnologías.</p>
+                <div class="download-stats">
+                    <span><i class="fas fa-download"></i> 1,150 descargas</span>
+                    <span>PDF • 1.8 MB</span>
+                </div>
+                <div class="resource-actions">
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-eye"></i> Vista Previa
+                    </a>
+                    <a href="#" class="btn btn-secondary">
+                        <i class="fas fa-download"></i> Descargar
+                    </a>
+                </div>
+            </div>
+        </div>
         
-        <section style="text-align: center; padding: 3rem 0;">
-            <h3 style="color: var(--primary); margin-bottom: 1rem;">¿Quieres contribuir con recursos?</h3>
-            <p>Si eres miembro de ASEFIP y quieres compartir tus materiales, guías o investigaciones, contáctanos.</p>
-            <a href="index.html#contacto" style="display: inline-block; background: var(--secondary); color: white; padding: 10px 25px; border-radius: 30px; text-decoration: none; margin-top: 1rem; font-weight: bold;">
-                Proponer un recurso
+        <!-- Guías de Estudio -->
+        <div style="margin: 4rem 0; padding: 3rem; background: rgba(214, 158, 46, 0.05); border-radius: 10px;">
+            <h2 style="text-align: center; margin-bottom: 2rem; color: #1a365d;">
+                <i class="fas fa-graduation-cap"></i> Guías de Estudio
+            </h2>
+            
+            <div class="resource-grid">
+                <div class="resource-item">
+                    <h3 style="margin-bottom: 1rem;">Guía para el Estudio de la Filosofía Antigua</h3>
+                    <p>Ruta de aprendizaje, bibliografía recomendada y ejercicios prácticos.</p>
+                    <a href="#" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">
+                        <i class="fas fa-download"></i> Descargar Guía
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <h3 style="margin-bottom: 1rem;">Cómo Investigar en Filosofía</h3>
+                    <p>Metodología, fuentes y estructura para investigaciones filosóficas.</p>
+                    <a href="investigar.html" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">
+                        <i class="fas fa-book"></i> Ver Guía
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <h3 style="margin-bottom: 1rem;">Glosario de Términos Filosóficos</h3>
+                    <p>Diccionario con más de 500 términos filosóficos explicados.</p>
+                    <a href="glosario.html" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">
+                        <i class="fas fa-search"></i> Explorar
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Call to Action -->
+        <div style="text-align: center; margin: 4rem 0; padding: 3rem; background: rgba(26, 54, 93, 0.05); border-radius: 10px;">
+            <h2 style="margin-bottom: 1rem; color: #1a365d;">¿Tienes Recursos para Compartir?</h2>
+            <p style="margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Invitamos a la comunidad académica a compartir sus materiales para enriquecer nuestra biblioteca digital.
+            </p>
+            <a href="enviar-articulo.html" class="btn btn-primary">
+                <i class="fas fa-share-alt"></i> Compartir Recursos
             </a>
-        </section>
+        </div>
     </div>
 
-    <footer>
+    <!-- Footer igual que index.html -->
+    <footer class="main-footer">
         <div class="container">
-            <div class="footer-content">
-                <div>
-                    <h3 style="color: white; margin-bottom: 1rem;">ASEFIP</h3>
-                    <p>Asociación de Estudiantes de Filosofía del Perú</p>
-                </div>
-                
-                <div>
-                    <h3 style="color: white; margin-bottom: 1rem;">Redes Sociales</h3>
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>ASEFIP</h3>
+                    <p style="margin-bottom: 1.5rem; opacity: 0.8;">
+                        Asociación de Estudiantes de Filosofía del Perú. 
+                        Promoviendo el pensamiento crítico y la filosofía peruana.
+                    </p>
                     <div class="social-links">
-                        <a href="https://www.tiktok.com/@asefip01?_r=1&_t=ZS-92TMiHxuxcb" class="social-icon" target="_blank" title="TikTok">
-                            <span style="font-size: 1.2rem;">🎵</span>
+                        <a href="https://www.tiktok.com/@asefip01" class="social-link" target="_blank">
+                            <i class="fab fa-tiktok"></i>
                         </a>
-                        <a href="https://www.instagram.com/asefip_?igsh=Y2I4ODk1ZzVoczk5&utm_source=qr" class="social-icon" target="_blank" title="Instagram">
-                            <span style="font-size: 1.2rem;">📸</span>
+                        <a href="https://www.instagram.com/asefip_" class="social-link" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-youtube"></i>
                         </a>
                     </div>
                 </div>
                 
-                <div>
-                    <h3 style="color: white; margin-bottom: 1rem;">Enlaces</h3>
-                    <ul style="list-style: none;">
-                        <li><a href="index.html" style="color: rgba(255,255,255,0.8); text-decoration: none; display: block; margin-bottom: 0.5rem;">Inicio</a></li>
-                        <li><a href="recursos.html" style="color: var(--accent); text-decoration: none; display: block; margin-bottom: 0.5rem;">Recursos</a></li>
-                        <li><a href="index.html#unete" style="color: rgba(255,255,255,0.8); text-decoration: none; display: block; margin-bottom: 0.5rem;">Únete</a></li>
+                <div class="footer-column">
+                    <h3>Recursos</h3>
+                    <ul class="footer-links">
+                        <li><a href="aprender.html">Aprender Filosofía</a></li>
+                        <li><a href="filósofos.html">Galería de Filósofos</a></li>
+                        <li><a href="blog.html">Blog y Artículos</a></li>
+                        <li><a href="recursos.html">Recursos Educativos</a></li>
+                        <li><a href="glosario.html">Glosario Filosófico</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Herramientas</h3>
+                    <ul class="footer-links">
+                        <li><a href="ejercicios.html">Ejercicios Prácticos</a></li>
+                        <li><a href="investigar.html">Guías de Investigación</a></li>
+                        <li><a href="linea-tiempo.html">Línea del Tiempo</a></li>
+                        <li><a href="recursos-descargables.html">Material Descargable</a></li>
+                        <li><a href="enviar-articulo.html">Enviar Artículo</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:contacto@asefip.org">contacto@asefip.org</a></li>
+                        <li><a href="#">Preguntas Frecuentes</a></li>
+                        <li><a href="#">Colaborar con ASEFIP</a></li>
+                        <li><a href="#">Trabaja con Nosotros</a></li>
+                        <li><a href="#">Mapa del Sitio</a></li>
                     </ul>
                 </div>
             </div>
             
-            <div class="copyright">
-                <p>© 2024 ASEFIP - Todos los derechos reservados.</p>
+            <div class="footer-bottom">
+                <p>© 2024 ASEFIP - Asociación de Estudiantes de Filosofía del Perú. Todos los derechos reservados.</p>
+                <p style="margin-top: 0.5rem;">
+                    <i class="fas fa-heart" style="color: #d69e2e;"></i> Filosofía para transformar el Perú
+                </p>
             </div>
         </div>
     </footer>
+
+    <script>
+        // Búsqueda de recursos
+        document.querySelector('.search-button').addEventListener('click', function() {
+            const searchTerm = document.querySelector('.search-input').value;
+            if (searchTerm) {
+                alert(`Buscando: "${searchTerm}"\n\nEsta funcionalidad buscaría en nuestra base de datos de recursos.`);
+            }
+        });
+        
+        document.querySelector('.search-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.querySelector('.search-button').click();
+            }
+        });
+        
+        // Marcar enlace activo
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('.main-nav a');
+            links.forEach(link => {
+                if (link.href === window.location.href) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
