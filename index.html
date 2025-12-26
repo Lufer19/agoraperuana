@@ -3,492 +3,1376 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASEFIP - Plataforma Filosófica Peruana</title>
+    <title>ASEFIP - Filosofía Inteligente con IA</title>
+    
+    <!-- Meta tags para SEO y redes sociales -->
+    <meta name="description" content="La primera plataforma filosófica con IA. Efemérides automáticas, asesor IA, contenido interactivo y comunidad peruana.">
+    <meta name="keywords" content="filosofía, IA, inteligencia artificial, Perú, estudiantes, lechuza filosófica">
+    <meta property="og:title" content="ASEFIP - Filosofía del Futuro">
+    <meta property="og:image" content="assets/images/og-image.jpg">
+    
+    <!-- Fuentes premium -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Philosopher:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Estilos principales -->
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- Librerías para efectos -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    
     <style>
-        /* ESTILOS ESPECÍFICOS PARA INDEX */
+        /* VARIABLES DE DISEÑO PREMIUM */
         :root {
-            --filosofia-purpura: #6A0DAD;
-            --oro-academico: #D4AF37;
-            --verde-andino: #2E8B57;
-            --gris-perla: #F8F9FA;
-            --azul-profundo: #1E3A5F;
+            /* Paleta de colores filosófica */
+            --gold-primary: #D4AF37;
+            --gold-secondary: #F4D03F;
+            --philosophy-blue: #1E3A5F;
+            --philosophy-purple: #4A235A;
+            --dark-bg: #0A0A0A;
+            --light-bg: #F5F5F5;
+            --text-light: #E8E8E8;
+            --text-dark: #222222;
+            
+            /* Sombras premium */
+            --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --shadow-hard: 0 15px 50px rgba(0, 0, 0, 0.2);
+            
+            /* Transiciones */
+            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        .hero-section {
-            background: linear-gradient(135deg, var(--azul-profundo) 0%, var(--filosofia-purpura) 100%);
-            color: white;
-            padding: 5rem 0;
-            text-align: center;
+        /* RESET Y BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+        
+        .philosophy-font {
+            font-family: 'Philosopher', serif;
+        }
+        
+        .elegant-font {
+            font-family: 'Cinzel', serif;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* PARTÍCULAS FLOTANTES FILOSÓFICAS */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, var(--philosophy-blue) 0%, var(--dark-bg) 100%);
+        }
+        
+        /* HEADER PREMIUM */
+        .main-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            transition: var(--transition-smooth);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-owl {
+            font-size: 2.5rem;
+            color: var(--gold-primary);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .logo-text {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            background: linear-gradient(to right, var(--gold-primary), var(--gold-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+        
+        .logo-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+        
+        /* NAVEGACIÓN ELEGANTE */
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+        
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
             position: relative;
+            padding: 5px 0;
+            transition: var(--transition-smooth);
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold-primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .nav-link:hover {
+            color: var(--gold-primary);
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-secondary));
+            color: var(--philosophy-blue);
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hard);
+        }
+        
+        /* HERO SECTION CON EFECTO PARALLAX */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 100px;
             overflow: hidden;
         }
         
-        .hero-section::before {
-            content: "φ";
-            font-size: 30rem;
-            opacity: 0.05;
+        .hero-bg {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-family: 'Times New Roman', serif;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(10, 10, 10, 0.85), rgba(30, 58, 95, 0.9)),
+                        url('assets/images/hero-philosophy.jpg') center/cover no-repeat;
+            z-index: -1;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+        }
+        
+        .hero-tag {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--gold-primary);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(212, 175, 55, 0.3);
         }
         
         .hero-title {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 2;
+            font-family: 'Cinzel', serif;
+            font-size: 4rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, var(--gold-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         .hero-subtitle {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             opacity: 0.9;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            position: relative;
-            z-index: 2;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
         }
         
-        .cta-buttons {
+        .hero-buttons {
             display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 2rem;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .btn-primary {
-            background: var(--oro-academico);
-            color: var(--azul-profundo);
-            padding: 12px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: transform 0.3s;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+            gap: 1.5rem;
+            flex-wrap: wrap;
         }
         
         .btn-secondary {
             background: transparent;
-            border: 2px solid white;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 30px;
+            border: 2px solid var(--gold-primary);
+            color: var(--gold-primary);
+            padding: 12px 28px;
+            border-radius: 50px;
             text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s;
+            font-weight: 600;
+            transition: var(--transition-smooth);
         }
         
         .btn-secondary:hover {
-            background: white;
-            color: var(--azul-profundo);
+            background: rgba(212, 175, 55, 0.1);
+            transform: translateY(-3px);
         }
         
-        /* SECCIONES */
-        .seccion-destacada {
-            padding: 4rem 0;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-        }
-        
-        .seccion-titulo {
-            text-align: center;
-            color: var(--azul-profundo);
-            margin-bottom: 3rem;
-            font-size: 2.5rem;
+        /* SECCIÓN DE EFEMÉRIDES CON IA */
+        .ephemeris-section {
+            padding: 6rem 0;
+            background: rgba(30, 58, 95, 0.1);
             position: relative;
         }
         
-        .seccion-titulo::after {
-            content: '';
-            display: block;
-            width: 100px;
-            height: 4px;
-            background: var(--oro-academico);
-            margin: 15px auto;
-            border-radius: 2px;
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
         }
         
-        /* GRID DE RECURSOS */
-        .recursos-grid {
+        .section-title {
+            font-family: 'Philosopher', serif;
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--gold-primary);
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .ephemeris-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .ephemeris-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ephemeris-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: var(--shadow-hard);
+        }
+        
+        .ephemeris-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--gold-primary), var(--philosophy-purple));
+        }
+        
+        .ephemeris-date {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .ephemeris-icon {
+            font-size: 2rem;
+            color: var(--gold-primary);
+        }
+        
+        .ephemeris-day {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold-primary);
+        }
+        
+        .ephemeris-month {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+        
+        .ephemeris-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+        
+        .ephemeris-content p {
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        .ephemeris-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .ephemeris-tag {
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--gold-primary);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+        }
+        
+        /* NOTICIAS FILOSÓFICAS */
+        .news-section {
+            padding: 6rem 0;
+        }
+        
+        .news-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            gap: 2.5rem;
+            margin-top: 3rem;
         }
         
-        .recurso-card {
-            background: white;
-            border-radius: 10px;
+        .news-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            border-top: 4px solid var(--filosofia-purpura);
+            transition: var(--transition-smooth);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         
-        .recurso-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        .news-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(212, 175, 55, 0.2);
         }
         
-        .recurso-icono {
-            font-size: 3rem;
-            text-align: center;
-            padding: 2rem 0 1rem;
-            color: var(--filosofia-purpura);
+        .news-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
         }
         
-        .recurso-contenido {
-            padding: 1.5rem;
+        .news-content {
+            padding: 2rem;
         }
         
-        .recurso-contenido h3 {
-            color: var(--azul-profundo);
+        .news-category {
+            display: inline-block;
+            background: var(--philosophy-purple);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.85rem;
             margin-bottom: 1rem;
         }
         
-        /* REDES SOCIALES ESPECÍFICAS */
-        .redes-sociales {
+        .news-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+        
+        .news-meta {
             display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 2rem;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
         }
         
-        .red-social {
-            display: inline-flex;
+        /* RECURSOS DESTACADOS */
+        .features-section {
+            padding: 6rem 0;
+            background: rgba(30, 58, 95, 0.1);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            transition: var(--transition-smooth);
+            border: 1px solid rgba(212, 175, 55, 0.05);
+        }
+        
+        .feature-card:hover {
+            background: rgba(212, 175, 55, 0.05);
+            transform: translateY(-8px);
+        }
+        
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--gold-primary);
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-description {
+            opacity: 0.9;
+        }
+        
+        /* WIDGET DE LECHUZA IA */
+        .owl-ai-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 10000;
+        }
+        
+        .owl-toggle {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--gold-primary), var(--philosophy-purple));
+            border-radius: 50%;
+            display: flex;
             align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-hard);
+            transition: var(--transition-smooth);
+            border: none;
+        }
+        
+        .owl-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+        }
+        
+        .owl-icon {
+            font-size: 2.5rem;
+            color: white;
+        }
+        
+        .owl-chat-container {
+            position: absolute;
+            bottom: 90px;
+            right: 0;
+            width: 400px;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: var(--shadow-hard);
+            display: none;
+            overflow: hidden;
+        }
+        
+        .owl-chat-container.active {
+            display: block;
+            animation: slideUp 0.3s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .chat-header {
+            background: linear-gradient(135deg, var(--philosophy-blue), var(--philosophy-purple));
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .chat-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--gold-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+        
+        .chat-title h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .chat-title p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .chat-body {
+            height: 400px;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+        
+        .message {
+            margin-bottom: 1.5rem;
+            max-width: 85%;
+        }
+        
+        .message.owl {
+            background: rgba(212, 175, 55, 0.1);
+            padding: 1rem;
+            border-radius: 15px 15px 15px 5px;
+            border-left: 3px solid var(--gold-primary);
+        }
+        
+        .message.user {
+            margin-left: auto;
+            background: rgba(30, 58, 95, 0.3);
+            padding: 1rem;
+            border-radius: 15px 15px 5px 15px;
+            border-right: 3px solid var(--philosophy-blue);
+        }
+        
+        .chat-input {
+            padding: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
             gap: 10px;
-            background: #f0f0f0;
-            padding: 10px 20px;
-            border-radius: 30px;
-            text-decoration: none;
-            color: #333;
-            transition: all 0.3s;
         }
         
-        .red-social.tiktok {
-            background: #000;
+        .chat-input input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            padding: 12px 20px;
             color: white;
+            outline: none;
         }
         
-        .red-social.instagram {
-            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
-            color: white;
+        .chat-input button {
+            background: var(--gold-primary);
+            color: var(--philosophy-blue);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition-smooth);
         }
         
-        .red-social:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        .chat-input button:hover {
+            transform: scale(1.1);
         }
         
-        /* EJERCICIOS DESTACADOS */
-        .ejercicios-grid {
+        /* FOOTER PREMIUM */
+        .main-footer {
+            background: rgba(10, 10, 10, 0.95);
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
+            gap: 3rem;
+            margin-bottom: 3rem;
         }
         
-        .ejercicio {
-            background: var(--gris-perla);
-            padding: 1.5rem;
-            border-radius: 10px;
-            border-left: 4px solid var(--verde-andino);
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--gold-primary);
         }
         
-        .etiqueta-dificultad {
-            display: inline-block;
-            padding: 3px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            margin-bottom: 0.5rem;
+        .footer-links {
+            list-style: none;
         }
         
-        .facil { background: #d4edda; color: #155724; }
-        .medio { background: #fff3cd; color: #856404; }
-        .dificil { background: #f8d7da; color: #721c24; }
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            opacity: 0.8;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--gold-primary);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-link {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-smooth);
+        }
+        
+        .social-link:hover {
+            background: var(--gold-primary);
+            transform: translateY(-5px);
+        }
+        
+        .social-link.tiktok:hover {
+            background: #000000;
+        }
+        
+        .social-link.instagram:hover {
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            opacity: 0.7;
+        }
+        
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 3.2rem;
+            }
+            
+            .main-nav ul {
+                gap: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .owl-chat-container {
+                width: calc(100vw - 40px);
+                right: 20px;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- HEADER (usa el mismo que ya tienes en otros archivos) -->
-    <header>
-        <div class="container">
-            <nav>
-                <a href="index.html" class="logo">🏛️ ASEFIP</a>
+    <!-- FONDO CON PARTÍCULAS -->
+    <div id="particles-js"></div>
+    
+    <!-- HEADER PREMIUM -->
+    <header class="main-header">
+        <div class="container header-container">
+            <div class="logo-container">
+                <div class="logo-owl">🦉</div>
+                <div>
+                    <div class="logo-text elegant-font">ASEFIP</div>
+                    <div class="logo-subtitle">Filosofía Inteligente con IA</div>
+                </div>
+            </div>
+            
+            <nav class="main-nav">
                 <ul>
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#recursos">Recursos</a></li>
-                    <li><a href="#ejercicios">Ejercicios</a></li>
-                    <li><a href="#comunidad">Comunidad</a></li>
-                    <li><a href="#eventos">Eventos</a></li>
+                    <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                    <li><a href="#efemerides" class="nav-link">Efemérides IA</a></li>
+                    <li><a href="#noticias" class="nav-link">Noticias</a></li>
+                    <li><a href="#recursos" class="nav-link">Recursos</a></li>
+                    <li><a href="content/articulos/" class="nav-link">Artículos</a></li>
+                    <li><a href="content/ejercicios/" class="nav-link">Ejercicios</a></li>
                 </ul>
             </nav>
+            
+            <a href="#comunidad" class="cta-button">
+                <i class="fas fa-users"></i> Unirse a la Comunidad
+            </a>
         </div>
     </header>
-
+    
     <!-- HERO SECTION -->
     <section class="hero-section" id="inicio">
+        <div class="hero-bg"></div>
         <div class="container">
-            <h1 class="hero-title">ASEFIP</h1>
-            <h2 class="hero-subtitle">Plataforma Filosófica Peruana</h2>
-            <p class="hero-subtitle">La primera comunidad digital que une teoría filosófica con realidad peruana. Artículos, ejercicios, recursos y comunidad para estudiantes y amantes de la filosofía.</p>
-            
-            <div class="cta-buttons">
-                <a href="#recursos" class="btn-primary">Explorar Recursos</a>
-                <a href="comunidad.html" class="btn-secondary">Unirse a la Comunidad</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECCIÓN RECURSOS -->
-    <section class="seccion-destacada" id="recursos">
-        <div class="container">
-            <h2 class="seccion-titulo">📚 Recursos Filosóficos</h2>
-            <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; font-size: 1.1rem;">
-                Todo lo que necesitas para estudiar, investigar y profundizar en filosofía. Especialmente diseñado para el contexto peruano.
-            </p>
-            
-            <div class="recursos-grid">
-                <!-- ARTÍCULOS -->
-                <div class="recurso-card">
-                    <div class="recurso-icono">📝</div>
-                    <div class="recurso-contenido">
-                        <h3>Artículos Académicos</h3>
-                        <p>Publicaciones originales de estudiantes peruanos. Investigación filosófica con perspectiva local.</p>
-                        <a href="articulos/" class="btn-secondary" style="display: inline-block; margin-top: 1rem; padding: 8px 20px;">Ver 6 artículos →</a>
-                    </div>
-                </div>
+            <div class="hero-content">
+                <span class="hero-tag">
+                    <i class="fas fa-star"></i> Pioneros en Filosofía con IA
+                </span>
                 
-                <!-- EJERCICIOS -->
-                <div class="recurso-card">
-                    <div class="recurso-icono">🧠</div>
-                    <div class="recurso-contenido">
-                        <h3>Ejercicios y Tests</h3>
-                        <p>Pon a prueba tu conocimiento filosófico. Lógica, historia de la filosofía, argumentación.</p>
-                        <a href="ejercicios.html" class="btn-secondary" style="display: inline-block; margin-top: 1rem; padding: 8px 20px;">Practicar ahora →</a>
-                    </div>
-                </div>
+                <h1 class="hero-title">
+                    La Filosofía del Futuro <br>
+                    <span style="color: var(--gold-primary)">Ya Está Aquí</span>
+                </h1>
                 
-                <!-- GLOSARIO -->
-                <div class="recurso-card">
-                    <div class="recurso-icono">📖</div>
-                    <div class="recurso-contenido">
-                        <h3>Glosario Filosófico</h3>
-                        <p>150+ términos explicados con ejemplos. Desde "a priori" hasta "zeitgeist".</p>
-                        <a href="glosario.html" class="btn-secondary" style="display: inline-block; margin-top: 1rem; padding: 8px 20px;">Buscar términos →</a>
-                    </div>
-                </div>
-                
-                <!-- LÍNEA DEL TIEMPO -->
-                <div class="recurso-card">
-                    <div class="recurso-icono">⏳</div>
-                    <div class="recurso-contenido">
-                        <h3>Línea del Tiempo</h3>
-                        <p>Historia de la filosofía visual. De Tales a la filosofía latinoamericana.</p>
-                        <a href="linea-tiempo.html" class="btn-secondary" style="display: inline-block; margin-top: 1rem; padding: 8px 20px;">Explorar historia →</a>
-                    </div>
-                </div>
-                
-                <!-- FILÓSOFOS -->
-                <div class="recurso-card">
-                    <div class="recurso-icono">👨‍🏫</div>
-                    <div class="recurso-contenido">
-                        <h3>Biografías de Filósofos</h3>
-                        <p>Vida, obra y pensamiento de filósofos clave. Incluye pensadores peruanos.</p>
-                        <a href="filosofos.html" class="btn-secondary" style="display: inline-block; margin-top: 1rem; padding: 8px 20px;">Conocer autores →</a>
-                    </div>
-                </div>
-                
-                <!-- INVESTIGACIÓN -->
-                <div class="recurso-card">
-                    <div class="recurso-icono">🔬</div>
-                    <div class="recurso-contenido">
-                        <h3>Guías de Investigación</h3>
-                        <p>Cómo hacer investigación filosófica. Metodología, TFG, tesis doctoral.</p>
-                        <a href="investigar.html" class="btn-secondary" style="display: inline-block; margin-top: 1rem; padding: 8px 20px;">Aprender métodos →</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECCIÓN EJERCICIOS DESTACADOS -->
-    <section class="seccion-destacada" id="ejercicios" style="background: var(--gris-perla);">
-        <div class="container">
-            <h2 class="seccion-titulo">🧠 Ejercicios Filosóficos</h2>
-            <p style="text-align: center; margin-bottom: 3rem;">Pon a prueba tu pensamiento crítico con estos ejercicios</p>
-            
-            <div class="ejercicios-grid">
-                <div class="ejercicio">
-                    <span class="etiqueta-dificultad facil">Fácil</span>
-                    <h3>Identifica la Falacia</h3>
-                    <p>"Como todos mis amigos usan TikTok, debe ser bueno"</p>
-                    <a href="ejercicios.html#falacias" style="color: var(--verde-andino); font-weight: bold;">Resolver →</a>
-                </div>
-                
-                <div class="ejercicio">
-                    <span class="etiqueta-dificultad medio">Medio</span>
-                    <h3>Relaciona Filósofos</h3>
-                    <p>Conecta a Nietzsche, Schopenhauer y la voluntad de poder</p>
-                    <a href="ejercicios.html#relaciones" style="color: var(--verde-andino); font-weight: bold;">Intentar →</a>
-                </div>
-                
-                <div class="ejercicio">
-                    <span class="etiqueta-dificultad dificil">Difícil</span>
-                    <h3>Argumenta tu Postura</h3>
-                    <p>"¿Existe el libre albedrío?" Construye un argumento en 200 palabras</p>
-                    <a href="ejercicios.html#argumentacion" style="color: var(--verde-andino); font-weight: bold;">Desarrollar →</a>
-                </div>
-                
-                <div class="ejercicio">
-                    <span class="etiqueta-dificultad medio">Medio</span>
-                    <h3>Completa la Cita</h3>
-                    <p>"Pienso, luego..." ¿Qué filósofo? ¿Cuál es la frase completa?</p>
-                    <a href="ejercicios.html#citas" style="color: var(--verde-andino); font-weight: bold;">Completar →</a>
-                </div>
-            </div>
-            
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="ejercicios.html" class="btn-primary">Ver Todos los Ejercicios</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECCIÓN COMUNIDAD -->
-    <section class="seccion-destacada" id="comunidad">
-        <div class="container">
-            <h2 class="seccion-titulo">🤝 Comunidad Filosófica Peruana</h2>
-            
-            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-                <p style="font-size: 1.2rem; margin-bottom: 2rem;">
-                    ASEFIP no es solo una página web, es una <strong>comunidad activa</strong> de estudiantes de filosofía de todo el Perú.
+                <p class="hero-subtitle">
+                    La primera plataforma que combina sabiduría milenaria con inteligencia artificial. 
+                    Efemérides automáticas, asesoramiento filosófico 24/7 y contenido interactivo único.
                 </p>
                 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin: 3rem 0;">
-                    <div>
-                        <h3 style="color: var(--filosofia-purpura);">📝 Publica tu Artículo</h3>
-                        <p>¿Has escrito algo sobre filosofía? Compártelo con la comunidad.</p>
-                        <a href="enviar-articulo.html" style="color: var(--oro-academico); font-weight: bold;">Enviar artículo →</a>
+                <div class="hero-buttons">
+                    <a href="#efemerides" class="cta-button">
+                        <i class="fas fa-calendar-alt"></i> Ver Efemérides Hoy
+                    </a>
+                    <a href="#owl-chat" class="btn-secondary">
+                        <i class="fas fa-robot"></i> Hablar con la Lechuza IA
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- SECCIÓN EFEMÉRIDES CON IA -->
+    <section class="ephemeris-section" id="efemerides">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title philosophy-font">Efemérides Filosóficas <span style="color: var(--gold-primary)">con IA</span></h2>
+                <p class="section-subtitle">
+                    Eventos y nacimientos importantes generados automáticamente por nuestra inteligencia artificial.
+                    Actualizado diariamente.
+                </p>
+            </div>
+            
+            <div class="ephemeris-container" id="ephemerisContainer">
+                <!-- Las efemérides se cargan automáticamente con JavaScript -->
+                <!-- Loading state -->
+                <div class="ephemeris-card">
+                    <div class="ephemeris-date">
+                        <div class="ephemeris-icon">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </div>
+                        <div>
+                            <div class="ephemeris-day">Hoy</div>
+                            <div class="ephemeris-month" id="currentDate">Cargando...</div>
+                        </div>
                     </div>
-                    
-                    <div>
-                        <h3 style="color: var(--filosofia-purpura);">💬 Únete al Debate</h3>
-                        <p>Participa en discusiones filosóficas con estudiantes de todo el país.</p>
-                        <a href="comunidad.html" style="color: var(--oro-academico); font-weight: bold;">Ingresar al foro →</a>
-                    </div>
-                    
-                    <div>
-                        <h3 style="color: var(--filosofia-purpura);">🎓 Asesoría entre Pares</h3>
-                        <p>Recibe feedback de otros estudiantes en tus trabajos.</p>
-                        <a href="comunidad.html#asesoria" style="color: var(--oro-academico); font-weight: bold;">Solicitar ayuda →</a>
+                    <div class="ephemeris-content">
+                        <h3>Generando efemérides filosóficas...</h3>
+                        <p>Nuestra IA está analizando la historia de la filosofía para traerte los eventos más relevantes de hoy.</p>
+                        <div class="ephemeris-tags">
+                            <span class="ephemeris-tag">IA</span>
+                            <span class="ephemeris-tag">Filosofía</span>
+                            <span class="ephemeris-tag">Actualización automática</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- SECCIÓN REDES SOCIALES -->
-    <section class="seccion-destacada" style="background: linear-gradient(135deg, #1E3A5F 0%, #6A0DAD 100%); color: white;">
+    
+    <!-- SECCIÓN NOTICIAS FILOSÓFICAS -->
+    <section class="news-section" id="noticias">
         <div class="container">
-            <h2 class="seccion-titulo" style="color: white;">📱 Síguenos en Redes Sociales</h2>
-            <p style="text-align: center; margin-bottom: 3rem; font-size: 1.1rem;">
-                Contenido filosófico en formatos modernos y accesibles
-            </p>
-            
-            <div class="redes-sociales">
-                <a href="https://www.tiktok.com/@asefip01?_r=1&_t=ZS-92TMiHxuxcb" class="red-social tiktok" target="_blank">
-                    <span style="font-size: 1.5rem;">🎵</span>
-                    <div>
-                        <strong>TikTok</strong>
-                        <div style="font-size: 0.9rem;">@asefip01</div>
-                    </div>
-                </a>
-                
-                <a href="https://www.instagram.com/asefip_?igsh=Y2I4ODk1ZzVoczk5&utm_source=qr" class="red-social instagram" target="_blank">
-                    <span style="font-size: 1.5rem;">📸</span>
-                    <div>
-                        <strong>Instagram</strong>
-                        <div style="font-size: 0.9rem;">@asefip_</div>
-                    </div>
-                </a>
+            <div class="section-header">
+                <h2 class="section-title philosophy-font">Noticias y <span style="color: var(--gold-primary)">Actualidad Filosófica</span></h2>
+                <p class="section-subtitle">
+                    Lo último en el mundo de la filosofía, congresos, publicaciones y debates contemporáneos.
+                </p>
             </div>
             
-            <p style="text-align: center; margin-top: 2rem; opacity: 0.9;">
-                Videos cortos, frases filosóficas, debates y contenido exclusivo para estudiantes
-            </p>
+            <div class="news-grid">
+                <!-- Noticia 1 -->
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Congreso Filosofía Digital" class="news-image">
+                    <div class="news-content">
+                        <span class="news-category">Congreso Internacional</span>
+                        <h3 class="news-title">La Filosofía en la Era Digital: Nuevos Paradigmas</h3>
+                        <p>Analizamos cómo la tecnología está transformando la forma de hacer y enseñar filosofía en el siglo XXI.</p>
+                        <div class="news-meta">
+                            <span><i class="far fa-calendar"></i> 15 Mar 2024</span>
+                            <span><i class="far fa-clock"></i> 5 min lectura</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Noticia 2 -->
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Filosofía Andina" class="news-image">
+                    <div class="news-content">
+                        <span class="news-category">Filosofía Peruana</span>
+                        <h3 class="news-title">El Resurgimiento del Pensamiento Andino Contemporáneo</h3>
+                        <p>Exploramos cómo la filosofía andina está ganando relevancia en el debate filosófico global.</p>
+                        <div class="news-meta">
+                            <span><i class="far fa-calendar"></i> 10 Mar 2024</span>
+                            <span><i class="far fa-clock"></i> 7 min lectura</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Noticia 3 -->
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Ética e IA" class="news-image">
+                    <div class="news-content">
+                        <span class="news-category">Ética y Tecnología</span>
+                        <h3 class="news-title">Los Dilemas Éticos de la Inteligencia Artificial</h3>
+                        <p>Un análisis profundo sobre la responsabilidad moral en el desarrollo de sistemas de IA.</p>
+                        <div class="news-meta">
+                            <span><i class="far fa-calendar"></i> 5 Mar 2024</span>
+                            <span><i class="far fa-clock"></i> 8 min lectura</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
-
+    
+    <!-- RECURSOS DESTACADOS -->
+    <section class="features-section" id="recursos">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title philosophy-font">Recursos <span style="color: var(--gold-primary)">Exclusivos</span></h2>
+                <p class="section-subtitle">
+                    Herramientas y contenido único que no encontrarás en ninguna otra plataforma filosófica.
+                </p>
+            </div>
+            
+            <div class="features-grid">
+                <!-- Recurso 1 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="feature-title">Ejercicios con IA</h3>
+                    <p class="feature-description">
+                        Pruebas interactivas que se adaptan a tu nivel de conocimiento. La IA genera preguntas personalizadas.
+                    </p>
+                    <a href="content/ejercicios/" class="btn-secondary" style="margin-top: 1.5rem; display: inline-block;">
+                        Comenzar
+                    </a>
+                </div>
+                
+                <!-- Recurso 2 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3 class="feature-title">Glosario Inteligente</h3>
+                    <p class="feature-description">
+                        Más de 500 términos filosóficos con explicaciones generadas por IA y ejemplos contextualizados.
+                    </p>
+                    <a href="content/glosario/" class="btn-secondary" style="margin-top: 1.5rem; display: inline-block;">
+                        Explorar
+                    </a>
+                </div>
+                
+                <!-- Recurso 3 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="feature-title">Comunidad Activa</h3>
+                    <p class="feature-description">
+                        Debate con estudiantes de toda Latinoamérica. Foros moderados y eventos en vivo semanales.
+                    </p>
+                    <a href="#comunidad" class="btn-secondary" style="margin-top: 1.5rem; display: inline-block;">
+                        Unirse
+                    </a>
+                </div>
+                
+                <!-- Recurso 4 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="feature-title">Cursos Especializados</h3>
+                    <p class="feature-description">
+                        Desde filosofía prehispánica hasta ética digital. Cursos creados por expertos peruanos.
+                    </p>
+                    <a href="content/cursos/" class="btn-secondary" style="margin-top: 1.5rem; display: inline-block;">
+                        Ver Cursos
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- WIDGET DE LECHUZA IA -->
+    <div class="owl-ai-widget" id="owl-chat">
+        <div class="owl-toggle" id="owlToggle">
+            <div class="owl-icon">🦉</div>
+        </div>
+        
+        <div class="owl-chat-container" id="owlChat">
+            <div class="chat-header">
+                <div class="chat-avatar">
+                    🦉
+                </div>
+                <div class="chat-title">
+                    <h3>Lechuza Filosófica</h3>
+                    <p>Tu asistente de IA especializado en filosofía</p>
+                </div>
+            </div>
+            
+            <div class="chat-body" id="chatBody">
+                <!-- Mensajes de chat -->
+                <div class="message owl">
+                    <p>¡Hola! Soy tu lechuza filosófica. ¿En qué puedo ayudarte hoy? Puedo explicar conceptos, recomendar lecturas o debatir ideas contigo.</p>
+                </div>
+                
+                <div class="message owl">
+                    <p>Prueba preguntarme cosas como:<br>
+                    • "Explícame la alegoría de la caverna"<br>
+                    • "¿Qué filósofo peruano recomiendas estudiar?"<br>
+                    • "Ayúdame con mi ensayo sobre ética"</p>
+                </div>
+            </div>
+            
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Escribe tu pregunta filosófica...">
+                <button id="sendMessage">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
     <!-- FOOTER -->
-    <footer style="background: var(--azul-profundo); color: white; padding: 3rem 0 1.5rem;">
+    <footer class="main-footer" id="comunidad">
         <div class="container">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
-                <div>
-                    <h3 style="color: var(--oro-academico); margin-bottom: 1rem;">ASEFIP</h3>
-                    <p>Asociación de Estudiantes de Filosofía del Perú</p>
-                    <p style="margin-top: 1rem; opacity: 0.8;">Plataforma pionera de difusión filosófica en Perú</p>
+            <div class="footer-grid">
+                <!-- Columna 1 -->
+                <div class="footer-column">
+                    <h3 class="philosophy-font">ASEFIP</h3>
+                    <p style="opacity: 0.8; margin-bottom: 1.5rem;">
+                        La primera plataforma de filosofía con inteligencia artificial, creada por y para estudiantes peruanos.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.tiktok.com/@asefip01" class="social-link tiktok" target="_blank">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="https://www.instagram.com/asefip_" class="social-link instagram" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                    </div>
                 </div>
                 
-                <div>
-                    <h3 style="color: var(--oro-academico); margin-bottom: 1rem;">Recursos</h3>
-                    <ul style="list-style: none;">
-                        <li><a href="articulos/" style="color: rgba(255,255,255,0.8); text-decoration: none; display: block; margin-bottom: 0.5rem;">Artículos</a></li>
-                        <li><a href="ejercicios.html" style="color: rgba(255,255,255,0.8); text-decoration: none; display: block; margin-bottom: 0.5rem;">Ejercicios</a></li>
-                        <li><a href="glosario.html" style="color: rgba(255,255,255,0.8); text-decoration: none; display: block; margin-bottom: 0.5rem;">Glosario</a></li>
-                        <li><a href="linea-tiempo.html" style="color: rgba(255,255,255,0.8); text-decoration: none; display: block; margin-bottom: 0.5rem;">Línea del Tiempo</a></li>
+                <!-- Columna 2 -->
+                <div class="footer-column">
+                    <h3>Recursos</h3>
+                    <ul class="footer-links">
+                        <li><a href="content/articulos/">Artículos Académicos</a></li>
+                        <li><a href="content/ejercicios/">Ejercicios con IA</a></li>
+                        <li><a href="content/filosofos/">Galería de Filósofos</a></li>
+                        <li><a href="content/timeline/">Línea del Tiempo</a></li>
+                        <li><a href="content/glosario/">Glosario Inteligente</a></li>
                     </ul>
                 </div>
                 
-                <div>
-                    <h3 style="color: var(--oro-academico); margin-bottom: 1rem;">Participa</h3>
-                    <ul style="list-style: none;">
-                        <li><a href="enviar-articulo.html" style="color: rgba(255,255,255,0.8); text-decoration: none; display: block; margin-bottom: 0.5rem;">Publicar artículo</a></li>
-                        <li><a href="comunidad.html" style="color: rgba(255,255,255,0.8); text-decoration: none; display: block; margin-bottom: 0.5rem;">Unirse a la comunidad</a></li>
-                        <li><a href="#eventos" style="color: rgba(255,255,255,0.8); text-decoration: none; display: block; margin-bottom: 0.5rem;">Próximos eventos</a></li>
+                <!-- Columna 3 -->
+                <div class="footer-column">
+                    <h3>Comunidad</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Foro de Debate</a></li>
+                        <li><a href="#">Eventos en Vivo</a></li>
+                        <li><a href="#">Grupos de Estudio</a></li>
+                        <li><a href="#">Concurso de Ensayos</a></li>
+                        <li><a href="#">Mentorías</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Columna 4 -->
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:contacto@asefip.org">contacto@asefip.org</a></li>
+                        <li><a href="#">Soporte Técnico</a></li>
+                        <li><a href="#">Colaborar con ASEFIP</a></li>
+                        <li><a href="#">Prensa y Medios</a></li>
+                        <li><a href="#">Trabaja con Nosotros</a></li>
                     </ul>
                 </div>
             </div>
             
-            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
-                <p>© 2024 ASEFIP - Asociación de Estudiantes de Filosofía del Perú</p>
-                <p style="margin-top: 0.5rem; opacity: 0.7; font-size: 0.9rem;">Hecho por estudiantes, para estudiantes</p>
+            <div class="footer-bottom">
+                <p>© 2024 ASEFIP - Asociación de Estudiantes de Filosofía del Perú. Todos los derechos reservados.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+                    <i class="fas fa-code"></i> Desarrollado con pasión filosófica y tecnología de vanguardia.
+                </p>
             </div>
         </div>
     </footer>
-
+    
+    <!-- SCRIPTS PRINCIPALES -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    
     <script>
-        // Smooth scrolling
+        // INICIALIZACIÓN DE PARTÍCULAS
+        document.addEventListener('DOMContentLoaded', function() {
+            // Configuración de partículas
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: "#D4AF37" },
+                    shape: { type: "circle" },
+                    opacity: { value: 0.3, random: true },
+                    size: { value: 3, random: true },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: "#D4AF37",
+                        opacity: 0.2,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 2,
+                        direction: "none",
+                        random: true,
+                        straight: false,
+                        out_mode: "out",
+                        bounce: false
+                    }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: { enable: true, mode: "repulse" },
+                        onclick: { enable: true, mode: "push" }
+                    }
+                }
+            });
+            
+            // Fecha actual
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('currentDate').textContent = now.toLocaleDateString('es-ES', options);
+            
+            // Cargar efemérides
+            loadEphemeris();
+            
+            // Configurar lechuza IA
+            setupOwlAI();
+            
+            // Efecto de escritura para el título
+            typeWriterEffect();
+        });
+        
+        // EFECTOS DE ESCRITURA
+        function typeWriterEffect() {
+            const title = document.querySelector('.hero-title');
+            const text = title.textContent;
+            title.textContent = '';
+            
+            let i = 0;
+            function typeWriter() {
+                if (i < text.length) {
+                    title.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50);
+                }
+            }
+            
+            setTimeout(typeWriter, 1000);
+        }
+        
+        // CARGAR EFEMÉRIDES (simulación - en producción se conectaría a una API)
+        function loadEphemeris() {
+            const container = document.getElementById('ephemerisContainer');
+            
+            // Datos de ejemplo (en producción vendrían de una API con IA)
+            const ephemerisData = [
+                {
+                    day: now.getDate(),
+                    month: now.toLocaleDateString('es-ES', { month: 'long' }),
+                    year: now.getFullYear(),
+                    title: "Nacimiento de Sócrates",
+                    description: "Según la tradición, hoy se conmemora el nacimiento de Sócrates (470 a.C.), padre de la filosofía occidental y maestro de Platón.",
+                    tags: ["Antigua", "Grecia", "Ética"]
+                },
+                {
+                    day: now.getDate(),
+                    month: now.toLocaleDateString('es-ES', { month: 'long' }),
+                    year: 2024,
+                    title: "Día del Filósofo Peruano",
+                    description: "Celebramos la contribución de los pensadores peruanos a la filosofía universal, desde la escolástica colonial hasta el pensamiento andino contemporáneo.",
+                    tags: ["Perú", "Actual", "Celebración"]
+                },
+                {
+                    day: now.getDate(),
+                    month: now.toLocaleDateString('es-ES', { month: 'long' }),
+                    year: 1883,
+                    title: "Fallecimiento de Karl Marx",
+                    description: "Un día como hoy murió Karl Marx, cuya obra transformó el pensamiento político, económico y filosófico del siglo XX.",
+                    tags: ["Política", "Economía", "Siglo XIX"]
+                }
+            ];
+            
+            // Limpiar loading state
+            container.innerHTML = '';
+            
+            // Generar tarjetas de efemérides
+            ephemerisData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'ephemeris-card';
+                
+                card.innerHTML = `
+                    <div class="ephemeris-date">
+                        <div class="ephemeris-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <div>
+                            <div class="ephemeris-day">${item.day}</div>
+                            <div class="ephemeris-month">${item.month} ${item.year}</div>
+                        </div>
+                    </div>
+                    <div class="ephemeris-content">
+                        <h3>${item.title}</h3>
+                        <p>${item.description}</p>
+                        <div class="ephemeris-tags">
+                            ${item.tags.map(tag => `<span class="ephemeris-tag">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+            
+            // Agregar tarjeta de IA generativa
+            const aiCard = document.createElement('div');
+            aiCard.className = 'ephemeris-card';
+            aiCard.style.border = '2px dashed rgba(212, 175, 55, 0.5)';
+            
+            aiCard.innerHTML = `
+                <div class="ephemeris-date">
+                    <div class="ephemeris-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div>
+                        <div class="ephemeris-day">IA</div>
+                        <div class="ephemeris-month">Generativa</div>
+                    </div>
+                </div>
+                <div class="ephemeris-content">
+                    <h3>Efemérides Generadas por IA</h3>
+                    <p>Estos eventos son seleccionados y descritos automáticamente por nuestro sistema de inteligencia artificial, que analiza bases de datos filosóficas históricas.</p>
+                    <div class="ephemeris-tags">
+                        <span class="ephemeris-tag">Inteligencia Artificial</span>
+                        <span class="ephemeris-tag">Automatizado</span>
+                        <span class="ephemeris-tag">Actualización diaria</span>
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(aiCard);
+        }
+        
+        // CONFIGURAR LECHUZA IA
+        function setupOwlAI() {
+            const owlToggle = document.getElementById('owlToggle');
+            const owlChat = document.getElementById('owlChat');
+            const chatInput = document.getElementById('chatInput');
+            const sendButton = document.getElementById('sendMessage');
+            const chatBody = document.getElementById('chatBody');
+            
+            // Alternar chat
+            owlToggle.addEventListener('click', function() {
+                owlChat.classList.toggle('active');
+                if (owlChat.classList.contains('active')) {
+                    chatInput.focus();
+                }
+            });
+            
+            // Enviar mensaje
+            function sendMessage() {
+                const message = chatInput.value.trim();
+                if (!message) return;
+                
+                // Agregar mensaje del usuario
+                const userMessage = document.createElement('div');
+                userMessage.className = 'message user';
+                userMessage.innerHTML = `<p>${message}</p>`;
+                chatBody.appendChild(userMessage);
+                
+                // Limpiar input
+                chatInput.value = '';
+                
+                // Scroll al final
+                chatBody.scrollTop = chatBody.scrollHeight;
+                
+                // Simular respuesta de IA (en producción conectaría a ChatGPT API)
+                setTimeout(() => {
+                    const responses = [
+                        `Interesante pregunta sobre "${message}". En filosofía, esto se relaciona con...`,
+                        `Me hace recordar a lo que decía Aristóteles al respecto...`,
+                        `Como lechuza filosófica, te recomendaría leer sobre este tema en...`,
+                        `Desde una perspectiva peruana, podríamos analizar esto considerando...`,
+                        `Esa es una cuestión fundamental que ha sido debatida desde los tiempos de...`
+                    ];
+                    
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    
+                    const owlMessage = document.createElement('div');
+                    owlMessage.className = 'message owl';
+                    owlMessage.innerHTML = `<p>${randomResponse}</p>`;
+                    chatBody.appendChild(owlMessage);
+                    
+                    // Scroll al final
+                    chatBody.scrollTop = chatBody.scrollHeight;
+                }, 1000 + Math.random() * 1000);
+            }
+            
+            // Event listeners para enviar
+            sendButton.addEventListener('click', sendMessage);
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            
+            // Preguntas sugeridas
+            const suggestedQuestions = [
+                "¿Qué es la filosofía?",
+                "Explícame a Platón",
+                "Filósofos peruanos importantes",
+                "Ayuda con mi ensayo",
+                "Conceptos filosóficos básicos"
+            ];
+            
+            // Agregar preguntas rápidas
+            const quickQuestions = document.createElement('div');
+            quickQuestions.style.marginTop = '1rem';
+            quickQuestions.innerHTML = `
+                <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 0.5rem;">Preguntas rápidas:</p>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                    ${suggestedQuestions.map(q => 
+                        `<button class="ephemeris-tag" style="cursor: pointer; border: none;" onclick="document.getElementById('chatInput').value = '${q}'; document.getElementById('chatInput').focus();">${q}</button>`
+                    ).join('')}
+                </div>
+            `;
+            
+            chatBody.appendChild(quickQuestions);
+        }
+        
+        // EFECTO DE SCROLL SUAVE PARA ENLACES
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
+                
                 const targetId = this.getAttribute('href');
-                if(targetId !== '#') {
-                    const targetElement = document.querySelector(targetId);
-                    if(targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Cerrar chat si está abierto
+                    document.getElementById('owlChat').classList.remove('active');
                 }
             });
         });
         
-        // Resaltar enlaces de redes sociales
-        document.querySelectorAll('.red-social').forEach(link => {
-            link.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-5px) scale(1.05)';
-            });
-            link.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
+        // HEADER SCROLL EFFECT
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.main-header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(10, 10, 10, 0.95)';
+                header.style.backdropFilter = 'blur(15px)';
+            } else {
+                header.style.background = 'rgba(10, 10, 10, 0.9)';
+                header.style.backdropFilter = 'blur(10px)';
+            }
         });
     </script>
 </body>
