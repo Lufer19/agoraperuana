@@ -1,1 +1,46 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generar Favicon</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        canvas { border: 1px solid #ccc; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <h2>Instrucciones para crear favicon.ico:</h2>
+    <ol>
+        <li>Ve a <a href="https://favicon.io/favicon-converter/" target="_blank">favicon.io</a></li>
+        <li>Sube cualquier imagen cuadrada (o usa el editor de texto)</li>
+        <li>Descarga el paquete .zip</li>
+        <li>Extrae y sube solo el archivo <code>favicon.ico</code> a tu carpeta <code>assets/</code></li>
+    </ol>
+    
+    <p><strong>O usa este favicon temporal:</strong></p>
+    <canvas id="faviconCanvas" width="64" height="64"></canvas>
+    <button onclick="descargarFavicon()">Descargar Favicon Temporal</button>
+    
+    <script>
+        const canvas = document.getElementById('faviconCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Fondo azul
+        ctx.fillStyle = '#1a365d';
+        ctx.fillRect(0, 0, 64, 64);
+        
+        // Letra A dorada
+        ctx.fillStyle = '#d69e2e';
+        ctx.font = 'bold 40px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('A', 32, 32);
+        
+        function descargarFavicon() {
+            const link = document.createElement('a');
+            link.download = 'favicon.ico';
+            link.href = canvas.toDataURL('image/x-icon');
+            link.click();
+        }
+    </script>
+</body>
+</html>
