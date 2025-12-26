@@ -5,18 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filósofos - ASEFIP</title>
     
+    <!-- SEO y Metadatos -->
+    <meta name="description" content="Galería de filósofos peruanos e internacionales. Conoce a los pensadores que han moldeado la historia de la filosofía.">
+    <meta name="keywords" content="filósofos peruanos, filosofía, pensadores, Sócrates, Platón, Aristóteles, Mariátegui, Salazar Bondy, filosofía peruana">
+    
     <!-- Enlaces comunes -->
     <link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     
     <style>
-        /* Estilos específicos para filósofos */
+        /* ESTILOS ESPECÍFICOS PARA FILÓSOFOS */
         .hero-filosofos {
-            background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
-            color: white;
+            background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-secundario) 100%);
+            color: var(--color-blanco);
             padding: 5rem 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-filosofos::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="%23ffffff" opacity="0.03" d="M0,0 L100,0 L100,100 Z"/></svg>');
+            background-size: cover;
+        }
+        
+        .hero-filosofos .container {
+            position: relative;
+            z-index: 1;
         }
         
         .search-bar {
@@ -28,10 +50,17 @@
         .search-bar input {
             width: 100%;
             padding: 1rem 1rem 1rem 3rem;
-            border: none;
+            border: 2px solid var(--color-borde);
             border-radius: 50px;
             font-size: 1rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: var(--transicion);
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--color-acento);
+            box-shadow: 0 0 0 3px rgba(214, 158, 46, 0.2);
         }
         
         .search-bar i {
@@ -39,7 +68,7 @@
             left: 1rem;
             top: 50%;
             transform: translateY(-50%);
-            color: #718096;
+            color: var(--color-texto-claro);
         }
         
         .filters {
@@ -47,23 +76,27 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin: 2rem 0;
+            margin: 2rem 0 3rem;
         }
         
         .filter-btn {
-            background: white;
-            border: 2px solid #e2e8f0;
-            padding: 0.5rem 1.5rem;
+            background: var(--color-blanco);
+            border: 2px solid var(--color-borde);
+            padding: 0.6rem 1.5rem;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transicion);
+            font-weight: 500;
+            color: var(--color-texto);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
         }
         
         .filter-btn.active,
         .filter-btn:hover {
-            background: #d69e2e;
-            color: white;
-            border-color: #d69e2e;
+            background: var(--color-acento);
+            color: var(--color-blanco);
+            border-color: var(--color-acento);
         }
         
         .filosofos-grid {
@@ -74,55 +107,71 @@
         }
         
         .filosofo-card {
-            background: white;
-            border-radius: 10px;
+            background: var(--color-blanco);
+            border-radius: var(--radio-borde);
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            box-shadow: var(--sombra);
+            transition: var(--transicion);
+            border: 1px solid var(--color-borde);
             position: relative;
         }
         
         .filosofo-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            transform: translateY(-8px);
+            box-shadow: var(--sombra-hover);
+            border-color: var(--color-acento);
         }
         
         .filosofo-era {
             position: absolute;
             top: 1rem;
             right: 1rem;
-            background: #d69e2e;
-            color: white;
-            padding: 0.25rem 1rem;
+            background: var(--color-acento);
+            color: var(--color-blanco);
+            padding: 0.4rem 1.2rem;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
+            font-weight: 600;
             z-index: 2;
         }
         
         .filosofo-image {
             height: 250px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--color-primario) 0%, #3a506b 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: var(--color-blanco);
             font-size: 4rem;
             font-family: 'Philosopher', serif;
+            font-weight: bold;
+            position: relative;
+        }
+        
+        .filosofo-image::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-acento), transparent);
         }
         
         .filosofo-content {
-            padding: 1.5rem;
+            padding: 1.8rem;
         }
         
         .filosofo-content h3 {
             margin-bottom: 0.5rem;
-            color: #1a365d;
+            color: var(--color-primario);
+            font-size: 1.5rem;
         }
         
         .filosofo-dates {
-            color: #718096;
+            color: var(--color-texto-claro);
             margin-bottom: 1rem;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
         
         .filosofo-tags {
@@ -134,56 +183,19 @@
         
         .tag {
             background: rgba(214, 158, 46, 0.1);
-            color: #d69e2e;
-            padding: 0.25rem 0.75rem;
+            color: var(--color-acento);
+            padding: 0.4rem 0.9rem;
             border-radius: 20px;
-            font-size: 0.8rem;
-        }
-        
-        .timeline {
-            position: relative;
-            max-width: 1000px;
-            margin: 5rem auto;
-        }
-        
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 6px;
-            background: #d69e2e;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -3px;
-        }
-        
-        .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            width: 50%;
-            box-sizing: border-box;
-        }
-        
-        .timeline-item:nth-child(odd) {
-            left: 0;
-        }
-        
-        .timeline-item:nth-child(even) {
-            left: 50%;
-        }
-        
-        .timeline-content {
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            font-size: 0.85rem;
+            font-weight: 500;
         }
         
         .era-section {
             margin: 4rem 0;
-            padding: 2rem;
-            background: #f7fafc;
-            border-radius: 10px;
+            padding: 2.5rem;
+            background: var(--color-fondo-alt);
+            border-radius: var(--radio-borde);
+            border: 1px solid var(--color-borde);
         }
         
         .era-title {
@@ -191,95 +203,195 @@
             align-items: center;
             gap: 1rem;
             margin-bottom: 2rem;
-            color: #1a365d;
+            color: var(--color-primario);
         }
         
         .era-icon {
             font-size: 2rem;
-            color: #d69e2e;
+            color: var(--color-acento);
         }
         
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: var(--color-acento);
+            top: 0;
+            bottom: 0;
+            left: 0;
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            margin-bottom: 2rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: var(--color-blanco);
+            border: 3px solid var(--color-acento);
+            border-radius: 50%;
+            left: -6px;
+            top: 0;
+        }
+        
+        .timeline-content {
+            padding: 1.5rem;
+            background: var(--color-blanco);
+            border-radius: var(--radio-borde-pequeno);
+            box-shadow: var(--sombra);
+            border-left: 4px solid var(--color-acento);
+        }
+        
+        .timeline-content h3 {
+            color: var(--color-primario);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Responsive */
         @media (max-width: 768px) {
-            .timeline::after {
-                left: 31px;
+            .filosofos-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .filters {
+                gap: 0.3rem;
+            }
+            
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .era-section {
+                padding: 1.5rem;
+            }
+            
+            .timeline {
+                padding-left: 1.5rem;
             }
             
             .timeline-item {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
+                padding-left: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .filosofos-grid {
+                grid-template-columns: 1fr;
             }
             
-            .timeline-item:nth-child(even) {
-                left: 0;
+            .search-bar {
+                margin: 1.5rem auto;
+            }
+            
+            .search-bar input {
+                padding: 0.8rem 0.8rem 0.8rem 2.5rem;
+                font-size: 0.95rem;
+            }
+            
+            .filosofo-image {
+                height: 220px;
+                font-size: 3.5rem;
+            }
+            
+            .filosofo-content {
+                padding: 1.5rem;
+            }
+            
+            .timeline::before {
+                left: 8px;
+            }
+            
+            .timeline-item {
+                padding-left: 2rem;
+            }
+            
+            .timeline-item::before {
+                left: 2px;
             }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header class="main-header">
+    <header class="main-header" role="banner">
         <div class="container header-container">
-            <a href="index.html" class="logo">
-                <div class="logo-icon">🦉</div>
+            <a href="index.html" class="logo" aria-label="ASEFIP - Inicio">
+                <div class="logo-icon" aria-hidden="true">🦉</div>
                 <div class="logo-text">
                     <h1>ASEFIP</h1>
                     <p>Asociación de Estudiantes de Filosofía del Perú</p>
                 </div>
             </a>
             
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
-                    <li><a href="aprender.html"><i class="fas fa-graduation-cap"></i> Aprender</a></li>
-                    <li><a href="filósofos.html" class="active"><i class="fas fa-users"></i> Filósofos</a></li>
-                    <li><a href="blog.html"><i class="fas fa-blog"></i> Blog</a></li>
-                    <li><a href="comunidad.html"><i class="fas fa-comments"></i> Comunidad</a></li>
-                    <li><a href="recursos.html"><i class="fas fa-tools"></i> Recursos</a></li>
+            <nav class="main-nav" aria-label="Navegación principal">
+                <ul role="menubar">
+                    <li role="none"><a href="index.html" role="menuitem"><i class="fas fa-home" aria-hidden="true"></i> <span>Inicio</span></a></li>
+                    <li role="none"><a href="aprender.html" role="menuitem"><i class="fas fa-graduation-cap" aria-hidden="true"></i> <span>Aprender</span></a></li>
+                    <li role="none"><a href="filosofos.html" class="active" role="menuitem" aria-current="page"><i class="fas fa-users" aria-hidden="true"></i> <span>Filósofos</span></a></li>
+                    <li role="none"><a href="blog.html" role="menuitem"><i class="fas fa-blog" aria-hidden="true"></i> <span>Blog</span></a></li>
+                    <li role="none"><a href="comunidad.html" role="menuitem"><i class="fas fa-comments" aria-hidden="true"></i> <span>Comunidad</span></a></li>
+                    <li role="none"><a href="recursos.html" role="menuitem"><i class="fas fa-tools" aria-hidden="true"></i> <span>Recursos</span></a></li>
+                    <li role="none"><a href="ejercicios.html" role="menuitem"><i class="fas fa-brain" aria-hidden="true"></i> <span>Ejercicios</span></a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero-filosofos">
-        <div class="container">
-            <h1 style="color: white; font-size: 3rem; margin-bottom: 1rem;">Galería de Filósofos</h1>
-            <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto; opacity: 0.9;">
+    <section class="hero-filosofos" aria-labelledby="hero-title">
+        <div class="container fade-in">
+            <h1 id="hero-title" style="color: white; margin-bottom: 1rem;">Galería de Filósofos</h1>
+            <p class="hero-subtitle" style="font-size: 1.2rem; max-width: 700px; margin: 0 auto; opacity: 0.95;">
                 Conoce a los pensadores que han moldeado la historia de la filosofía, con especial énfasis en los filósofos peruanos
             </p>
         </div>
     </section>
 
     <!-- Búsqueda y Filtros -->
-    <div class="container" style="padding: 2rem 0;">
+    <div class="container" style="padding: 2rem 0 1rem;">
         <div class="search-bar">
-            <i class="fas fa-search"></i>
-            <input type="text" id="searchInput" placeholder="Buscar filósofo, época o concepto...">
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <input type="text" id="searchInput" placeholder="Buscar filósofo, época o concepto..." aria-label="Buscar filósofos">
         </div>
         
-        <div class="filters">
-            <button class="filter-btn active" data-filter="todos">Todos</button>
-            <button class="filter-btn" data-filter="antigua">Antigua</button>
-            <button class="filter-btn" data-filter="medieval">Medieval</button>
-            <button class="filter-btn" data-filter="moderna">Moderna</button>
-            <button class="filter-btn" data-filter="contemporanea">Contemporánea</button>
-            <button class="filter-btn" data-filter="peruana">Peruana</button>
-            <button class="filter-btn" data-filter="feminista">Feminista</button>
+        <div class="filters" role="group" aria-label="Filtros de época">
+            <button class="filter-btn active" data-filter="todos" aria-pressed="true">Todos</button>
+            <button class="filter-btn" data-filter="antigua" aria-pressed="false">Antigua</button>
+            <button class="filter-btn" data-filter="medieval" aria-pressed="false">Medieval</button>
+            <button class="filter-btn" data-filter="moderna" aria-pressed="false">Moderna</button>
+            <button class="filter-btn" data-filter="contemporanea" aria-pressed="false">Contemporánea</button>
+            <button class="filter-btn" data-filter="peruana" aria-pressed="false">Peruana</button>
+            <button class="filter-btn" data-filter="feminista" aria-pressed="false">Feminista</button>
         </div>
     </div>
 
     <!-- Grid de Filósofos -->
-    <div class="container" style="padding: 2rem 0 5rem;">
-        <h2 style="text-align: center; margin-bottom: 2rem; color: #1a365d;">
-            Filósofos Destacados
-        </h2>
+    <div class="container" style="padding: 0 0 5rem;">
+        <div class="section-title fade-in">
+            <h2>Filósofos Destacados</h2>
+            <p>Explora las biografías y contribuciones de los pensadores más influyentes</p>
+        </div>
         
-        <div class="filosofos-grid" id="filosofosGrid">
+        <div class="filosofos-grid" id="filosofosGrid" role="list" aria-label="Lista de filósofos">
             <!-- Sócrates -->
-            <div class="filosofo-card" data-era="antigua">
-                <div class="filosofo-era">Antigua</div>
-                <div class="filosofo-image">
+            <article class="filosofo-card fade-in" data-era="antigua" role="listitem" style="animation-delay: 0.1s;">
+                <div class="filosofo-era" aria-label="Época: Antigua">Antigua</div>
+                <div class="filosofo-image" aria-hidden="true">
                     Σ
                 </div>
                 <div class="filosofo-content">
@@ -291,16 +403,16 @@
                         <span class="tag">Dialéctica</span>
                         <span class="tag">Mayéutica</span>
                     </div>
-                    <a href="#" class="btn" style="background: #d69e2e; color: white; padding: 0.75rem 1.5rem; border-radius: 5px; text-decoration: none; display: inline-block; margin-top: 1rem;">
-                        Ver Perfil Completo
+                    <a href="#" class="btn btn-primary" style="margin-top: 1rem;">
+                        <i class="fas fa-user-circle" aria-hidden="true"></i> Ver Perfil Completo
                     </a>
                 </div>
-            </div>
+            </article>
             
             <!-- Platón -->
-            <div class="filosofo-card" data-era="antigua">
-                <div class="filosofo-era">Antigua</div>
-                <div class="filosofo-image">
+            <article class="filosofo-card fade-in" data-era="antigua" role="listitem" style="animation-delay: 0.2s;">
+                <div class="filosofo-era" aria-label="Época: Antigua">Antigua</div>
+                <div class="filosofo-image" aria-hidden="true">
                     Π
                 </div>
                 <div class="filosofo-content">
@@ -312,16 +424,16 @@
                         <span class="tag">Política</span>
                         <span class="tag">Epistemología</span>
                     </div>
-                    <a href="#" class="btn" style="background: #d69e2e; color: white; padding: 0.75rem 1.5rem; border-radius: 5px; text-decoration: none; display: inline-block; margin-top: 1rem;">
-                        Ver Perfil Completo
+                    <a href="#" class="btn btn-primary" style="margin-top: 1rem;">
+                        <i class="fas fa-user-circle" aria-hidden="true"></i> Ver Perfil Completo
                     </a>
                 </div>
-            </div>
+            </article>
             
             <!-- Aristóteles -->
-            <div class="filosofo-card" data-era="antigua">
-                <div class="filosofo-era">Antigua</div>
-                <div class="filosofo-image">
+            <article class="filosofo-card fade-in" data-era="antigua" role="listitem" style="animation-delay: 0.3s;">
+                <div class="filosofo-era" aria-label="Época: Antigua">Antigua</div>
+                <div class="filosofo-image" aria-hidden="true">
                     Α
                 </div>
                 <div class="filosofo-content">
@@ -333,16 +445,16 @@
                         <span class="tag">Ética</span>
                         <span class="tag">Biología</span>
                     </div>
-                    <a href="#" class="btn" style="background: #d69e2e; color: white; padding: 0.75rem 1.5rem; border-radius: 5px; text-decoration: none; display: inline-block; margin-top: 1rem;">
-                        Ver Perfil Completo
+                    <a href="#" class="btn btn-primary" style="margin-top: 1rem;">
+                        <i class="fas fa-user-circle" aria-hidden="true"></i> Ver Perfil Completo
                     </a>
                 </div>
-            </div>
+            </article>
             
             <!-- Mariátegui -->
-            <div class="filosofo-card" data-era="peruana">
-                <div class="filosofo-era">Peruana</div>
-                <div class="filosofo-image">
+            <article class="filosofo-card fade-in" data-era="peruana" role="listitem" style="animation-delay: 0.4s;">
+                <div class="filosofo-era" aria-label="Época: Peruana">Peruana</div>
+                <div class="filosofo-image" aria-hidden="true">
                     JC
                 </div>
                 <div class="filosofo-content">
@@ -354,16 +466,16 @@
                         <span class="tag">Socialismo</span>
                         <span class="tag">Perú</span>
                     </div>
-                    <a href="#" class="btn" style="background: #d69e2e; color: white; padding: 0.75rem 1.5rem; border-radius: 5px; text-decoration: none; display: inline-block; margin-top: 1rem;">
-                        Ver Perfil Completo
+                    <a href="#" class="btn btn-primary" style="margin-top: 1rem;">
+                        <i class="fas fa-user-circle" aria-hidden="true"></i> Ver Perfil Completo
                     </a>
                 </div>
-            </div>
+            </article>
             
             <!-- Salazar Bondy -->
-            <div class="filosofo-card" data-era="peruana">
-                <div class="filosofo-era">Peruana</div>
-                <div class="filosofo-image">
+            <article class="filosofo-card fade-in" data-era="peruana" role="listitem" style="animation-delay: 0.5s;">
+                <div class="filosofo-era" aria-label="Época: Peruana">Peruana</div>
+                <div class="filosofo-image" aria-hidden="true">
                     AS
                 </div>
                 <div class="filosofo-content">
@@ -375,16 +487,16 @@
                         <span class="tag">Ética</span>
                         <span class="tag">Educación</span>
                     </div>
-                    <a href="#" class="btn" style="background: #d69e2e; color: white; padding: 0.75rem 1.5rem; border-radius: 5px; text-decoration: none; display: inline-block; margin-top: 1rem;">
-                        Ver Perfil Completo
+                    <a href="#" class="btn btn-primary" style="margin-top: 1rem;">
+                        <i class="fas fa-user-circle" aria-hidden="true"></i> Ver Perfil Completo
                     </a>
                 </div>
-            </div>
+            </article>
             
             <!-- Simone de Beauvoir -->
-            <div class="filosofo-card" data-era="feminista">
-                <div class="filosofo-era">Feminista</div>
-                <div class="filosofo-image">
+            <article class="filosofo-card fade-in" data-era="feminista" role="listitem" style="animation-delay: 0.6s;">
+                <div class="filosofo-era" aria-label="Época: Feminista">Feminista</div>
+                <div class="filosofo-image" aria-hidden="true">
                     SB
                 </div>
                 <div class="filosofo-content">
@@ -396,20 +508,20 @@
                         <span class="tag">Existencialismo</span>
                         <span class="tag">Ética</span>
                     </div>
-                    <a href="#" class="btn" style="background: #d69e2e; color: white; padding: 0.75rem 1.5rem; border-radius: 5px; text-decoration: none; display: inline-block; margin-top: 1rem;">
-                        Ver Perfil Completo
+                    <a href="#" class="btn btn-primary" style="margin-top: 1rem;">
+                        <i class="fas fa-user-circle" aria-hidden="true"></i> Ver Perfil Completo
                     </a>
                 </div>
-            </div>
+            </article>
         </div>
     </div>
 
     <!-- Línea del Tiempo -->
     <div class="container">
-        <div class="era-section">
+        <div class="era-section fade-in">
             <div class="era-title">
                 <div class="era-icon">
-                    <i class="fas fa-history"></i>
+                    <i class="fas fa-history" aria-hidden="true"></i>
                 </div>
                 <h2 style="margin: 0;">Línea del Tiempo Filosófica</h2>
             </div>
@@ -417,29 +529,29 @@
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <h3 style="color: #1a365d;">Filosofía Antigua (600 a.C. - 400 d.C.)</h3>
-                        <p>Desarrollo de la filosofía en Grecia y Roma. Figuras como Sócrates, Platón y Aristóteles.</p>
+                        <h3>Filosofía Antigua (600 a.C. - 400 d.C.)</h3>
+                        <p>Desarrollo de la filosofía en Grecia y Roma. Figuras como Sócrates, Platón y Aristóteles sentaron las bases del pensamiento occidental.</p>
                     </div>
                 </div>
                 
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <h3 style="color: #1a365d;">Filosofía Medieval (400 - 1400)</h3>
-                        <p>Filosofía cristiana, islámica y judía. Santo Tomás de Aquino, San Agustín.</p>
+                        <h3>Filosofía Medieval (400 - 1400)</h3>
+                        <p>Filosofía cristiana, islámica y judía. Santo Tomás de Aquino, San Agustín y Averroes desarrollaron la escolástica.</p>
                     </div>
                 </div>
                 
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <h3 style="color: #1a365d;">Filosofía Moderna (1400 - 1800)</h3>
-                        <p>Renacimiento, Ilustración. Descartes, Kant, Rousseau, Voltaire.</p>
+                        <h3>Filosofía Moderna (1400 - 1800)</h3>
+                        <p>Renacimiento, Ilustración. Descartes, Kant, Rousseau y Voltaire revolucionaron el pensamiento racional.</p>
                     </div>
                 </div>
                 
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <h3 style="color: #1a365d;">Filosofía Contemporánea (1800 - Actualidad)</h3>
-                        <p>Marx, Nietzsche, Freud, Foucault, y los filósofos peruanos contemporáneos.</p>
+                        <h3>Filosofía Contemporánea (1800 - Actualidad)</h3>
+                        <p>Marx, Nietzsche, Foucault, y los filósofos peruanos contemporáneos. Diversificación de corrientes y enfoques.</p>
                     </div>
                 </div>
             </div>
@@ -447,27 +559,27 @@
     </div>
 
     <!-- Footer -->
-    <footer class="main-footer">
+    <footer class="main-footer" role="contentinfo">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-column">
                     <h3>ASEFIP</h3>
-                    <p style="margin-bottom: 1.5rem; opacity: 0.8;">
+                    <p class="footer-description">
                         Asociación de Estudiantes de Filosofía del Perú. 
                         Promoviendo el pensamiento crítico y la filosofía peruana.
                     </p>
                     <div class="social-links">
-                        <a href="https://www.tiktok.com/@asefip01" class="social-link" target="_blank">
-                            <i class="fab fa-tiktok"></i>
+                        <a href="https://www.tiktok.com/@asefip01" class="social-link" target="_blank" aria-label="TikTok de ASEFIP" rel="noopener noreferrer">
+                            <i class="fab fa-tiktok" aria-hidden="true"></i>
                         </a>
-                        <a href="https://www.instagram.com/asefip_" class="social-link" target="_blank">
-                            <i class="fab fa-instagram"></i>
+                        <a href="https://www.instagram.com/asefip_" class="social-link" target="_blank" aria-label="Instagram de ASEFIP" rel="noopener noreferrer">
+                            <i class="fab fa-instagram" aria-hidden="true"></i>
                         </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-facebook"></i>
+                        <a href="#" class="social-link" aria-label="Facebook de ASEFIP">
+                            <i class="fab fa-facebook" aria-hidden="true"></i>
                         </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-youtube"></i>
+                        <a href="#" class="social-link" aria-label="YouTube de ASEFIP">
+                            <i class="fab fa-youtube" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
@@ -475,41 +587,42 @@
                 <div class="footer-column">
                     <h3>Recursos</h3>
                     <ul class="footer-links">
-                        <li><a href="aprender.html">Aprender Filosofía</a></li>
-                        <li><a href="filósofos.html">Galería de Filósofos</a></li>
-                        <li><a href="blog.html">Blog y Artículos</a></li>
-                        <li><a href="recursos.html">Recursos Educativos</a></li>
-                        <li><a href="glosario.html">Glosario Filosófico</a></li>
+                        <li><a href="aprender.html"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Aprender Filosofía</a></li>
+                        <li><a href="filosofos.html"><i class="fas fa-users" aria-hidden="true"></i> Galería de Filósofos</a></li>
+                        <li><a href="blog.html"><i class="fas fa-blog" aria-hidden="true"></i> Blog y Artículos</a></li>
+                        <li><a href="recursos.html"><i class="fas fa-tools" aria-hidden="true"></i> Recursos Educativos</a></li>
+                        <li><a href="glosario.html"><i class="fas fa-book" aria-hidden="true"></i> Glosario Filosófico</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Herramientas</h3>
                     <ul class="footer-links">
-                        <li><a href="ejercicios.html">Ejercicios Prácticos</a></li>
-                        <li><a href="investigar.html">Guías de Investigación</a></li>
-                        <li><a href="linea-tiempo.html">Línea del Tiempo</a></li>
-                        <li><a href="recursos-descargables.html">Material Descargable</a></li>
-                        <li><a href="enviar-articulo.html">Enviar Artículo</a></li>
+                        <li><a href="ejercicios.html"><i class="fas fa-brain" aria-hidden="true"></i> Ejercicios Prácticos</a></li>
+                        <li><a href="investigar.html"><i class="fas fa-search" aria-hidden="true"></i> Guías de Investigación</a></li>
+                        <li><a href="linea-tiempo.html"><i class="fas fa-timeline" aria-hidden="true"></i> Línea del Tiempo</a></li>
+                        <li><a href="recursos-descargables.html"><i class="fas fa-download" aria-hidden="true"></i> Material Descargable</a></li>
+                        <li><a href="enviar-articulo.html"><i class="fas fa-paper-plane" aria-hidden="true"></i> Enviar Artículo</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Contacto</h3>
                     <ul class="footer-links">
-                        <li><a href="mailto:contacto@asefip.org">contacto@asefip.org</a></li>
-                        <li><a href="#">Preguntas Frecuentes</a></li>
-                        <li><a href="#">Colaborar con ASEFIP</a></li>
-                        <li><a href="#">Trabaja con Nosotros</a></li>
-                        <li><a href="#">Mapa del Sitio</a></li>
+                        <li><a href="mailto:contacto@asefip.org"><i class="fas fa-envelope" aria-hidden="true"></i> contacto@asefip.org</a></li>
+                        <li><a href="#"><i class="fas fa-question-circle" aria-hidden="true"></i> Preguntas Frecuentes</a></li>
+                        <li><a href="#"><i class="fas fa-handshake" aria-hidden="true"></i> Colaborar con ASEFIP</a></li>
+                        <li><a href="#"><i class="fas fa-briefcase" aria-hidden="true"></i> Trabaja con Nosotros</a></li>
+                        <li><a href="#"><i class="fas fa-sitemap" aria-hidden="true"></i> Mapa del Sitio</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="footer-bottom">
                 <p>© 2024 ASEFIP - Asociación de Estudiantes de Filosofía del Perú. Todos los derechos reservados.</p>
-                <p style="margin-top: 0.5rem;">
-                    <i class="fas fa-heart" style="color: #d69e2e;"></i> Filosofía para transformar el Perú
+                <p class="footer-motto">
+                    <i class="fas fa-heart" aria-hidden="true"></i> 
+                    <span>Filosofía para transformar el Perú</span>
                 </p>
             </div>
         </div>
@@ -518,24 +631,36 @@
     <script>
         // Marcar enlace activo
         document.addEventListener('DOMContentLoaded', function() {
+            // Marcar navegación activa
             const currentPage = window.location.pathname.split('/').pop();
             document.querySelectorAll('.main-nav a').forEach(link => {
                 const linkPage = link.getAttribute('href');
-                if (linkPage === currentPage) {
+                if (linkPage === currentPage || 
+                   (currentPage === '' && linkPage === 'index.html') ||
+                   (currentPage === 'index.html' && linkPage === 'index.html')) {
                     link.classList.add('active');
+                    link.setAttribute('aria-current', 'page');
+                } else {
+                    link.classList.remove('active');
+                    link.removeAttribute('aria-current');
                 }
             });
             
-            // Filtros
+            // Filtros de filósofos
             const filterButtons = document.querySelectorAll('.filter-btn');
             const filosofos = document.querySelectorAll('.filosofo-card');
             
             filterButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     // Remover clase active de todos los botones
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-pressed', 'false');
+                    });
+                    
                     // Agregar clase active al botón clickeado
                     this.classList.add('active');
+                    this.setAttribute('aria-pressed', 'true');
                     
                     const filter = this.getAttribute('data-filter');
                     
@@ -543,26 +668,52 @@
                     filosofos.forEach(filosofo => {
                         if (filter === 'todos' || filosofo.getAttribute('data-era') === filter) {
                             filosofo.style.display = 'block';
+                            filosofo.setAttribute('aria-hidden', 'false');
                         } else {
                             filosofo.style.display = 'none';
+                            filosofo.setAttribute('aria-hidden', 'true');
                         }
                     });
                 });
             });
             
-            // Búsqueda
+            // Búsqueda en tiempo real
             const searchInput = document.getElementById('searchInput');
             searchInput.addEventListener('input', function() {
-                const searchTerm = this.value.toLowerCase();
+                const searchTerm = this.value.toLowerCase().trim();
                 
                 filosofos.forEach(filosofo => {
                     const content = filosofo.textContent.toLowerCase();
-                    if (content.includes(searchTerm)) {
+                    const title = filosofo.querySelector('h3').textContent.toLowerCase();
+                    
+                    if (searchTerm === '' || content.includes(searchTerm) || title.includes(searchTerm)) {
                         filosofo.style.display = 'block';
+                        filosofo.setAttribute('aria-hidden', 'false');
                     } else {
                         filosofo.style.display = 'none';
+                        filosofo.setAttribute('aria-hidden', 'true');
                     }
                 });
+            });
+            
+            // Animaciones de entrada
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observar elementos para animaciones
+            document.querySelectorAll('.filosofo-card, .era-section').forEach(el => {
+                observer.observe(el);
             });
         });
     </script>
