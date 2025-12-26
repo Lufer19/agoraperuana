@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efemérides Filosóficas - ASEFIP</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .efemeride-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .efemeride-header {
+            text-align: center;
+            padding: 20px;
+            background: #2c3e50;
+            color: white;
+            border-radius: 15px 15px 0 0;
+            margin: -20px -20px 20px -20px;
+        }
+        
+        .efemeride-icon {
+            font-size: 60px;
+            margin-bottom: 10px;
+        }
+        
+        .fecha-display {
+            background: #e74c3c;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            display: inline-block;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        
+        .efemeride-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #3498db;
+        }
+        
+        .cita-filosofica {
+            font-size: 1.2em;
+            font-style: italic;
+            color: #2c3e50;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #f1c40f;
+        }
+        
+        .autor-filosofo {
+            text-align: right;
+            font-weight: bold;
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+        
+        .info-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .info-item {
+            flex: 1;
+            min-width: 200px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #27ae60;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px 5px;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background: #219653;
+            transform: translateY(-2px);
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.2em;
+            color: #7f8c8d;
+        }
+        
+        .historial-btn {
+            background: #9b59b6;
+        }
+        
+        .historial-btn:hover {
+            background: #8e44ad;
+        }
+    </style>
+</head>
+<body>
+    <!-- Puedes incluir tu header aquí si tienes uno -->
+    <div class="efemeride-container">
+        <div class="efemeride-header">
+            <div class="efemeride-icon">📅</div>
+            <h1>Efemérides Filosóficas</h1>
+            <p>Asociación de Estudiantes de Filosofía del Perú (ASEFIP)</p>
+            <div class="fecha-display" id="fechaActual">Cargando fecha...</div>
+        </div>
+        
+        <div id="efemerideHoy" class="loading">
+            <div style="font-size: 24px; color: #3498db;">🔄</div>
+            <p>Cargando la reflexión filosófica del día...</p>
+        </div>
+        
+        <div class="info-box">
+            <div class="info-item">
+                <h3>📚 ¿Qué son las efemérides filosóficas?</h3>
+                <p>Recordamos nacimientos, eventos y citas importantes en la historia del pensamiento, con especial énfasis en la filosofía peruana.</p>
+            </div>
+            <div class="info-item">
+                <h3>🎯 Objetivo</h3>
+                <p>Fomentar la memoria histórica filosófica y reflexionar sobre cómo el pensamiento del pasado ilumina nuestro presente.</p>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="index.html" class="btn">🏠 Volver al Inicio</a>
+            <a href="filósofos.html" class="btn historial-btn">👥 Ver Filósofos</a>
+            <button onclick="cargarEfemeride()" class="btn">🔄 Actualizar Reflexión</button>
+        </div>
+        
+        <div style="margin-top: 40px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+            <h3>📖 Reflexión del Mes</h3>
+            <p>Este mes destacamos la filosofía peruana. Te invitamos a:</p>
+            <ul>
+                <li>Leer a Mariátegui y Salazar Bondy</li>
+                <li>Reflexionar sobre la identidad filosófica peruana</li>
+                <li>Participar en nuestros foros de discusión</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Cargar efeméride al abrir la página
+        document.addEventListener('DOMContentLoaded', cargarEfemeride);
+        
+        // Actualizar fecha actual
+        function actualizarFecha() {
+            const ahora = new Date();
+            const opciones = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            };
+            document.getElementById('fechaActual').textContent = 
+                ahora.toLocaleDateString('es-ES', opciones);
+        }
+        
+        // Cargar efeméride desde la API
+        async function cargarEfemeride() {
+            const contenedor = document.getElementById('efemerideHoy');
+            contenedor.innerHTML = `
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-size: 30px; color: #3498db;">⚡</div>
+                    <p>Cargando sabiduría filosófica...</p>
+                </div>
+            `;
+            
+            actualizarFecha();
+            
+            try {
+                const respuesta = await fetch('api/efemerides.php');
+                const data = await respuesta.json();
+                
+                if (data.success) {
+                    const efemeride = data.efemeride;
+                    
+                    contenedor.innerHTML = `
+                        <div class="efemeride-content">
+                            <div style="
+                                background: #3498db;
+                                color: white;
+                                padding: 5px 15px;
+                                border-radius: 20px;
+                                display: inline-block;
+                                margin-bottom: 15px;
+                                font-size: 0.9em;
+                            ">
+                                ${efemeride.tipo}
+                            </div>
+                            
+                            <h2 style="color: #2c3e50; margin-bottom: 15px;">
+                                ${efemeride.evento}
+                            </h2>
+                            
+                            <div style="
+                                background: #f1c40f;
+                                color: #2c3e50;
+                                padding: 8px 15px;
+                                border-radius: 10px;
+                                display: inline-block;
+                                margin-bottom: 20px;
+                                font-weight: bold;
+                            ">
+                                👤 ${efemeride.filosofo}
+                            </div>
+                            
+                            <div class="cita-filosofica">
+                                "${efemeride.cita}"
+                                <div class="autor-filosofo">— ${efemeride.filosofo}</div>
+                            </div>
+                            
+                            <div style="margin: 20px 0; padding: 15px; background: #e8f4fc; border-radius: 10px;">
+                                <strong>💭 ${efemeride.saludo}</strong><br>
+                                ${efemeride.mensaje}
+                            </div>
+                            
+                            <div style="margin: 20px 0; padding: 15px; background: #e8f6f3; border-radius: 10px;">
+                                <strong>🎯 Sugerencia:</strong><br>
+                                ${efemeride.sugerencia_actividad}
+                            </div>
+                            
+                            ${efemeride.contribucion ? `
+                            <div style="margin: 20px 0; padding: 15px; background: #fef9e7; border-radius: 10px;">
+                                <strong>📚 Contribución:</strong><br>
+                                ${efemeride.contribucion}
+                            </div>
+                            ` : ''}
+                            
+                            <div style="
+                                margin-top: 30px;
+                                padding-top: 20px;
+                                border-top: 1px solid #eee;
+                                font-size: 0.9em;
+                                color: #7f8c8d;
+                            ">
+                                <strong>📅 Fecha:</strong> ${efemeride.fecha_actual}<br>
+                                <strong>🎭 Tipo:</strong> ${efemeride.tipo_respuesta}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    throw new Error('No se pudo cargar la efeméride');
+                }
+            } catch (error) {
+                contenedor.innerHTML = `
+                    <div class="efemeride-content" style="border-left-color: #e74c3c;">
+                        <h2 style="color: #e74c3c;">⚠️ Error al cargar</h2>
+                        <p>No se pudo cargar la efeméride del día. Intenta de nuevo más tarde.</p>
+                        <p><em>Error: ${error.message}</em></p>
+                        <div class="cita-filosofica">
+                            "La paciencia es amarga, pero su fruto es dulce."
+                            <div class="autor-filosofo">— Jean-Jacques Rousseau</div>
+                        </div>
+                        <button onclick="cargarEfemeride()" class="btn">🔄 Reintentar</button>
+                    </div>
+                `;
+            }
+        }
+        
+        // Actualizar automáticamente cada hora
+        setInterval(actualizarFecha, 3600000);
+    </script>
+</body>
+  </html>
