@@ -1,19 +1,57 @@
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Georgia,'Times New Roman',serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;padding:20px}
-.container{max-width:1200px;margin:0 auto;background:white;border-radius:20px;padding:40px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
-header{text-align:center;margin-bottom:50px}
-.logo{display:inline-block;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;width:60px;height:60px;border-radius:50%;line-height:60px;font-size:24px;font-weight:700;margin-bottom:15px}
-h1{color:#2d3748;font-size:2.2em;margin-bottom:8px}
-.subtitle{color:#718096;font-size:1.05em}
-.back-link{display:inline-block;color:#667eea;text-decoration:none;margin-bottom:20px;font-weight:500}
-.article-header{height:150px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:3rem;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%)}
-.article-content{padding:22px}
-.article-category{background:#e6fffa;color:#234e52;padding:6px 12px;border-radius:20px;font-weight:700;font-size:.85em;display:inline-block;margin-bottom:10px}
-.article-meta{display:flex;gap:12px;color:#718096;font-size:.9em;margin-bottom:12px;flex-wrap:wrap}
-.article-card h3{color:#2d3748;font-size:1.2rem;margin-bottom:10px}
-.article-excerpt{color:#4a5568;line-height:1.6;margin-bottom:12px}
-.article-author{display:flex;align-items:center;gap:12px;padding-top:14px;border-top:1px solid #f1f5f9;margin-top:12px}
-.author-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;font-weight:700}
-.read-more{color:#667eea;text-decoration:none;font-weight:700}
-footer{text-align:center;margin-top:24px;color:#718096}
-@media (max-width:768px){.article-header{height:120px;font-size:2.2rem}}
+/* styles.css - Estilos básicos para toda la página */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* HEADER */
+header {
+    background: #2C3E50;
+    color: white;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #D4AF37;
+}
