@@ -3,477 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Filosófico - ASEFIP</title>
-    
-    <!-- Mismos estilos que index.html -->
+    <title>Blog - ASEFIP</title>
     <link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    
-    <style>
-        /* Estilos específicos para blog */
-        .hero-blog {
-            background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
-            color: white;
-            padding: 5rem 0;
-            text-align: center;
-        }
-        
-        .blog-filters {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin: 2rem 0 3rem;
-        }
-        
-        .filter-btn {
-            padding: 0.5rem 1.5rem;
-            border: 2px solid #d69e2e;
-            background: transparent;
-            color: #d69e2e;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-        
-        .filter-btn.active,
-        .filter-btn:hover {
-            background: #d69e2e;
-            color: white;
-        }
-        
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-        
-        .article-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .article-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-        }
-        
-        .article-image {
-            height: 200px;
-            background: linear-gradient(135deg, #1a365d, #2d3748);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-        }
-        
-        .article-content {
-            padding: 2rem;
-        }
-        
-        .article-category {
-            display: inline-block;
-            background: rgba(214, 158, 46, 0.1);
-            color: #d69e2e;
-            padding: 0.25rem 1rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            margin-bottom: 1rem;
-        }
-        
-        .article-meta {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 1.5rem;
-            font-size: 0.9rem;
-            color: #666;
-        }
-        
-        .pagination {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin: 3rem 0;
-        }
-        
-        .page-btn {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            background: white;
-            color: #333;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .page-btn.active,
-        .page-btn:hover {
-            border-color: #d69e2e;
-            background: #d69e2e;
-            color: white;
-        }
-        
-        .featured-articles {
-            margin: 4rem 0;
-            padding: 3rem;
-            background: rgba(214, 158, 46, 0.05);
-            border-radius: 10px;
-        }
-    </style>
 </head>
 <body>
-    <!-- Header igual que index.html -->
-    <header class="main-header">
+    <!-- Header (igual que index.html) -->
+    <header class="main-header" role="banner">
         <div class="container header-container">
-            <a href="index.html" class="logo">
-                <div class="logo-icon">🦉</div>
+            <a href="index.html" class="logo" aria-label="ASEFIP - Inicio">
+                <div class="logo-icon" aria-hidden="true">🦉</div>
                 <div class="logo-text">
                     <h1>ASEFIP</h1>
                     <p>Asociación de Estudiantes de Filosofía del Perú</p>
                 </div>
             </a>
             
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
-                    <li><a href="aprender.html"><i class="fas fa-graduation-cap"></i> Aprender</a></li>
-                    <li><a href="filósofos.html"><i class="fas fa-users"></i> Filósofos</a></li>
-                    <li><a href="blog.html" class="active"><i class="fas fa-blog"></i> Blog</a></li>
-                    <li><a href="comunidad.html"><i class="fas fa-comments"></i> Comunidad</a></li>
-                    <li><a href="recursos.html"><i class="fas fa-tools"></i> Recursos</a></li>
-                    <li><a href="ejercicios.html"><i class="fas fa-brain"></i> Ejercicios</a></li>
+            <nav class="main-nav" aria-label="Navegación principal">
+                <ul role="menubar">
+                    <li role="none"><a href="index.html" role="menuitem"><i class="fas fa-home" aria-hidden="true"></i> <span>Inicio</span></a></li>
+                    <li role="none"><a href="aprender.html" role="menuitem"><i class="fas fa-graduation-cap" aria-hidden="true"></i> <span>Aprender</span></a></li>
+                    <li role="none"><a href="filosofos.html" role="menuitem"><i class="fas fa-users" aria-hidden="true"></i> <span>Filósofos</span></a></li>
+                    <li role="none"><a href="blog.html" class="active" role="menuitem" aria-current="page"><i class="fas fa-blog" aria-hidden="true"></i> <span>Blog</span></a></li>
+                    <li role="none"><a href="comunidad.html" role="menuitem"><i class="fas fa-comments" aria-hidden="true"></i> <span>Comunidad</span></a></li>
+                    <li role="none"><a href="recursos.html" role="menuitem"><i class="fas fa-tools" aria-hidden="true"></i> <span>Recursos</span></a></li>
+                    <li role="none"><a href="ejercicios.html" role="menuitem"><i class="fas fa-brain" aria-hidden="true"></i> <span>Ejercicios</span></a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero-blog">
-        <div class="container">
-            <h1 style="color: white; font-size: 3rem; margin-bottom: 1rem;">Blog Filosófico</h1>
-            <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto;">
-                Artículos, ensayos y reflexiones sobre filosofía peruana y universal
-            </p>
-        </div>
-    </section>
-
-    <!-- Contenido Principal -->
-    <div class="container" style="padding: 3rem 0;">
-        <!-- Filtros -->
-        <div class="blog-filters">
-            <button class="filter-btn active" data-filter="todos">Todos</button>
-            <button class="filter-btn" data-filter="peruana">Filosofía Peruana</button>
-            <button class="filter-btn" data-filter="etica">Ética</button>
-            <button class="filter-btn" data-filter="politica">Filosofía Política</button>
-            <button class="filter-btn" data-filter="historia">Historia de la Filosofía</button>
-            <button class="filter-btn" data-filter="actualidad">Actualidad</button>
+    <main class="container" style="padding: 3rem 0 5rem;">
+        <div class="section-title">
+            <h1>Blog Filosófico</h1>
+            <p>Artículos, reflexiones y análisis sobre filosofía peruana y universal</p>
         </div>
         
-        <!-- Artículos Destacados -->
-        <div class="featured-articles">
-            <h2 style="text-align: center; margin-bottom: 2rem; color: #1a365d;">
-                <i class="fas fa-star" style="color: #d69e2e;"></i> Artículos Destacados
-            </h2>
-            
-            <div class="blog-grid">
-                <div class="article-card">
-                    <div class="article-image">
-                        <i class="fas fa-mountain"></i>
-                    </div>
-                    <div class="article-content">
-                        <span class="article-category">Filosofía Peruana</span>
-                        <h3 style="margin-bottom: 1rem;">El Pensamiento Andino en el Siglo XXI</h3>
-                        <p>Un análisis de cómo la cosmovisión andina puede aportar soluciones a los problemas contemporáneos globales.</p>
-                        <div class="article-meta">
-                            <span><i class="fas fa-user"></i> Juan Pérez</span>
-                            <span><i class="fas fa-calendar"></i> 15 Dic 2024</span>
-                        </div>
-                        <a href="#" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">
-                            Leer Artículo
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="article-card">
-                    <div class="article-image">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <div class="article-content">
-                        <span class="article-category">Ética</span>
-                        <h3 style="margin-bottom: 1rem;">La Ética en la Era de la Inteligencia Artificial</h3>
-                        <p>Reflexiones sobre los desafíos éticos que plantea el desarrollo de la IA y cómo la filosofía puede guiarnos.</p>
-                        <div class="article-meta">
-                            <span><i class="fas fa-user"></i> María González</span>
-                            <span><i class="fas fa-calendar"></i> 10 Dic 2024</span>
-                        </div>
-                        <a href="#" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">
-                            Leer Artículo
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="article-card">
-                    <div class="article-image">
-                        <i class="fas fa-book"></i>
-                    </div>
-                    <div class="article-content">
-                        <span class="article-category">Historia</span>
-                        <h3 style="margin-bottom: 1rem;">Mariátegui: 7 Ensayos Releídos Hoy</h3>
-                        <p>Una relectura crítica de la obra fundamental de José Carlos Mariátegui a casi 100 años de su publicación.</p>
-                        <div class="article-meta">
-                            <span><i class="fas fa-user"></i> Carlos Rodríguez</span>
-                            <span><i class="fas fa-calendar"></i> 5 Dic 2024</span>
-                        </div>
-                        <a href="#" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">
-                            Leer Artículo
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Todos los Artículos -->
-        <h2 style="text-align: center; margin: 4rem 0 2rem; color: #1a365d;">
-            Todos los Artículos
-        </h2>
-        
-        <div class="blog-grid">
-            <!-- Artículo 1 -->
-            <div class="article-card" data-category="peruana">
-                <div class="article-content">
-                    <span class="article-category">Filosofía Peruana</span>
-                    <h3 style="margin-bottom: 1rem;">Augusto Salazar Bondy y la Autenticidad Filosófica</h3>
-                    <p>Análisis de la pregunta fundamental: ¿Existe una filosofía peruana auténtica?</p>
-                    <div class="article-meta">
-                        <span><i class="fas fa-user"></i> Ana Torres</span>
-                        <span><i class="fas fa-calendar"></i> 1 Dic 2024</span>
-                        <span><i class="fas fa-clock"></i> 8 min</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Artículo 2 -->
-            <div class="article-card" data-category="etica">
-                <div class="article-content">
-                    <span class="article-category">Ética</span>
-                    <h3 style="margin-bottom: 1rem;">Virtudes para el Mundo Actual</h3>
-                    <p>Cómo las virtudes aristotélicas pueden aplicarse a los desafíos contemporáneos.</p>
-                    <div class="article-meta">
-                        <span><i class="fas fa-user"></i> Luis Fernández</span>
-                        <span><i class="fas fa-calendar"></i> 28 Nov 2024</span>
-                        <span><i class="fas fa-clock"></i> 6 min</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Artículo 3 -->
-            <div class="article-card" data-category="politica">
-                <div class="article-content">
-                    <span class="article-category">Filosofía Política</span>
-                    <h3 style="margin-bottom: 1rem;">Democracia y Participación Ciudadana</h3>
-                    <p>Reflexiones sobre el concepto de democracia desde la perspectiva de la filosofía política.</p>
-                    <div class="article-meta">
-                        <span><i class="fas fa-user"></i> Sofía Mendoza</span>
-                        <span><i class="fas fa-calendar"></i> 25 Nov 2024</span>
-                        <span><i class="fas fa-clock"></i> 10 min</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Artículo 4 -->
-            <div class="article-card" data-category="historia">
-                <div class="article-content">
-                    <span class="article-category">Historia</span>
-                    <h3 style="margin-bottom: 1rem;">El Legado de la Filosofía Griega</h3>
-                    <p>Cómo el pensamiento griego antiguo sigue influyendo en nuestra forma de pensar hoy.</p>
-                    <div class="article-meta">
-                        <span><i class="fas fa-user"></i> Roberto Jiménez</span>
-                        <span><i class="fas fa-calendar"></i> 20 Nov 2024</span>
-                        <span><i class="fas fa-clock"></i> 7 min</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Artículo 5 -->
-            <div class="article-card" data-category="actualidad">
-                <div class="article-content">
-                    <span class="article-category">Actualidad</span>
-                    <h3 style="margin-bottom: 1rem;">Filosofía en las Redes Sociales</h3>
-                    <p>Análisis del impacto de las redes sociales en el debate filosófico contemporáneo.</p>
-                    <div class="article-meta">
-                        <span><i class="fas fa-user"></i> Carmen Ruiz</span>
-                        <span><i class="fas fa-calendar"></i> 15 Nov 2024</span>
-                        <span><i class="fas fa-clock"></i> 9 min</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Artículo 6 -->
-            <div class="article-card" data-category="peruana">
-                <div class="article-content">
-                    <span class="article-category">Filosofía Peruana</span>
-                    <h3 style="margin-bottom: 1rem;">Pensamiento Feminista en el Perú</h3>
-                    <p>Exploración del desarrollo del pensamiento feminista en la filosofía peruana.</p>
-                    <div class="article-meta">
-                        <span><i class="fas fa-user"></i> Daniela Castro</span>
-                        <span><i class="fas fa-calendar"></i> 10 Nov 2024</span>
-                        <span><i class="fas fa-clock"></i> 8 min</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Paginación -->
-        <div class="pagination">
-            <button class="page-btn"><i class="fas fa-chevron-left"></i></button>
-            <button class="page-btn active">1</button>
-            <button class="page-btn">2</button>
-            <button class="page-btn">3</button>
-            <button class="page-btn">4</button>
-            <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
-        </div>
-        
-        <!-- Call to Action -->
-        <div style="text-align: center; margin: 4rem 0; padding: 3rem; background: rgba(26, 54, 93, 0.05); border-radius: 10px;">
-            <h2 style="margin-bottom: 1rem; color: #1a365d;">¿Quieres Publicar en Nuestro Blog?</h2>
-            <p style="margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-                Invitamos a estudiantes, profesores e investigadores a compartir sus reflexiones filosóficas.
-            </p>
-            <a href="enviar-articulo.html" class="btn btn-primary">
-                <i class="fas fa-pen-fancy"></i> Enviar un Artículo
+        <div style="text-align: center; margin: 3rem 0;">
+            <p>Contenido en desarrollo. Próximamente artículos exclusivos.</p>
+            <a href="index.html" class="btn btn-primary" style="margin-top: 1rem;">
+                <i class="fas fa-arrow-left" aria-hidden="true"></i> Volver al Inicio
             </a>
         </div>
-    </div>
+    </main>
 
-    <!-- Footer igual que index.html -->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <h3>ASEFIP</h3>
-                    <p style="margin-bottom: 1.5rem; opacity: 0.8;">
-                        Asociación de Estudiantes de Filosofía del Perú. 
-                        Promoviendo el pensamiento crítico y la filosofía peruana.
-                    </p>
-                    <div class="social-links">
-                        <a href="https://www.tiktok.com/@asefip01" class="social-link" target="_blank">
-                            <i class="fab fa-tiktok"></i>
-                        </a>
-                        <a href="https://www.instagram.com/asefip_" class="social-link" target="_blank">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Recursos</h3>
-                    <ul class="footer-links">
-                        <li><a href="aprender.html">Aprender Filosofía</a></li>
-                        <li><a href="filósofos.html">Galería de Filósofos</a></li>
-                        <li><a href="blog.html">Blog y Artículos</a></li>
-                        <li><a href="recursos.html">Recursos Educativos</a></li>
-                        <li><a href="glosario.html">Glosario Filosófico</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Herramientas</h3>
-                    <ul class="footer-links">
-                        <li><a href="ejercicios.html">Ejercicios Prácticos</a></li>
-                        <li><a href="investigar.html">Guías de Investigación</a></li>
-                        <li><a href="linea-tiempo.html">Línea del Tiempo</a></li>
-                        <li><a href="recursos-descargables.html">Material Descargable</a></li>
-                        <li><a href="enviar-articulo.html">Enviar Artículo</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Contacto</h3>
-                    <ul class="footer-links">
-                        <li><a href="mailto:contacto@asefip.org">contacto@asefip.org</a></li>
-                        <li><a href="#">Preguntas Frecuentes</a></li>
-                        <li><a href="#">Colaborar con ASEFIP</a></li>
-                        <li><a href="#">Trabaja con Nosotros</a></li>
-                        <li><a href="#">Mapa del Sitio</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>© 2024 ASEFIP - Asociación de Estudiantes de Filosofía del Perú. Todos los derechos reservados.</p>
-                <p style="margin-top: 0.5rem;">
-                    <i class="fas fa-heart" style="color: #d69e2e;"></i> Filosofía para transformar el Perú
-                </p>
-            </div>
-        </div>
+    <!-- Footer (copia EXACTO de index.html) -->
+    <footer class="main-footer" role="contentinfo">
+        <!-- Pega aquí el footer COMPLETO de index.html -->
     </footer>
 
     <script>
-        // Filtros de artículos
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                // Remover activo de todos
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                // Activar este
-                this.classList.add('active');
-                
-                const filter = this.dataset.filter;
-                const articles = document.querySelectorAll('.article-card');
-                
-                articles.forEach(article => {
-                    if (filter === 'todos') {
-                        article.style.display = 'block';
-                    } else {
-                        if (article.dataset.category === filter) {
-                            article.style.display = 'block';
-                        } else {
-                            article.style.display = 'none';
-                        }
-                    }
-                });
-            });
-        });
-        
-        // Paginación
-        document.querySelectorAll('.page-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                if (this.classList.contains('active')) return;
-                
-                document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                
-                // Aquí iría la lógica para cargar la página correspondiente
-                // Por ahora solo mostramos un mensaje
-                if (!this.querySelector('i')) {
-                    const pageNum = this.textContent;
-                    alert(`Cargando página ${pageNum}...`);
-                }
-            });
-        });
-        
-        // Marcar enlace activo
         document.addEventListener('DOMContentLoaded', function() {
-            const links = document.querySelectorAll('.main-nav a');
-            links.forEach(link => {
-                if (link.href === window.location.href) {
+            const currentPage = window.location.pathname.split('/').pop();
+            document.querySelectorAll('.main-nav a').forEach(link => {
+                const linkPage = link.getAttribute('href');
+                if (linkPage === currentPage) {
                     link.classList.add('active');
+                    link.setAttribute('aria-current', 'page');
                 }
             });
         });
