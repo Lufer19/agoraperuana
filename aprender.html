@@ -5,207 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aprender Filosofía - ASEFIP</title>
     
-    <!-- Mismo header que index.html -->
+    <!-- Enlaces comunes -->
     <link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        /* Estilos específicos para aprender.html */
-        :root {
-            --color-primario: #1a365d;
-            --color-acento: #d69e2e;
-            --color-fondo: #f7fafc;
-        }
-        
-        .hero-aprender {
-            background: linear-gradient(135deg, var(--color-primario) 0%, #2d3748 100%);
-            color: white;
-            padding: 5rem 0;
-            text-align: center;
-        }
-        
-        .cursos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-        
-        .curso-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-        
-        .curso-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .curso-header {
-            background: var(--color-acento);
-            color: white;
-            padding: 1.5rem;
-            text-align: center;
-        }
-        
-        .curso-content {
-            padding: 2rem;
-        }
-        
-        .niveles {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-        
-        .nivel-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            border-left: 5px solid var(--color-acento);
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Mismo header que index.html -->
-    <header class="main-header">
+    <!-- Header (igual que index.html) -->
+    <header class="main-header" role="banner">
         <div class="container header-container">
-            <a href="index.html" class="logo">
-                <div class="logo-icon">🦉</div>
+            <a href="index.html" class="logo" aria-label="ASEFIP - Inicio">
+                <div class="logo-icon" aria-hidden="true">🦉</div>
                 <div class="logo-text">
                     <h1>ASEFIP</h1>
                     <p>Asociación de Estudiantes de Filosofía del Perú</p>
                 </div>
             </a>
             
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
-                    <li><a href="aprender.html" class="active"><i class="fas fa-graduation-cap"></i> Aprender</a></li>
-                    <li><a href="filósofos.html"><i class="fas fa-users"></i> Filósofos</a></li>
-                    <li><a href="blog.html"><i class="fas fa-blog"></i> Blog</a></li>
-                    <li><a href="comunidad.html"><i class="fas fa-comments"></i> Comunidad</a></li>
+            <nav class="main-nav" aria-label="Navegación principal">
+                <ul role="menubar">
+                    <li role="none"><a href="index.html" role="menuitem"><i class="fas fa-home" aria-hidden="true"></i> <span>Inicio</span></a></li>
+                    <li role="none"><a href="aprender.html" class="active" role="menuitem" aria-current="page"><i class="fas fa-graduation-cap" aria-hidden="true"></i> <span>Aprender</span></a></li>
+                    <li role="none"><a href="filosofos.html" role="menuitem"><i class="fas fa-users" aria-hidden="true"></i> <span>Filósofos</span></a></li>
+                    <li role="none"><a href="blog.html" role="menuitem"><i class="fas fa-blog" aria-hidden="true"></i> <span>Blog</span></a></li>
+                    <li role="none"><a href="comunidad.html" role="menuitem"><i class="fas fa-comments" aria-hidden="true"></i> <span>Comunidad</span></a></li>
+                    <li role="none"><a href="recursos.html" role="menuitem"><i class="fas fa-tools" aria-hidden="true"></i> <span>Recursos</span></a></li>
+                    <li role="none"><a href="ejercicios.html" role="menuitem"><i class="fas fa-brain" aria-hidden="true"></i> <span>Ejercicios</span></a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <section class="hero-aprender">
-        <div class="container">
-            <h1 style="color: white; font-size: 3rem; margin-bottom: 1rem;">Aprender Filosofía</h1>
-            <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto;">
-                Cursos estructurados, recursos didácticos y guías de aprendizaje para todos los niveles
-            </p>
+    <!-- Contenido principal -->
+    <main class="container" style="padding: 3rem 0 5rem;">
+        <div class="section-title">
+            <h1>Cursos y Aprendizaje</h1>
+            <p>Aprende filosofía peruana y universal con nuestros recursos educativos</p>
         </div>
-    </section>
+        
+        <div style="text-align: center; margin: 3rem 0;">
+            <p>Contenido en desarrollo. Próximamente cursos gratuitos de filosofía peruana.</p>
+            <a href="index.html" class="btn btn-primary" style="margin-top: 1rem;">
+                <i class="fas fa-arrow-left" aria-hidden="true"></i> Volver al Inicio
+            </a>
+        </div>
+    </main>
 
-    <div class="container" style="padding: 5rem 0;">
-        <h2 style="text-align: center; margin-bottom: 3rem; color: var(--color-primario);">
-            Cursos Disponibles
-        </h2>
-        
-        <div class="cursos-grid">
-            <div class="curso-card">
-                <div class="curso-header">
-                    <h3 style="color: white;">Filosofía Básica</h3>
-                </div>
-                <div class="curso-content">
-                    <p>Introducción a los conceptos fundamentales de la filosofía. Ideal para principiantes.</p>
-                    <ul style="margin: 1rem 0; padding-left: 1.5rem;">
-                        <li>¿Qué es la filosofía?</li>
-                        <li>Ramas principales</li>
-                        <li>Métodos filosóficos</li>
-                        <li>Historia general</li>
-                    </ul>
-                    <a href="#" class="btn" style="background: var(--color-acento); color: white; padding: 0.75rem 1.5rem; border-radius: 5px; text-decoration: none; display: inline-block;">
-                        Comenzar Curso
-                    </a>
-                </div>
-            </div>
-            
-            <div class="curso-card">
-                <div class="curso-header">
-                    <h3 style="color: white;">Filosofía Peruana</h3>
-                </div>
-                <div class="curso-content">
-                    <p>Explora el pensamiento filosófico desarrollado en el Perú desde la época prehispánica hasta hoy.</p>
-                    <ul style="margin: 1rem 0; padding-left: 1.5rem;">
-                        <li>Pensamiento andino</li>
-                        <li>Filósofos coloniales</li>
-                        <li>Mariátegui y el socialismo</li>
-                        <li>Filosofía contemporánea</li>
-                    </ul>
-                    <a href="#" class="btn" style="background: var(--color-acento); color: white; padding: 0.75rem 1.5rem; border-radius: 5px; text-decoration: none; display: inline-block;">
-                        Comenzar Curso
-                    </a>
-                </div>
-            </div>
-            
-            <div class="curso-card">
-                <div class="curso-header">
-                    <h3 style="color: white;">Ética Aplicada</h3>
-                </div>
-                <div class="curso-content">
-                    <p>Estudio de los principios éticos y su aplicación en situaciones contemporáneas.</p>
-                    <ul style="margin: 1rem 0; padding-left: 1.5rem;">
-                        <li>Teorías éticas</li>
-                        <li>Bioética</li>
-                        <li>Ética digital</li>
-                        <li>Ética profesional</li>
-                    </ul>
-                    <a href="#" class="btn" style="background: var(--color-acento); color: white; padding: 0.75rem 1.5rem; border-radius: 5px; text-decoration: none; display: inline-block;">
-                        Comenzar Curso
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <h2 style="text-align: center; margin: 5rem 0 2rem; color: var(--color-primario);">
-            Niveles de Aprendizaje
-        </h2>
-        
-        <div class="niveles">
-            <div class="nivel-card">
-                <h3 style="color: var(--color-primario); margin-bottom: 1rem;">
-                    <i class="fas fa-seedling" style="color: var(--color-acento);"></i> Principiante
-                </h3>
-                <p>Para quienes recién comienzan su viaje filosófico. Conceptos básicos y ejemplos claros.</p>
-            </div>
-            
-            <div class="nivel-card">
-                <h3 style="color: var(--color-primario); margin-bottom: 1rem;">
-                    <i class="fas fa-tree" style="color: var(--color-acento);"></i> Intermedio
-                </h3>
-                <p>Para estudiantes con conocimientos básicos que desean profundizar en temas específicos.</p>
-            </div>
-            
-            <div class="nivel-card">
-                <h3 style="color: var(--color-primario); margin-bottom: 1rem;">
-                    <i class="fas fa-mountain" style="color: var(--color-acento);"></i> Avanzado
-                </h3>
-                <p>Para estudiantes avanzados que buscan especialización y análisis profundo.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Mismo footer que index.html -->
-    <footer class="main-footer">
-        <div class="container">
-            <!-- Igual que el footer del index.html -->
-            <!-- Copia el mismo footer del index.html aquí -->
-        </div>
+    <!-- Footer (igual que index.html) -->
+    <footer class="main-footer" role="contentinfo">
+        <!-- Copia el footer exacto de tu index.html aquí -->
     </footer>
 
     <script>
-        // Script para marcar enlace activo
+        // Script básico para marcar enlace activo
         document.addEventListener('DOMContentLoaded', function() {
-            const links = document.querySelectorAll('.main-nav a');
-            links.forEach(link => {
-                if (link.href === window.location.href) {
+            const currentPage = window.location.pathname.split('/').pop();
+            document.querySelectorAll('.main-nav a').forEach(link => {
+                const linkPage = link.getAttribute('href');
+                if (linkPage === currentPage) {
                     link.classList.add('active');
+                    link.setAttribute('aria-current', 'page');
                 }
             });
         });
