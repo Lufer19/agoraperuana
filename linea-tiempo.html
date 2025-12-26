@@ -3,601 +3,612 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Línea de Tiempo - ASEFIP</title>
+    <title>Línea del Tiempo Filosófica - ASEFIP</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* ESTILOS PARA NO PROGRAMADORES - SOLO COPIA Y PEGA */
+        
+        /* COLORES FILOSÓFICOS */
+        :root {
+            --antiguo: #8B4513;      /* Color tierra - filosofía antigua */
+            --medieval: #2E8B57;     /* Verde - filosofía medieval */
+            --renacimiento: #4682B4; /* Azul - renacimiento */
+            --moderna: #9370DB;      /* Púrpura - filosofía moderna */
+            --contemporanea: #DC143C;/* Rojo - filosofía contemporánea */
+            --peruana: #DAA520;      /* Oro - filosofía peruana */
+            --fondo: #F8F9FA;
         }
         
-        body {
-            font-family: 'Georgia', 'Times New Roman', serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .logo {
-            display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        /* CABECERA */
+        .timeline-hero {
+            background: linear-gradient(135deg, #1E3A5F 0%, #4A235A 100%);
             color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            line-height: 60px;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 15px;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
         
-        h1 {
-            color: #2d3748;
-            font-size: 2.5em;
-            margin-bottom: 10px;
+        .timeline-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
         }
         
-        .subtitle {
-            color: #718096;
-            font-size: 1.1em;
-        }
-        
-        .back-link {
-            display: inline-block;
-            color: #667eea;
-            text-decoration: none;
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-        
-        .back-link:hover {
-            text-decoration: underline;
-        }
-        
-        /* FILTROS */
-        .epoca-filters {
+        /* CONTROLES */
+        .controles-timeline {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin: 2rem auto;
+            max-width: 1200px;
             display: flex;
-            gap: 10px;
-            margin-bottom: 50px;
-            justify-content: center;
             flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
         }
         
-        .filter-btn {
-            padding: 10px 25px;
-            background: #e2e8f0;
+        .periodo-btn {
+            padding: 10px 20px;
             border: none;
-            border-radius: 25px;
+            border-radius: 30px;
+            font-weight: bold;
             cursor: pointer;
-            font-size: 1em;
-            font-weight: 600;
             transition: all 0.3s;
         }
         
-        .filter-btn:hover {
-            background: #cbd5e0;
+        .btn-antigua { background: var(--antiguo); color: white; }
+        .btn-medieval { background: var(--medieval); color: white; }
+        .btn-renacimiento { background: var(--renacimiento); color: white; }
+        .btn-moderna { background: var(--moderna); color: white; }
+        .btn-contemporanea { background: var(--contemporanea); color: white; }
+        .btn-peruana { background: var(--peruana); color: white; }
+        
+        .periodo-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         
-        .filter-btn.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-        
-        /* TIMELINE */
-        .timeline {
+        /* LÍNEA DEL TIEMPO */
+        .timeline-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 20px;
             position: relative;
-            padding: 40px 0;
         }
         
-        .timeline::before {
-            content: '';
+        /* LÍNEA CENTRAL */
+        .timeline-line {
             position: absolute;
             left: 50%;
             top: 0;
             bottom: 0;
-            width: 4px;
-            background: linear-gradient(to bottom, #667eea, #764ba2);
+            width: 6px;
+            background: #333;
             transform: translateX(-50%);
         }
         
-        .timeline-item {
+        /* EVENTOS DE LA LÍNEA */
+        .timeline-event {
+            margin: 4rem 0;
             position: relative;
-            margin-bottom: 80px;
+            width: 45%;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        /* EVENTOS IZQUIERDA */
+        .event-left {
+            margin-right: auto;
+            background: white;
+            border-left: 5px solid;
+        }
+        
+        /* EVENTOS DERECHA */
+        .event-right {
+            margin-left: auto;
+            background: white;
+            border-right: 5px solid;
+        }
+        
+        /* COLORES POR ÉPOCA */
+        .antigua { border-color: var(--antiguo); }
+        .medieval { border-color: var(--medieval); }
+        .renacimiento { border-color: var(--renacimiento); }
+        .moderna { border-color: var(--moderna); }
+        .contemporanea { border-color: var(--contemporanea); }
+        .peruana { border-color: var(--peruana); }
+        
+        .timeline-event:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        /* PUNTO EN LA LÍNEA */
+        .timeline-point {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border: 3px solid;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .event-left .timeline-point {
+            right: -55px;
+        }
+        
+        .event-right .timeline-point {
+            left: -55px;
+        }
+        
+        /* AÑO */
+        .event-year {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        /* ETIQUETA DE ÉPOCA */
+        .event-era {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .era-antigua { background: var(--antiguo); }
+        .era-medieval { background: var(--medieval); }
+        .era-renacimiento { background: var(--renacimiento); }
+        .era-moderna { background: var(--moderna); }
+        .era-contemporanea { background: var(--contemporanea); }
+        .era-peruana { background: var(--peruana); }
+        
+        /* CONTENIDO DEL EVENTO */
+        .event-content h3 {
+            margin-bottom: 0.8rem;
+            color: #222;
+        }
+        
+        .event-content p {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        /* LINEA DE TIEMPO RESPONSIVE */
+        @media (max-width: 768px) {
+            .timeline-line {
+                left: 30px;
+            }
+            
+            .timeline-event {
+                width: calc(100% - 60px);
+                margin-left: 60px;
+            }
+            
+            .event-left .timeline-point,
+            .event-right .timeline-point {
+                left: -45px;
+                right: auto;
+            }
+            
+            .controles-timeline {
+                padding: 1rem;
+            }
+            
+            .periodo-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* LEGENDA */
+        .leyenda {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+        
+        .leyenda-item {
             display: flex;
             align-items: center;
+            gap: 10px;
         }
         
-        .timeline-item:nth-child(odd) {
-            flex-direction: row;
+        .leyenda-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
         }
         
-        .timeline-item:nth-child(even) {
-            flex-direction: row-reverse;
-        }
-        
-        .timeline-content {
-            flex: 0 0 45%;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            border: 2px solid #e2e8f0;
+        /* BOTÓN IMPRIMIR */
+        .btn-imprimir {
+            display: block;
+            margin: 2rem auto;
+            padding: 12px 30px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
             transition: all 0.3s;
         }
         
-        .timeline-content:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
-            border-color: #667eea;
-        }
-        
-        .timeline-date {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 30px;
-            font-weight: bold;
-            font-size: 1.1em;
-            white-space: nowrap;
-            z-index: 10;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-        
-        .timeline-icon {
-            font-size: 3em;
-            margin-bottom: 15px;
-        }
-        
-        .timeline-content h3 {
-            color: #2d3748;
-            font-size: 1.6em;
-            margin-bottom: 10px;
-        }
-        
-        .timeline-lugar {
-            color: #667eea;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-        
-        .timeline-content p {
-            color: #4a5568;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-        
-        .timeline-filosofos {
-            background: #f7fafc;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 15px;
-        }
-        
-        .timeline-filosofos strong {
-            color: #2d3748;
-            display: block;
-            margin-bottom: 8px;
-        }
-        
-        .filosofo-tag {
-            display: inline-block;
-            background: white;
-            color: #667eea;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.85em;
-            margin: 3px;
-            font-weight: 600;
-        }
-        
-        /* ÉPOCA SECTIONS */
-        .epoca-section {
-            margin-bottom: 80px;
-        }
-        
-        .epoca-title {
-            text-align: center;
-            font-size: 2.5em;
-            color: #2d3748;
-            margin-bottom: 20px;
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 15px;
-        }
-        
-        .epoca-description {
-            text-align: center;
-            color: #4a5568;
-            font-size: 1.1em;
-            line-height: 1.8;
-            margin-bottom: 40px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            padding-top: 30px;
-            border-top: 2px solid #e2e8f0;
-            color: #718096;
-        }
-        
-        @media (max-width: 768px) {
-            .timeline::before {
-                left: 30px;
-            }
-            
-            .timeline-item {
-                flex-direction: column !important;
-                padding-left: 60px;
-            }
-            
-            .timeline-content {
-                flex: 1;
-                margin: 40px 0 0 0;
-            }
-            
-            .timeline-date {
-                left: 30px;
-                transform: none;
-            }
+        .btn-imprimir:hover {
+            background: #555;
+            transform: translateY(-3px);
         }
     </style>
 </head>
 <body>
+    <!-- HEADER - IGUAL QUE LAS OTRAS PÁGINAS -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">🏛️ ASEFIP</a>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="glosario.html">Glosario</a></li>
+                    <li><a href="filosofos.html">Filósofos</a></li>
+                    <li><a href="linea-tiempo.html" style="color: #DAA520;">Línea del Tiempo</a></li>
+                    <li><a href="ejercicios.html">Ejercicios</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CABECERA -->
+    <section class="timeline-hero">
+        <div class="container">
+            <h1>⏳ Línea del Tiempo Filosófica</h1>
+            <p style="max-width: 800px; margin: 0 auto; font-size: 1.1rem;">
+                Recorrido visual por 2,500 años de pensamiento filosófico. Desde Tales de Mileto hasta la filosofía peruana contemporánea.
+            </p>
+        </div>
+    </section>
+
     <div class="container">
-        <a href="aprender.html" class="back-link">← Volver a Aprender</a>
-        
-        <header>
-            <div class="logo">AS</div>
-            <h1>Línea de Tiempo de la Filosofía</h1>
-            <p class="subtitle">Un viaje a través de 2,600 años de pensamiento</p>
-        </header>
-        
-        <!-- FILTROS -->
-        <div class="epoca-filters">
-            <button class="filter-btn active" onclick="mostrarEpoca('todas')">🌍 Todas las épocas</button>
-            <button class="filter-btn" onclick="mostrarEpoca('antigua')">🏛️ Antigua</button>
-            <button class="filter-btn" onclick="mostrarEpoca('medieval')">⛪ Medieval</button>
-            <button class="filter-btn" onclick="mostrarEpoca('moderna')">🔬 Moderna</button>
-            <button class="filter-btn" onclick="mostrarEpoca('contemporanea')">🌐 Contemporánea</button>
+        <!-- CONTROLES -->
+        <div class="controles-timeline">
+            <button class="periodo-btn btn-antigua" onclick="filtrarEpoca('antigua')">Antigua</button>
+            <button class="periodo-btn btn-medieval" onclick="filtrarEpoca('medieval')">Medieval</button>
+            <button class="periodo-btn btn-renacimiento" onclick="filtrarEpoca('renacimiento')">Renacimiento</button>
+            <button class="periodo-btn btn-moderna" onclick="filtrarEpoca('moderna')">Moderna</button>
+            <button class="periodo-btn btn-contemporanea" onclick="filtrarEpoca('contemporanea')">Contemporánea</button>
+            <button class="periodo-btn btn-peruana" onclick="filtrarEpoca('peruana')">Peruana</button>
+            <button class="periodo-btn" onclick="filtrarEpoca('todas')" style="background: #666; color: white;">Todas</button>
         </div>
         
-        <!-- FILOSOFÍA ANTIGUA -->
-        <div class="epoca-section" data-epoca="antigua">
-            <h2 class="epoca-title">🏛️ Filosofía Antigua (600 a.C. - 500 d.C.)</h2>
-            <p class="epoca-description">
-                El nacimiento de la filosofía occidental en Grecia. Los primeros pensadores buscaban explicar 
-                el cosmos mediante la razón, alejándose de las explicaciones míticas.
-            </p>
+        <!-- LEGENDA -->
+        <div class="leyenda">
+            <div class="leyenda-item">
+                <div class="leyenda-color" style="background: var(--antiguo);"></div>
+                <span>Filosofía Antigua (siglo VI a.C. - siglo V d.C.)</span>
+            </div>
+            <div class="leyenda-item">
+                <div class="leyenda-color" style="background: var(--medieval);"></div>
+                <span>Filosofía Medieval (siglo V - siglo XV)</span>
+            </div>
+            <div class="leyenda-item">
+                <div class="leyenda-color" style="background: var(--peruana);"></div>
+                <span>Filosofía Peruana</span>
+            </div>
+        </div>
+        
+        <!-- LÍNEA DEL TIEMPO -->
+        <div class="timeline-container">
+            <div class="timeline-line"></div>
             
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">c. 585 a.C.</div>
-                    <div class="timeline-content">
-                        <div class="timeline-icon">💧</div>
-                        <h3>Nacimiento de la Filosofía</h3>
-                        <p class="timeline-lugar">Mileto, Jonia</p>
-                        <p>
-                            Tales de Mileto predice un eclipse solar, marca el inicio de la filosofía occidental. 
-                            Propone que el agua es el principio (arjé) de todas las cosas, iniciando la búsqueda 
-                            racional del origen del cosmos.
-                        </p>
-                        <div class="timeline-filosofos">
-                            <strong>Filósofos Presocráticos:</strong>
-                            <span class="filosofo-tag">Tales</span>
-                            <span class="filosofo-tag">Anaximandro</span>
-                            <span class="filosofo-tag">Heráclito</span>
-                            <span class="filosofo-tag">Parménides</span>
-                        </div>
-                    </div>
-                </div>
+            <!-- EVENTO 1: FILOSOFÍA PRESOCRÁTICA -->
+            <div class="timeline-event event-left antigua" data-epoca="antigua">
+                <div class="event-year">600 - 400 a.C.</div>
+                <div class="event-era era-antigua">Antigua</div>
+                <div class="timeline-point antigua"></div>
                 
-                <div class="timeline-item">
-                    <div class="timeline-date">469-399 a.C.</div>
-                    <div class="timeline-content">
-                        <div class="timeline-icon">💭</div>
-                        <h3>Sócrates y el Giro Antropológico</h3>
-                        <p class="timeline-lugar">Atenas</p>
-                        <p>
-                            Sócrates revoluciona la filosofía al centrarla en cuestiones éticas y el autoconocimiento. 
-                            Desarrolla la mayéutica y es condenado a muerte por "corromper a la juventud". 
-                            "Conócete a ti mismo" se convierte en el lema filosófico.
-                        </p>
-                    </div>
+                <div class="event-content">
+                    <h3>🎭 Filosofía Presocrática</h3>
+                    <p>Primeros filósofos que buscaron el principio (arjé) de todas las cosas:</p>
+                    <ul style="margin-left: 1.5rem; color: #555;">
+                        <li><strong>Tales de Mileto:</strong> "Todo es agua"</li>
+                        <li><strong>Anaximandro:</strong> "El principio es lo ilimitado (ápeiron)"</li>
+                        <li><strong>Heráclito:</strong> "Todo fluye", "La guerra es padre de todas las cosas"</li>
+                        <li><strong>Parménides:</strong> "El ser es, el no-ser no es"</li>
+                    </ul>
                 </div>
+            </div>
+            
+            <!-- EVENTO 2: SÓCRATES, PLATÓN, ARISTÓTELES -->
+            <div class="timeline-event event-right antigua" data-epoca="antigua">
+                <div class="event-year">470 - 322 a.C.</div>
+                <div class="event-era era-antigua">Antigua</div>
+                <div class="timeline-point antigua"></div>
                 
-                <div class="timeline-item">
-                    <div class="timeline-date">387 a.C.</div>
-                    <div class="timeline-content">
-                        <div class="timeline-icon">🏛️</div>
-                        <h3>Fundación de la Academia</h3>
-                        <p class="timeline-lugar">Atenas</p>
-                        <p>
-                            Platón funda la Academia, la primera institución de educación superior de Occidente. 
-                            Desarrolla su teoría de las Ideas (Formas) y escribe diálogos inmortales como 
-                            "La República" y "El Banquete".
-                        </p>
-                        <div class="timeline-filosofos">
-                            <strong>Conceptos clave:</strong>
-                            <span class="filosofo-tag">Teoría de Ideas</span>
-                            <span class="filosofo-tag">Dualismo</span>
-                            <span class="filosofo-tag">Estado Ideal</span>
-                        </div>
-                    </div>
+                <div class="event-content">
+                    <h3>🏛️ Triunvirato Ateniense</h3>
+                    <p>La cima de la filosofía griega:</p>
+                    <ul style="margin-left: 1.5rem; color: #555;">
+                        <li><strong>Sócrates:</strong> Método mayéutico, "Solo sé que no sé nada"</li>
+                        <li><strong>Platón:</strong> Teoría de las Ideas, República, Academia</li>
+                        <li><strong>Aristóteles:</strong> Lógica, ética de la virtud, Liceo</li>
+                    </ul>
+                    <p><em>"La filosofía comienza con el asombro" - Aristóteles</em></p>
                 </div>
+            </div>
+            
+            <!-- EVENTO 3: FILOSOFÍA HELENÍSTICA -->
+            <div class="timeline-event event-left antigua" data-epoca="antigua">
+                <div class="event-year">300 a.C. - 200 d.C.</div>
+                <div class="event-era era-antigua">Antigua</div>
+                <div class="timeline-point antigua"></div>
                 
-                <div class="timeline-item">
-                    <div class="timeline-date">335 a.C.</div>
-                    <div class="timeline-content">
-                        <div class="timeline-icon">📚</div>
-                        <h3>El Liceo de Aristóteles</h3>
-                        <p class="timeline-lugar">Atenas</p>
-                        <p>
-                            Aristóteles funda el Liceo y sistematiza el conocimiento de su época. Crea la lógica formal, 
-                            estudia la biología, física, ética y política. Su influencia durará más de 2000 años.
-                        </p>
-                        <div class="timeline-filosofos">
-                            <strong>Obras fundamentales:</strong>
-                            <span class="filosofo-tag">Órganon (Lógica)</span>
-                            <span class="filosofo-tag">Metafísica</span>
-                            <span class="filosofo-tag">Ética a Nicómaco</span>
-                        </div>
-                    </div>
+                <div class="event-content">
+                    <h3>🌍 Filosofía Helenística</h3>
+                    <p>Filosofías de vida para tiempos turbulentos:</p>
+                    <ul style="margin-left: 1.5rem; color: #555;">
+                        <li><strong>Estoicismo:</strong> Zenón, Séneca, Epicteto, Marco Aurelio</li>
+                        <li><strong>Epicureísmo:</strong> Epicuro, búsqueda de la ataraxia</li>
+                        <li><strong>Escepticismo:</strong> Pirrón, suspensión del juicio</li>
+                        <li><strong>Cinismo:</strong> Diógenes, autosuficiencia radical</li>
+                    </ul>
                 </div>
+            </div>
+            
+            <!-- EVENTO 4: FILOSOFÍA MEDIEVAL -->
+            <div class="timeline-event event-right medieval" data-epoca="medieval">
+                <div class="event-year">400 - 1400</div>
+                <div class="event-era era-medieval">Medieval</div>
+                <div class="timeline-point medieval"></div>
                 
-                <div class="timeline-item">
-                    <div class="timeline-date">306 a.C.</div>
-                    <div class="timeline-content">
-                        <div class="timeline-icon">🌿</div>
-                        <h3>Época Helenística</h3>
-                        <p class="timeline-lugar">Atenas, Alejandría</p>
-                        <p>
-                            Surgen escuelas filosóficas centradas en la ética y la felicidad: Estoicismo (virtud y 
-                            aceptación del destino), Epicureísmo (placer entendido como ataraxia) y Escepticismo 
-                            (suspensión del juicio).
-                        </p>
-                        <div class="timeline-filosofos">
-                            <strong>Escuelas principales:</strong>
-                            <span class="filosofo-tag">Estoicismo</span>
-                            <span class="filosofo-tag">Epicureísmo</span>
-                            <span class="filosofo-tag">Escepticismo</span>
-                        </div>
-                    </div>
+                <div class="event-content">
+                    <h3>⛪ Filosofía Medieval</h3>
+                    <p>"Filosofía es sierva de la teología" (Philosophia ancilla theologiae):</p>
+                    <ul style="margin-left: 1.5rem; color: #555;">
+                        <li><strong>San Agustín:</strong> Ciudad de Dios, libre albedrío</li>
+                        <li><strong>Avicena y Averroes:</strong> Filosofía islámica medieval</li>
+                        <li><strong>Maimónides:</strong> Filosofía judía medieval</li>
+                        <li><strong>Santo Tomás de Aquino:</strong> Suma Teológica, cinco vías</li>
+                        <li><strong>Guillermo de Ockham:</strong> Navaja de Ockham</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- EVENTO 5: RENACIMIENTO -->
+            <div class="timeline-event event-left renacimiento" data-epoca="renacimiento">
+                <div class="event-year">1400 - 1600</div>
+                <div class="event-era era-renacimiento">Renacimiento</div>
+                <div class="timeline-point renacimiento"></div>
+                
+                <div class="event-content">
+                    <h3>🎨 Renacimiento Humanista</h3>
+                    <p>Retorno a los clásicos y antropocentrismo:</p>
+                    <ul style="margin-left: 1.5rem; color: #555;">
+                        <li><strong>Erasmo de Rotterdam:</strong> Humanismo cristiano</li>
+                        <li><strong>Maquiavelo:</strong> "El fin justifica los medios"</li>
+                        <li><strong>Tomás Moro:</strong> "Utopía"</li>
+                        <li><strong>Montaigne:</strong> Ensayos, escepticismo moderno</li>
+                        <li><strong>Giordano Bruno:</strong> Infinitud del universo</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- EVENTO 6: FILOSOFÍA MODERNA -->
+            <div class="timeline-event event-right moderna" data-epoca="moderna">
+                <div class="event-year">1600 - 1800</div>
+                <div class="event-era era-moderna">Moderna</div>
+                <div class="timeline-point moderna"></div>
+                
+                <div class="event-content">
+                    <h3>🔬 Filosofía Moderna</h3>
+                    <p>Racionalismo, empirismo y Ilustración:</p>
+                    <ul style="margin-left: 1.5rem; color: #555;">
+                        <li><strong>Descartes:</strong> "Pienso, luego existo", racionalismo</li>
+                        <li><strong>Spinoza:</strong> Ética demostrada geométricamente</li>
+                        <li><strong>Locke, Berkeley, Hume:</strong> Empirismo británico</li>
+                        <li><strong>Kant:</strong> Crítica de la razón, ilustración</li>
+                        <li><strong>Rousseau:</strong> Contrato social, voluntad general</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- EVENTO 7: FILOSOFÍA DEL SIGLO XIX -->
+            <div class="timeline-event event-left contemporanea" data-epoca="contemporanea">
+                <div class="event-year">1800 - 1900</div>
+                <div class="event-era era-contemporanea">Contemporánea</div>
+                <div class="timeline-point contemporanea"></div>
+                
+                <div class="event-content">
+                    <h3>⚙️ Siglo XIX: Idealismo y Materialismo</h3>
+                    <p>Revoluciones filosóficas tras la Revolución Francesa:</p>
+                    <ul style="margin-left: 1.5rem; color: #555;">
+                        <li><strong>Hegel:</strong> Idealismo absoluto, dialéctica</li>
+                        <li><strong>Marx:</strong> Materialismo histórico, plusvalía</li>
+                        <li><strong>Kierkegaard:</strong> Padre del existencialismo</li>
+                        <li><strong>Nietzsche:</strong> Muerte de Dios, voluntad de poder</li>
+                        <li><strong>Utilitarismo:</strong> Bentham y Mill</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- EVENTO 8: FILOSOFÍA CONTEMPORÁNEA -->
+            <div class="timeline-event event-right contemporanea" data-epoca="contemporanea">
+                <div class="event-year">1900 - Presente</div>
+                <div class="event-era era-contemporanea">Contemporánea</div>
+                <div class="timeline-point contemporanea"></div>
+                
+                <div class="event-content">
+                    <h3>🌐 Filosofía Contemporánea</h3>
+                    <p>Diversidad de corrientes en el siglo XX y XXI:</p>
+                    <ul style="margin-left: 1.5rem; color: #555;">
+                        <li><strong>Fenomenología:</strong> Husserl, Heidegger</li>
+                        <li><strong>Existencialismo:</strong> Sartre, Beauvoir, Camus</li>
+                        <li><strong>Escuela de Frankfurt:</strong> Horkheimer, Adorno</li>
+                        <li><strong>Filosofía analítica:</strong> Wittgenstein, Russell</li>
+                        <li><strong>Posmodernismo:</strong> Foucault, Derrida, Lyotard</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- EVENTO 9: FILOSOFÍA PERUANA - INICIOS -->
+            <div class="timeline-event event-left peruana" data-epoca="peruana">
+                <div class="event-year">Siglo XVI - XIX</div>
+                <div class="event-era era-peruana">Peruana</div>
+                <div class="timeline-point peruana"></div>
+                
+                <div class="event-content">
+                    <h3>🇵🇪 Filosofía Peruana Colonial y Republicana</h3>
+                    <p>Primeras manifestaciones del pensamiento filosófico en el Perú:</p>
+                    <ul style="margin-left: 1.5rem; color: #555;">
+                        <li><strong>Escolástica colonial:</strong> Universidad de San Marcos (1551)</li>
+                        <li><strong>Ilustración peruana:</strong> Hipólito Unanue, Toribio Rodríguez de Mendoza</li>
+                        <li><strong>Positivismo:</strong> Manuel González Prada</li>
+                        <li><strong>Espiritualismo:</strong> Alejandro Deústua</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- EVENTO 10: FILOSOFÍA PERUANA CONTEMPORÁNEA -->
+            <div class="timeline-event event-right peruana" data-epoca="peruana">
+                <div class="event-year">Siglo XX - Presente</div>
+                <div class="event-era era-peruana">Peruana</div>
+                <div class="timeline-point peruana"></div>
+                
+                <div class="event-content">
+                    <h3>🇵🇪 Filosofía Peruana Contemporánea</h3>
+                    <p>Desarrollo del pensamiento filosófico con identidad propia:</p>
+                    <ul style="margin-left: 1.5rem; color: #555;">
+                        <li><strong>Augusto Salazar Bondy:</strong> Crítica al pensamiento colonial</li>
+                        <li><strong>Francisco Miró Quesada:</strong> Filosofía de la matemática</li>
+                        <li><strong>María Rostworowski:</strong> Estudios andinos</li>
+                        <li><strong>Filosofía andina:</strong> Josef Estermann</li>
+                        <li><strong>Filosofía intercultural:</strong> Foro "Soledad y diálogo"</li>
+                    </ul>
+                    <p><em>Pensamiento crítico desde y para el Perú</em></p>
                 </div>
             </div>
         </div>
         
-        <!-- FILOSOFÍA MEDIEVAL -->
-        <div class="epoca-section" data-epoca="medieval">
-            <h2 class="epoca-title">⛪ Filosofía Medieval (500 - 1500)</h2>
-            <p class="epoca-description">
-                Síntesis entre filosofía griega y monoteísmo (cristianismo, islam, judaísmo). 
-                Grandes debates sobre fe y razón, universales y la existencia de Dios.
-            </p>
-            
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">354-430</div>
-                    <div class="timeline-content">
-                        <div class="timeline-icon">✝️</div>
-                        <h3>San Agustín de Hipona</h3>
-                        <p class="timeline-lugar">Norte de África</p>
-                        <p>
-                            Integra el neoplatonismo con el cristianismo. Escribe "Confesiones" y "La Ciudad de Dios". 
-                            Reflexiona sobre el tiempo, el mal, la gracia y el libre albedrío. 
-                            "Ama y haz lo que quieras".
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-date">1225-1274</div>
-                    <div class="timeline-content">
-                        <div class="timeline-icon">📖</div>
-                        <h3>Santo Tomás de Aquino</h3>
-                        <p class="timeline-lugar">Europa</p>
-                        <p>
-                            Máximo exponente de la Escolástica. Armoniza la filosofía aristotélica con la fe cristiana. 
-                            Escribe la monumental "Suma Teológica". Propone las cinco vías para demostrar la existencia de Dios.
-                        </p>
-                        <div class="timeline-filosofos">
-                            <strong>Conceptos clave:</strong>
-                            <span class="filosofo-tag">Fe y Razón</span>
-                            <span class="filosofo-tag">Cinco Vías</span>
-                            <span class="filosofo-tag">Escolástica</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-date">980-1037</div>
-                    <div class="timeline-content">
-                        <div class="timeline-icon">☪️</div>
-                        <h3>Avicena (Ibn Sina)</h3>
-                        <p class="timeline-lugar">Persia</p>
-                        <p>
-                            Filósofo y médico persa. Desarrolla el argumento del "ente necesario" para Dios. 
-                            Su obra influye tanto en el mundo islámico como en el cristiano. Escribió más de 450 obras.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- FILOSOFÍA MODERNA -->
-        <div class="epoca-section" data-epoca="moderna">
-            <h2 class="epoca-title">🔬 Filosofía Moderna (1500 - 1800)</h2>
-            <p class="epoca-description">
-                Revolución científica y giro hacia la subjetividad. Racionalismo vs Empirismo. 
-                Nacimiento del método científico y crítica de la metafísica tradicional.
-            </p>
-            
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">1637</div>
-                    <div class="timeline-content">
-                        <div class="timeline-icon">🤔</div>
-                        <h3>Descartes: El Discurso del Método</h3>
-                        <p class="timeline-lugar">Francia</p>
-                        <p>
-                            René Descartes publica "Discurso del Método" con su famoso "Cogito ergo sum" 
-                            (Pienso, luego existo). Funda el racionalismo moderno y aplica el método matemático a la filosofía.
-                        </p>
-                        <div class="timeline-filosofos">
-                            <strong>Racionalismo:</strong>
-                            <span class="filosofo-tag">Descartes</span>
-                            <span class="filosofo-tag">Spinoza</span>
-                            <span class="filosofo-tag">Leibniz</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-date">1781</div>
-                    <div class="timeline-content">
-                        <div class="timeline-icon">⚖️</div>
-                        <h3>Kant: Crítica de la Razón Pura</h3>
-                        <p class="timeline-lugar">Königsberg, Prusia</p>
-                        <p>
-                            Immanuel Kant realiza la síntesis entre racionalismo y empirismo. Su "revolución copernicana" 
-                            en filosofía establece que conocemos el mundo a través de nuestras estructuras mentales.
-                        </p>
-                        <div class="timeline-filosofos">
-                            <strong>Obras críticas:</strong>
-                            <span class="filosofo-tag">Crítica Razón Pura</span>
-                            <span class="filosofo-tag">Crítica Razón Práctica</span>
-                            <span class="filosofo-tag">Crítica del Juicio</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- FILOSOFÍA CONTEMPORÁNEA -->
-        <div class="epoca-section" data-epoca="contemporanea">
-            <h2 class="epoca-title">🌐 Filosofía Contemporánea (1800 - Actualidad)</h2>
-            <p class="epoca-description">
-                Explosión de diversidad: existencialismo, fenomenología, marxismo, filosofía analítica, 
-                postmodernismo. Cuestionamiento radical de la razón y surgimiento de nuevos paradigmas.
-            </p>
-            
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">1883-1885</div>
-                    <div class="timeline-content">
-                        <div class="timeline-icon">⚡</div>
-                        <h3>Nietzsche: Así Habló Zaratustra</h3>
-                        <p class="timeline-lugar">Alemania</p>
-                        <p>
-                            Friedrich Nietzsche proclama la "muerte de Dios" y propone la transvaloración de todos 
-                            los valores. Introduce conceptos como el Übermensch, voluntad de poder y eterno retorno.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-date">1943</div>
-                    <div class="timeline-content">
-                        <div class="timeline-icon">🎭</div>
-                        <h3>Sartre: El Ser y la Nada</h3>
-                        <p class="timeline-lugar">Francia</p>
-                        <p>
-                            Jean-Paul Sartre desarrolla el existencialismo ateo. "La existencia precede a la esencia": 
-                            estamos condenados a ser libres y a crear nuestro propio significado.
-                        </p>
-                        <div class="timeline-filosofos">
-                            <strong>Existencialismo:</strong>
-                            <span class="filosofo-tag">Sartre</span>
-                            <span class="filosofo-tag">Camus</span>
-                            <span class="filosofo-tag">Beauvoir</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-date">1967</div>
-                    <div class="timeline-content">
-                        <div class="timeline-icon">📱</div>
-                        <h3>Giro Postmoderno</h3>
-                        <p class="timeline-lugar">Francia</p>
-                        <p>
-                            Derrida, Foucault, Lyotard cuestionan las "grandes narrativas" y la idea de verdad absoluta. 
-                            Análisis del poder, el discurso y la deconstrucción.
-                        </p>
-                        <div class="timeline-filosofos">
-                            <strong>Postmodernismo:</strong>
-                            <span class="filosofo-tag">Foucault</span>
-                            <span class="filosofo-tag">Derrida</span>
-                            <span class="filosofo-tag">Lyotard</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-date">Siglo XXI</div>
-                    <div class="timeline-content">
-                        <div class="timeline-icon">🤖</div>
-                        <h3>Filosofía Contemporánea</h3>
-                        <p class="timeline-lugar">Global</p>
-                        <p>
-                            Nuevos desafíos: inteligencia artificial, cambio climático, ética de la tecnología, 
-                            filosofía de la mente, bioética. La filosofía se globaliza y diversifica.
-                        </p>
-                        <div class="timeline-filosofos">
-                            <strong>Temas actuales:</strong>
-                            <span class="filosofo-tag">IA y Ética</span>
-                            <span class="filosofo-tag">Filosofía Ambiental</span>
-                            <span class="filosofo-tag">Neurociencia</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <footer>
-            <p>© 2024-2025 ASEFIP - Asociación de Estudiantes de Filosofía del Perú</p>
-        </footer>
+        <!-- BOTÓN IMPRIMIR -->
+        <button class="btn-imprimir" onclick="imprimirTimeline()">🖨️ Imprimir Línea del Tiempo</button>
     </div>
-    
+
+    <!-- FOOTER -->
+    <footer style="background: #2C3E50; color: white; padding: 3rem 0 1.5rem; margin-top: 4rem;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                <div>
+                    <h3 style="color: #DAA520; margin-bottom: 1rem;">ASEFIP Timeline</h3>
+                    <p>Línea del tiempo creada por estudiantes peruanos para entender la historia de la filosofía.</p>
+                </div>
+                
+                <div>
+                    <h3 style="color: #DAA520; margin-bottom: 1rem;">¿Para qué sirve?</h3>
+                    <ul style="list-style: none;">
+                        <li>• Contextualizar autores y obras</li>
+                        <li>• Estudiar para exámenes</li>
+                        <li>• Preparar exposiciones</li>
+                        <li>• Investigación académica</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 style="color: #DAA520; margin-bottom: 1rem;">Recursos relacionados</h3>
+                    <ul style="list-style: none;">
+                        <li><a href="filosofos.html" style="color: rgba(255,255,255,0.8);">• Galería de Filósofos</a></li>
+                        <li><a href="glosario.html" style="color: rgba(255,255,255,0.8);">• Glosario Filosófico</a></li>
+                        <li><a href="ejercicios.html" style="color: rgba(255,255,255,0.8);">• Ejercicios de Historia</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>© 2024 ASEFIP - Línea del Tiempo Filosófica</p>
+                <p style="margin-top: 0.5rem; opacity: 0.7; font-size: 0.9rem;">Herramienta educativa para estudiantes de filosofía</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT SIMPLE - NO NECESITAS MODIFICARLO -->
     <script>
-        function mostrarEpoca(epoca) {
-            const secciones = document.querySelectorAll('.epoca-section');
-            const botones = document.querySelectorAll('.filter-btn');
+        // FUNCIÓN PARA FILTRAR POR ÉPOCA
+        function filtrarEpoca(epoca) {
+            // Quitar clase activa de todos los botones
+            document.querySelectorAll('.periodo-btn').forEach(btn => {
+                btn.style.opacity = '0.7';
+            });
             
-            // Actualizar botones
-            botones.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            // Poner activo el botón clickeado
+            event.target.style.opacity = '1';
             
-            // Mostrar/ocultar secciones
-            if (epoca === 'todas') {
-                secciones.forEach(s => s.style.display = 'block');
-            } else {
-                secciones.forEach(s => {
-                    s.style.display = s.dataset.epoca === epoca ? 'block' : 'none';
-                });
-            }
+            // Mostrar/ocultar eventos
+            const eventos = document.querySelectorAll('.timeline-event');
+            
+            eventos.forEach(evento => {
+                if (epoca === 'todas' || evento.dataset.epoca === epoca) {
+                    evento.style.display = 'block';
+                    
+                    // Animación de aparición
+                    setTimeout(() => {
+                        evento.style.opacity = '1';
+                        evento.style.transform = 'translateY(0)';
+                    }, 100);
+                } else {
+                    evento.style.opacity = '0';
+                    evento.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        evento.style.display = 'none';
+                    }, 300);
+                }
+            });
         }
+        
+        // FUNCIÓN PARA IMPRIMIR
+        function imprimirTimeline() {
+            alert('Para imprimir: Presiona Ctrl+P en tu teclado o ve a Archivo → Imprimir');
+            
+            // Opción: Crear versión simplificada para imprimir
+            window.print();
+        }
+        
+        // ANIMACIÓN INICIAL
+        document.addEventListener('DOMContentLoaded', function() {
+            const eventos = document.querySelectorAll('.timeline-event');
+            eventos.forEach((evento, index) => {
+                evento.style.opacity = '0';
+                evento.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    evento.style.transition = 'all 0.5s ease-out';
+                    evento.style.opacity = '1';
+                    evento.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+        
+        // HACER EVENTOS CLICKEABLES (más información)
+        document.querySelectorAll('.timeline-event').forEach(evento => {
+            evento.addEventListener('click', function() {
+                const titulo = this.querySelector('h3').textContent;
+                const año = this.querySelector('.event-year').textContent;
+                
+                alert(`Más información sobre:\n\n${titulo}\n\nPeríodo: ${año}\n\n(En futuras actualizaciones, esto abrirá una página detallada)`);
+            });
+        });
     </script>
 </body>
-</html>
+</html>.
