@@ -3,77 +3,621 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicios Filosóficos - ASEFIP</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Ejercicios Filosóficos Interactivos - ASEFIP</title>
+    <link rel="stylesheet" href="../styles.css">
     <style>
-        .ejercicio-seccion {
-            padding: 2rem;
-            background: #f8f9fa;
-            margin: 1rem 0;
-            border-radius: 10px;
+        .ejercicios-container {
+            padding: 4rem 0;
+            min-height: 100vh;
         }
         
+        .ejercicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .ejercicio-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .ejercicio-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+        
+        .ejercicio-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .dificultad {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        
+        .facil { background: rgba(76, 175, 80, 0.2); color: #4CAF50; }
+        .medio { background: rgba(255, 152, 0, 0.2); color: #FF9800; }
+        .dificil { background: rgba(244, 67, 54, 0.2); color: #F44336; }
+        
         .pregunta {
-            background: white;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            border-radius: 8px;
-            border-left: 4px solid #6A0DAD;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
         }
         
         .opciones {
-            margin: 1rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
         
         .opcion {
-            margin: 0.5rem 0;
-            padding: 0.5rem;
-            background: #e9ecef;
-            border-radius: 5px;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
             cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid transparent;
         }
         
         .opcion:hover {
-            background: #dee2e6;
+            background: rgba(212, 175, 55, 0.1);
+            border-color: rgba(212, 175, 55, 0.3);
         }
         
-        .respuesta-correcta {
+        .opcion.seleccionada {
+            background: rgba(33, 150, 243, 0.2);
+            border-color: #2196F3;
+        }
+        
+        .opcion.correcta {
+            background: rgba(76, 175, 80, 0.2);
+            border-color: #4CAF50;
+        }
+        
+        .opcion.incorrecta {
+            background: rgba(244, 67, 54, 0.2);
+            border-color: #F44336;
+        }
+        
+        .botones-ejercicio {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .btn-verificar, .btn-siguiente {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-verificar {
+            background: #2196F3;
+            color: white;
+        }
+        
+        .btn-verificar:hover {
+            background: #0b7dda;
+        }
+        
+        .btn-siguiente {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-siguiente:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .explicacion {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(30, 58, 95, 0.3);
+            border-radius: 10px;
+            border-left: 4px solid #D4AF37;
             display: none;
-            background: #d4edda;
-            padding: 1rem;
-            margin-top: 1rem;
-            border-radius: 5px;
-            border-left: 4px solid #28a745;
+        }
+        
+        .explicacion.visible {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .contador {
+            text-align: center;
+            margin-top: 2rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Modal de resultados */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-contenido {
+            background: rgba(30, 58, 95, 0.95);
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            border: 2px solid #D4AF37;
+        }
+        
+        .modal h2 {
+            color: #D4AF37;
+            margin-bottom: 1.5rem;
+        }
+        
+        .puntuacion {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #4CAF50;
+            margin: 1rem 0;
+        }
+        
+        .btn-reiniciar {
+            background: #D4AF37;
+            color: #1E3A5F;
+            padding: 12px 30px;
+            border-radius: 50px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 2rem;
+            transition: all 0.3s;
+        }
+        
+        .btn-reiniciar:hover {
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
-    <header><!-- Mismo header --></header>
+    <!-- Header (igual que index.html pero con rutas relativas) -->
+    <header class="main-header">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 0;">
+            <a href="../index.html" style="display: flex; align-items: center; gap: 15px; text-decoration: none;">
+                <div style="font-size: 2rem;">🦉</div>
+                <div>
+                    <div style="font-family: 'Cinzel', serif; font-size: 1.8rem; color: #D4AF37;">ASEFIP</div>
+                    <div style="font-size: 0.9rem; opacity: 0.8;">Ejercicios Interactivos</div>
+                </div>
+            </a>
+            
+            <nav>
+                <ul style="display: flex; list-style: none; gap: 2rem;">
+                    <li><a href="../index.html" style="color: white; text-decoration: none;">Inicio</a></li>
+                    <li><a href="glosario.html" style="color: white; text-decoration: none;">Glosario</a></li>
+                    <li><a href="filosofos.html" style="color: white; text-decoration: none;">Filósofos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
     
-    <div class="container">
-        <h1>🧠 Ejercicios de Filosofía</h1>
+    <main class="container ejercicios-container">
+        <h1 style="font-family: 'Philosopher', serif; font-size: 2.8rem; text-align: center; margin-bottom: 1rem;">
+            🧠 Ejercicios Filosóficos Interactivos
+        </h1>
         
-        <div class="ejercicio-seccion" id="falacias">
-            <h2>Identifica la Falacia</h2>
-            <div class="pregunta">
-                <p><strong>Ejercicio 1:</strong> "Como todos mis amigos usan TikTok, debe ser bueno"</p>
-                <div class="opciones">
-                    <div class="opcion" onclick="mostrarRespuesta(1)">A) Argumentum ad populum</div>
-                    <div class="opcion" onclick="mostrarRespuesta(1)">B) Falacia del hombre de paja</div>
-                    <div class="opcion" onclick="mostrarRespuesta(1)">C) Petición de principio</div>
-                </div>
-                <div class="respuesta-correcta" id="respuesta1">
-                    ✅ Correcto: <strong>A) Argumentum ad populum</strong>. Esta falacia asume que algo es verdadero o bueno solo porque mucha gente lo cree o lo hace.
-                </div>
-            </div>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; opacity: 0.9; font-size: 1.1rem;">
+            Pon a prueba tu conocimiento con estos ejercicios generados y corregidos automáticamente. 
+            Cada respuesta incluye una explicación detallada.
+        </p>
+        
+        <!-- Selector de categorías -->
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 3rem;">
+            <button class="categoria-btn active" data-categoria="logica">Lógica y Argumentación</button>
+            <button class="categoria-btn" data-categoria="historia">Historia de la Filosofía</button>
+            <button class="categoria-btn" data-categoria="etica">Ética y Moral</button>
+            <button class="categoria-btn" data-categoria="peruana">Filosofía Peruana</button>
+            <button class="categoria-btn" data-categoria="todos">Todos</button>
         </div>
         
-        <!-- Más ejercicios -->
-    </div>
+        <!-- Contenedor de ejercicios -->
+        <div id="ejerciciosContainer" class="ejercicios-grid">
+            <!-- Los ejercicios se cargan dinámicamente -->
+        </div>
+        
+        <!-- Modal de resultados -->
+        <div id="modalResultados" class="modal">
+            <div class="modal-contenido">
+                <h2>🎉 ¡Resultados!</h2>
+                <div id="puntuacionFinal" class="puntuacion">0/0</div>
+                <p id="mensajeResultado">¡Excelente trabajo!</p>
+                <button id="btnReiniciar" class="btn-reiniciar">Reiniciar Ejercicios</button>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div style="text-align: center;">
+                <p>© 2024 ASEFIP - Ejercicios Filosóficos Interactivos</p>
+                <p style="margin-top: 0.5rem; opacity: 0.7; font-size: 0.9rem;">
+                    <i class="fas fa-brain"></i> Desarrollado para estimular el pensamiento crítico
+                </p>
+            </div>
+        </div>
+    </footer>
     
     <script>
-        function mostrarRespuesta(num) {
-            document.getElementById('respuesta' + num).style.display = 'block';
+        // BASE DE DATOS DE EJERCICIOS
+        const ejercicios = [
+            {
+                id: 1,
+                categoria: "logica",
+                dificultad: "facil",
+                pregunta: "¿Cuál de las siguientes es una falacia 'ad hominem'?",
+                opciones: [
+                    { texto: "Atacar a la persona en lugar de su argumento", correcta: true },
+                    { texto: "Generalizar a partir de casos insuficientes", correcta: false },
+                    { texto: "Suponer que lo popular es correcto", correcta: false },
+                    { texto: "Argumentar en círculos", correcta: false }
+                ],
+                explicacion: "La falacia 'ad hominem' (contra el hombre) consiste en atacar a la persona que presenta un argumento en lugar de refutar el argumento en sí. Es una de las falacias más comunes en los debates."
+            },
+            {
+                id: 2,
+                categoria: "historia",
+                dificultad: "medio",
+                pregunta: "¿Qué filósofo dijo 'Solo sé que no sé nada'?",
+                opciones: [
+                    { texto: "Platón", correcta: false },
+                    { texto: "Aristóteles", correcta: false },
+                    { texto: "Sócrates", correcta: true },
+                    { texto: "Descartes", correcta: false }
+                ],
+                explicacion: "La frase 'Solo sé que no sé nada' se atribuye a Sócrates, quien la utilizaba para expresar su método de cuestionamiento y búsqueda del conocimiento a través del reconocimiento de la propia ignorancia."
+            },
+            {
+                id: 3,
+                categoria: "etica",
+                dificultad: "dificil",
+                pregunta: "Según Kant, ¿cuál es la formulación del imperativo categórico?",
+                opciones: [
+                    { texto: "Obra de tal modo que maximices la felicidad", correcta: false },
+                    { texto: "Obra solo según la máxima que puedas querer que se convierta en ley universal", correcta: true },
+                    { texto: "El fin justifica los medios", correcta: false },
+                    { texto: "Sigue tu naturaleza", correcta: false }
+                ],
+                explicacion: "Kant formuló el imperativo categórico como: 'Obra solo según aquella máxima por la cual puedas querer que al mismo tiempo se convierta en ley universal'. Es el principio fundamental de su ética deontológica."
+            },
+            {
+                id: 4,
+                categoria: "peruana",
+                dificultad: "medio",
+                pregunta: "¿Qué filósofo peruano escribió 'Filosofía Andina'?",
+                opciones: [
+                    { texto: "Augusto Salazar Bondy", correcta: false },
+                    { texto: "Francisco Miró Quesada", correcta: false },
+                    { texto: "Josef Estermann", correcta: true },
+                    { texto: "Manuel González Prada", correcta: false }
+                ],
+                explicacion: "Josef Estermann es un filósofo y teólogo suizo-peruano conocido por su obra 'Filosofía Andina', que estudia la cosmovisión y el pensamiento de los pueblos originarios de los Andes."
+            },
+            // Agregar más ejercicios aquí...
+            {
+                id: 5,
+                categoria: "logica",
+                dificultad: "medio",
+                pregunta: "¿Cuál es la estructura básica de un silogismo?",
+                opciones: [
+                    { texto: "Premisa mayor, premisa menor, conclusión", correcta: true },
+                    { texto: "Hipótesis, experimento, resultado", correcta: false },
+                    { texto: "Tesis, antítesis, síntesis", correcta: false },
+                    { texto: "Problema, análisis, solución", correcta: false }
+                ],
+                explicacion: "El silogismo, desarrollado por Aristóteles, consta de tres partes: una premisa mayor, una premisa menor y una conclusión que se deduce lógicamente de las dos premisas."
+            }
+        ];
+        
+        // VARIABLES GLOBALES
+        let ejerciciosActuales = [...ejercicios];
+        let ejercicioActual = 0;
+        let puntuacion = 0;
+        let respuestasSeleccionadas = {};
+        
+        // INICIALIZACIÓN
+        document.addEventListener('DOMContentLoaded', function() {
+            cargarEjercicios();
+            configurarCategorias();
+            configurarModal();
+        });
+        
+        // CARGAR EJERCICIOS
+        function cargarEjercicios() {
+            const container = document.getElementById('ejerciciosContainer');
+            container.innerHTML = '';
+            
+            ejerciciosActuales.forEach((ejercicio, index) => {
+                const card = document.createElement('div');
+                card.className = 'ejercicio-card';
+                card.dataset.id = ejercicio.id;
+                
+                // Determinar clase de dificultad
+                let claseDificultad = '';
+                switch(ejercicio.dificultad) {
+                    case 'facil': claseDificultad = 'facil'; break;
+                    case 'medio': claseDificultad = 'medio'; break;
+                    case 'dificil': claseDificultad = 'dificil'; break;
+                }
+                
+                // Generar opciones HTML
+                const opcionesHTML = ejercicio.opciones.map((opcion, i) => `
+                    <div class="opcion" data-index="${i}">
+                        ${opcion.texto}
+                    </div>
+                `).join('');
+                
+                card.innerHTML = `
+                    <div class="ejercicio-header">
+                        <span>Ejercicio ${index + 1}</span>
+                        <span class="dificultad ${claseDificultad}">
+                            ${ejercicio.dificultad.toUpperCase()}
+                        </span>
+                    </div>
+                    
+                    <div class="pregunta">
+                        ${ejercicio.pregunta}
+                    </div>
+                    
+                    <div class="opciones">
+                        ${opcionesHTML}
+                    </div>
+                    
+                    <div class="explicacion" id="explicacion-${ejercicio.id}">
+                        <strong>Explicación:</strong><br>
+                        ${ejercicio.explicacion}
+                    </div>
+                    
+                    <div class="botones-ejercicio">
+                        <button class="btn-verificar" data-id="${ejercicio.id}">
+                            Verificar Respuesta
+                        </button>
+                        <button class="btn-siguiente" style="display: none;" data-id="${ejercicio.id}">
+                            Siguiente →
+                        </button>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+                
+                // Agregar eventos a las opciones
+                card.querySelectorAll('.opcion').forEach(opcion => {
+                    opcion.addEventListener('click', function() {
+                        const ejercicioId = parseInt(this.closest('.ejercicio-card').dataset.id);
+                        const opcionIndex = parseInt(this.dataset.index);
+                        
+                        // Guardar selección
+                        respuestasSeleccionadas[ejercicioId] = opcionIndex;
+                        
+                        // Quitar selección anterior en este ejercicio
+                        this.parentNode.querySelectorAll('.opcion').forEach(o => {
+                            o.classList.remove('seleccionada');
+                        });
+                        
+                        // Marcar como seleccionada
+                        this.classList.add('seleccionada');
+                        
+                        // Habilitar botón de verificar
+                        const btnVerificar = this.closest('.ejercicio-card').querySelector('.btn-verificar');
+                        btnVerificar.disabled = false;
+                    });
+                });
+                
+                // Evento para verificar respuesta
+                card.querySelector('.btn-verificar').addEventListener('click', function() {
+                    const ejercicioId = parseInt(this.dataset.id);
+                    verificarRespuesta(ejercicioId);
+                });
+                
+                // Evento para siguiente ejercicio
+                card.querySelector('.btn-siguiente').addEventListener('click', function() {
+                    ejercicioActual++;
+                    if (ejercicioActual < ejerciciosActuales.length) {
+                        document.querySelectorAll('.ejercicio-card')[ejercicioActual].scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    } else {
+                        mostrarResultados();
+                    }
+                });
+            });
+            
+            // Actualizar contador
+            document.querySelector('.contador')?.remove();
+            const contador = document.createElement('div');
+            contador.className = 'contador';
+            contador.innerHTML = `
+                <p>Mostrando ${ejerciciosActuales.length} de ${ejercicios.length} ejercicios</p>
+            `;
+            container.after(contador);
+        }
+        
+        // CONFIGURAR CATEGORÍAS
+        function configurarCategorias() {
+            const categoriasBtn = document.querySelectorAll('.categoria-btn');
+            
+            categoriasBtn.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Quitar activo de todos
+                    categoriasBtn.forEach(b => b.classList.remove('active'));
+                    
+                    // Activar este
+                    this.classList.add('active');
+                    
+                    const categoria = this.dataset.categoria;
+                    
+                    // Filtrar ejercicios
+                    if (categoria === 'todos') {
+                        ejerciciosActuales = [...ejercicios];
+                    } else {
+                        ejerciciosActuales = ejercicios.filter(e => e.categoria === categoria);
+                    }
+                    
+                    // Reiniciar variables
+                    ejercicioActual = 0;
+                    puntuacion = 0;
+                    respuestasSeleccionadas = {};
+                    
+                    // Recargar ejercicios
+                    cargarEjercicios();
+                });
+            });
+        }
+        
+        // VERIFICAR RESPUESTA
+        function verificarRespuesta(ejercicioId) {
+            const ejercicio = ejercicios.find(e => e.id === ejercicioId);
+            const opcionSeleccionada = respuestasSeleccionadas[ejercicioId];
+            const card = document.querySelector(`.ejercicio-card[data-id="${ejercicioId}"]`);
+            
+            if (opcionSeleccionada === undefined) {
+                alert('Por favor, selecciona una respuesta primero.');
+                return;
+            }
+            
+            // Marcar opciones correctas/incorrectas
+            const opciones = card.querySelectorAll('.opcion');
+            opciones.forEach((opcion, index) => {
+                opcion.classList.remove('seleccionada');
+                
+                if (ejercicio.opciones[index].correcta) {
+                    opcion.classList.add('correcta');
+                } else if (index === opcionSeleccionada) {
+                    opcion.classList.add('incorrecta');
+                }
+                
+                // Deshabilitar clics
+                opcion.style.pointerEvents = 'none';
+            });
+            
+            // Verificar si es correcta
+            const esCorrecta = ejercicio.opciones[opcionSeleccionada].correcta;
+            
+            // Mostrar explicación
+            const explicacion = card.querySelector('.explicacion');
+            explicacion.classList.add('visible');
+            
+            // Actualizar puntuación
+            if (esCorrecta) {
+                puntuacion++;
+            }
+            
+            // Cambiar botones
+            const btnVerificar = card.querySelector('.btn-verificar');
+            const btnSiguiente = card.querySelector('.btn-siguiente');
+            
+            btnVerificar.style.display = 'none';
+            btnSiguiente.style.display = 'block';
+            
+            // Si es el último ejercicio, cambiar texto del botón
+            const indexActual = ejerciciosActuales.findIndex(e => e.id === ejercicioId);
+            if (indexActual === ejerciciosActuales.length - 1) {
+                btnSiguiente.textContent = 'Ver Resultados →';
+            }
+        }
+        
+        // CONFIGURAR MODAL
+        function configurarModal() {
+            const btnReiniciar = document.getElementById('btnReiniciar');
+            const modal = document.getElementById('modalResultados');
+            
+            btnReiniciar.addEventListener('click', function() {
+                modal.style.display = 'none';
+                
+                // Reiniciar todo
+                ejerciciosActuales = [...ejercicios];
+                ejercicioActual = 0;
+                puntuacion = 0;
+                respuestasSeleccionadas = {};
+                
+                // Recargar ejercicios
+                cargarEjercicios();
+                
+                // Scroll al inicio
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // Cerrar modal haciendo clic fuera
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+        
+        // MOSTRAR RESULTADOS
+        function mostrarResultados() {
+            const modal = document.getElementById('modalResultados');
+            const puntuacionFinal = document.getElementById('puntuacionFinal');
+            const mensajeResultado = document.getElementById('mensajeResultado');
+            
+            const porcentaje = (puntuacion / ejerciciosActuales.length) * 100;
+            
+            puntuacionFinal.textContent = `${puntuacion}/${ejerciciosActuales.length}`;
+            
+            // Mensaje según puntuación
+            let mensaje = '';
+            if (porcentaje >= 90) {
+                mensaje = '¡Excelente! Eres un verdadero filósofo.';
+            } else if (porcentaje >= 70) {
+                mensaje = '¡Muy bien! Tienes un sólido conocimiento filosófico.';
+            } else if (porcentaje >= 50) {
+                mensaje = 'Buen trabajo, pero hay espacio para mejorar.';
+            } else {
+                mensaje = 'Sigue estudiando, la filosofía requiere práctica constante.';
+            }
+            
+            mensajeResultado.textContent = mensaje;
+            modal.style.display = 'flex';
+        }
+        
+        // AGREGAR EJERCICIO DESDE IA (funcionalidad futura)
+        function agregarEjercicioDesdeIA(pregunta, opciones, explicacion) {
+            const nuevoEjercicio = {
+                id: ejercicios.length + 1,
+                categoria: "ia",
+                dificultad: "medio",
+                pregunta: pregunta,
+                opciones: opciones,
+                explicacion: explicacion
+            };
+            
+            ejercicios.push(nuevoEjercicio);
+            alert('¡Nuevo ejercicio agregado desde IA!');
         }
     </script>
 </body>
