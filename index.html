@@ -12,761 +12,19 @@
     <meta property="og:title" content="ASEFIP - Filosofía Peruana para el Mundo">
     <meta property="og:description" content="Plataforma pionera en difundir el pensamiento filosófico peruano y andino a nivel global.">
     
-    <!-- Favicon para identidad de marca -->
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     
-    <!-- Fuentes optimizadas -->
+    <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=Merriweather:wght@300;400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     
-    <!-- Iconos - solo cargar los necesarios -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Estilos principales -->
     <link rel="stylesheet" href="styles.css">
-    
-    <style>
-        /* VARIABLES GLOBALES - Mantener consistencia con styles.css */
-        :root {
-            --color-primario: #1a365d;
-            --color-secundario: #2d3748;
-            --color-acento: #d69e2e;
-            --color-texto: #2d3748;
-            --color-fondo: #f7fafc;
-            --color-blanco: #ffffff;
-            --sombra: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --sombra-hover: 0 10px 20px rgba(0, 0, 0, 0.15);
-            --transicion: all 0.3s ease;
-            --radio-borde: 10px;
-        }
-        
-        /* RESET MEJORADO */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.7;
-            color: var(--color-texto);
-            background-color: var(--color-fondo);
-            overflow-x: hidden;
-        }
-        
-        /* TIPOGRAFÍA JERÁRQUICA */
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Philosopher', serif;
-            font-weight: 700;
-            line-height: 1.3;
-            color: var(--color-primario);
-            margin-bottom: 1rem;
-        }
-        
-        h1 { font-size: 2.8rem; }
-        h2 { font-size: 2.2rem; }
-        h3 { font-size: 1.8rem; }
-        
-        p {
-            margin-bottom: 1.2rem;
-            font-size: 1.05rem;
-        }
-        
-        /* ENLACES ACCESIBLES */
-        a {
-            color: var(--color-primario);
-            text-decoration: none;
-            transition: var(--transicion);
-        }
-        
-        a:focus-visible {
-            outline: 3px solid var(--color-acento);
-            outline-offset: 3px;
-        }
-        
-        /* CONTENEDOR PRINCIPAL */
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* HEADER MEJORADO */
-        .main-header {
-            background-color: var(--color-blanco);
-            box-shadow: var(--sombra);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            padding: 0.8rem 0;
-        }
-        
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-decoration: none;
-            padding: 5px;
-        }
-        
-        .logo-icon {
-            font-size: 2.8rem;
-            color: var(--color-acento);
-            transition: transform 0.5s ease;
-        }
-        
-        .logo:hover .logo-icon {
-            transform: rotate(15deg);
-        }
-        
-        .logo-text h1 {
-            font-size: 1.8rem;
-            margin-bottom: 0.2rem;
-            color: var(--color-primario);
-        }
-        
-        .logo-text p {
-            font-size: 0.85rem;
-            color: var(--color-secundario);
-            font-style: italic;
-            margin-bottom: 0;
-        }
-        
-        /* NAVEGACIÓN MEJORADA */
-        .main-nav ul {
-            display: flex;
-            list-style: none;
-            gap: 1.2rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        .main-nav a {
-            text-decoration: none;
-            color: var(--color-primario);
-            font-weight: 500;
-            padding: 0.6rem 1rem;
-            border-radius: var(--radio-borde);
-            transition: var(--transicion);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            white-space: nowrap;
-        }
-        
-        .main-nav a:hover,
-        .main-nav a:focus {
-            background-color: rgba(214, 158, 46, 0.15);
-            color: var(--color-acento);
-        }
-        
-        .main-nav a.active {
-            background-color: var(--color-acento);
-            color: var(--color-blanco);
-        }
-        
-        /* HERO SECTION MEJORADA */
-        .hero-section {
-            background: linear-gradient(135deg, var(--color-primario) 0%, #2d3748 100%);
-            color: var(--color-blanco);
-            padding: 5rem 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero-section::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="%23ffffff" opacity="0.03" d="M0,0 L100,0 L100,100 Z"/></svg>');
-            background-size: cover;
-        }
-        
-        .hero-section .container {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .hero-section h1 {
-            font-size: 3.2rem;
-            color: var(--color-blanco);
-            margin-bottom: 1.2rem;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        }
-        
-        .hero-subtitle {
-            font-size: 1.25rem;
-            max-width: 750px;
-            margin: 0 auto 2.5rem;
-            opacity: 0.95;
-            line-height: 1.6;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 1.2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-        
-        /* BOTONES MEJORADOS */
-        .btn {
-            padding: 1rem 2.2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.05rem;
-            transition: var(--transicion);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            border: none;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-        }
-        
-        .btn-primary {
-            background-color: var(--color-acento);
-            color: var(--color-blanco);
-            box-shadow: 0 4px 12px rgba(214, 158, 46, 0.3);
-        }
-        
-        .btn-primary:hover,
-        .btn-primary:focus {
-            background-color: #b8860b;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(214, 158, 46, 0.4);
-        }
-        
-        .btn-secondary {
-            background-color: transparent;
-            border: 2px solid var(--color-blanco);
-            color: var(--color-blanco);
-        }
-        
-        .btn-secondary:hover,
-        .btn-secondary:focus {
-            background-color: rgba(255, 255, 255, 0.15);
-        }
-        
-        /* SECCIÓN BIENVENIDA MEJORADA */
-        .welcome-section {
-            padding: 4.5rem 0;
-            background-color: var(--color-blanco);
-            position: relative;
-        }
-        
-        .welcome-section::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 5%;
-            right: 5%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--color-acento), transparent);
-        }
-        
-        .welcome-content {
-            max-width: 850px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        .welcome-content h2 {
-            font-size: 2.4rem;
-            margin-bottom: 1.8rem;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .welcome-content h2::after {
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            left: 25%;
-            right: 25%;
-            height: 3px;
-            background-color: var(--color-acento);
-            border-radius: 3px;
-        }
-        
-        .welcome-content p {
-            font-size: 1.15rem;
-            margin-bottom: 1.8rem;
-            color: var(--color-secundario);
-        }
-        
-        /* SECCIÓN RECURSOS MEJORADA */
-        .resources-section {
-            padding: 5rem 0;
-            background-color: var(--color-fondo);
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 3.5rem;
-        }
-        
-        .section-title h2 {
-            font-size: 2.4rem;
-            margin-bottom: 1rem;
-        }
-        
-        .section-title p {
-            max-width: 700px;
-            margin: 0 auto;
-            color: var(--color-secundario);
-            font-size: 1.1rem;
-        }
-        
-        .resources-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-            margin-top: 2rem;
-        }
-        
-        .resource-card {
-            background-color: var(--color-blanco);
-            border-radius: var(--radio-borde);
-            overflow: hidden;
-            box-shadow: var(--sombra);
-            transition: var(--transicion);
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-        
-        .resource-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--sombra-hover);
-        }
-        
-        .resource-icon {
-            height: 200px;
-            background: linear-gradient(135deg, var(--color-primario) 0%, #3a506b 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4.5rem;
-            color: var(--color-blanco);
-            position: relative;
-        }
-        
-        .resource-icon::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--color-acento), transparent);
-        }
-        
-        .resource-content {
-            padding: 2.2rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .resource-content h3 {
-            margin-bottom: 1.2rem;
-            font-size: 1.6rem;
-        }
-        
-        .resource-content p {
-            color: var(--color-secundario);
-            margin-bottom: 1.8rem;
-            flex-grow: 1;
-        }
-        
-        .resource-content .btn {
-            align-self: flex-start;
-            margin-top: auto;
-        }
-        
-        /* SECCIÓN COMUNIDAD MEJORADA */
-        .community-section {
-            padding: 5rem 0;
-            background-color: var(--color-blanco);
-        }
-        
-        .community-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2.2rem;
-            margin: 3.5rem 0;
-        }
-        
-        .stat-card {
-            text-align: center;
-            padding: 2.2rem 1.5rem;
-            background-color: var(--color-fondo);
-            border-radius: var(--radio-borde);
-            transition: var(--transicion);
-            border: 1px solid transparent;
-        }
-        
-        .stat-card:hover {
-            background-color: rgba(214, 158, 46, 0.08);
-            border-color: rgba(214, 158, 46, 0.3);
-            transform: translateY(-5px);
-        }
-        
-        .stat-number {
-            font-size: 3.2rem;
-            font-weight: 800;
-            color: var(--color-acento);
-            margin-bottom: 0.5rem;
-            font-family: 'Merriweather', serif;
-        }
-        
-        .stat-card p {
-            font-weight: 500;
-            color: var(--color-secundario);
-            margin-bottom: 0;
-            font-size: 1.1rem;
-        }
-        
-        .community-cta {
-            text-align: center;
-            margin-top: 3.5rem;
-        }
-        
-        /* SECCIÓN EFEMÉRIDES MEJORADA */
-        .ephemeris-section {
-            padding: 5rem 0;
-            background-color: var(--color-fondo);
-            position: relative;
-        }
-        
-        .ephemeris-card {
-            background-color: var(--color-blanco);
-            border-radius: var(--radio-borde);
-            padding: 2.5rem;
-            box-shadow: var(--sombra);
-            margin-top: 2rem;
-            border-left: 6px solid var(--color-acento);
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .ephemeris-header {
-            display: flex;
-            align-items: center;
-            gap: 1.2rem;
-            margin-bottom: 1.8rem;
-        }
-        
-        .ephemeris-header i {
-            font-size: 2.2rem;
-            color: var(--color-acento);
-        }
-        
-        .ephemeris-header h3 {
-            margin-bottom: 0.3rem;
-        }
-        
-        #current-date {
-            color: var(--color-secundario);
-            font-weight: 500;
-            font-size: 1.05rem;
-        }
-        
-        /* FOOTER MEJORADO */
-        .main-footer {
-            background-color: var(--color-primario);
-            color: var(--color-blanco);
-            padding: 4rem 0 2rem;
-            margin-top: 3rem;
-        }
-        
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3.5rem;
-        }
-        
-        .footer-column h3 {
-            color: var(--color-acento);
-            margin-bottom: 1.8rem;
-            font-size: 1.4rem;
-            position: relative;
-            padding-bottom: 0.8rem;
-        }
-        
-        .footer-column h3::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 2px;
-            background-color: rgba(214, 158, 46, 0.5);
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 0.9rem;
-        }
-        
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: var(--transicion);
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .footer-links a:hover {
-            color: var(--color-acento);
-            padding-left: 5px;
-        }
-        
-        .footer-links a::before {
-            content: "▸";
-            font-size: 0.8rem;
-            opacity: 0.6;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.8rem;
-        }
-        
-        .social-link {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--color-blanco);
-            text-decoration: none;
-            transition: var(--transicion);
-        }
-        
-        .social-link:hover,
-        .social-link:focus {
-            background-color: var(--color-acento);
-            transform: translateY(-3px);
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-        
-        .footer-bottom p:first-child {
-            margin-bottom: 0.5rem;
-        }
-        
-        /* RESPONSIVE MEJORADO */
-        @media (max-width: 992px) {
-            h1 { font-size: 2.5rem; }
-            h2 { font-size: 2rem; }
-            h3 { font-size: 1.6rem; }
-            
-            .hero-section h1 { font-size: 2.8rem; }
-            .hero-subtitle { font-size: 1.15rem; }
-            
-            .resources-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 2rem;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                gap: 1.2rem;
-                padding-bottom: 1rem;
-            }
-            
-            .main-nav ul {
-                justify-content: center;
-                gap: 0.8rem;
-            }
-            
-            .main-nav a {
-                padding: 0.6rem 0.9rem;
-                font-size: 0.95rem;
-            }
-            
-            .hero-section {
-                padding: 4rem 0;
-            }
-            
-            .hero-section h1 {
-                font-size: 2.3rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.1rem;
-                padding: 0 1rem;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-                gap: 1rem;
-            }
-            
-            .btn {
-                width: 100%;
-                max-width: 320px;
-                justify-content: center;
-            }
-            
-            .welcome-section,
-            .resources-section,
-            .community-section,
-            .ephemeris-section {
-                padding: 3.5rem 0;
-            }
-            
-            .community-stats {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.5rem;
-            }
-            
-            .ephemeris-card {
-                padding: 1.8rem;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            h1 { font-size: 2.2rem; }
-            h2 { font-size: 1.8rem; }
-            
-            .hero-section h1 { font-size: 2rem; }
-            
-            .container {
-                padding: 0 15px;
-            }
-            
-            .main-nav ul {
-                gap: 0.5rem;
-            }
-            
-            .main-nav a {
-                padding: 0.5rem 0.8rem;
-                font-size: 0.9rem;
-            }
-            
-            .main-nav a i {
-                font-size: 0.9rem;
-            }
-            
-            .resource-icon {
-                height: 180px;
-                font-size: 3.8rem;
-            }
-            
-            .resource-content {
-                padding: 1.8rem;
-            }
-            
-            .stat-card {
-                padding: 1.8rem 1rem;
-            }
-            
-            .stat-number {
-                font-size: 2.8rem;
-            }
-            
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 2.5rem;
-            }
-        }
-        
-        @media (max-width: 380px) {
-            .logo {
-                flex-direction: column;
-                text-align: center;
-                gap: 10px;
-            }
-            
-            .resources-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .community-stats {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* ANIMACIONES Y MEJORAS DE ACCESIBILIDAD */
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
-        }
-        
-        .fade-in {
-            animation: fadeIn 1s ease-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* ESTADO DE CARGA */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(214, 158, 46, 0.3);
-            border-radius: 50%;
-            border-top-color: var(--color-acento);
-            animation: spin 1s ease-in-out infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-    </style>
 </head>
 <body>
     <!-- Header -->
@@ -780,7 +38,7 @@
                 </div>
             </a>
             
-            <!-- Navegación principal mejorada -->
+            <!-- Navegación principal -->
             <nav class="main-nav" aria-label="Navegación principal">
                 <ul role="menubar">
                     <li role="none"><a href="index.html" class="active" role="menuitem" aria-current="page"><i class="fas fa-home" aria-hidden="true"></i> <span>Inicio</span></a></li>
@@ -850,7 +108,7 @@
                     <div class="resource-content">
                         <h3>Biblioteca Digital</h3>
                         <p>Accede a cientos de textos filosóficos, desde los clásicos griegos hasta los pensadores peruanos contemporáneos.</p>
-                        <a href="recursos.html" class="btn btn-primary" style="padding: 0.85rem 1.8rem;">
+                        <a href="recursos.html" class="btn btn-primary">
                             <i class="fas fa-arrow-right" aria-hidden="true"></i> Explorar
                         </a>
                     </div>
@@ -864,7 +122,7 @@
                     <div class="resource-content">
                         <h3>Foro de Debate</h3>
                         <p>Participa en discusiones filosóficas con estudiantes de todo el Perú. Moderado por expertos académicos.</p>
-                        <a href="comunidad.html" class="btn btn-primary" style="padding: 0.85rem 1.8rem;">
+                        <a href="comunidad.html" class="btn btn-primary">
                             <i class="fas fa-arrow-right" aria-hidden="true"></i> Participar
                         </a>
                     </div>
@@ -878,7 +136,7 @@
                     <div class="resource-content">
                         <h3>Cursos Gratuitos</h3>
                         <p>Aprende filosofía de manera estructurada con nuestros cursos diseñados por profesores universitarios.</p>
-                        <a href="aprender.html" class="btn btn-primary" style="padding: 0.85rem 1.8rem;">
+                        <a href="aprender.html" class="btn btn-primary">
                             <i class="fas fa-arrow-right" aria-hidden="true"></i> Comenzar
                         </a>
                     </div>
@@ -942,7 +200,7 @@
                     <p><span class="loading" aria-hidden="true"></span> Cargando efeméride del día...</p>
                 </div>
                 <div style="margin-top: 1.8rem;">
-                    <button onclick="cargarEfemeride()" class="btn btn-secondary" style="padding: 0.85rem 1.8rem;" aria-label="Actualizar efeméride">
+                    <button onclick="cargarEfemeride()" class="btn btn-secondary" aria-label="Actualizar efeméride">
                         <i class="fas fa-sync-alt" aria-hidden="true"></i> Actualizar Efeméride
                     </button>
                 </div>
@@ -956,7 +214,7 @@
             <div class="footer-grid">
                 <div class="footer-column">
                     <h3>ASEFIP</h3>
-                    <p style="margin-bottom: 1.8rem; opacity: 0.85; line-height: 1.6;">
+                    <p class="footer-description">
                         Asociación de Estudiantes de Filosofía del Perú. 
                         Promoviendo el pensamiento crítico y la filosofía peruana.
                     </p>
@@ -1012,15 +270,15 @@
             
             <div class="footer-bottom">
                 <p>© 2024 ASEFIP - Asociación de Estudiantes de Filosofía del Perú. Todos los derechos reservados.</p>
-                <p style="margin-top: 0.8rem; font-size: 0.9rem;">
-                    <i class="fas fa-heart" style="color: var(--color-acento);" aria-hidden="true"></i> 
+                <p class="footer-motto">
+                    <i class="fas fa-heart" aria-hidden="true"></i> 
                     <span>Filosofía para transformar el Perú</span>
                 </p>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript Mejorado -->
+    <!-- JavaScript -->
     <script>
         // Fecha actual formateada
         function actualizarFecha() {
@@ -1037,7 +295,7 @@
             }
         }
         
-        // Cargar efeméride con mejor manejo de errores
+        // Cargar efeméride
         async function cargarEfemeride() {
             const contenido = document.getElementById('ephemeris-content');
             if (!contenido) return;
@@ -1045,13 +303,10 @@
             contenido.innerHTML = '<p><span class="loading"></span> Cargando efeméride...</p>';
             
             try {
-                // Primero intentar cargar de la API si existe
                 let efemerideData = null;
                 
                 // Verificar si la API está disponible
-                const apiDisponible = await verificarAPI('api/efemerides.php');
-                
-                if (apiDisponible) {
+                try {
                     const response = await fetch('api/efemerides.php');
                     if (response.ok) {
                         const data = await response.json();
@@ -1059,6 +314,8 @@
                             efemerideData = data.efemeride;
                         }
                     }
+                } catch (error) {
+                    console.log('API no disponible, usando datos locales');
                 }
                 
                 // Si no hay datos de API, usar datos locales
@@ -1076,17 +333,7 @@
             }
         }
         
-        // Verificar si la API está disponible
-        async function verificarAPI(url) {
-            try {
-                const response = await fetch(url, { method: 'HEAD' });
-                return response.ok;
-            } catch {
-                return false;
-            }
-        }
-        
-        // Obtener efeméride local (datos de respaldo)
+        // Obtener efeméride local
         function obtenerEfemerideLocal() {
             const efemerides = [
                 {
@@ -1119,13 +366,12 @@
                 }
             ];
             
-            // Obtener una efeméride basada en el día del mes para variedad
             const hoy = new Date();
             const indice = hoy.getDate() % efemerides.length;
             return efemerides[indice];
         }
         
-        // Mostrar la efeméride en el DOM
+        // Mostrar la efeméride
         function mostrarEfemeride(efemeride) {
             const contenido = document.getElementById('ephemeris-content');
             contenido.innerHTML = `
@@ -1141,12 +387,9 @@
                     ${efemeride.mensaje}
                 </p>
             `;
-            
-            // Anunciar cambios para lectores de pantalla
-            contenido.setAttribute('aria-live', 'polite');
         }
         
-        // Marcar enlace activo con mejor precisión
+        // Marcar enlace activo
         function marcarEnlaceActivo() {
             const currentPage = window.location.pathname.split('/').pop() || 'index.html';
             document.querySelectorAll('.main-nav a').forEach(link => {
@@ -1163,33 +406,14 @@
             });
         }
         
-        // Inicializar cuando el DOM esté listo
+        // Inicializar
         document.addEventListener('DOMContentLoaded', function() {
             actualizarFecha();
             cargarEfemeride();
             marcarEnlaceActivo();
-            
-            // Añadir animaciones de entrada
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('fade-in');
-                    }
-                });
-            }, observerOptions);
-            
-            // Observar elementos para animaciones
-            document.querySelectorAll('.resource-card, .stat-card').forEach(el => {
-                observer.observe(el);
-            });
         });
         
-        // Actualizar efemérides cada 2 horas (7200000 ms)
+        // Actualizar efemérides cada 2 horas
         setInterval(cargarEfemeride, 7200000);
     </script>
 </body>
