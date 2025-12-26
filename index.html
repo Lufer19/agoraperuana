@@ -3,599 +3,474 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASEFIP - Asociación de Estudiantes de Filosofía del Perú</title>
+    <title>ASEFIP - Plataforma Filosófica Peruana</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
+        /* ESTILOS ESPECÍFICOS PARA INDEX */
         :root {
-            --primary: #2C3E50;
-            --secondary: #E74C3C;
-            --accent: #F39C12;
-            --light: #ECF0F1;
-            --dark: #1A252F;
+            --filosofia-purpura: #6A0DAD;
+            --oro-academico: #D4AF37;
+            --verde-andino: #2E8B57;
+            --gris-perla: #F8F9FA;
+            --azul-profundo: #1E3A5F;
         }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* HEADER */
-        header {
-            background: var(--primary);
-            color: white;
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .logo span {
-            color: var(--accent);
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-        
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-            padding: 5px 10px;
-            border-radius: 4px;
-        }
-        
-        nav a:hover {
-            color: var(--accent);
-            background: rgba(255,255,255,0.1);
-        }
-        
-        /* HERO SECTION */
-        .hero {
-            background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            background-position: center;
+        .hero-section {
+            background: linear-gradient(135deg, var(--azul-profundo) 0%, var(--filosofia-purpura) 100%);
             color: white;
             padding: 5rem 0;
             text-align: center;
-            border-bottom: 5px solid var(--accent);
+            position: relative;
+            overflow: hidden;
         }
         
-        .hero h1 {
-            font-size: 3rem;
+        .hero-section::before {
+            content: "φ";
+            font-size: 30rem;
+            opacity: 0.05;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Times New Roman', serif;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            position: relative;
+            z-index: 2;
         }
         
-        .hero p {
-            font-size: 1.2rem;
+        .hero-subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
             max-width: 800px;
             margin: 0 auto 2rem;
-            opacity: 0.9;
+            position: relative;
+            z-index: 2;
         }
         
-        .cta-button {
-            display: inline-block;
-            background: var(--secondary);
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .btn-primary {
+            background: var(--oro-academico);
+            color: var(--azul-profundo);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid white;
             color: white;
             padding: 12px 30px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 1.1rem;
             transition: all 0.3s;
-            border: 2px solid var(--secondary);
         }
         
-        .cta-button:hover {
-            background: transparent;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        .btn-secondary:hover {
+            background: white;
+            color: var(--azul-profundo);
         }
         
-        /* MAIN CONTENT */
-        section {
+        /* SECCIONES */
+        .seccion-destacada {
             padding: 4rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
         }
         
-        .section-title {
+        .seccion-titulo {
             text-align: center;
+            color: var(--azul-profundo);
             margin-bottom: 3rem;
-            color: var(--primary);
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             position: relative;
         }
         
-        .section-title:after {
+        .seccion-titulo::after {
             content: '';
             display: block;
-            width: 80px;
+            width: 100px;
             height: 4px;
-            background: var(--accent);
-            margin: 10px auto;
+            background: var(--oro-academico);
+            margin: 15px auto;
             border-radius: 2px;
         }
         
-        /* QUIENES SOMOS */
-        .about-content {
+        /* GRID DE RECURSOS */
+        .recursos-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-        
-        .about-text h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-        
-        .mission-vision {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
         
-        .mission, .vision {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border-left: 4px solid var(--accent);
-        }
-        
-        /* PILARES */
-        .pilares-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        
-        .pilar {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
-        }
-        
-        .pilar:hover {
-            transform: translateY(-10px);
-        }
-        
-        .pilar-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-        
-        /* ARTICULOS */
-        .articulos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-        
-        .articulo-card {
+        .recurso-card {
             background: white;
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: all 0.3s;
+            border-top: 4px solid var(--filosofia-purpura);
         }
         
-        .articulo-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        .recurso-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
         
-        .articulo-content {
+        .recurso-icono {
+            font-size: 3rem;
+            text-align: center;
+            padding: 2rem 0 1rem;
+            color: var(--filosofia-purpura);
+        }
+        
+        .recurso-contenido {
             padding: 1.5rem;
         }
         
-        .articulo-content h3 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
+        .recurso-contenido h3 {
+            color: var(--azul-profundo);
+            margin-bottom: 1rem;
         }
         
-        .articulo-link {
-            display: inline-block;
-            color: var(--secondary);
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 1rem;
-            transition: color 0.3s;
-        }
-        
-        .articulo-link:hover {
-            color: var(--primary);
-        }
-        
-        /* NOTICIAS */
-        .noticias-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .noticia {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border-top: 4px solid var(--primary);
-        }
-        
-        .noticia-date {
-            color: var(--secondary);
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-        
-        /* FOOTER */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 3rem 0 1rem;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 2rem;
-        }
-        
-        .social-links {
+        /* REDES SOCIALES ESPECÍFICAS */
+        .redes-sociales {
             display: flex;
             gap: 1rem;
-            margin-top: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
         }
         
-        .social-icon {
+        .red-social {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            color: white;
+            gap: 10px;
+            background: #f0f0f0;
+            padding: 10px 20px;
+            border-radius: 30px;
             text-decoration: none;
+            color: #333;
             transition: all 0.3s;
         }
         
-        .social-icon:hover {
-            background: var(--secondary);
+        .red-social.tiktok {
+            background: #000;
+            color: white;
+        }
+        
+        .red-social.instagram {
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+            color: white;
+        }
+        
+        .red-social:hover {
             transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.7);
-            font-size: 0.9rem;
+        /* EJERCICIOS DESTACADOS */
+        .ejercicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
         }
         
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .about-content, .mission-vision {
-                grid-template-columns: 1fr;
-            }
-            
-            .articulos-grid, .noticias-grid {
-                grid-template-columns: 1fr;
-            }
+        .ejercicio {
+            background: var(--gris-perla);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--verde-andino);
         }
+        
+        .etiqueta-dificultad {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .facil { background: #d4edda; color: #155724; }
+        .medio { background: #fff3cd; color: #856404; }
+        .dificil { background: #f8d7da; color: #721c24; }
     </style>
 </head>
 <body>
-    <!-- HEADER -->
+    <!-- HEADER (usa el mismo que ya tienes en otros archivos) -->
     <header>
-        <div class="container header-container">
-            <a href="index.html" class="logo">
-                🏛️ ASEF<span>IP</span>
-            </a>
+        <div class="container">
             <nav>
+                <a href="index.html" class="logo">🏛️ ASEFIP</a>
                 <ul>
                     <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#quienes-somos">Quiénes Somos</a></li>
-                    <li><a href="#pilares">Nuestros Pilares</a></li>
-                    <li><a href="#articulos">Artículos</a></li>
-                    <li><a href="#noticias">Noticias</a></li>
-                    <li><a href="#unete">Únete</a></li>
+                    <li><a href="#recursos">Recursos</a></li>
+                    <li><a href="#ejercicios">Ejercicios</a></li>
+                    <li><a href="#comunidad">Comunidad</a></li>
+                    <li><a href="#eventos">Eventos</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <!-- HERO SECTION -->
-    <section class="hero" id="inicio">
+    <section class="hero-section" id="inicio">
         <div class="container">
-            <h1>ASEFIP</h1>
-            <h2>Asociación de Estudiantes de Filosofía del Perú</h2>
-            <p>La primera plataforma digital pionera dedicada a difundir el pensamiento filosófico en el Perú. Un espacio donde estudiantes y aficionados encuentran artículos, ensayos y recursos para descubrir cómo la filosofía nos ayuda a entender el mundo actual.</p>
-            <a href="#unete" class="cta-button">Únete a Nuestra Comunidad</a>
-        </div>
-    </section>
-
-    <!-- QUIENES SOMOS -->
-    <section id="quienes-somos">
-        <div class="container">
-            <h2 class="section-title">¿Quiénes Somos?</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>Una red nacional de estudiantes comprometidos con la filosofía</h3>
-                    <p>ASEFIP nació el 21 de diciembre de 2024 de una reunión histórica que reunió a estudiantes de filosofía de diversas universidades del Perú. Somos la asociación que busca fortalecer la comunidad filosófica estudiantil a nivel nacional, creando un hito de referencia académica.</p>
-                    
-                    <div class="mission-vision">
-                        <div class="mission">
-                            <h4>🎯 Nuestra Misión</h4>
-                            <p>Promover el desarrollo del pensamiento crítico y filosófico entre los estudiantes peruanos, creando espacios de diálogo, debate y formación académica que contribuyan al crecimiento intelectual de nuestra comunidad.</p>
-                        </div>
-                        <div class="vision">
-                            <h4>🌟 Nuestra Visión</h4>
-                            <p>Ser la red de estudiantes de filosofía más importante del Perú, reconocida por su compromiso con la excelencia académica, el pensamiento crítico y la promoción de valores humanistas en la sociedad peruana.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-image">
-                    <!-- Imagen representativa -->
-                    <div style="background: var(--light); height: 100%; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--primary); padding: 2rem;">
-                        <div style="text-align: center;">
-                            <div style="font-size: 4rem; margin-bottom: 1rem;">📚</div>
-                            <h3>Comunidad Filosófica Peruana</h3>
-                            <p>Uniendo mentes críticas de todo el Perú</p>
-                        </div>
-                    </div>
-                </div>
+            <h1 class="hero-title">ASEFIP</h1>
+            <h2 class="hero-subtitle">Plataforma Filosófica Peruana</h2>
+            <p class="hero-subtitle">La primera comunidad digital que une teoría filosófica con realidad peruana. Artículos, ejercicios, recursos y comunidad para estudiantes y amantes de la filosofía.</p>
+            
+            <div class="cta-buttons">
+                <a href="#recursos" class="btn-primary">Explorar Recursos</a>
+                <a href="comunidad.html" class="btn-secondary">Unirse a la Comunidad</a>
             </div>
         </div>
     </section>
 
-    <!-- PILARES -->
-    <section id="pilares" style="background: var(--light);">
+    <!-- SECCIÓN RECURSOS -->
+    <section class="seccion-destacada" id="recursos">
         <div class="container">
-            <h2 class="section-title">Nuestros Pilares</h2>
-            <div class="pilares-grid">
-                <div class="pilar">
-                    <div class="pilar-icon">💭</div>
-                    <h3>Pensamiento Crítico</h3>
-                    <p>Fomentamos el análisis riguroso, el cuestionamiento reflexivo y la argumentación sólida como herramientas fundamentales del quehacer filosófico.</p>
-                </div>
-                <div class="pilar">
-                    <div class="pilar-icon">🤝</div>
-                    <h3>Comunidad</h3>
-                    <p>Construimos redes de apoyo entre estudiantes de diferentes universidades, promoviendo la colaboración y el intercambio de ideas.</p>
-                </div>
-                <div class="pilar">
-                    <div class="pilar-icon">📚</div>
-                    <h3>Formación Académica</h3>
-                    <p>Ofrecemos recursos, talleres y espacios de estudio que complementan la formación universitaria de nuestros miembros.</p>
-                </div>
-                <div class="pilar">
-                    <div class="pilar-icon">🗣️</div>
-                    <h3>Diálogo Plural</h3>
-                    <p>Valoramos la diversidad de perspectivas filosóficas y promovemos el debate respetuoso entre diferentes corrientes de pensamiento.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ARTÍCULOS -->
-    <section id="articulos">
-        <div class="container">
-            <h2 class="section-title">Artículos Académicos</h2>
-            <p style="text-align: center; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
-                Explora las publicaciones y reflexiones filosóficas de nuestros miembros. Investigación original que combina rigor académico con relevancia contemporánea.
+            <h2 class="seccion-titulo">📚 Recursos Filosóficos</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; font-size: 1.1rem;">
+                Todo lo que necesitas para estudiar, investigar y profundizar en filosofía. Especialmente diseñado para el contexto peruano.
             </p>
             
-            <div class="articulos-grid">
-                <!-- ARTÍCULO 1 -->
-                <div class="articulo-card">
-                    <div class="articulo-content">
-                        <h3>La Democracia en Disputa: Perspectivas Contemporáneas</h3>
-                        <p>Un análisis crítico de los desafíos actuales de la democracia desde diversas perspectivas filosóficas y políticas.</p>
-                        <a href="articulos/democracia-en-disputa.html" class="articulo-link">Leer artículo →</a>
+            <div class="recursos-grid">
+                <!-- ARTÍCULOS -->
+                <div class="recurso-card">
+                    <div class="recurso-icono">📝</div>
+                    <div class="recurso-contenido">
+                        <h3>Artículos Académicos</h3>
+                        <p>Publicaciones originales de estudiantes peruanos. Investigación filosófica con perspectiva local.</p>
+                        <a href="articulos/" class="btn-secondary" style="display: inline-block; margin-top: 1rem; padding: 8px 20px;">Ver 6 artículos →</a>
                     </div>
                 </div>
                 
-                <!-- ARTÍCULO 2 -->
-                <div class="articulo-card">
-                    <div class="articulo-content">
-                        <h3>Hegel y la República de Platón: Un Diálogo Trascendental</h3>
-                        <p>Estudio comparativo entre dos sistemas filosóficos fundamentales y su influencia en el pensamiento occidental.</p>
-                        <a href="articulos/hegel-republica-platon.html" class="articulo-link">Leer artículo →</a>
+                <!-- EJERCICIOS -->
+                <div class="recurso-card">
+                    <div class="recurso-icono">🧠</div>
+                    <div class="recurso-contenido">
+                        <h3>Ejercicios y Tests</h3>
+                        <p>Pon a prueba tu conocimiento filosófico. Lógica, historia de la filosofía, argumentación.</p>
+                        <a href="ejercicios.html" class="btn-secondary" style="display: inline-block; margin-top: 1rem; padding: 8px 20px;">Practicar ahora →</a>
                     </div>
                 </div>
                 
-                <!-- ARTÍCULO 3 -->
-                <div class="articulo-card">
-                    <div class="articulo-content">
-                        <h3>Ética del Cuidado: Reflexiones desde Zafra</h3>
-                        <p>Aproximación a la ética del cuidado desde una perspectiva latinoamericana, con estudios de caso peruanos.</p>
-                        <a href="articulos/articulo-etica-cuidado-zafra.html" class="articulo-link">Leer artículo →</a>
+                <!-- GLOSARIO -->
+                <div class="recurso-card">
+                    <div class="recurso-icono">📖</div>
+                    <div class="recurso-contenido">
+                        <h3>Glosario Filosófico</h3>
+                        <p>150+ términos explicados con ejemplos. Desde "a priori" hasta "zeitgeist".</p>
+                        <a href="glosario.html" class="btn-secondary" style="display: inline-block; margin-top: 1rem; padding: 8px 20px;">Buscar términos →</a>
                     </div>
                 </div>
                 
-                <!-- ARTÍCULO 4 -->
-                <div class="articulo-card">
-                    <div class="articulo-content">
-                        <h3>El Nacimiento de la Filosofía en Sumeria</h3>
-                        <p>Investigación sobre los orígenes mesopotámicos del pensamiento filosófico antes de la Grecia clásica.</p>
-                        <a href="articulos/nacimiento-filosofia-subirme.html" class="articulo-link">Leer artículo →</a>
+                <!-- LÍNEA DEL TIEMPO -->
+                <div class="recurso-card">
+                    <div class="recurso-icono">⏳</div>
+                    <div class="recurso-contenido">
+                        <h3>Línea del Tiempo</h3>
+                        <p>Historia de la filosofía visual. De Tales a la filosofía latinoamericana.</p>
+                        <a href="linea-tiempo.html" class="btn-secondary" style="display: inline-block; margin-top: 1rem; padding: 8px 20px;">Explorar historia →</a>
                     </div>
                 </div>
                 
-                <!-- ARTÍCULO 5 -->
-                <div class="articulo-card">
-                    <div class="articulo-content">
-                        <h3>Imperialismo Cultural: El Caso de Ruanda</h3>
-                        <p>Análisis filosófico de los mecanismos de imperialismo cultural y su impacto en las sociedades postcoloniales.</p>
-                        <a href="articulos/imperialismo-cultural-ruanda.html" class="articulo-link">Leer artículo →</a>
+                <!-- FILÓSOFOS -->
+                <div class="recurso-card">
+                    <div class="recurso-icono">👨‍🏫</div>
+                    <div class="recurso-contenido">
+                        <h3>Biografías de Filósofos</h3>
+                        <p>Vida, obra y pensamiento de filósofos clave. Incluye pensadores peruanos.</p>
+                        <a href="filosofos.html" class="btn-secondary" style="display: inline-block; margin-top: 1rem; padding: 8px 20px;">Conocer autores →</a>
                     </div>
                 </div>
                 
-                <!-- ARTÍCULO 6 -->
-                <div class="articulo-card">
-                    <div class="articulo-content">
-                        <h3>Reseña: "El Muro" de Max Horkheimer</h3>
-                        <p>Análisis crítico de la obra de Horkheimer y su relevancia para la teoría crítica contemporánea.</p>
-                        <a href="articulos/resena-max.html" class="articulo-link">Leer artículo →</a>
+                <!-- INVESTIGACIÓN -->
+                <div class="recurso-card">
+                    <div class="recurso-icono">🔬</div>
+                    <div class="recurso-contenido">
+                        <h3>Guías de Investigación</h3>
+                        <p>Cómo hacer investigación filosófica. Metodología, TFG, tesis doctoral.</p>
+                        <a href="investigar.html" class="btn-secondary" style="display: inline-block; margin-top: 1rem; padding: 8px 20px;">Aprender métodos →</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- NOTICIAS -->
-    <section id="noticias" style="background: var(--light);">
+    <!-- SECCIÓN EJERCICIOS DESTACADOS -->
+    <section class="seccion-destacada" id="ejercicios" style="background: var(--gris-perla);">
         <div class="container">
-            <h2 class="section-title">Últimas Noticias</h2>
-            <div class="noticias-grid">
-                <div class="noticia">
-                    <div class="noticia-date">🎉 21 de Diciembre, 2024</div>
-                    <h3>¡Nace ASEFIP!</h3>
-                    <p>Reunión fundacional con estudiantes de diversas universidades del Perú marca el inicio de nuestra asociación.</p>
+            <h2 class="seccion-titulo">🧠 Ejercicios Filosóficos</h2>
+            <p style="text-align: center; margin-bottom: 3rem;">Pon a prueba tu pensamiento crítico con estos ejercicios</p>
+            
+            <div class="ejercicios-grid">
+                <div class="ejercicio">
+                    <span class="etiqueta-dificultad facil">Fácil</span>
+                    <h3>Identifica la Falacia</h3>
+                    <p>"Como todos mis amigos usan TikTok, debe ser bueno"</p>
+                    <a href="ejercicios.html#falacias" style="color: var(--verde-andino); font-weight: bold;">Resolver →</a>
                 </div>
                 
-                <div class="noticia">
-                    <div class="noticia-date">📖 Próximamente</div>
-                    <h3>Primer Seminario Nacional</h3>
-                    <p>Prepárate para nuestro primer evento académico que reunirá a estudiantes de filosofía de todo el Perú.</p>
+                <div class="ejercicio">
+                    <span class="etiqueta-dificultad medio">Medio</span>
+                    <h3>Relaciona Filósofos</h3>
+                    <p>Conecta a Nietzsche, Schopenhauer y la voluntad de poder</p>
+                    <a href="ejercicios.html#relaciones" style="color: var(--verde-andino); font-weight: bold;">Intentar →</a>
                 </div>
                 
-                <div class="noticia">
-                    <div class="noticia-date">🌐 Disponible ahora</div>
-                    <h3>Recursos Gratuitos</h3>
-                    <p>Accede a nuestra biblioteca digital con textos filosóficos, cursos y herramientas académicas.</p>
-                    <a href="#unete" style="color: var(--secondary); font-weight: bold; text-decoration: none;">Acceder →</a>
+                <div class="ejercicio">
+                    <span class="etiqueta-dificultad dificil">Difícil</span>
+                    <h3>Argumenta tu Postura</h3>
+                    <p>"¿Existe el libre albedrío?" Construye un argumento en 200 palabras</p>
+                    <a href="ejercicios.html#argumentacion" style="color: var(--verde-andino); font-weight: bold;">Desarrollar →</a>
                 </div>
+                
+                <div class="ejercicio">
+                    <span class="etiqueta-dificultad medio">Medio</span>
+                    <h3>Completa la Cita</h3>
+                    <p>"Pienso, luego..." ¿Qué filósofo? ¿Cuál es la frase completa?</p>
+                    <a href="ejercicios.html#citas" style="color: var(--verde-andino); font-weight: bold;">Completar →</a>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="ejercicios.html" class="btn-primary">Ver Todos los Ejercicios</a>
             </div>
         </div>
     </section>
 
-    <!-- ÚNETE -->
-    <section id="unete">
+    <!-- SECCIÓN COMUNIDAD -->
+    <section class="seccion-destacada" id="comunidad">
         <div class="container">
-            <h2 class="section-title">¿Listo para Unirte?</h2>
-            <div style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">
-                <h3 style="color: var(--primary); margin-bottom: 1rem;">Forma parte de la comunidad de estudiantes de filosofía más activa del Perú</h3>
-                <p>Como miembro de ASEFIP tendrás acceso a recursos exclusivos, podrás publicar tus artículos, participar en eventos nacionales y conectar con una red de estudiantes apasionados por la filosofía.</p>
+            <h2 class="seccion-titulo">🤝 Comunidad Filosófica Peruana</h2>
+            
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+                    ASEFIP no es solo una página web, es una <strong>comunidad activa</strong> de estudiantes de filosofía de todo el Perú.
+                </p>
                 
-                <div style="margin-top: 2rem; display: inline-flex; flex-direction: column; gap: 1rem;">
-                    <a href="#contacto" class="cta-button" style="background: var(--primary);">Solicitar Información</a>
-                    <a href="recursos.html" class="cta-button" style="background: transparent; color: var(--primary); border: 2px solid var(--primary);">
-                        Ver Recursos Gratuitos
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CONTACTO Y FOOTER -->
-    <footer id="contacto">
-        <div class="container">
-            <div class="footer-content">
-                <div>
-                    <h3 style="color: white; margin-bottom: 1rem;">ASEFIP</h3>
-                    <p>Asociación de Estudiantes de Filosofía del Perú</p>
-                    <p style="margin-top: 1rem; opacity: 0.8;">Uniendo a estudiantes de filosofía de todo el Perú para fortalecer el pensamiento crítico y promover el diálogo filosófico.</p>
-                </div>
-                
-                <div>
-                    <h3 style="color: white; margin-bottom: 1rem;">Contacto</h3>
-                    <p>✉️ contacto@asefip.org</p>
-                    <p>📞 Información para miembros</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin: 3rem 0;">
+                    <div>
+                        <h3 style="color: var(--filosofia-purpura);">📝 Publica tu Artículo</h3>
+                        <p>¿Has escrito algo sobre filosofía? Compártelo con la comunidad.</p>
+                        <a href="enviar-articulo.html" style="color: var(--oro-academico); font-weight: bold;">Enviar artículo →</a>
+                    </div>
                     
-                    <div class="social-links">
-                        <a href="https://www.tiktok.com/@asefip01?_r=1&_t=ZS-92TMiHxuxcb" class="social-icon" target="_blank" title="TikTok">
-                            <span style="font-size: 1.2rem;">🎵</span>
-                        </a>
-                        <a href="https://www.instagram.com/asefip_?igsh=Y2I4ODk1ZzVoczk5&utm_source=qr" class="social-icon" target="_blank" title="Instagram">
-                            <span style="font-size: 1.2rem;">📸</span>
-                        </a>
+                    <div>
+                        <h3 style="color: var(--filosofia-purpura);">💬 Únete al Debate</h3>
+                        <p>Participa en discusiones filosóficas con estudiantes de todo el país.</p>
+                        <a href="comunidad.html" style="color: var(--oro-academico); font-weight: bold;">Ingresar al foro →</a>
                     </div>
+                    
+                    <div>
+                        <h3 style="color: var(--filosofia-purpura);">🎓 Asesoría entre Pares</h3>
+                        <p>Recibe feedback de otros estudiantes en tus trabajos.</p>
+                        <a href="comunidad.html#asesoria" style="color: var(--oro-academico); font-weight: bold;">Solicitar ayuda →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN REDES SOCIALES -->
+    <section class="seccion-destacada" style="background: linear-gradient(135deg, #1E3A5F 0%, #6A0DAD 100%); color: white;">
+        <div class="container">
+            <h2 class="seccion-titulo" style="color: white;">📱 Síguenos en Redes Sociales</h2>
+            <p style="text-align: center; margin-bottom: 3rem; font-size: 1.1rem;">
+                Contenido filosófico en formatos modernos y accesibles
+            </p>
+            
+            <div class="redes-sociales">
+                <a href="https://www.tiktok.com/@asefip01?_r=1&_t=ZS-92TMiHxuxcb" class="red-social tiktok" target="_blank">
+                    <span style="font-size: 1.5rem;">🎵</span>
+                    <div>
+                        <strong>TikTok</strong>
+                        <div style="font-size: 0.9rem;">@asefip01</div>
+                    </div>
+                </a>
+                
+                <a href="https://www.instagram.com/asefip_?igsh=Y2I4ODk1ZzVoczk5&utm_source=qr" class="red-social instagram" target="_blank">
+                    <span style="font-size: 1.5rem;">📸</span>
+                    <div>
+                        <strong>Instagram</strong>
+                        <div style="font-size: 0.9rem;">@asefip_</div>
+                    </div>
+                </a>
+            </div>
+            
+            <p style="text-align: center; margin-top: 2rem; opacity: 0.9;">
+                Videos cortos, frases filosóficas, debates y contenido exclusivo para estudiantes
+            </p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer style="background: var(--azul-profundo); color: white; padding: 3rem 0 1.5rem;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                <div>
+                    <h3 style="color: var(--oro-academico); margin-bottom: 1rem;">ASEFIP</h3>
+                    <p>Asociación de Estudiantes de Filosofía del Perú</p>
+                    <p style="margin-top: 1rem; opacity: 0.8;">Plataforma pionera de difusión filosófica en Perú</p>
                 </div>
                 
                 <div>
-                    <h3 style="color: white; margin-bottom: 1rem;">Enlaces Rápidos</h3>
+                    <h3 style="color: var(--oro-academico); margin-bottom: 1rem;">Recursos</h3>
                     <ul style="list-style: none;">
-                        <li><a href="#articulos" style="color: rgba(255,255,255,0.8); text-decoration: none; display: block; margin-bottom: 0.5rem;">Artículos</a></li>
-                        <li><a href="#noticias" style="color: rgba(255,255,255,0.8); text-decoration: none; display: block; margin-bottom: 0.5rem;">Noticias</a></li>
-                        <li><a href="recursos.html" style="color: rgba(255,255,255,0.8); text-decoration: none; display: block; margin-bottom: 0.5rem;">Recursos</a></li>
-                        <li><a href="#unete" style="color: rgba(255,255,255,0.8); text-decoration: none; display: block; margin-bottom: 0.5rem;">Únete</a></li>
+                        <li><a href="articulos/" style="color: rgba(255,255,255,0.8); text-decoration: none; display: block; margin-bottom: 0.5rem;">Artículos</a></li>
+                        <li><a href="ejercicios.html" style="color: rgba(255,255,255,0.8); text-decoration: none; display: block; margin-bottom: 0.5rem;">Ejercicios</a></li>
+                        <li><a href="glosario.html" style="color: rgba(255,255,255,0.8); text-decoration: none; display: block; margin-bottom: 0.5rem;">Glosario</a></li>
+                        <li><a href="linea-tiempo.html" style="color: rgba(255,255,255,0.8); text-decoration: none; display: block; margin-bottom: 0.5rem;">Línea del Tiempo</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--oro-academico); margin-bottom: 1rem;">Participa</h3>
+                    <ul style="list-style: none;">
+                        <li><a href="enviar-articulo.html" style="color: rgba(255,255,255,0.8); text-decoration: none; display: block; margin-bottom: 0.5rem;">Publicar artículo</a></li>
+                        <li><a href="comunidad.html" style="color: rgba(255,255,255,0.8); text-decoration: none; display: block; margin-bottom: 0.5rem;">Unirse a la comunidad</a></li>
+                        <li><a href="#eventos" style="color: rgba(255,255,255,0.8); text-decoration: none; display: block; margin-bottom: 0.5rem;">Próximos eventos</a></li>
                     </ul>
                 </div>
             </div>
             
-            <div class="copyright">
-                <p>© 2024 ASEFIP - Asociación de Estudiantes de Filosofía del Perú. Todos los derechos reservados.</p>
-                <p style="margin-top: 0.5rem; font-size: 0.8rem;">Desarrollado por estudiantes para estudiantes</p>
+            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>© 2024 ASEFIP - Asociación de Estudiantes de Filosofía del Perú</p>
+                <p style="margin-top: 0.5rem; opacity: 0.7; font-size: 0.9rem;">Hecho por estudiantes, para estudiantes</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Smooth scrolling para los enlaces del menú
-        document.querySelectorAll('nav a, .footer-content a').forEach(anchor => {
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
-                if(this.getAttribute('href').startsWith('#')) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId !== '#') {
                     const targetElement = document.querySelector(targetId);
-                    
                     if(targetElement) {
                         window.scrollTo({
                             top: targetElement.offsetTop - 80,
@@ -603,6 +478,16 @@
                         });
                     }
                 }
+            });
+        });
+        
+        // Resaltar enlaces de redes sociales
+        document.querySelectorAll('.red-social').forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.05)';
+            });
+            link.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
             });
         });
     </script>
