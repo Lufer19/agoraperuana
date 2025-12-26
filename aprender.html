@@ -5,13 +5,230 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aprender Filosofía - ASEFIP</title>
     
+    <!-- SEO y Metadatos -->
+    <meta name="description" content="Cursos gratuitos de filosofía peruana. Aprende sobre pensamiento andino, filosofía latinoamericana y autores peruanos.">
+    <meta name="keywords" content="cursos filosofía, aprender filosofía peruana, filosofía andina, cursos gratuitos, educación filosófica">
+    
     <!-- Enlaces comunes -->
     <link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* ESTILOS ESPECÍFICOS PARA APRENDER */
+        .hero-aprender {
+            background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-secundario) 100%);
+            color: var(--color-blanco);
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-aprender::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="%23ffffff" opacity="0.03" d="M0,0 L100,0 L100,100 Z"/></svg>');
+            background-size: cover;
+        }
+        
+        .hero-aprender .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cursos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin: 3rem 0;
+        }
+        
+        .curso-card {
+            background: var(--color-blanco);
+            border-radius: var(--radio-borde);
+            overflow: hidden;
+            box-shadow: var(--sombra);
+            border: 1px solid var(--color-borde);
+            transition: var(--transicion);
+            position: relative;
+        }
+        
+        .curso-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--sombra-hover);
+            border-color: var(--color-acento);
+        }
+        
+        .curso-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--color-acento);
+            color: var(--color-blanco);
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+        
+        .curso-imagen {
+            height: 200px;
+            background: linear-gradient(135deg, var(--color-primario) 0%, #3a506b 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-blanco);
+            font-size: 3.5rem;
+            position: relative;
+        }
+        
+        .curso-imagen::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-acento), transparent);
+        }
+        
+        .curso-contenido {
+            padding: 2rem;
+        }
+        
+        .curso-contenido h3 {
+            margin-bottom: 0.8rem;
+            color: var(--color-primario);
+            font-size: 1.5rem;
+        }
+        
+        .curso-metadata {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1rem 0;
+            color: var(--color-texto-claro);
+            font-size: 0.9rem;
+        }
+        
+        .metadata-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .curso-descripcion {
+            margin: 1.2rem 0;
+            color: var(--color-texto-claro);
+            line-height: 1.6;
+        }
+        
+        .curso-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1.2rem 0;
+        }
+        
+        .curso-tag {
+            background: rgba(214, 158, 46, 0.1);
+            color: var(--color-acento);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .recursos-section {
+            background: var(--color-fondo-alt);
+            border-radius: var(--radio-borde);
+            padding: 2.5rem;
+            margin: 4rem 0;
+            border: 1px solid var(--color-borde);
+        }
+        
+        .recursos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .recurso-item {
+            background: var(--color-blanco);
+            border-radius: var(--radio-borde-pequeno);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--sombra);
+            transition: var(--transicion);
+            border: 1px solid var(--color-borde);
+        }
+        
+        .recurso-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--sombra-hover);
+            border-color: var(--color-acento);
+        }
+        
+        .recurso-icon {
+            font-size: 2.5rem;
+            color: var(--color-acento);
+            margin-bottom: 1rem;
+        }
+        
+        .faq-section {
+            margin: 3rem 0;
+        }
+        
+        .faq-item {
+            background: var(--color-blanco);
+            border-radius: var(--radio-borde-pequeno);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--color-acento);
+            box-shadow: var(--sombra);
+        }
+        
+        .faq-pregunta {
+            font-weight: 600;
+            color: var(--color-primario);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .faq-respuesta {
+            color: var(--color-texto-claro);
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .cursos-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .recursos-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .curso-metadata {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .recursos-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Header (igual que index.html) -->
+    <!-- Header -->
     <header class="main-header" role="banner">
         <div class="container header-container">
             <a href="index.html" class="logo" aria-label="ASEFIP - Inicio">
@@ -36,28 +253,273 @@
         </div>
     </header>
 
-    <!-- Contenido principal -->
-    <main class="container" style="padding: 3rem 0 5rem;">
-        <div class="section-title">
-            <h1>Cursos y Aprendizaje</h1>
-            <p>Aprende filosofía peruana y universal con nuestros recursos educativos</p>
+    <!-- Hero Section -->
+    <section class="hero-aprender" aria-labelledby="hero-title">
+        <div class="container fade-in">
+            <h1 id="hero-title" style="color: white; margin-bottom: 1rem;">Aprende Filosofía Peruana</h1>
+            <p class="hero-subtitle" style="font-size: 1.2rem; max-width: 700px; margin: 0 auto; opacity: 0.95;">
+                Cursos gratuitos diseñados por expertos para entender el pensamiento filosófico peruano y latinoamericano
+            </p>
+        </div>
+    </section>
+
+    <!-- Cursos Disponibles -->
+    <div class="container" style="padding: 3rem 0;">
+        <div class="section-title fade-in">
+            <h2>Cursos Disponibles</h2>
+            <p>Selecciona el curso que mejor se adapte a tus intereses y nivel de conocimiento</p>
         </div>
         
-        <div style="text-align: center; margin: 3rem 0;">
-            <p>Contenido en desarrollo. Próximamente cursos gratuitos de filosofía peruana.</p>
-            <a href="index.html" class="btn btn-primary" style="margin-top: 1rem;">
-                <i class="fas fa-arrow-left" aria-hidden="true"></i> Volver al Inicio
-            </a>
+        <div class="cursos-grid">
+            <!-- Curso 1 -->
+            <article class="curso-card fade-in" style="animation-delay: 0.1s;">
+                <div class="curso-badge" aria-label="Curso para principiantes">Principiante</div>
+                <div class="curso-imagen" aria-hidden="true">
+                    <i class="fas fa-mountain" aria-hidden="true"></i>
+                </div>
+                <div class="curso-contenido">
+                    <h3>Introducción al Pensamiento Andino</h3>
+                    <div class="curso-metadata">
+                        <span class="metadata-item">
+                            <i class="fas fa-clock" aria-hidden="true"></i> 4 semanas
+                        </span>
+                        <span class="metadata-item">
+                            <i class="fas fa-video" aria-hidden="true"></i> 8 clases
+                        </span>
+                        <span class="metadata-item">
+                            <i class="fas fa-user-graduate" aria-hidden="true"></i> 1,200 estudiantes
+                        </span>
+                    </div>
+                    <p class="curso-descripcion">
+                        Descubre los fundamentos de la cosmovisión andina y su relevancia en la filosofía contemporánea. 
+                        Exploraremos conceptos como la complementariedad, la reciprocidad y la relación sagrada con la naturaleza.
+                    </p>
+                    <div class="curso-tags">
+                        <span class="curso-tag">Cosmovisión Andina</span>
+                        <span class="curso-tag">Filosofía Indígena</span>
+                        <span class="curso-tag">Ética Ambiental</span>
+                    </div>
+                    <div style="margin-top: 1.5rem;">
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-play-circle" aria-hidden="true"></i> Comenzar Curso
+                        </a>
+                        <a href="#" class="btn btn-secondary" style="margin-left: 1rem; padding: 0.8rem 1.5rem;">
+                            <i class="fas fa-info-circle" aria-hidden="true"></i> Más Información
+                        </a>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Curso 2 -->
+            <article class="curso-card fade-in" style="animation-delay: 0.2s;">
+                <div class="curso-badge" aria-label="Curso intermedio">Intermedio</div>
+                <div class="curso-imagen" aria-hidden="true">
+                    <i class="fas fa-book" aria-hidden="true"></i>
+                </div>
+                <div class="curso-contenido">
+                    <h3>Filosofía Peruana del Siglo XX</h3>
+                    <div class="curso-metadata">
+                        <span class="metadata-item">
+                            <i class="fas fa-clock" aria-hidden="true"></i> 6 semanas
+                        </span>
+                        <span class="metadata-item">
+                            <i class="fas fa-video" aria-hidden="true"></i> 12 clases
+                        </span>
+                        <span class="metadata-item">
+                            <i class="fas fa-user-graduate" aria-hidden="true"></i> 850 estudiantes
+                        </span>
+                    </div>
+                    <p class="curso-descripcion">
+                        Análisis profundo de los principales pensadores peruanos: Mariátegui, Salazar Bondy, 
+                        Miró Quesada y otros. Estudiaremos sus aportes a la filosofía latinoamericana y su vigencia actual.
+                    </p>
+                    <div class="curso-tags">
+                        <span class="curso-tag">Mariátegui</span>
+                        <span class="curso-tag">Salazar Bondy</span>
+                        <span class="curso-tag">Filosofía Latinoamericana</span>
+                    </div>
+                    <div style="margin-top: 1.5rem;">
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-play-circle" aria-hidden="true"></i> Comenzar Curso
+                        </a>
+                        <a href="#" class="btn btn-secondary" style="margin-left: 1rem; padding: 0.8rem 1.5rem;">
+                            <i class="fas fa-info-circle" aria-hidden="true"></i> Más Información
+                        </a>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Curso 3 -->
+            <article class="curso-card fade-in" style="animation-delay: 0.3s;">
+                <div class="curso-badge" aria-label="Curso avanzado">Avanzado</div>
+                <div class="curso-imagen" aria-hidden="true">
+                    <i class="fas fa-balance-scale" aria-hidden="true"></i>
+                </div>
+                <div class="curso-contenido">
+                    <h3>Filosofía Política en el Perú Contemporáneo</h3>
+                    <div class="curso-metadata">
+                        <span class="metadata-item">
+                            <i class="fas fa-clock" aria-hidden="true"></i> 8 semanas
+                        </span>
+                        <span class="metadata-item">
+                            <i class="fas fa-video" aria-hidden="true"></i> 16 clases
+                        </span>
+                        <span class="metadata-item">
+                            <i class="fas fa-user-graduate" aria-hidden="true"></i> 540 estudiantes
+                        </span>
+                    </div>
+                    <p class="curso-descripcion">
+                        Estudio crítico de las corrientes políticas en el pensamiento peruano actual. 
+                        Análisis de democracia, justicia social, derechos humanos y movimientos sociales desde una perspectiva filosófica.
+                    </p>
+                    <div class="curso-tags">
+                        <span class="curso-tag">Filosofía Política</span>
+                        <span class="curso-tag">Justicia Social</span>
+                        <span class="curso-tag">Democracia</span>
+                    </div>
+                    <div style="margin-top: 1.5rem;">
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-play-circle" aria-hidden="true"></i> Comenzar Curso
+                        </a>
+                        <a href="#" class="btn btn-secondary" style="margin-left: 1rem; padding: 0.8rem 1.5rem;">
+                            <i class="fas fa-info-circle" aria-hidden="true"></i> Más Información
+                        </a>
+                    </div>
+                </div>
+            </article>
         </div>
-    </main>
+    </div>
 
-    <!-- Footer (igual que index.html) -->
-    <footer class="main-footer" role="contentinfo">
-        <!-- Copia el footer exacto de tu index.html aquí -->
-    </footer>
+    <!-- Recursos Adicionales -->
+    <div class="container">
+        <div class="recursos-section fade-in">
+            <div class="section-title" style="text-align: left; margin-bottom: 2rem;">
+                <h2>Recursos de Apoyo</h2>
+                <p>Material complementario para tu aprendizaje</p>
+            </div>
+            
+            <div class="recursos-grid">
+                <div class="recurso-item fade-in" style="animation-delay: 0.1s;">
+                    <div class="recurso-icon">
+                        <i class="fas fa-file-pdf" aria-hidden="true"></i>
+                    </div>
+                    <h3>Guías de Estudio</h3>
+                    <p style="color: var(--color-texto-claro); font-size: 0.95rem; margin: 0.5rem 0;">
+                        Resúmenes, mapas conceptuales y guías de lectura para cada curso.
+                    </p>
+                    <a href="recursos-descargables.html" class="btn btn-primary" style="margin-top: 1rem; padding: 0.6rem 1.2rem;">
+                        Descargar
+                    </a>
+                </div>
+                
+                <div class="recurso-item fade-in" style="animation-delay: 0.2s;">
+                    <div class="recurso-icon">
+                        <i class="fas fa-video" aria-hidden="true"></i>
+                    </div>
+                    <h3>Videoteca</h3>
+                    <p style="color: var(--color-texto-claro); font-size: 0.95rem; margin: 0.5rem 0;">
+                        Conferencias, entrevistas y documentales sobre filosofía peruana.
+                    </p>
+                    <a href="recursos.html#multimedia" class="btn btn-primary" style="margin-top: 1rem; padding: 0.6rem 1.2rem;">
+                        Ver Videos
+                    </a>
+                </div>
+                
+                <div class="recurso-item fade-in" style="animation-delay: 0.3s;">
+                    <div class="recurso-icon">
+                        <i class="fas fa-comments" aria-hidden="true"></i>
+                    </div>
+                    <h3>Foros de Estudio</h3>
+                    <p style="color: var(--color-texto-claro); font-size: 0.95rem; margin: 0.5rem 0;">
+                        Discute con otros estudiantes y resuelve dudas con tutores.
+                    </p>
+                    <a href="comunidad.html" class="btn btn-primary" style="margin-top: 1rem; padding: 0.6rem 1.2rem;">
+                        Participar
+                    </a>
+                </div>
+                
+                <div class="recurso-item fade-in" style="animation-delay: 0.4s;">
+                    <div class="recurso-icon">
+                        <i class="fas fa-certificate" aria-hidden="true"></i>
+                    </div>
+                    <h3>Certificación</h3>
+                    <p style="color: var(--color-texto-claro); font-size: 0.95rem; margin: 0.5rem 0;">
+                        Obtén certificados oficiales al completar los cursos satisfactoriamente.
+                    </p>
+                    <a href="#" class="btn btn-primary" style="margin-top: 1rem; padding: 0.6rem 1.2rem;">
+                        Más Información
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Preguntas Frecuentes -->
+    <div class="container" style="padding: 0 0 5rem;">
+        <div class="faq-section fade-in">
+            <div class="section-title">
+                <h2>Preguntas Frecuentes</h2>
+                <p>Resolvemos tus dudas sobre nuestros cursos</p>
+            </div>
+            
+            <div class="faq-grid" style="margin-top: 2rem;">
+                <div class="faq-item fade-in" style="animation-delay: 0.1s;">
+                    <div class="faq-pregunta">
+                        <i class="fas fa-question-circle" aria-hidden="true" style="color: var(--color-acento); margin-right: 0.5rem;"></i>
+                        ¿Los cursos son realmente gratuitos?
+                    </div>
+                    <div class="faq-respuesta">
+                        Sí, todos nuestros cursos son 100% gratuitos. ASEFIP es una organización sin fines de lucro 
+                        dedicada a democratizar el acceso a la educación filosófica en el Perú.
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in" style="animation-delay: 0.2s;">
+                    <div class="faq-pregunta">
+                        <i class="fas fa-question-circle" aria-hidden="true" style="color: var(--color-acento); margin-right: 0.5rem;"></i>
+                        ¿Necesito conocimientos previos de filosofía?
+                    </div>
+                    <div class="faq-respuesta">
+                        No, ofrecemos cursos para todos los niveles. Cada curso indica claramente si es para 
+                        principiantes, intermedios o avanzados. Además, proporcionamos material introductorio.
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in" style="animation-delay: 0.3s;">
+                    <div class="faq-pregunta">
+                        <i class="fas fa-question-circle" aria-hidden="true" style="color: var(--color-acento); margin-right: 0.5rem;"></i>
+                        ¿Cómo obtengo un certificado?
+                    </div>
+                    <div class="faq-respuesta">
+                        Al completar satisfactoriamente un curso (todos los módulos y evaluaciones), 
+                        puedes solicitar tu certificado digital firmado por ASEFIP y las universidades colaboradoras.
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in" style="animation-delay: 0.4s;">
+                    <div class="faq-pregunta">
+                        <i class="fas fa-question-circle" aria-hidden="true" style="color: var(--color-acento); margin-right: 0.5rem;"></i>
+                        ¿Puedo estudiar a mi propio ritmo?
+                    </div>
+                    <div class="faq-respuesta">
+                        Totalmente. Todos los materiales están disponibles 24/7. Puedes avanzar según tu disponibilidad 
+                        de tiempo, aunque recomendamos seguir el calendario sugerido para un mejor aprendizaje.
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="comunidad.html" class="btn btn-primary" style="padding: 1rem 2.5rem;">
+                    <i class="fas fa-question-circle" aria-hidden="true"></i> ¿Tienes otra pregunta?
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Universal -->
 
     <script>
-        // Script básico para marcar enlace activo
+        // Marcar enlace activo
         document.addEventListener('DOMContentLoaded', function() {
             const currentPage = window.location.pathname.split('/').pop();
             document.querySelectorAll('.main-nav a').forEach(link => {
@@ -66,6 +528,25 @@
                     link.classList.add('active');
                     link.setAttribute('aria-current', 'page');
                 }
+            });
+            
+            // Animaciones
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
             });
         });
     </script>
