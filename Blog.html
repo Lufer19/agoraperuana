@@ -1,131 +1,419 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Blog - ASEFIP</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Filosófico - ASEFIP</title>
+    
+    <!-- Enlaces comunes -->
+    <link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* Estilos específicos para blog */
+        .hero-blog {
+            background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .blog-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .blog-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .blog-content {
+            padding: 1.5rem;
+        }
+        
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #718096;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-category {
+            background: rgba(214, 158, 46, 0.1);
+            color: #d69e2e;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .sidebar {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+        
+        .categories-list {
+            list-style: none;
+        }
+        
+        .categories-list li {
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .categories-list a {
+            display: flex;
+            justify-content: space-between;
+            color: #4a5568;
+        }
+        
+        .categories-list a:hover {
+            color: #d69e2e;
+        }
+        
+        .recent-post {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .recent-post img {
+            width: 80px;
+            height: 60px;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+        
+        @media (min-width: 992px) {
+            .blog-container {
+                display: grid;
+                grid-template-columns: 2fr 1fr;
+                gap: 3rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <a href="index.html" class="back-link">← Volver al Inicio</a>
-    <header>
-      <div class="logo">AS</div>
-      <h1>Blog Filosófico</h1>
-      <p class="subtitle">Artículos y ensayos escritos por nuestra comunidad</p>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🦉</div>
+                <div class="logo-text">
+                    <h1>ASEFIP</h1>
+                    <p>Asociación de Estudiantes de Filosofía del Perú</p>
+                </div>
+            </a>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="aprender.html"><i class="fas fa-graduation-cap"></i> Aprender</a></li>
+                    <li><a href="filósofos.html"><i class="fas fa-users"></i> Filósofos</a></li>
+                    <li><a href="blog.html" class="active"><i class="fas fa-blog"></i> Blog</a></li>
+                    <li><a href="comunidad.html"><i class="fas fa-comments"></i> Comunidad</a></li>
+                    <li><a href="recursos.html"><i class="fas fa-tools"></i> Recursos</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <div class="articles-grid" id="articles">
-
-      <!-- Artículo 1 -->
-      <article class="article-card" data-category="ensayo">
-        <div class="article-header">📝</div>
-        <div class="article-content">
-          <span class="article-category">Ensayo</span>
-          <h3>Más allá de la justicia: el rol de la ética del cuidado</h3>
-          <p class="article-excerpt">Un estudio sobre cómo la ética del cuidado ha influido en el desarrollo reciente de los derechos humanos.</p>
-          <a href="articulos/articulo-etica-cuidado-zafra.html">Leer artículo completo →</a>
-          <div class="article-author">
-            <div class="author-avatar">R</div>
-            <div class="author-info">
-              <div class="author-name">Rita del Pilar Lucila Zafra Ramos</div>
-              <div class="author-university">PUCP</div>
-            </div>
-          </div>
+    <!-- Hero Section -->
+    <section class="hero-blog">
+        <div class="container">
+            <h1 style="color: white; font-size: 3rem; margin-bottom: 1rem;">Blog Filosófico</h1>
+            <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto; opacity: 0.9;">
+                Artículos, ensayos y reflexiones sobre filosofía peruana y universal
+            </p>
         </div>
-      </article>
+    </section>
 
-      <!-- Artículo 2 -->
-      <article class="article-card" data-category="analisis">
-        <div class="article-header">📖</div>
-        <div class="article-content">
-          <span class="article-category">Artículo</span>
-          <h3>Democracia en disputa: una mirada crítica desde Ernesto Laclau</h3>
-          <p class="article-excerpt">Análisis de las movilizaciones contra Manuel Merino y Dina Boluarte desde la teoría de Laclau.</p>
-          <a href="articulos/democracia-en-disputa.html">Leer artículo completo →</a>
-          <div class="article-author">
-            <div class="author-avatar">M</div>
-            <div class="author-info">
-              <div class="author-name">Martín Córdova Pacheco</div>
-              <div class="author-university">Cuadernos de Ética y Filosofía Política</div>
+    <!-- Contenido Principal -->
+    <div class="container" style="padding: 5rem 0;">
+        <div class="blog-container">
+            <!-- Columna Principal -->
+            <div>
+                <h2 style="margin-bottom: 2rem; color: #1a365d;">Artículos Recientes</h2>
+                
+                <div class="blog-grid">
+                    <!-- Artículo 1 -->
+                    <article class="blog-card">
+                        <div class="blog-image">
+                            <i class="fas fa-mountain"></i>
+                        </div>
+                        <div class="blog-content">
+                            <span class="blog-category">Filosofía Andina</span>
+                            <h3 style="margin-bottom: 1rem; font-size: 1.3rem;">
+                                El Yanantin: Complementariedad en el Pensamiento Andino
+                            </h3>
+                            <p>Exploramos el concepto de yanantin como base de la cosmovisión andina y su relevancia en el mundo contemporáneo.</p>
+                            <div class="blog-meta">
+                                <span><i class="far fa-calendar"></i> 20 Dic 2024</span>
+                                <span><i class="far fa-clock"></i> 5 min lectura</span>
+                            </div>
+                            <a href="#" class="btn" style="background: #d69e2e; color: white; padding: 0.75rem 1.5rem; border-radius: 5px; text-decoration: none; display: inline-block; margin-top: 1rem;">
+                                Leer Artículo
+                            </a>
+                        </div>
+                    </article>
+                    
+                    <!-- Artículo 2 -->
+                    <article class="blog-card">
+                        <div class="blog-image">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div class="blog-content">
+                            <span class="blog-category">Filosofía Moderna</span>
+                            <h3 style="margin-bottom: 1rem; font-size: 1.3rem;">
+                                Kant y la Revolución Copernicana en Filosofía
+                            </h3>
+                            <p>Análisis del giro copernicano kantiano y su impacto en la epistemología moderna.</p>
+                            <div class="blog-meta">
+                                <span><i class="far fa-calendar"></i> 15 Dic 2024</span>
+                                <span><i class="far fa-clock"></i> 8 min lectura</span>
+                            </div>
+                            <a href="#" class="btn" style="background: #d69e2e; color: white; padding: 0.75rem 1.5rem; border-radius: 5px; text-decoration: none; display: inline-block; margin-top: 1rem;">
+                                Leer Artículo
+                            </a>
+                        </div>
+                    </article>
+                    
+                    <!-- Artículo 3 -->
+                    <article class="blog-card">
+                        <div class="blog-image">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="blog-content">
+                            <span class="blog-category">Filosofía Peruana</span>
+                            <h3 style="margin-bottom: 1rem; font-size: 1.3rem;">
+                                Mariátegui: 7 Ensayos y su Vigencia Actual
+                            </h3>
+                            <p>Relectura crítica de los 7 Ensayos de Mariátegui desde la perspectiva del siglo XXI.</p>
+                            <div class="blog-meta">
+                                <span><i class="far fa-calendar"></i> 10 Dic 2024</span>
+                                <span><i class="far fa-clock"></i> 7 min lectura</span>
+                            </div>
+                            <a href="#" class="btn" style="background: #d69e2e; color: white; padding: 0.75rem 1.5rem; border-radius: 5px; text-decoration: none; display: inline-block; margin-top: 1rem;">
+                                Leer Artículo
+                            </a>
+                        </div>
+                    </article>
+                </div>
+                
+                <!-- Paginación -->
+                <div style="text-align: center; margin-top: 3rem;">
+                    <nav style="display: inline-flex; gap: 0.5rem;">
+                        <a href="#" style="background: #d69e2e; color: white; width: 40px; height: 40px; border-radius: 5px; display: flex; align-items: center; justify-content: center; text-decoration: none;">1</a>
+                        <a href="#" style="background: #e2e8f0; color: #4a5568; width: 40px; height: 40px; border-radius: 5px; display: flex; align-items: center; justify-content: center; text-decoration: none;">2</a>
+                        <a href="#" style="background: #e2e8f0; color: #4a5568; width: 40px; height: 40px; border-radius: 5px; display: flex; align-items: center; justify-content: center; text-decoration: none;">3</a>
+                        <span style="display: flex; align-items: center; color: #718096;">...</span>
+                        <a href="#" style="background: #e2e8f0; color: #4a5568; width: 40px; height: 40px; border-radius: 5px; display: flex; align-items: center; justify-content: center; text-decoration: none;">10</a>
+                    </nav>
+                </div>
             </div>
-          </div>
+            
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <!-- Categorías -->
+                <div class="sidebar-section">
+                    <h3 style="margin-bottom: 1.5rem; color: #1a365d;">
+                        <i class="fas fa-folder"></i> Categorías
+                    </h3>
+                    <ul class="categories-list">
+                        <li>
+                            <a href="#">
+                                Filosofía Peruana
+                                <span style="background: #e2e8f0; padding: 0.25rem 0.5rem; border-radius: 20px; font-size: 0.8rem;">24</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Filosofía Antigua
+                                <span style="background: #e2e8f0; padding: 0.25rem 0.5rem; border-radius: 20px; font-size: 0.8rem;">18</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Ética
+                                <span style="background: #e2e8f0; padding: 0.25rem 0.5rem; border-radius: 20px; font-size: 0.8rem;">15</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Política
+                                <span style="background: #e2e8f0; padding: 0.25rem 0.5rem; border-radius: 20px; font-size: 0.8rem;">12</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Estética
+                                <span style="background: #e2e8f0; padding: 0.25rem 0.5rem; border-radius: 20px; font-size: 0.8rem;">8</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Artículos Populares -->
+                <div class="sidebar-section">
+                    <h3 style="margin-bottom: 1.5rem; color: #1a365d;">
+                        <i class="fas fa-fire"></i> Populares
+                    </h3>
+                    <div class="recent-post">
+                        <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Filosofía">
+                        <div>
+                            <h4 style="font-size: 0.9rem; margin-bottom: 0.25rem;">La Filosofía en la Era Digital</h4>
+                            <span style="font-size: 0.8rem; color: #718096;">500 lecturas</span>
+                        </div>
+                    </div>
+                    <div class="recent-post">
+                        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Pensamiento Andino">
+                        <div>
+                            <h4 style="font-size: 0.9rem; margin-bottom: 0.25rem;">Cosmovisión Andina</h4>
+                            <span style="font-size: 0.8rem; color: #718096;">350 lecturas</span>
+                        </div>
+                    </div>
+                    <div class="recent-post">
+                        <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Ética">
+                        <div>
+                            <h4 style="font-size: 0.9rem; margin-bottom: 0.25rem;">Ética para el Siglo XXI</h4>
+                            <span style="font-size: 0.8rem; color: #718096;">280 lecturas</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Newsletter -->
+                <div class="sidebar-section">
+                    <h3 style="margin-bottom: 1.5rem; color: #1a365d;">
+                        <i class="fas fa-newspaper"></i> Newsletter
+                    </h3>
+                    <p style="margin-bottom: 1rem; color: #4a5568;">
+                        Recibe los mejores artículos en tu correo
+                    </p>
+                    <form style="display: flex; flex-direction: column; gap: 1rem;">
+                        <input type="email" placeholder="Tu correo electrónico" style="padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 5px;">
+                        <button type="submit" style="background: #d69e2e; color: white; padding: 0.75rem; border: none; border-radius: 5px; cursor: pointer;">
+                            Suscribirse
+                        </button>
+                    </form>
+                </div>
+            </aside>
         </div>
-      </article>
-
-      <!-- Artículo 3 -->
-      <article class="article-card" data-category="analisis">
-        <div class="article-header">🌍</div>
-        <div class="article-content">
-          <span class="article-category">Artículo</span>
-          <h3>Imperialismo cultural en el genocidio de Ruanda</h3>
-          <p class="article-excerpt">Un análisis sobre el papel del imperialismo cultural en el genocidio de Ruanda.</p>
-          <a href="articulos/imperialismo-cultural-ruanda.html">Leer artículo completo →</a>
-          <div class="article-author">
-            <div class="author-avatar">J</div>
-            <div class="author-info">
-              <div class="author-name">Joselyn Lizet Ñaccha Palomino y Claudia Alejandra Díaz Rodríguez</div>
-              <div class="author-university">Cuadernos de Ética y Filosofía Política</div>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <!-- Artículo 4 -->
-      <article class="article-card" data-category="analisis">
-        <div class="article-header">📚</div>
-        <div class="article-content">
-          <span class="article-category">Artículo</span>
-          <h3>Hegel y La república de Platón</h3>
-          <p class="article-excerpt">Debate filosófico sobre la justicia y la libertad.</p>
-          <a href="articulos/hegel-republica-platon.html">Leer artículo completo →</a>
-          <div class="article-author">
-            <div class="author-avatar">L</div>
-            <div class="author-info">
-              <div class="author-name">Luis Burneo Seminario</div>
-              <div class="author-university">Cuadernos de Ética y Filosofía Política</div>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <!-- Artículo 5 -->
-      <article class="article-card" data-category="analisis">
-        <div class="article-header">✨</div>
-        <div class="article-content">
-          <span class="article-category">Artículo</span>
-          <h3>El nacimiento de la filosofía desde lo sublime</h3>
-          <p class="article-excerpt">Reflexión sobre la contemplación de lo sublime como origen de la filosofía.</p>
-          <a href="articulos/nacimiento-filosofia-sublime.html">Leer artículo completo →</a>
-          <div class="article-author">
-            <div class="author-avatar">M</div>
-            <div class="author-info">
-              <div class="author-name">Mario García Jarrín</div>
-              <div class="author-university">Cuadernos de Ética y Filosofía Política</div>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <!-- Artículo 6 -->
-      <article class="article-card" data-category="resena">
-        <div class="article-header">📰</div>
-        <div class="article-content">
-          <span class="article-category">Reseña</span>
-          <h3>Reseña: Dialéctica de la política en Marx</h3>
-          <p class="article-excerpt">Una reseña crítica sobre la obra de Marx.</p>
-          <a href="articulos/resena-marx.html">Leer artículo completo →</a>
-          <div class="article-author">
-            <div class="author-avatar">S</div>
-            <div class="author-info">
-              <div class="author-name">Sergio Saez Díaz</div>
-              <div class="author-university">Cuadernos de Ética y Filosofía Política</div>
-            </div>
-          </div>
-        </div>
-      </article>
-
     </div>
-  </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>ASEFIP</h3>
+                    <p style="margin-bottom: 1.5rem; opacity: 0.8;">
+                        Asociación de Estudiantes de Filosofía del Perú. 
+                        Promoviendo el pensamiento crítico y la filosofía peruana.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.tiktok.com/@asefip01" class="social-link" target="_blank">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="https://www.instagram.com/asefip_" class="social-link" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Recursos</h3>
+                    <ul class="footer-links">
+                        <li><a href="aprender.html">Aprender Filosofía</a></li>
+                        <li><a href="filósofos.html">Galería de Filósofos</a></li>
+                        <li><a href="blog.html">Blog y Artículos</a></li>
+                        <li><a href="recursos.html">Recursos Educativos</a></li>
+                        <li><a href="glosario.html">Glosario Filosófico</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Herramientas</h3>
+                    <ul class="footer-links">
+                        <li><a href="ejercicios.html">Ejercicios Prácticos</a></li>
+                        <li><a href="investigar.html">Guías de Investigación</a></li>
+                        <li><a href="linea-tiempo.html">Línea del Tiempo</a></li>
+                        <li><a href="recursos-descargables.html">Material Descargable</a></li>
+                        <li><a href="enviar-articulo.html">Enviar Artículo</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:contacto@asefip.org">contacto@asefip.org</a></li>
+                        <li><a href="#">Preguntas Frecuentes</a></li>
+                        <li><a href="#">Colaborar con ASEFIP</a></li>
+                        <li><a href="#">Trabaja con Nosotros</a></li>
+                        <li><a href="#">Mapa del Sitio</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2024 ASEFIP - Asociación de Estudiantes de Filosofía del Perú. Todos los derechos reservados.</p>
+                <p style="margin-top: 0.5rem;">
+                    <i class="fas fa-heart" style="color: #d69e2e;"></i> Filosofía para transformar el Perú
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Marcar enlace activo
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop();
+            document.querySelectorAll('.main-nav a').forEach(link => {
+                const linkPage = link.getAttribute('href');
+                if (linkPage === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
