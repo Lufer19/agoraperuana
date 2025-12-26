@@ -3,13 +3,397 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - ASEFIP</title>
+    <title>Blog Filosófico - ASEFIP</title>
+    
+    <!-- SEO y Metadatos -->
+    <meta name="description" content="Artículos, análisis y reflexiones sobre filosofía peruana y latinoamericana. Actualizaciones semanales del pensamiento contemporáneo.">
+    <meta name="keywords" content="blog filosofía, artículos filosóficos, análisis filosofía peruana, reflexiones, pensamiento contemporáneo">
+    
+    <!-- Enlaces comunes -->
     <link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* ESTILOS ESPECÍFICOS PARA BLOG */
+        .hero-blog {
+            background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-secundario) 100%);
+            color: var(--color-blanco);
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-blog::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="%23ffffff" opacity="0.03" d="M0,0 L100,0 L100,100 Z"/></svg>');
+            background-size: cover;
+        }
+        
+        .hero-blog .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .blog-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0 3rem;
+            padding: 1.5rem;
+            background: var(--color-fondo-alt);
+            border-radius: var(--radio-borde);
+            border: 1px solid var(--color-borde);
+        }
+        
+        .categories-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        
+        .category-filter {
+            background: var(--color-blanco);
+            border: 2px solid var(--color-borde);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transicion);
+            font-size: 0.9rem;
+            color: var(--color-texto);
+        }
+        
+        .category-filter.active,
+        .category-filter:hover {
+            background: var(--color-acento);
+            color: var(--color-blanco);
+            border-color: var(--color-acento);
+        }
+        
+        .sort-options select {
+            padding: 0.6rem 1rem;
+            border: 2px solid var(--color-borde);
+            border-radius: var(--radio-borde-pequeno);
+            background: var(--color-blanco);
+            color: var(--color-texto);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin: 2rem 0;
+        }
+        
+        .article-card {
+            background: var(--color-blanco);
+            border-radius: var(--radio-borde);
+            overflow: hidden;
+            box-shadow: var(--sombra);
+            border: 1px solid var(--color-borde);
+            transition: var(--transicion);
+            position: relative;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--sombra-hover);
+            border-color: var(--color-acento);
+        }
+        
+        .article-featured {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+        
+        .article-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--color-acento);
+            color: var(--color-blanco);
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+        
+        .article-image {
+            height: 250px;
+            background: linear-gradient(135deg, var(--color-primario) 0%, #3a506b 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-blanco);
+            font-size: 3.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .article-featured .article-image {
+            height: 100%;
+            min-height: 350px;
+        }
+        
+        .article-image::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-acento), transparent);
+        }
+        
+        .article-content {
+            padding: 2rem;
+        }
+        
+        .article-featured .article-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: var(--color-texto-claro);
+            font-size: 0.9rem;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .article-content h3 {
+            margin-bottom: 1rem;
+            color: var(--color-primario);
+            font-size: 1.5rem;
+            line-height: 1.3;
+        }
+        
+        .article-featured .article-content h3 {
+            font-size: 1.8rem;
+        }
+        
+        .article-excerpt {
+            color: var(--color-texto-claro);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .article-featured .article-excerpt {
+            -webkit-line-clamp: 4;
+            font-size: 1.05rem;
+        }
+        
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1.2rem 0;
+        }
+        
+        .article-tag {
+            background: rgba(214, 158, 46, 0.1);
+            color: var(--color-acento);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .read-time {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-texto-claro);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 3rem 0;
+        }
+        
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--color-borde);
+            border-radius: var(--radio-borde-pequeno);
+            background: var(--color-blanco);
+            color: var(--color-texto);
+            cursor: pointer;
+            transition: var(--transicion);
+        }
+        
+        .page-btn.active,
+        .page-btn:hover {
+            background: var(--color-acento);
+            color: var(--color-blanco);
+            border-color: var(--color-acento);
+        }
+        
+        .newsletter-section {
+            background: linear-gradient(135deg, var(--color-primario) 0%, #2a4365 100%);
+            color: var(--color-blanco);
+            border-radius: var(--radio-borde);
+            padding: 3rem;
+            margin: 4rem 0;
+            text-align: center;
+        }
+        
+        .newsletter-form {
+            max-width: 500px;
+            margin: 2rem auto 0;
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--color-blanco);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+        }
+        
+        .newsletter-form input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: var(--color-acento);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .popular-sidebar {
+            background: var(--color-fondo-alt);
+            border-radius: var(--radio-borde);
+            padding: 2rem;
+            margin: 3rem 0;
+            border: 1px solid var(--color-borde);
+        }
+        
+        .popular-list {
+            margin-top: 1.5rem;
+        }
+        
+        .popular-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--color-borde);
+        }
+        
+        .popular-item:last-child {
+            border-bottom: none;
+        }
+        
+        .popular-item h4 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1rem;
+        }
+        
+        .popular-meta {
+            display: flex;
+            gap: 1rem;
+            color: var(--color-texto-claro);
+            font-size: 0.85rem;
+        }
+        
+        @media (max-width: 992px) {
+            .article-featured {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-featured .article-image {
+                height: 250px;
+                min-height: auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .blog-controls {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1.5rem;
+            }
+            
+            .categories-filter {
+                justify-content: center;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-section {
+                padding: 2rem 1.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .article-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .article-content {
+                padding: 1.5rem;
+            }
+            
+            .article-content h3 {
+                font-size: 1.3rem;
+            }
+            
+            .pagination {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Header (igual que index.html) -->
+    <!-- Header -->
     <header class="main-header" role="banner">
         <div class="container header-container">
             <a href="index.html" class="logo" aria-label="ASEFIP - Inicio">
@@ -34,26 +418,428 @@
         </div>
     </header>
 
-    <main class="container" style="padding: 3rem 0 5rem;">
-        <div class="section-title">
-            <h1>Blog Filosófico</h1>
-            <p>Artículos, reflexiones y análisis sobre filosofía peruana y universal</p>
+    <!-- Hero Section -->
+    <section class="hero-blog" aria-labelledby="hero-title">
+        <div class="container fade-in">
+            <h1 id="hero-title" style="color: white; margin-bottom: 1rem;">Blog Filosófico</h1>
+            <p class="hero-subtitle" style="font-size: 1.2rem; max-width: 700px; margin: 0 auto; opacity: 0.95;">
+                Artículos, análisis y reflexiones sobre filosofía peruana y el pensamiento contemporáneo
+            </p>
+        </div>
+    </section>
+
+    <!-- Controles del Blog -->
+    <div class="container">
+        <div class="blog-controls fade-in">
+            <div class="categories-filter">
+                <span style="font-weight: 500; margin-right: 1rem;">Categorías:</span>
+                <button class="category-filter active" data-category="todos">Todos</button>
+                <button class="category-filter" data-category="peruana">Filosofía Peruana</button>
+                <button class="category-filter" data-category="andina">Pensamiento Andino</button>
+                <button class="category-filter" data-category="analisis">Análisis</button>
+                <button class="category-filter" data-category="reflexiones">Reflexiones</button>
+                <button class="category-filter" data-category="entrevistas">Entrevistas</button>
+            </div>
+            
+            <div class="sort-options">
+                <select id="sortSelect" aria-label="Ordenar artículos por">
+                    <option value="recientes">Más recientes</option>
+                    <option value="populares">Más populares</option>
+                    <option value="antiguos">Más antiguos</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Artículo Destacado -->
+    <div class="container">
+        <article class="article-card article-featured fade-in" data-category="peruana">
+            <div class="article-badge" aria-label="Artículo destacado">Destacado</div>
+            <div class="article-image" aria-hidden="true">
+                <i class="fas fa-feather-alt" aria-hidden="true"></i>
+            </div>
+            <div class="article-content">
+                <div class="article-meta">
+                    <span class="meta-item">
+                        <i class="fas fa-user-edit" aria-hidden="true"></i> María Fernández
+                    </span>
+                    <span class="meta-item">
+                        <i class="fas fa-calendar-alt" aria-hidden="true"></i> 20 Diciembre 2024
+                    </span>
+                    <span class="meta-item">
+                        <i class="fas fa-comments" aria-hidden="true"></i> 24 comentarios
+                    </span>
+                </div>
+                <h3>La vigencia de Mariátegui en el Perú del siglo XXI</h3>
+                <p class="article-excerpt">
+                    ¿Siguen siendo relevantes los "7 Ensayos de Interpretación de la Realidad Peruana" casi 100 años después? 
+                    En este análisis profundo, exploramos cómo el pensamiento de José Carlos Mariátegui puede ayudarnos 
+                    a entender los desafíos actuales del Perú: desigualdad, identidad nacional y desarrollo sostenible.
+                </p>
+                <div class="article-tags">
+                    <span class="article-tag">Mariátegui</span>
+                    <span class="article-tag">Marxismo</span>
+                    <span class="article-tag">Perú Contemporáneo</span>
+                    <span class="article-tag">Análisis Social</span>
+                </div>
+                <div class="read-time">
+                    <i class="fas fa-clock" aria-hidden="true"></i> Tiempo de lectura: 8 min
+                </div>
+                <a href="#" class="btn btn-primary" style="margin-top: 1.5rem;">
+                    <i class="fas fa-book-open" aria-hidden="true"></i> Leer Artículo Completo
+                </a>
+            </div>
+        </article>
+    </div>
+
+    <!-- Grid de Artículos -->
+    <div class="container" style="padding: 3rem 0;">
+        <div class="blog-grid" id="blogGrid">
+            <!-- Artículo 1 -->
+            <article class="article-card fade-in" data-category="andina" style="animation-delay: 0.1s;">
+                <div class="article-image" aria-hidden="true">
+                    <i class="fas fa-mountain" aria-hidden="true"></i>
+                </div>
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span class="meta-item">
+                            <i class="fas fa-user-edit" aria-hidden="true"></i> Carlos Andino
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-calendar-alt" aria-hidden="true"></i> 15 Diciembre 2024
+                        </span>
+                    </div>
+                    <h3>Cosmovisión Andina y Ecología Profunda</h3>
+                    <p class="article-excerpt">
+                        Explorando cómo la filosofía andina de la reciprocidad (ayni) y el respeto por la Pachamama 
+                        ofrecen alternativas viables a la crisis ecológica global desde una perspectiva peruana.
+                    </p>
+                    <div class="article-tags">
+                        <span class="article-tag">Cosmovisión Andina</span>
+                        <span class="article-tag">Ecología</span>
+                        <span class="article-tag">Filosofía Ambiental</span>
+                    </div>
+                    <div class="read-time">
+                        <i class="fas fa-clock" aria-hidden="true"></i> 6 min
+                    </div>
+                    <a href="#" class="btn btn-primary" style="margin-top: 1rem;">
+                        Leer Más
+                    </a>
+                </div>
+            </article>
+            
+            <!-- Artículo 2 -->
+            <article class="article-card fade-in" data-category="analisis" style="animation-delay: 0.2s;">
+                <div class="article-image" aria-hidden="true">
+                    <i class="fas fa-balance-scale" aria-hidden="true"></i>
+                </div>
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span class="meta-item">
+                            <i class="fas fa-user-edit" aria-hidden="true"></i> Luis Rodríguez
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-calendar-alt" aria-hidden="true"></i> 10 Diciembre 2024
+                        </span>
+                    </div>
+                    <h3>Filosofía de la Liberación Latinoamericana Hoy</h3>
+                    <p class="article-excerpt">
+                        Análisis crítico de las corrientes de pensamiento liberador en América Latina 
+                        y su aplicación en los movimientos sociales contemporáneos del Perú.
+                    </p>
+                    <div class="article-tags">
+                        <span class="article-tag">Liberación</span>
+                        <span class="article-tag">Latinoamérica</span>
+                        <span class="article-tag">Movimientos Sociales</span>
+                    </div>
+                    <div class="read-time">
+                        <i class="fas fa-clock" aria-hidden="true"></i> 7 min
+                    </div>
+                    <a href="#" class="btn btn-primary" style="margin-top: 1rem;">
+                        Leer Más
+                    </a>
+                </div>
+            </article>
+            
+            <!-- Artículo 3 -->
+            <article class="article-card fade-in" data-category="reflexiones" style="animation-delay: 0.3s;">
+                <div class="article-image" aria-hidden="true">
+                    <i class="fas fa-brain" aria-hidden="true"></i>
+                </div>
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span class="meta-item">
+                            <i class="fas fa-user-edit" aria-hidden="true"></i> Ana Martínez
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-calendar-alt" aria-hidden="true"></i> 5 Diciembre 2024
+                        </span>
+                    </div>
+                    <h3>¿Por qué Estudiar Filosofía en el Perú Actual?</h3>
+                    <p class="article-excerpt">
+                        Reflexión personal sobre el valor de la formación filosófica en un contexto 
+                        de crisis política y social, y cómo el pensamiento crítico puede transformar realidades.
+                    </p>
+                    <div class="article-tags">
+                        <span class="article-tag">Educación</span>
+                        <span class="article-tag">Pensamiento Crítico</span>
+                        <span class="article-tag">Filosofía Peruana</span>
+                    </div>
+                    <div class="read-time">
+                        <i class="fas fa-clock" aria-hidden="true"></i> 5 min
+                    </div>
+                    <a href="#" class="btn btn-primary" style="margin-top: 1rem;">
+                        Leer Más
+                    </a>
+                </div>
+            </article>
+            
+            <!-- Artículo 4 -->
+            <article class="article-card fade-in" data-category="entrevistas" style="animation-delay: 0.4s;">
+                <div class="article-image" aria-hidden="true">
+                    <i class="fas fa-microphone-alt" aria-hidden="true"></i>
+                </div>
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span class="meta-item">
+                            <i class="fas fa-user-edit" aria-hidden="true"></i> ASEFIP Entrevistas
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-calendar-alt" aria-hidden="true"></i> 1 Diciembre 2024
+                        </span>
+                    </div>
+                    <h3>Entrevista: La Filosofía Feminista en el Perú</h3>
+                    <p class="article-excerpt">
+                        Conversación con la Dra. Elena Torres sobre el desarrollo del pensamiento 
+                        feminista en el Perú y sus contribuciones a la filosofía latinoamericana.
+                    </p>
+                    <div class="article-tags">
+                        <span class="article-tag">Feminismo</span>
+                        <span class="article-tag">Entrevista</span>
+                        <span class="article-tag">Filosofía Contemporánea</span>
+                    </div>
+                    <div class="read-time">
+                        <i class="fas fa-clock" aria-hidden="true"></i> 10 min
+                    </div>
+                    <a href="#" class="btn btn-primary" style="margin-top: 1rem;">
+                        Leer Más
+                    </a>
+                </div>
+            </article>
+            
+            <!-- Artículo 5 -->
+            <article class="article-card fade-in" data-category="peruana" style="animation-delay: 0.5s;">
+                <div class="article-image" aria-hidden="true">
+                    <i class="fas fa-history" aria-hidden="true"></i>
+                </div>
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span class="meta-item">
+                            <i class="fas fa-user-edit" aria-hidden="true"></i> Jorge Mendieta
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-calendar-alt" aria-hidden="true"></i> 25 Noviembre 2024
+                        </span>
+                    </div>
+                    <h3>Augusto Salazar Bondy y la Búsqueda de Autenticidad</h3>
+                    <p class="article-excerpt">
+                        Revisión crítica de la pregunta central de Salazar Bondy: 
+                        ¿Existe una filosofía auténticamente latinoamericana? Y la respuesta peruana.
+                    </p>
+                    <div class="article-tags">
+                        <span class="article-tag">Salazar Bondy</span>
+                        <span class="article-tag">Autenticidad</span>
+                        <span class="article-tag">Filosofía Latinoamericana</span>
+                    </div>
+                    <div class="read-time">
+                        <i class="fas fa-clock" aria-hidden="true"></i> 8 min
+                    </div>
+                    <a href="#" class="btn btn-primary" style="margin-top: 1rem;">
+                        Leer Más
+                    </a>
+                </div>
+            </article>
+            
+            <!-- Artículo 6 -->
+            <article class="article-card fade-in" data-category="analisis" style="animation-delay: 0.6s;">
+                <div class="article-image" aria-hidden="true">
+                    <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                </div>
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span class="meta-item">
+                            <i class="fas fa-user-edit" aria-hidden="true"></i> Pedro Castillo
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-calendar-alt" aria-hidden="true"></i> 20 Noviembre 2024
+                        </span>
+                    </div>
+                    <h3>La Enseñanza de la Filosofía en las Universidades Peruanas</h3>
+                    <p class="article-excerpt">
+                        Análisis del estado actual de los programas de filosofía en el Perú, 
+                        desafíos y oportunidades para formar nuevos pensadores críticos.
+                    </p>
+                    <div class="article-tags">
+                        <span class="article-tag">Educación Superior</span>
+                        <span class="article-tag">Universidades</span>
+                        <span class="article-tag">Formación Filosófica</span>
+                    </div>
+                    <div class="read-time">
+                        <i class="fas fa-clock" aria-hidden="true"></i> 7 min
+                    </div>
+                    <a href="#" class="btn btn-primary" style="margin-top: 1rem;">
+                        Leer Más
+                    </a>
+                </div>
+            </article>
         </div>
         
-        <div style="text-align: center; margin: 3rem 0;">
-            <p>Contenido en desarrollo. Próximamente artículos exclusivos.</p>
-            <a href="index.html" class="btn btn-primary" style="margin-top: 1rem;">
-                <i class="fas fa-arrow-left" aria-hidden="true"></i> Volver al Inicio
-            </a>
+        <!-- Paginación -->
+        <div class="pagination fade-in">
+            <button class="page-btn" aria-label="Página anterior">
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>
+            </button>
+            <button class="page-btn active" aria-label="Página 1">1</button>
+            <button class="page-btn" aria-label="Página 2">2</button>
+            <button class="page-btn" aria-label="Página 3">3</button>
+            <button class="page-btn" aria-label="Página 4">4</button>
+            <button class="page-btn" aria-label="Página 5">5</button>
+            <button class="page-btn" aria-label="Página siguiente">
+                <i class="fas fa-chevron-right" aria-hidden="true"></i>
+            </button>
         </div>
-    </main>
+    </div>
 
-    <!-- Footer (copia EXACTO de index.html) -->
-    <footer class="main-footer" role="contentinfo">
-        <!-- Pega aquí el footer COMPLETO de index.html -->
-    </footer>
+    <!-- Newsletter -->
+    <div class="container">
+        <section class="newsletter-section fade-in" aria-labelledby="newsletter-title">
+            <h2 id="newsletter-title" style="color: white; margin-bottom: 0.5rem;">No Te Pierdas Nada</h2>
+            <p style="opacity: 0.9; max-width: 600px; margin: 0 auto;">
+                Suscríbete a nuestro newsletter y recibe los nuevos artículos, eventos y recursos directamente en tu correo.
+            </p>
+            <form class="newsletter-form" id="newsletterForm">
+                <input type="email" placeholder="Tu correo electrónico" aria-label="Correo electrónico para newsletter" required>
+                <button type="submit" class="btn btn-primary" style="white-space: nowrap;">
+                    <i class="fas fa-paper-plane" aria-hidden="true"></i> Suscribirse
+                </button>
+            </form>
+            <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 1rem;">
+                Sin spam. Solo contenido valioso sobre filosofía peruana.
+            </p>
+        </section>
+    </div>
 
+    <!-- Sidebar de Artículos Populares -->
+    <div class="container" style="padding: 0 0 5rem;">
+        <div class="popular-sidebar fade-in">
+            <h2 style="color: var(--color-primario);">Artículos Más Populares</h2>
+            <div class="popular-list">
+                <article class="popular-item">
+                    <h4><a href="#" style="color: var(--color-texto);">Filosofía Andina y el Buen Vivir</a></h4>
+                    <div class="popular-meta">
+                        <span><i class="fas fa-eye" aria-hidden="true"></i> 1,245 vistas</span>
+                        <span><i class="fas fa-comment" aria-hidden="true"></i> 42 comentarios</span>
+                    </div>
+                </article>
+                
+                <article class="popular-item">
+                    <h4><a href="#" style="color: var(--color-texto);">¿Qué Puede Aprender la Filosofía Occidental del Pensamiento Andino?</a></h4>
+                    <div class="popular-meta">
+                        <span><i class="fas fa-eye" aria-hidden="true"></i> 987 vistas</span>
+                        <span><i class="fas fa-comment" aria-hidden="true"></i> 31 comentarios</span>
+                    </div>
+                </article>
+                
+                <article class="popular-item">
+                    <h4><a href="#" style="color: var(--color-texto);">La Crítica de Salazar Bondy a la Educación Peruana</a></h4>
+                    <div class="popular-meta">
+                        <span><i class="fas fa-eye" aria-hidden="true"></i> 856 vistas</span>
+                        <span><i class="fas fa-comment" aria-hidden="true"></i> 28 comentarios</span>
+                    </div>
+                </article>
+                
+                <article class="popular-item">
+                    <h4><a href="#" style="color: var(--color-texto);">Filosofía para la Acción: Teoría y Praxis en el Perú</a></h4>
+                    <div class="popular-meta">
+                        <span><i class="fas fa-eye" aria-hidden="true"></i> 743 vistas</span>
+                        <span><i class="fas fa-comment" aria-hidden="true"></i> 19 comentarios</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Universal -->
+<footer class="main-footer" role="contentinfo">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-column">
+                <h3>ASEFIP</h3>
+                <p class="footer-description">
+                    Asociación de Estudiantes de Filosofía del Perú. 
+                    Promoviendo el pensamiento crítico y la filosofía peruana.
+                </p>
+                <div class="social-links">
+                    <a href="https://www.tiktok.com/@asefip01" class="social-link" target="_blank" aria-label="TikTok de ASEFIP" rel="noopener noreferrer">
+                        <i class="fab fa-tiktok" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://www.instagram.com/asefip_" class="social-link" target="_blank" aria-label="Instagram de ASEFIP" rel="noopener noreferrer">
+                        <i class="fab fa-instagram" aria-hidden="true"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Facebook de ASEFIP">
+                        <i class="fab fa-facebook" aria-hidden="true"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="YouTube de ASEFIP">
+                        <i class="fab fa-youtube" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Recursos</h3>
+                <ul class="footer-links">
+                    <li><a href="aprender.html"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Aprender Filosofía</a></li>
+                    <li><a href="filosofos.html"><i class="fas fa-users" aria-hidden="true"></i> Galería de Filósofos</a></li>
+                    <li><a href="blog.html"><i class="fas fa-blog" aria-hidden="true"></i> Blog y Artículos</a></li>
+                    <li><a href="recursos.html"><i class="fas fa-tools" aria-hidden="true"></i> Recursos Educativos</a></li>
+                    <li><a href="glosario.html"><i class="fas fa-book" aria-hidden="true"></i> Glosario Filosófico</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Herramientas</h3>
+                <ul class="footer-links">
+                    <li><a href="ejercicios.html"><i class="fas fa-brain" aria-hidden="true"></i> Ejercicios Prácticos</a></li>
+                    <li><a href="investigar.html"><i class="fas fa-search" aria-hidden="true"></i> Guías de Investigación</a></li>
+                    <li><a href="linea-tiempo.html"><i class="fas fa-timeline" aria-hidden="true"></i> Línea del Tiempo</a></li>
+                    <li><a href="recursos-descargables.html"><i class="fas fa-download" aria-hidden="true"></i> Material Descargable</a></li>
+                    <li><a href="enviar-articulo.html"><i class="fas fa-paper-plane" aria-hidden="true"></i> Enviar Artículo</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contacto</h3>
+                <ul class="footer-links">
+                    <li><a href="mailto:contacto@asefip.org"><i class="fas fa-envelope" aria-hidden="true"></i> contacto@asefip.org</a></li>
+                    <li><a href="#"><i class="fas fa-question-circle" aria-hidden="true"></i> Preguntas Frecuentes</a></li>
+                    <li><a href="#"><i class="fas fa-handshake" aria-hidden="true"></i> Colaborar con ASEFIP</a></li>
+                    <li><a href="#"><i class="fas fa-briefcase" aria-hidden="true"></i> Trabaja con Nosotros</a></li>
+                    <li><a href="#"><i class="fas fa-sitemap" aria-hidden="true"></i> Mapa del Sitio</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2024 ASEFIP - Asociación de Estudiantes de Filosofía del Perú. Todos los derechos reservados.</p>
+            <p class="footer-motto">
+                <i class="fas fa-heart" aria-hidden="true"></i> 
+                <span>Filosofía para transformar el Perú</span>
+            </p>
+        </div>
+    </div>
+</footer>
     <script>
+        // Marcar enlace activo
         document.addEventListener('DOMContentLoaded', function() {
             const currentPage = window.location.pathname.split('/').pop();
             document.querySelectorAll('.main-nav a').forEach(link => {
@@ -62,6 +848,82 @@
                     link.classList.add('active');
                     link.setAttribute('aria-current', 'page');
                 }
+            });
+            
+            // Filtros de categorías
+            const categoryButtons = document.querySelectorAll('.category-filter');
+            const articles = document.querySelectorAll('.article-card');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const category = this.getAttribute('data-category');
+                    
+                    articles.forEach(article => {
+                        if (category === 'todos' || article.getAttribute('data-category') === category) {
+                            article.style.display = 'block';
+                            article.setAttribute('aria-hidden', 'false');
+                        } else {
+                            article.style.display = 'none';
+                            article.setAttribute('aria-hidden', 'true');
+                        }
+                    });
+                });
+            });
+            
+            // Ordenar artículos
+            const sortSelect = document.getElementById('sortSelect');
+            sortSelect.addEventListener('change', function() {
+                // En una implementación real, aquí harías una petición al servidor
+                // o reordenarías los artículos localmente
+                alert(`Ordenando por: ${this.value}. En una versión completa, esto reordenaría los artículos.`);
+            });
+            
+            // Newsletter form
+            const newsletterForm = document.getElementById('newsletterForm');
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = this.querySelector('input[type="email"]').value;
+                alert(`¡Gracias por suscribirte con: ${email}! Te enviaremos nuestro próximo newsletter.`);
+                this.reset();
+            });
+            
+            // Paginación
+            const pageButtons = document.querySelectorAll('.page-btn');
+            pageButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    if (this.classList.contains('active')) return;
+                    
+                    pageButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // En una implementación real, aquí cargarías la página correspondiente
+                    const pageNum = this.textContent.trim();
+                    if (!isNaN(pageNum)) {
+                        console.log(`Cargando página ${pageNum}...`);
+                    }
+                });
+            });
+            
+            // Animaciones
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
             });
         });
     </script>
