@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filosofía Peruana - ASEFIP</title>
+    <meta name="description" content="Explora el pensamiento filosófico peruano: desde Guamán Poma hasta Salazar Bondy. La única plataforma dedicada a la filosofía hecha en el Perú.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇵🇪</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --dark: #2d3748;
+            --gray: #718096;
+            --light: #f7fafc;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* NAVEGACIÓN */
+        nav {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        
+        .back-link:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .flag {
+            font-size: 5em;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        
+        .subtitle {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+        
+        /* CONTAINER */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        /* INTRO */
+        .intro {
+            background: var(--light);
+            padding: 40px;
+            border-radius: 15px;
+            border-left: 5px solid var(--primary);
+            margin-bottom: 60px;
+        }
+        
+        .intro h2 {
+            color: var(--dark);
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        
+        .intro p {
+            color: var(--gray);
+            line-height: 1.8;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        
+        /* SECCIONES */
+        h2 {
+            color: var(--dark);
+            font-size: 2.5em;
+            margin: 60px 0 30px 0;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        /* PERÍODOS */
+        .periodo {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+        }
+        
+        .periodo:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+            border-color: var(--primary);
+        }
+        
+        .periodo h3 {
+            color: var(--primary);
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .periodo p {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .conceptos {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .conceptos h4 {
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        
+        .conceptos ul {
+            margin-left: 20px;
+            color: var(--gray);
+        }
+        
+        .conceptos li {
+            margin-bottom: 8px;
+        }
+        
+        /* GRID FILÓSOFOS */
+        .filosofos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .filosofo {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .filosofo:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+            border-color: var(--primary);
+        }
+        
+        .avatar {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+        
+        .filosofo h3 {
+            text-align: center;
+            color: var(--dark);
+            font-size: 1.5em;
+            margin-bottom: 8px;
+        }
+        
+        .years {
+            text-align: center;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .bio {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .obras {
+            background: var(--light);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .obras strong {
+            display: block;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+        
+        .obra-item {
+            color: var(--gray);
+            margin-bottom: 5px;
+            font-size: 0.95em;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            background: #e6fffa;
+            color: #234e52;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        
+        /* CITA */
+        .cita {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 50px;
+            border-radius: 15px;
+            margin: 60px 0;
+            text-align: center;
+            font-style: italic;
+            font-size: 1.3em;
+            line-height: 1.8;
+        }
+        
+        .cita-autor {
+            font-style: normal;
+            font-weight: bold;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+        
+        /* TEMAS */
+        .temas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .tema {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+            transition: transform 0.3s;
+        }
+        
+        .tema:hover {
+            transform: translateX(5px);
+        }
+        
+        .tema h4 {
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        
+        .tema p {
+            color: var(--gray);
+            line-height: 1.7;
+            font-size: 0.95em;
+        }
+        
+        /* FOOTER */
+        footer {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .filosofos-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAV -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">🦉 ASEFIP</a>
+            <a href="index.html" class="back-link">← Volver al Inicio</a>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header>
+        <div class="flag">🇵🇪</div>
+        <h1>Filosofía Peruana</h1>
+        <p class="subtitle">El pensamiento filosófico hecho en el Perú para el mundo</p>
+    </header>
+
+    <div class="container">
+        <!-- INTRO -->
+        <div class="intro">
+            <h2>¿Existe una Filosofía Peruana?</h2>
+            <p>
+                Esta pregunta, planteada por <strong>Augusto Salazar Bondy</strong> en los años 60, 
+                marcó un punto de inflexión en el pensamiento filosófico latinoamericano. 
+                La respuesta, lejos de ser simple, nos lleva a explorar más de cinco siglos de 
+                reflexión filosófica en territorio peruano.
+            </p>
+            <p>
+                Desde las <strong>cosmovisiones andinas prehispánicas</strong> hasta los debates 
+                contemporáneos sobre identidad, justicia social y descolonización del pensamiento, 
+                la filosofía peruana ha contribuido de manera única al panorama filosófico mundial.
+            </p>
+            <p>
+                <strong>La filosofía peruana no es una mera reproducción de corrientes europeas</strong>, 
+                sino un pensamiento original que surge de nuestra realidad multicultural, nuestros 
+                conflictos sociales y nuestra búsqueda de identidad en un mundo globalizado.
+            </p>
+        </div>
+
+        <!-- PERÍODOS -->
+        <h2>📜 Períodos del Pensamiento Filosófico Peruano</h2>
+
+        <div class="periodo">
+            <h3>🌄 Pensamiento Andino Prehispánico</h3>
+            <p>
+                Aunque no existe "filosofía" en el sentido occidental, las culturas andinas desarrollaron 
+                complejas cosmovisiones sobre el tiempo, el espacio, la reciprocidad y la relación con 
+                la naturaleza (Pacha). El concepto de <strong>Ayni</strong> (reciprocidad) y la 
+                <strong>dualidad complementaria</strong> son ejemplos de pensamiento filosófico andino.
+            </p>
+            <div class="conceptos">
+                <h4>Conceptos Fundamentales:</h4>
+                <ul>
+                    <li><strong>Pacha:</strong> Tiempo-espacio como unidad inseparable</li>
+                    <li><strong>Ayni:</strong> Reciprocidad y equilibrio cósmico</li>
+                    <li><strong>Yanantin:</strong> Dualidad complementaria (no opuesta)</li>
+                    <li><strong>Tinku:</strong> Encuentro de opuestos que genera armonía</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="periodo">
+            <h3>✝️ Período Colonial (1532-1821)</h3>
+            <p>
+                Durante la colonia, el pensamiento filosófico peruano estuvo marcado por la escolástica 
+                y debates teológicos. Sin embargo, figuras como <strong>Guamán Poma de Ayala</strong> 
+                cuestionaron el orden colonial desde una perspectiva indígena, mientras que la 
+                Universidad de San Marcos se convirtió en centro del pensamiento criollo.
+            </p>
+        </div>
+
+        <div class="periodo">
+            <h3>🗽 República y Positivismo (1821-1920)</h3>
+            <p>
+                La independencia trajo nuevas preguntas sobre la identidad nacional y el progreso. 
+                El positivismo dominó el pensamiento académico, mientras intelectuales como 
+                <strong>Manuel González Prada</strong> criticaron las estructuras coloniales persistentes.
+            </p>
+        </div>
+
+        <div class="periodo">
+            <h3>⚡ Pensamiento Crítico (1920-1970)</h3>
+            <p>
+                <strong>José Carlos Mariátegui</strong> revolucionó el pensamiento latinoamericano 
+                con su marxismo heterodoxo adaptado a la realidad peruana. 
+                <strong>Víctor Raúl Haya de la Torre</strong> desarrolló el aprismo como 
+                filosofía política latinoamericana.
+            </p>
+        </div>
+
+        <div class="periodo">
+            <h3>🎓 Filosofía Académica Contemporánea (1970-Presente)</h3>
+            <p>
+                Augusto Salazar Bondy plantea la pregunta sobre la existencia y autenticidad de la 
+                filosofía latinoamericana. María Luisa Rivara desarrolla estudios sobre filosofía peruana. 
+                Surge interés por la descolonización del pensamiento y filosofías interculturales.
+            </p>
+        </div>
+
+        <!-- FILÓSOFOS -->
+        <h2>🌟 Filósofos Peruanos Destacados</h2>
+
+        <div class="filosofos-grid">
+            <!-- Guamán Poma -->
+            <div class="filosofo">
+                <div class="avatar">GP</div>
+                <h3>Felipe Guamán Poma de Ayala</h3>
+                <p class="years">c. 1535 - c. 1616</p>
+                <p class="bio">
+                    Cronista indígena que escribió "Nueva Corónica y Buen Gobierno", una crítica 
+                    devastadora al sistema colonial español desde una perspectiva andina. Su obra es 
+                    considerada una de las primeras reflexiones filosófico-políticas originadas en América.
+                </p>
+                <div class="obras">
+                    <strong>Obra Principal:</strong>
+                    <div class="obra-item">• Nueva Corónica y Buen Gobierno (1615)</div>
+                </div>
+                <div class="tags">
+                    <span class="tag">Crítica Colonial</span>
+                    <span class="tag">Cosmovisión Andina</span>
+                    <span class="tag">Justicia</span>
+                </div>
+            </div>
+
+            <!-- Mariátegui -->
+            <div class="filosofo">
+                <div class="avatar">JM</div>
+                <h3>José Carlos Mariátegui</h3>
+                <p class="years">1894 - 1930</p>
+                <p class="bio">
+                    El más influyente pensador marxista de América Latina. Su "7 Ensayos de Interpretación 
+                    de la Realidad Peruana" adaptó el marxismo a la realidad latinoamericana, incorporando 
+                    el problema indígena como central. Fundó la revista "Amauta".
+                </p>
+                <div class="obras">
+                    <strong>Obras Principales:</strong>
+                    <div class="obra-item">• 7 Ensayos de Interpretación de la Realidad Peruana (1928)</div>
+                    <div class="obra-item">• La Escena Contemporánea (1925)</div>
+                    <div class="obra-item">• Defensa del Marxismo (1929)</div>
+                </div>
+                <div class="tags">
+                    <span class="tag">Marxismo</span>
+                    <span class="tag">Indigenismo</span>
+                    <span class="tag">Realidad Peruana</span>
+                </div>
+            </div>
+
+            <!-- Haya de la Torre -->
+            <div class="filosofo">
+                <div class="avatar">VH</div>
+                <h3>Víctor Raúl Haya de la Torre</h3>
+                <p class="years">1895 - 1979</p>
+                <p class="bio">
+                    Fundador del APRA y creador del "Espacio-Tiempo Histórico", una teoría filosófica 
+                    que sostiene que cada realidad histórico-cultural requiere soluciones propias. 
+                    Planteó el "Indoamericanismo" como identidad continental.
+                </p>
+                <div class="obras">
+                    <strong>Obras Principales:</strong>
+                    <div class="obra-item">• El Antiimperialismo y el APRA (1928)</div>
+                    <div class="obra-item">• Espacio-Tiempo Histórico (1948)</div>
+                </div>
+                <div class="tags">
+                    <span class="tag">Indoamericanismo</span>
+                    <span class="tag">Antiimperialismo</span>
+                    <span class="tag">Filosofía Política</span>
+                </div>
+            </div>
+
+            <!-- Salazar Bondy -->
+            <div class="filosofo">
+                <div class="avatar">AS</div>
+                <h3>Augusto Salazar Bondy</h3>
+                <p class="years">1925 - 1974</p>
+                <p class="bio">
+                    Filósofo profesional más importante del siglo XX peruano. Su pregunta 
+                    "¿Existe una filosofía de nuestra América?" (1968) generó el gran debate sobre 
+                    la autenticidad y posibilidad de una filosofía latinoamericana original.
+                </p>
+                <div class="obras">
+                    <strong>Obras Principales:</strong>
+                    <div class="obra-item">• ¿Existe una filosofía de nuestra América? (1968)</div>
+                    <div class="obra-item">• Filosofía de la Dominación (1968)</div>
+                </div>
+                <div class="tags">
+                    <span class="tag">Filosofía Latinoamericana</span>
+                    <span class="tag">Axiología</span>
+                    <span class="tag">Liberación</span>
+                </div>
+            </div>
+
+            <!-- Miró Quesada -->
+            <div class="filosofo">
+                <div class="avatar">FM</div>
+                <h3>Francisco Miró Quesada</h3>
+                <p class="years">1918 - 2019</p>
+                <p class="bio">
+                    Filósofo de lógica y matemática, pero también pensador político y social. 
+                    Respondió a Salazar Bondy afirmando la posibilidad de una filosofía 
+                    latinoamericana auténtica. Vivió 101 años dedicados a la filosofía.
+                </p>
+                <div class="obras">
+                    <strong>Obras Principales:</strong>
+                    <div class="obra-item">• Despertar y Proyecto del Filosofar Latinoamericano (1974)</div>
+                    <div class="obra-item">• Lógica (1946)</div>
+                </div>
+                <div class="tags">
+                    <span class="tag">Lógica</span>
+                    <span class="tag">Filosofía Latinoamericana</span>
+                    <span class="tag">Racionalidad</span>
+                </div>
+            </div>
+
+            <!-- María Luisa Rivara -->
+            <div class="filosofo">
+                <div class="avatar">MR</div>
+                <h3>María Luisa Rivara de Tuesta</h3>
+                <p class="years">1932 - 2021</p>
+                <p class="bio">
+                    Historiadora de la filosofía peruana y latinoamericana. Dedicó su vida académica 
+                    a rescatar y sistematizar el pensamiento filosófico peruano desde la colonia 
+                    hasta el siglo XX. Fundó el Centro de Estudios Filosóficos de la UNMSM.
+                </p>
+                <div class="obras">
+                    <strong>Obras Principales:</strong>
+                    <div class="obra-item">• Pensamiento Prehispánico y Filosofía Colonial (1989)</div>
+                    <div class="obra-item">• Filosofía e Historia de las Ideas en Latinoamérica (1998)</div>
+                </div>
+                <div class="tags">
+                    <span class="tag">Historia de Ideas</span>
+                    <span class="tag">Filosofía Colonial</span>
+                    <span class="tag">Pensamiento Peruano</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- CITA -->
+        <div class="cita">
+            "No hay filosofía en sí, filosofía a secas; siempre se filosofa desde algún lugar, 
+            desde alguna perspectiva, desde alguna historia, desde alguna tradición."
+            <div class="cita-autor">— Augusto Salazar Bondy</div>
+        </div>
+
+        <!-- TEMAS -->
+        <h2>🔑 Temas Centrales de la Filosofía Peruana</h2>
+        
+        <div class="temas-grid">
+            <div class="tema">
+                <h4>🔍 Identidad Nacional</h4>
+                <p>¿Qué significa ser peruano? La búsqueda de identidad atraviesa todo el pensamiento filosófico peruano.</p>
+            </div>
+            
+            <div class="tema">
+                <h4>🌎 Colonialidad y Descolonización</h4>
+                <p>Crítica de las estructuras mentales y sociales heredadas del colonialismo español.</p>
+            </div>
+            
+            <div class="tema">
+                <h4>🤝 Interculturalidad</h4>
+                <p>Diálogo entre la tradición andina, europea, africana y asiática en el Perú.</p>
+            </div>
+            
+            <div class="tema">
+                <h4>⚖️ Justicia Social</h4>
+                <p>Reflexión sobre la desigualdad, el racismo y la exclusión en la sociedad peruana.</p>
+            </div>
+            
+            <div class="tema">
+                <h4>🗿 Pensamiento Andino</h4>
+                <p>Recuperación y revalorización de las cosmovisiones indígenas prehispánicas.</p>
+            </div>
+            
+            <div class="tema">
+                <h4>📚 Autenticidad Filosófica</h4>
+                <p>¿Puede haber filosofía original en América Latina o solo imitación europea?</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p><strong>© 2024-2025 ASEFIP - Asociación de Estudiantes de Filosofía del Perú</strong></p>
+        <p style="margin-top: 10px;">La filosofía peruana es nuestra voz en el concierto mundial de las ideas 🇵🇪</p>
+    </footer>
+</body>
+</html>
