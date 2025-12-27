@@ -1,0 +1,17 @@
+[
+  {
+    "pregunta": "¿Qué es la eudaimonía en Aristóteles?",
+    "opciones": ["Placer inmediato", "Florecimiento del carácter", "Dominio del deseo", "Éxito político"],
+    "correcta": 1
+  },
+  {
+    "pregunta": "¿Qué método filosófico usa Hegel?",
+    "opciones": ["Empirismo", "Dialéctica", "Escepticismo", "Materialismo"],
+    "correcta": 1
+  },
+  {
+    "pregunta": "¿Quién escribió 'La República'?",
+    "opciones": ["Platón", "Aristóteles", "Sócrates", "Epicuro"],
+    "correcta": 0
+  }
+]
