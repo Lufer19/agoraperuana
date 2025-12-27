@@ -1,0 +1,29 @@
+[
+  {
+    "concepto": "Eudaimonía",
+    "definiciones": [
+      "Placer inmediato",
+      "Florecimiento humano mediante la virtud",
+      "Éxito político"
+    ],
+    "correcta": 1
+  },
+  {
+    "concepto": "Dialéctica",
+    "definiciones": [
+      "Método de razonamiento basado en contradicciones",
+      "Estudio de los sentidos",
+      "Teoría del conocimiento empírico"
+    ],
+    "correcta": 0
+  },
+  {
+    "concepto": "Categorías de Kant",
+    "definiciones": [
+      "Conceptos puros del entendimiento",
+      "Virtudes morales",
+      "Ideas innatas de Platón"
+    ],
+    "correcta": 0
+  }
+]
