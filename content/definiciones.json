@@ -2,21 +2,13 @@
   {
     "termino": "Eudaimonía",
     "definicion": "Concepto aristotélico que significa florecimiento humano mediante la virtud.",
-    "tags": ["Aristóteles", "ética", "felicidad"]
+    "tags": ["Aristóteles", "ética", "felicidad"],
+    "archivo": "definiciones/eudaimonia.html"
   },
   {
     "termino": "Dialéctica",
     "definicion": "Método filosófico de razonamiento basado en la contradicción y superación.",
-    "tags": ["Platón", "Hegel", "método"]
-  },
-  {
-    "termino": "Categorías de Kant",
-    "definicion": "Conceptos puros del entendimiento que estructuran la experiencia.",
-    "tags": ["Kant", "epistemología", "razón"]
-  },
-  {
-    "termino": "Cosmovisión Andina",
-    "definicion": "Forma de comprender el mundo basada en la relación armónica entre naturaleza y comunidad.",
-    "tags": ["Andina", "identidad", "filosofía latinoamericana"]
+    "tags": ["Platón", "Hegel", "método"],
+    "archivo": "definiciones/dialectica.html"
   }
 ]
