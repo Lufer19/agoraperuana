@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Explorar Filosofía - Ágora Peruana</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Explorar Recursos Filosóficos</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="articulos.html">Artículos</a>
+      <a href="definiciones.html">Definiciones</a>
+      <a href="tests.html">Tests</a>
+      <a href="juegos.html">Juegos</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="videos.html">Videos</a>
+      <a href="enlaces.html">Explorar</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Directorio de sitios y asociaciones</h2>
+    <input id="buscar" placeholder="Buscar recurso...">
+    <div id="listaEnlaces"></div>
+  </main>
+
+  <script>
+    let enlaces = [];
+    fetch('content/enlaces.json')
+      .then(r => r.json())
+      .then(data => {
+        enlaces = data;
+        render(enlaces);
+      });
+
+    function render(lista) {
+      document.getElementById('listaEnlaces').innerHTML =
+        lista.map(e => `
+          <article>
+            <h3><a href="${e.url}" target="_blank">${e.nombre}</a></h3>
+            <p>${e.descripcion}</p>
+            <p><em>${(e.tags||[]).join(', ')}</em></p>
+          </article>
+        `).join('');
+    }
+
+    document.getElementById('buscar').addEventListener('input', e => {
+      const q = e.target.value.toLowerCase();
+      render(enlaces.filter(e => e.nombre.toLowerCase().includes(q) || (e.tags||[]).join(' ').toLowerCase().includes(q)));
+    });
+  </script>
+</body>
+</html>
