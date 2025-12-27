@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Podcast - Ágora Peruana</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Podcast Filosófico</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="articulos.html">Artículos</a>
+      <a href="definiciones.html">Definiciones</a>
+      <a href="tests.html">Tests</a>
+      <a href="juegos.html">Juegos</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="videos.html">Videos</a>
+      <a href="enlaces.html">Explorar</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Escucha nuestros episodios</h2>
+    <div id="podcast"></div>
+  </main>
+
+  <script>
+    fetch('content/podcast.json')
+      .then(r => r.json())
+      .then(data => {
+        document.getElementById('podcast').innerHTML =
+          data.map(p => `
+            <article>
+              <h3>${p.titulo}</h3>
+              <p>${p.descripcion}</p>
+              ${p.tipo === "archivo" ? 
+                `<audio controls src="${p.url}"></audio>` : 
+                `<iframe src="${p.url}" width="560" height="150" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`}
+            </article>
+          `).join('');
+      });
+  </script>
+</body>
+</html>
