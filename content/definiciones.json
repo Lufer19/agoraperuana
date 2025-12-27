@@ -8,5 +8,15 @@
     "termino": "Dialéctica",
     "definicion": "Método filosófico de razonamiento basado en la contradicción y superación.",
     "tags": ["Platón", "Hegel", "método"]
+  },
+  {
+    "termino": "Categorías de Kant",
+    "definicion": "Conceptos puros del entendimiento que estructuran la experiencia.",
+    "tags": ["Kant", "epistemología", "razón"]
+  },
+  {
+    "termino": "Cosmovisión Andina",
+    "definicion": "Forma de comprender el mundo basada en la relación armónica entre naturaleza y comunidad.",
+    "tags": ["Andina", "identidad", "filosofía latinoamericana"]
   }
 ]
