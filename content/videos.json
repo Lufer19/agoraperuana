@@ -1,0 +1,14 @@
+[
+  {
+    "titulo": "Clase sobre Platón",
+    "url": "https://www.youtube.com/watch?v=abcd1234xyz",
+    "embed": "https://www.youtube.com/embed/abcd1234xyz",
+    "tags": ["Platón", "filosofía clásica"]
+  },
+  {
+    "titulo": "Filosofía Andina",
+    "url": "https://www.youtube.com/watch?v=wxyz9876abc",
+    "embed": "https://www.youtube.com/embed/wxyz9876abc",
+    "tags": ["Andina", "cosmovisión"]
+  }
+]
