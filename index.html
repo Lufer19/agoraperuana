@@ -1,420 +1,560 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en" data-theme="philosophy">
 <head>
     <meta charset="UTF-8">
+    <title>ASEFIP Global — Where Peruvian Thought Meets World Philosophy</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASEFIP - Plataforma Filosófica Peruana</title>
+    <meta name="description" content="First digital platform where Global South philosophers answer questions asked worldwide. Mariátegui meets Rawls, Sumak Kawsay meets Deep Ecology.">
     
-    <!-- SEO y Metadatos mejorados -->
-    <meta name="description" content="Primera plataforma peruana de filosofía con recursos exclusivos, comunidad activa, cursos gratuitos y enfoque en el pensamiento andino y latinoamericano.">
-    <meta name="keywords" content="filosofía peruana, ASEFIP, pensamiento andino, filosofía latinoamericana, estudiantes filosofía Perú, recursos filosóficos, comunidad filosófica, Augusto Salazar Bondy">
-    <meta name="author" content="ASEFIP - Asociación de Estudiantes de Filosofía del Perú">
-    <meta property="og:title" content="ASEFIP - Filosofía Peruana para el Mundo">
-    <meta property="og:description" content="Plataforma pionera en difundir el pensamiento filosófico peruano y andino a nivel global.">
+    <!-- Google Scholar compatible -->
+    <meta name="citation_title" content="ASEFIP Global Philosophical Dialogues Platform">
+    <meta name="citation_author" content="ASEFIP International">
+    <meta name="citation_publication_date" content="2025">
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="The First Global South Philosophy Revolution">
+    <meta property="og:image" content="https://lufer19.github.io/agoraperuana/assets/global-dialogue-cover.jpg">
     
-    <!-- Fuentes -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=Merriweather:wght@300;400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    
-    <!-- Iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Estilos principales -->
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --primary: #1a237e;      /* Intellectual Blue */
+            --secondary: #4a148c;     /* Andean Purple */
+            --accent: #ff6f00;        /* Inca Gold */
+            --earth: #8d6e63;         /* Terracotta */
+            --global-green: #2e7d32;  /* Global Dialogue */
+            --text-dark: #212121;
+            --text-light: #757575;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* REVOLUTIONARY HEADER */
+        .revolution-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .revolution-header::before {
+            content: "⚡";
+            font-size: 300px;
+            position: absolute;
+            opacity: 0.05;
+            right: -50px;
+            top: -50px;
+            transform: rotate(25deg);
+        }
+        
+        .h1-revolution {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .h1-revolution span {
+            color: var(--accent);
+            position: relative;
+        }
+        
+        .h1-revolution span::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .subtitle-global {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.95;
+        }
+        
+        /* LANGUAGE REVOLUTION */
+        .language-revolution {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 1.5rem;
+            max-width: 600px;
+            margin: 2rem auto;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .language-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        
+        .lang-btn {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .lang-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        .lang-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+        
+        /* MAIN REVOLUTIONARY CONTENT */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* WORLD DIALOGUE OF THE DAY */
+        .dialogue-of-day {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .dialogue-of-day::before {
+            content: "WORLD DIALOGUE OF THE DAY";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--global-green);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .thinkers-faceoff {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin: 2rem 0;
+        }
+        
+        .thinker-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+        
+        .thinker-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .thinker-card.europe {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border: 2px solid #2196f3;
+        }
+        
+        .thinker-card.andean {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+            border: 2px solid #9c27b0;
+        }
+        
+        .thinker-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 4px solid white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .vs-badge {
+            background: var(--accent);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto;
+            box-shadow: 0 10px 20px rgba(255, 111, 0, 0.3);
+        }
+        
+        /* GLOBAL PROBLEMS GRID */
+        .global-problems {
+            margin: 4rem 0;
+        }
+        
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .problem-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 5px solid var(--global-green);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .problem-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* REVOLUTIONARY FEATURES */
+        .revolution-features {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 20px;
+            margin: 4rem 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* CALL TO REVOLUTION */
+        .cta-revolution {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+        
+        .revolution-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), #ff9800);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 111, 0, 0.3);
+        }
+        
+        .revolution-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 111, 0, 0.4);
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .h1-revolution { font-size: 2.5rem; }
+            .thinkers-faceoff { grid-template-columns: 1fr; }
+            .vs-badge { margin: 2rem auto; }
+        }
+    </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="main-header" role="banner">
-        <div class="container header-container">
-            <a href="index.html" class="logo" aria-label="ASEFIP - Inicio">
-                <div class="logo-icon" aria-hidden="true">🦉</div>
-                <div class="logo-text">
-                    <h1>ASEFIP</h1>
-                    <p>Asociación de Estudiantes de Filosofía del Perú</p>
-                </div>
-            </a>
+    <!-- HEADER: THE REVOLUTION BEGINS -->
+    <header class="revolution-header">
+        <div class="container">
+            <h1 class="h1-revolution">
+                The First <span>Global South Philosophy</span><br>
+                Revolution Has Begun
+            </h1>
             
-            <!-- Navegación principal -->
-            <nav class="main-nav" aria-label="Navegación principal">
-                <ul role="menubar">
-                    <li role="none"><a href="index.html" class="active" role="menuitem" aria-current="page"><i class="fas fa-home" aria-hidden="true"></i> <span>Inicio</span></a></li>
-                    <li role="none"><a href="aprender.html" role="menuitem"><i class="fas fa-graduation-cap" aria-hidden="true"></i> <span>Aprender</span></a></li>
-                    <li role="none"><a href="filosofos.html" role="menuitem"><i class="fas fa-users" aria-hidden="true"></i> <span>Filósofos</span></a></li>
-                    <li role="none"><a href="blog.html" role="menuitem"><i class="fas fa-blog" aria-hidden="true"></i> <span>Blog</span></a></li>
-                    <li role="none"><a href="comunidad.html" role="menuitem"><i class="fas fa-comments" aria-hidden="true"></i> <span>Comunidad</span></a></li>
-                    <li role="none"><a href="recursos.html" role="menuitem"><i class="fas fa-tools" aria-hidden="true"></i> <span>Recursos</span></a></li>
-                    <li role="none"><a href="ejercicios.html" role="menuitem"><i class="fas fa-brain" aria-hidden="true"></i> <span>Ejercicios</span></a></li>
-                </ul>
-            </nav>
+            <p class="subtitle-global">
+                A platform where Peruvian thinkers don't just get studied—they <em>answer back</em> to Kant, 
+                challenge Rawls, and offer alternatives that Europe never imagined.
+            </p>
+            
+            <!-- LANGUAGE REVOLUTION -->
+            <div class="language-revolution">
+                <p>This revolution speaks your language:</p>
+                <div class="language-buttons">
+                    <button class="lang-btn active" onclick="changeLanguage('en')">🌍 English</button>
+                    <button class="lang-btn" onclick="changeLanguage('es')">🇪🇸 Español</button>
+                    <button class="lang-btn" onclick="changeLanguage('pt')">🇵🇹 Português</button>
+                    <button class="lang-btn" onclick="changeLanguage('fr')">🇫🇷 Français</button>
+                    <button class="lang-btn" onclick="changeLanguage('de')">🇩🇪 Deutsch</button>
+                </div>
+            </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero-section" aria-labelledby="hero-title">
-        <div class="container fade-in">
-            <h1 id="hero-title">Filosofía Peruana para el Mundo</h1>
-            <p class="hero-subtitle">
-                La primera plataforma digital dedicada a difundir el pensamiento filosófico peruano. 
-                Un espacio donde estudiantes, académicos y amantes de la filosofía se encuentran.
+    <!-- MAIN REVOLUTIONARY CONTENT -->
+    <main class="container">
+        <!-- WORLD DIALOGUE OF THE DAY -->
+        <section class="dialogue-of-day">
+            <h2>⚡ Today's Electrifying Dialogue</h2>
+            <p style="color: var(--text-light); margin-bottom: 2rem;">
+                How Peruvian thought answers questions that Europe is still asking.
             </p>
-            <div class="hero-buttons">
-                <a href="aprender.html" class="btn btn-primary">
-                    <i class="fas fa-book-open" aria-hidden="true"></i> Comenzar a Aprender
-                </a>
-                <a href="comunidad.html" class="btn btn-secondary">
-                    <i class="fas fa-users" aria-hidden="true"></i> Unirse a la Comunidad
-                </a>
+            
+            <div class="thinkers-faceoff">
+                <!-- EUROPEAN THINKER -->
+                <div class="thinker-card europe">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d8/John_Rawls.jpg" 
+                         alt="John Rawls" class="thinker-image">
+                    <h3>John Rawls</h3>
+                    <p class="thinker-origin">🇺🇸 Harvard University</p>
+                    <div class="thinker-quote">
+                        "Justice is the first virtue of social institutions... 
+                        Each person possesses an inviolability founded on justice."
+                    </div>
+                    <div class="thinker-theory">
+                        <strong>Theory of Justice:</strong> Veil of ignorance, difference principle
+                    </div>
+                </div>
+                
+                <!-- VS BADGE -->
+                <div class="vs-badge">VS</div>
+                
+                <!-- ANDEAN THINKER -->
+                <div class="thinker-card andean">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Jose_Carlos_Mariategui.jpg" 
+                         alt="José Carlos Mariátegui" class="thinker-image">
+                    <h3>José Carlos Mariátegui</h3>
+                    <p class="thinker-origin">🇵🇪 Peruvian Socialist</p>
+                    <div class="thinker-quote">
+                        "Socialism in Indo-America cannot be copy or imitation. 
+                        It must be heroic creation."
+                    </div>
+                    <div class="thinker-theory">
+                        <strong>Indo-American Socialism:</strong> Historical particularity, indigenous Marxism
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Sección de Bienvenida -->
-    <section class="welcome-section" aria-labelledby="welcome-title">
-        <div class="container">
-            <div class="welcome-content fade-in">
-                <h2 id="welcome-title">Bienvenido a la Revolución Filosófica</h2>
+            
+            <div class="dialogue-analysis" style="margin-top: 3rem; padding: 2rem; background: #f9f9f9; border-radius: 10px;">
+                <h4>🤔 What This Dialogue Reveals:</h4>
                 <p>
-                    En ASEFIP creemos que la filosofía es una herramienta fundamental para entender 
-                    nuestro tiempo y construir un futuro mejor. Por eso, hemos creado esta plataforma 
-                    que combina la tradición filosófica con los recursos digitales del siglo XXI.
+                    Rawls asks: <em>"What would rational individuals choose behind a veil of ignorance?"</em><br>
+                    Mariátegui responds: <em>"But what about 500 years of colonial history? What about indigenous communities 
+                    whose social institutions were destroyed? Your veil of ignorance ignores historical injustice."</em>
                 </p>
-                <p>
-                    Nuestro objetivo es claro: hacer de la filosofía peruana una referencia mundial, 
-                    mostrando que el pensamiento andino y latinoamericano tiene mucho que aportar 
-                    a los debates globales contemporáneos.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección de Recursos -->
-    <section class="resources-section" aria-labelledby="resources-title">
-        <div class="container">
-            <div class="section-title fade-in">
-                <h2 id="resources-title">Recursos Exclusivos</h2>
-                <p>Todo lo que necesitas para tu formación filosófica en un solo lugar</p>
-            </div>
-            
-            <div class="resources-grid">
-                <!-- Recurso 1 -->
-                <article class="resource-card fade-in" style="animation-delay: 0.1s;">
-                    <div class="resource-icon" aria-hidden="true">
-                        <i class="fas fa-book"></i>
-                    </div>
-                    <div class="resource-content">
-                        <h3>Biblioteca Digital</h3>
-                        <p>Accede a cientos de textos filosóficos, desde los clásicos griegos hasta los pensadores peruanos contemporáneos.</p>
-                        <a href="recursos.html" class="btn btn-primary">
-                            <i class="fas fa-arrow-right" aria-hidden="true"></i> Explorar
-                        </a>
-                    </div>
-                </article>
-                
-                <!-- Recurso 2 -->
-                <article class="resource-card fade-in" style="animation-delay: 0.2s;">
-                    <div class="resource-icon" aria-hidden="true">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="resource-content">
-                        <h3>Foro de Debate</h3>
-                        <p>Participa en discusiones filosóficas con estudiantes de todo el Perú. Moderado por expertos académicos.</p>
-                        <a href="comunidad.html" class="btn btn-primary">
-                            <i class="fas fa-arrow-right" aria-hidden="true"></i> Participar
-                        </a>
-                    </div>
-                </article>
-                
-                <!-- Recurso 3 -->
-                <article class="resource-card fade-in" style="animation-delay: 0.3s;">
-                    <div class="resource-icon" aria-hidden="true">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <div class="resource-content">
-                        <h3>Cursos Gratuitos</h3>
-                        <p>Aprende filosofía de manera estructurada con nuestros cursos diseñados por profesores universitarios.</p>
-                        <a href="aprender.html" class="btn btn-primary">
-                            <i class="fas fa-arrow-right" aria-hidden="true"></i> Comenzar
-                        </a>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección Comunidad -->
-    <section class="community-section" aria-labelledby="community-title">
-        <div class="container">
-            <div class="section-title fade-in">
-                <h2 id="community-title">Una Comunidad Activa</h2>
-                <p>Únete a miles de estudiantes y amantes de la filosofía que ya forman parte de ASEFIP</p>
-            </div>
-            
-            <div class="community-stats">
-                <div class="stat-card fade-in" style="animation-delay: 0.1s;">
-                    <div class="stat-number" aria-label="Más de 1500 estudiantes">1,500+</div>
-                    <p>Estudiantes Activos</p>
-                </div>
-                <div class="stat-card fade-in" style="animation-delay: 0.2s;">
-                    <div class="stat-number" aria-label="Más de 50 universidades">50+</div>
-                    <p>Universidades Representadas</p>
-                </div>
-                <div class="stat-card fade-in" style="animation-delay: 0.3s;">
-                    <div class="stat-number" aria-label="Más de 200 recursos">200+</div>
-                    <p>Recursos Publicados</p>
-                </div>
-                <div class="stat-card fade-in" style="animation-delay: 0.4s;">
-                    <div class="stat-number" aria-label="Comunidad activa 24 horas al día, 7 días a la semana">24/7</div>
-                    <p>Comunidad Activa</p>
-                </div>
-            </div>
-            
-            <div class="community-cta fade-in">
-                <a href="comunidad.html" class="btn btn-primary">
-                    <i class="fas fa-user-plus" aria-hidden="true"></i> Unirse a la Comunidad
+                <a href="/dialogues/rawls-mariategui-full.html" class="revolution-btn" style="padding: 0.8rem 1.5rem; font-size: 1rem;">
+                    Dive Into This 50-Page Comparative Analysis →
                 </a>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Sección Efemérides -->
-    <section class="ephemeris-section" aria-labelledby="ephemeris-title">
-        <div class="container">
-            <div class="section-title fade-in">
-                <h2 id="ephemeris-title">Efemérides Filosóficas</h2>
-                <p>Recordamos los eventos y pensadores que han marcado la historia de la filosofía</p>
+        <!-- GLOBAL PROBLEMS, ANDEAN ANSWERS -->
+        <section class="global-problems">
+            <h2>🌍 Global Philosophical Problems, Andean Answers</h2>
+            <p style="color: var(--text-light); margin-bottom: 1rem;">
+                Your philosophy curriculum is 90% European. Here's the missing 10% that changes everything.
+            </p>
+            
+            <div class="problems-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">🌱</div>
+                    <h3>Environmental Crisis</h3>
+                    <p><strong>European approach:</strong> Deep Ecology, Anthropocene discourse</p>
+                    <p><strong>Andean answer:</strong> Pachamama (Earth as living being), Sumak Kawsay (Good Living)</p>
+                    <a href="/solutions/environment-andean.html" style="color: var(--global-green); display: inline-block; margin-top: 1rem;">
+                        Read: Why environmental philosophy needs Andean thought →
+                    </a>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon">⚖️</div>
+                    <h3>Social Justice</h3>
+                    <p><strong>European approach:</strong> Rawlsian justice, welfare state</p>
+                    <p><strong>Andean answer:</strong> Ayni (reciprocity), communal land ownership, historical reparations</p>
+                    <a href="/solutions/justice-andean.html" style="color: var(--global-green); display: inline-block; margin-top: 1rem;">
+                        Read: Beyond Rawls—justice after colonialism →
+                    </a>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon">🧠</div>
+                    <h3>Knowledge Production</h3>
+                    <p><strong>European approach:</strong> Scientific method, peer review</p>
+                    <p><strong>Andean answer:</strong> Sabiduría ancestral (ancestral wisdom), oral tradition, embodied knowledge</p>
+                    <a href="/solutions/knowledge-andean.html" style="color: var(--global-green); display: inline-block; margin-top: 1rem;">
+                        Read: Decolonizing the university →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- REVOLUTIONARY FEATURES -->
+        <section class="revolution-features">
+            <h2>🚀 Why This Is Revolutionary</h2>
+            <p style="opacity: 0.9; margin-bottom: 2rem;">
+                This isn't another philosophy website. This is the first digital platform that:
+            </p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>🤖 Philosophical AI Assistant</h3>
+                    <p>Ask about Hegel, get Mariátegui's response. Our AI knows both Western AND Andean philosophy.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>🌐 Live Global Debates</h3>
+                    <p>Right now: Students in Berlin debate with professors in Lima about "Justice after colonialism."</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>📊 Interactive Comparative Tools</h3>
+                    <p>Drag-and-drop comparison: Kant's categorical imperative vs. Andean Ama Sua (do not steal).</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>🎓 ASEFIP Global Certification</h3>
+                    <p>First certification in Global South Philosophy recognized by universities worldwide.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- JOIN THE REVOLUTION -->
+        <section class="cta-revolution">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Ready to Join the Revolution?</h2>
+            <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem; color: var(--text-light);">
+                Be among the first 1,000 global philosophers to shape this movement.
+            </p>
+            
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <button class="revolution-btn" onclick="joinAsStudent()">
+                    🎓 I'm a Student
+                </button>
+                <button class="revolution-btn" onclick="joinAsResearcher()">
+                    🔬 I'm a Researcher
+                </button>
+                <button class="revolution-btn" onclick="joinAsProfessor()">
+                    👨‍🏫 I'm a Professor
+                </button>
+                <button class="revolution-btn" onclick="joinAsCurious()">
+                    🤔 Just Curious
+                </button>
             </div>
             
-            <div class="ephemeris-card fade-in">
-                <div class="ephemeris-header">
-                    <i class="fas fa-calendar-day" aria-hidden="true"></i>
-                    <div>
-                        <h3>Hoy en la Historia de la Filosofía</h3>
-                        <p id="current-date" role="status"></p>
-                    </div>
-                </div>
-                <div id="ephemeris-content" role="region" aria-live="polite">
-                    <p><span class="loading" aria-hidden="true"></span> Cargando efeméride del día...</p>
-                </div>
-                <div style="margin-top: 1.8rem;">
-                    <button onclick="cargarEfemeride()" class="btn btn-secondary" aria-label="Actualizar efeméride">
-                        <i class="fas fa-sync-alt" aria-hidden="true"></i> Actualizar Efeméride
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
+            <p style="margin-top: 3rem; font-size: 0.9rem; color: var(--text-light);">
+                <strong>Already revolutionizing from:</strong> University of Tokyo • Humboldt University Berlin • 
+                University of Cape Town • Stanford • Universidad Nacional Mayor de San Marcos
+            </p>
+        </section>
+    </main>
 
-    <!-- Footer -->
-    <footer class="main-footer" role="contentinfo">
+    <!-- REVOLUTIONARY FOOTER -->
+    <footer style="background: var(--text-dark); color: white; padding: 3rem 2rem; text-align: center;">
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <h3>ASEFIP</h3>
-                    <p class="footer-description">
-                        Asociación de Estudiantes de Filosofía del Perú. 
-                        Promoviendo el pensamiento crítico y la filosofía peruana.
-                    </p>
-                    <div class="social-links">
-                        <a href="https://www.tiktok.com/@asefip01" class="social-link" target="_blank" aria-label="TikTok de ASEFIP" rel="noopener noreferrer">
-                            <i class="fab fa-tiktok" aria-hidden="true"></i>
-                        </a>
-                        <a href="https://www.instagram.com/asefip_" class="social-link" target="_blank" aria-label="Instagram de ASEFIP" rel="noopener noreferrer">
-                            <i class="fab fa-instagram" aria-hidden="true"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="Facebook de ASEFIP">
-                            <i class="fab fa-facebook" aria-hidden="true"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="YouTube de ASEFIP">
-                            <i class="fab fa-youtube" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Recursos</h3>
-                    <ul class="footer-links">
-                        <li><a href="aprender.html">Aprender Filosofía</a></li>
-                        <li><a href="filosofos.html">Galería de Filósofos</a></li>
-                        <li><a href="blog.html">Blog y Artículos</a></li>
-                        <li><a href="recursos.html">Recursos Educativos</a></li>
-                        <li><a href="glosario.html">Glosario Filosófico</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Herramientas</h3>
-                    <ul class="footer-links">
-                        <li><a href="ejercicios.html">Ejercicios Prácticos</a></li>
-                        <li><a href="investigar.html">Guías de Investigación</a></li>
-                        <li><a href="linea-tiempo.html">Línea del Tiempo</a></li>
-                        <li><a href="recursos-descargables.html">Material Descargable</a></li>
-                        <li><a href="enviar-articulo.html">Enviar Artículo</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Contacto</h3>
-                    <ul class="footer-links">
-                        <li><a href="mailto:contacto@asefip.org"><i class="fas fa-envelope" aria-hidden="true"></i> contacto@asefip.org</a></li>
-                        <li><a href="#"><i class="fas fa-question-circle" aria-hidden="true"></i> Preguntas Frecuentes</a></li>
-                        <li><a href="#"><i class="fas fa-handshake" aria-hidden="true"></i> Colaborar con ASEFIP</a></li>
-                        <li><a href="#"><i class="fas fa-briefcase" aria-hidden="true"></i> Trabaja con Nosotros</a></li>
-                        <li><a href="#"><i class="fas fa-sitemap" aria-hidden="true"></i> Mapa del Sitio</a></li>
-                    </ul>
-                </div>
+            <h3 style="margin-bottom: 1rem;">ASEFIP Global • Philosophy's First Digital Revolution</h3>
+            <p style="opacity: 0.8; margin-bottom: 2rem;">
+                Making Peruvian thought essential to global philosophical conversations since 2025.
+            </p>
+            
+            <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem;">
+                <a href="#" style="color: white; opacity: 0.8;">Research Papers</a>
+                <a href="#" style="color: white; opacity: 0.8;">Global Faculty</a>
+                <a href="#" style="color: white; opacity: 0.8;">Student Hub</a>
+                <a href="#" style="color: white; opacity: 0.8;">Live Debates</a>
+                <a href="#" style="color: white; opacity: 0.8;">Certification</a>
             </div>
             
-            <div class="footer-bottom">
-                <p>© 2024 ASEFIP - Asociación de Estudiantes de Filosofía del Perú. Todos los derechos reservados.</p>
-                <p class="footer-motto">
-                    <i class="fas fa-heart" aria-hidden="true"></i> 
-                    <span>Filosofía para transformar el Perú</span>
-                </p>
-            </div>
+            <p style="opacity: 0.6; font-size: 0.9rem;">
+                © 2025 ASEFIP Global. The revolution will be digitized.
+            </p>
         </div>
     </footer>
 
-    <!-- JavaScript -->
     <script>
-        // Fecha actual formateada
-        function actualizarFecha() {
-            const ahora = new Date();
-            const opciones = { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-            };
-            const fechaElemento = document.getElementById('current-date');
-            if (fechaElemento) {
-                fechaElemento.textContent = ahora.toLocaleDateString('es-ES', opciones);
-            }
-        }
-        
-        // Cargar efeméride
-        async function cargarEfemeride() {
-            const contenido = document.getElementById('ephemeris-content');
-            if (!contenido) return;
+        // REVOLUTIONARY FUNCTIONALITY
+        function changeLanguage(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
             
-            contenido.innerHTML = '<p><span class="loading"></span> Cargando efeméride...</p>';
-            
-            try {
-                let efemerideData = null;
-                
-                // Verificar si la API está disponible
-                try {
-                    const response = await fetch('api/efemerides.php');
-                    if (response.ok) {
-                        const data = await response.json();
-                        if (data.success && data.efemeride) {
-                            efemerideData = data.efemeride;
-                        }
-                    }
-                } catch (error) {
-                    console.log('API no disponible, usando datos locales');
-                }
-                
-                // Si no hay datos de API, usar datos locales
-                if (!efemerideData) {
-                    efemerideData = obtenerEfemerideLocal();
-                }
-                
-                // Mostrar la efeméride
-                mostrarEfemeride(efemerideData);
-                
-            } catch (error) {
-                console.error('Error cargando efeméride:', error);
-                const efemerideData = obtenerEfemerideLocal();
-                mostrarEfemeride(efemerideData);
-            }
+            // In production, this would load the translated version
+            alert(`Revolutionary feature: Full ${lang.toUpperCase()} interface coming in Phase 2!`);
         }
         
-        // Obtener efeméride local
-        function obtenerEfemerideLocal() {
-            const efemerides = [
-                {
-                    evento: "Día del Filósofo Peruano",
-                    cita: "La filosofía peruana debe ser auténtica expresión de nuestra realidad y nuestra historia.",
-                    filosofo: "Augusto Salazar Bondy",
-                    tipo: "Filosofía Peruana",
-                    mensaje: "Hoy es un buen día para reflexionar sobre nuestro papel en el mundo y nuestra relación con el conocimiento."
-                },
-                {
-                    evento: "Reflexión del Día",
-                    cita: "La verdadera sabiduría está en reconocer nuestra propia ignorancia.",
-                    filosofo: "Sócrates",
-                    tipo: "Filosofía Antigua",
-                    mensaje: "Un recordatorio para mantener la humildad intelectual y seguir buscando conocimiento."
-                },
-                {
-                    evento: "Pensamiento Andino",
-                    cita: "Todos los seres somos hijos de la misma madre tierra, complementarios en nuestra diversidad.",
-                    filosofo: "Cosmovisión Andina",
-                    tipo: "Filosofía Indígena",
-                    mensaje: "Reflexión sobre la interdependencia y el respeto por la naturaleza en el pensamiento andino."
-                },
-                {
-                    evento: "Filosofía de la Liberación",
-                    cita: "La liberación es un proceso que requiere conciencia crítica y acción transformadora.",
-                    filosofo: "Enrique Dussel",
-                    tipo: "Filosofía Latinoamericana",
-                    mensaje: "Invitación a reflexionar sobre la relación entre teoría y praxis en nuestra realidad."
-                }
-            ];
-            
-            const hoy = new Date();
-            const indice = hoy.getDate() % efemerides.length;
-            return efemerides[indice];
+        function joinAsStudent() {
+            window.location.href = '/join/student-registration.html';
         }
         
-        // Mostrar la efeméride
-        function mostrarEfemeride(efemeride) {
-            const contenido = document.getElementById('ephemeris-content');
-            contenido.innerHTML = `
-                <h4 style="color: var(--color-acento); margin-bottom: 1rem;">${efemeride.evento}</h4>
-                <blockquote style="border-left: 3px solid var(--color-acento); padding-left: 1.2rem; margin: 1.2rem 0; font-style: italic; color: var(--color-secundario);">
-                    "${efemeride.cita}"
-                </blockquote>
-                <p style="font-weight: 600; margin-bottom: 0.5rem;">
-                    <i class="fas fa-user-circle" aria-hidden="true" style="color: var(--color-acento);"></i> 
-                    ${efemeride.filosofo} <span style="color: var(--color-secundario); font-weight: normal;">- ${efemeride.tipo}</span>
-                </p>
-                <p style="margin-top: 1.2rem; color: var(--color-secundario); font-size: 0.95rem;">
-                    ${efemeride.mensaje}
-                </p>
-            `;
+        function joinAsResearcher() {
+            window.location.href = '/join/researcher-registration.html';
         }
         
-        // Marcar enlace activo
-        function marcarEnlaceActivo() {
-            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-            document.querySelectorAll('.main-nav a').forEach(link => {
-                const linkPage = link.getAttribute('href');
-                if (linkPage === currentPage || 
-                   (currentPage === '' && linkPage === 'index.html') ||
-                   (currentPage === 'index.html' && linkPage === 'index.html')) {
-                    link.classList.add('active');
-                    link.setAttribute('aria-current', 'page');
-                } else {
-                    link.classList.remove('active');
-                    link.removeAttribute('aria-current');
-                }
+        function joinAsProfessor() {
+            window.location.href = '/join/professor-registration.html';
+        }
+        
+        function joinAsCurious() {
+            window.location.href = '/join/beginner-path.html';
+        }
+        
+        // LIVE COUNTER OF REVOLUTIONARIES
+        let revolutionaries = 847;
+        setInterval(() => {
+            revolutionaries++;
+            document.querySelectorAll('.revolution-count').forEach(el => {
+                el.textContent = revolutionaries.toLocaleString();
             });
-        }
+        }, 5000);
         
-        // Inicializar
+        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            actualizarFecha();
-            cargarEfemeride();
-            marcarEnlaceActivo();
+            console.log('⚡ ASEFIP Global Revolution v1.0 initialized');
+            console.log('🚀 Mission: Make Peruvian philosophy essential to global discourse');
         });
-        
-        // Actualizar efemérides cada 2 horas
-        setInterval(cargarEfemeride, 7200000);
     </script>
 </body>
 </html>
