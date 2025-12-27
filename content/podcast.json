@@ -1,0 +1,14 @@
+[
+  {
+    "titulo": "Episodio 1: Filosofía Andina",
+    "descripcion": "Exploramos la cosmovisión andina y su aporte al futuro global.",
+    "tipo": "archivo",
+    "url": "podcast/episodio01.mp3"
+  },
+  {
+    "titulo": "Episodio 2: Rawls vs Mariátegui",
+    "descripcion": "Un diálogo sobre justicia y realidad.",
+    "tipo": "link",
+    "url": "https://open.spotify.com/embed/episode/123456789"
+  }
+]
