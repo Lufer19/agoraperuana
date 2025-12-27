@@ -1,0 +1,18 @@
+[
+  {
+    "slug": "rawls-vs-mariategui",
+    "titulo": "Rawls vs. Mariátegui: justicia y realidad",
+    "autor": "Equipo Ágora",
+    "fecha": "2025-12-26",
+    "tags": ["justicia", "latinoamérica", "política"],
+    "archivo": "articulos/rawls-vs-mariategui.html"
+  },
+  {
+    "slug": "filosofia-andina",
+    "titulo": "Filosofía Andina y el futuro global",
+    "autor": "Equipo Ágora",
+    "fecha": "2025-12-20",
+    "tags": ["andina", "cosmovisión", "identidad"],
+    "archivo": "articulos/filosofia-andina.html"
+  }
+]
