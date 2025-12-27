@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Definiciones - Ágora Peruana</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Definiciones</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="articulos.html">Artículos</a>
+      <a href="definiciones.html">Definiciones</a>
+      <a href="tests.html">Tests</a>
+      <a href="juegos.html">Juegos</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="videos.html">Videos</a>
+      <a href="enlaces.html">Explorar</a>
+    </nav>
+  </header>
+  <main>
+    <h2>Glosario filosófico</h2>
+    <input id="buscar" placeholder="Buscar término...">
+    <div id="definiciones"></div>
+  </main>
+  <script>
+    let defs = [];
+    fetch('content/definiciones.json')
+      .then(r => r.json())
+      .then(data => {
+        defs = data;
+        render(defs);
+      });
+    function render(lista) {
+      document.getElementById('definiciones').innerHTML =
+        lista.map(d => `
+          <article>
+            <h3>${d.termino}</h3>
+            <p>${d.definicion}</p>
+            <p><em>${(d.tags||[]).join(', ')}</em></p>
+          </article>
+        `).join('');
+    }
+    document.getElementById('buscar').addEventListener('input', e => {
+      const q = e.target.value.toLowerCase();
+      render(defs.filter(d => d.termino.toLowerCase().includes(q)));
+    });
+  </script>
+</body>
+</html>
