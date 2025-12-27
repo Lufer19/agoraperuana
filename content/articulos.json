@@ -14,5 +14,13 @@
     "fecha": "2025-12-20",
     "tags": ["andina", "cosmovisión", "identidad"],
     "archivo": "articulos/filosofia-andina.html"
+  },
+  {
+    "slug": "teoria-del-conocimiento",
+    "titulo": "Teoría del conocimiento en Kant",
+    "autor": "Equipo Ágora",
+    "fecha": "2025-12-15",
+    "tags": ["Kant", "epistemología", "razón"],
+    "archivo": "articulos/teoria-del-conocimiento.html"
   }
 ]
