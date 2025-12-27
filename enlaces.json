@@ -1,0 +1,32 @@
+[
+  {
+    "nombre": "Filosofía.org",
+    "descripcion": "Archivo histórico y diccionario filosófico.",
+    "url": "https://filosofia.org/",
+    "tags": ["archivo", "diccionario", "historia"]
+  },
+  {
+    "nombre": "Filosofía en la Red",
+    "descripcion": "Divulgación filosófica contemporánea y seminarios.",
+    "url": "https://filosofiaenlared.com/",
+    "tags": ["divulgación", "seminarios"]
+  },
+  {
+    "nombre": "Proyecto CIO - UCV",
+    "descripcion": "Metacatálogo de webs de filosofía.",
+    "url": "https://proyectoscio.ucv.es/enlaces-a-webs-de-filosofia/",
+    "tags": ["catálogo", "recursos"]
+  },
+  {
+    "nombre": "Webdianoia",
+    "descripcion": "Portal de filosofía con recursos didácticos.",
+    "url": "https://www.webdianoia.com/",
+    "tags": ["portal", "didáctico"]
+  },
+  {
+    "nombre": "Red Española de Filosofía",
+    "descripcion": "Asociación que agrupa sociedades filosóficas en España.",
+    "url": "https://redfilosofia.es/",
+    "tags": ["asociación", "España"]
+  }
+]
