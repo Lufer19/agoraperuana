@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Juegos Didácticos - Ágora Peruana</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Juegos Didácticos</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="articulos.html">Artículos</a>
+      <a href="definiciones.html">Definiciones</a>
+      <a href="tests.html">Tests</a>
+      <a href="juegos.html">Juegos</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="videos.html">Videos</a>
+      <a href="enlaces.html">Explorar</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Empareja el concepto con su definición</h2>
+    <div id="juego"></div>
+    <button onclick="verificar()">Verificar respuestas</button>
+    <p id="resultado"></p>
+  </main>
+
+  <script>
+    let pares = [];
+    fetch('content/juegos.json')
+      .then(r => r.json())
+      .then(data => {
+        pares = data;
+        const juegoDiv = document.getElementById('juego');
+        juegoDiv.innerHTML = pares.map((p,i) => `
+          <div>
+            <strong>${p.concepto}</strong><br>
+            <select id="sel${i}">
+              <option value="">--Selecciona definición--</option>
+              ${p.definiciones.map((d,j) => `<option value="${j}">${d}</option>`).join('')}
+            </select>
+          </div>
+        `).join('');
+      });
+
+    function verificar() {
+      let correctas = 0;
+      pares.forEach((p,i) => {
+        const sel = document.getElementById('sel'+i);
+        if (sel.value == p.correcta) correctas++;
+      });
+      document.getElementById('resultado').innerText =
+        `Tuviste ${correctas} de ${pares.length} correctas.`;
+    }
+  </script>
+</body>
+</html>
