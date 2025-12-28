@@ -1,85 +1,438 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Enviar Artículo - ASEFIP</title>
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:Georgia, 'Times New Roman', serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;padding:20px}
-    .container{max-width:900px;margin:0 auto;background:#fff;border-radius:12px;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.2)}
-    h1{color:#2d3748;margin-bottom:6px}
-    p.subtitle{color:#718096;margin-bottom:18px}
-    label{display:block;margin-top:12px;font-weight:600;color:#334155}
-    input[type="text"], input[type="email"], textarea, select {width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:8px;margin-top:6px}
-    textarea{min-height:200px;resize:vertical}
-    .form-actions{margin-top:18px;display:flex;gap:12px}
-    .btn{padding:10px 20px;border-radius:8px;border:0;cursor:pointer;font-weight:700}
-    .btn-primary{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff}
-    .helper{color:#64748b;font-size:.95em;margin-top:8px}
-    footer{margin-top:18px;color:#94a3b8;text-align:center}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviar Artículo - ASEFIP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+
+        .btn-enviar {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn-enviar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-enviar:active {
+            transform: translateY(0);
+        }
+
+        .btn-enviar:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .mensaje {
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mensaje.exito {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+
+        .mensaje.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+
+        .char-count {
+            text-align: right;
+            color: #999;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-box h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .info-box ul {
+            margin-left: 20px;
+            color: #555;
+        }
+
+        .info-box li {
+            margin-bottom: 8px;
+        }
+
+        .articulos-guardados {
+            margin-top: 50px;
+            padding-top: 50px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .articulos-guardados h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .articulo-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .articulo-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .articulo-card .meta {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .articulo-card .contenido-preview {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .btn-ver-mas {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn-ver-mas:hover {
+            background: #5568d3;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <a href="Blog.html" style="color:#667eea;text-decoration:none;font-weight:600">← Volver al Blog</a>
-    <header>
-      <h1>Enviar Artículo</h1>
-      <p class="subtitle">Completa este formulario para enviar tu ensayo a revisión.</p>
-    </header>
+    <div class="container">
+        <div class="header">
+            <h1>🦉 Envía tu Artículo Filosófico</h1>
+            <p>Comparte tu pensamiento con la comunidad ASEFIP</p>
+        </div>
 
-    <!-- Formulario que usa Formspree -->
-    <!-- Reemplaza {your-id} por tu endpoint de Formspree: https://formspree.io/f/{your-id} -->
-    <form id="sendArticleForm" action="https://formspree.io/f/{your-id}" method="POST">
-      <label for="title">Título del artículo</label>
-      <input type="text" id="title" name="title" required>
+        <div class="info-box">
+            <h3>📝 Instrucciones</h3>
+            <ul>
+                <li>Escribe sobre cualquier tema filosófico</li>
+                <li>Mínimo 200 caracteres para el contenido</li>
+                <li>Tu artículo será revisado antes de publicarse</li>
+                <li>Respetamos todos los artículos académicos y rigurosos</li>
+            </ul>
+        </div>
 
-      <label for="author">Nombre del autor</label>
-      <input type="text" id="author" name="author" required>
+        <div id="mensaje" class="mensaje"></div>
 
-      <label for="email">Correo electrónico (para contacto)</label>
-      <input type="email" id="email" name="_replyto" required>
+        <form id="formularioArticulo">
+            <div class="form-group">
+                <label for="nombre">Tu Nombre *</label>
+                <input type="text" id="nombre" name="nombre" required placeholder="Ej: María García">
+            </div>
 
-      <label for="university">Universidad / Facultad</label>
-      <input type="text" id="university" name="university">
+            <div class="form-group">
+                <label for="email">Tu Email *</label>
+                <input type="email" id="email" name="email" required placeholder="tu@email.com">
+            </div>
 
-      <label for="category">Categoría</label>
-      <select id="category" name="category">
-        <option value="ensayo">Ensayo</option>
-        <option value="reflexion">Reflexión</option>
-        <option value="resena">Reseña</option>
-        <option value="analisis">Análisis</option>
-        <option value="peruana">Filosofía Peruana</option>
-      </select>
+            <div class="form-group">
+                <label for="titulo">Título del Artículo *</label>
+                <input type="text" id="titulo" name="titulo" required placeholder="Ej: La ética de Aristóteles en el Perú contemporáneo">
+            </div>
 
-      <label for="content">Texto del artículo (pega aquí tu ensayo)</label>
-      <textarea id="content" name="content" placeholder="Escribe o pega tu artículo aquí..." required></textarea>
-      <div class="helper">Nota: si quieres enviar un archivo (PDF/DOCX), indícalo en el texto y podremos coordinar vía email (Formspree en su plan gratuito limita cargas de archivo).</div>
+            <div class="form-group">
+                <label for="categoria">Categoría *</label>
+                <select id="categoria" name="categoria" required>
+                    <option value="">Selecciona una categoría</option>
+                    <option value="etica">Ética</option>
+                    <option value="epistemologia">Epistemología</option>
+                    <option value="metafisica">Metafísica</option>
+                    <option value="logica">Lógica</option>
+                    <option value="filosofia-politica">Filosofía Política</option>
+                    <option value="filosofia-peruana">Filosofía Peruana</option>
+                    <option value="filosofia-antigua">Filosofía Antigua</option>
+                    <option value="filosofia-moderna">Filosofía Moderna</option>
+                    <option value="filosofia-contemporanea">Filosofía Contemporánea</option>
+                    <option value="otro">Otro</option>
+                </select>
+            </div>
 
-      <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Enviar para revisión</button>
-        <button type="reset" class="btn" style="background:#e2e8f0">Limpiar</button>
-      </div>
-    </form>
+            <div class="form-group">
+                <label for="contenido">Contenido del Artículo *</label>
+                <textarea id="contenido" name="contenido" required placeholder="Escribe aquí tu artículo filosófico..."></textarea>
+                <div class="char-count">
+                    <span id="contador">0</span> / 200 caracteres mínimos
+                </div>
+            </div>
 
-    <footer>
-      <p>Tras enviar, el equipo revisará tu artículo. Si se aprueba, lo publicaremos en el blog y te notificaremos por email.</p>
-    </footer>
-  </div>
+            <button type="submit" class="btn-enviar" id="btnEnviar">
+                📤 Enviar Artículo
+            </button>
+        </form>
 
-  <script>
-    // Pequeña confirmación UX al enviar
-    const form = document.getElementById('sendArticleForm');
-    form.addEventListener('submit', (e) => {
-      // Si no has cambiado {your-id} advertimos al usuario
-      if (form.action.includes('{your-id}')) {
-        e.preventDefault();
-        alert('Antes de enviar debes configurar el endpoint de Formspree: reemplaza {your-id} en el atributo action del formulario por tu id (ver instrucciones en la descripción del PR o en la guía). Si quieres, puedo configurar esto por ti.');
-        return;
-      }
-      // Dejar que se envíe al endpoint configurado
-      alert('Enviando artículo... serás redirigido/a a la página de confirmación de Formspree.');
-    });
-  </script>
+        <div class="articulos-guardados">
+            <h2>📚 Artículos Enviados Recientemente</h2>
+            <div id="listaArticulos"></div>
+        </div>
+    </div>
+
+    <script>
+        // Sistema de almacenamiento persistente
+        const formulario = document.getElementById('formularioArticulo');
+        const mensaje = document.getElementById('mensaje');
+        const btnEnviar = document.getElementById('btnEnviar');
+        const contenido = document.getElementById('contenido');
+        const contador = document.getElementById('contador');
+        const listaArticulos = document.getElementById('listaArticulos');
+
+        // Contador de caracteres
+        contenido.addEventListener('input', () => {
+            const cantidad = contenido.value.length;
+            contador.textContent = cantidad;
+            contador.style.color = cantidad >= 200 ? '#28a745' : '#999';
+        });
+
+        // Cargar artículos al iniciar
+        cargarArticulos();
+
+        // Enviar formulario
+        formulario.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('nombre').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const titulo = document.getElementById('titulo').value.trim();
+            const categoria = document.getElementById('categoria').value;
+            const contenidoTexto = contenido.value.trim();
+
+            // Validar longitud mínima
+            if (contenidoTexto.length < 200) {
+                mostrarMensaje('El artículo debe tener al menos 200 caracteres', 'error');
+                return;
+            }
+
+            // Crear objeto de artículo
+            const articulo = {
+                id: Date.now(),
+                nombre,
+                email,
+                titulo,
+                categoria,
+                contenido: contenidoTexto,
+                fecha: new Date().toLocaleString('es-PE'),
+                estado: 'pendiente'
+            };
+
+            try {
+                btnEnviar.disabled = true;
+                btnEnviar.textContent = '📤 Enviando...';
+
+                // Guardar en almacenamiento persistente
+                await guardarArticulo(articulo);
+
+                mostrarMensaje('¡Artículo enviado con éxito! Será revisado por nuestro equipo.', 'exito');
+                formulario.reset();
+                contador.textContent = '0';
+                
+                // Recargar lista
+                cargarArticulos();
+
+                setTimeout(() => {
+                    mensaje.style.display = 'none';
+                }, 5000);
+
+            } catch (error) {
+                mostrarMensaje('Error al enviar. Por favor intenta nuevamente.', 'error');
+            } finally {
+                btnEnviar.disabled = false;
+                btnEnviar.textContent = '📤 Enviar Artículo';
+            }
+        });
+
+        function mostrarMensaje(texto, tipo) {
+            mensaje.textContent = texto;
+            mensaje.className = `mensaje ${tipo}`;
+            mensaje.style.display = 'block';
+            mensaje.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        async function guardarArticulo(articulo) {
+            try {
+                // Obtener artículos existentes
+                const articulosExistentes = await obtenerArticulos();
+                articulosExistentes.push(articulo);
+
+                // Guardar en almacenamiento persistente
+                await window.storage.set('articulos_asefip', JSON.stringify(articulosExistentes));
+                
+                console.log('Artículo guardado exitosamente');
+            } catch (error) {
+                console.error('Error al guardar:', error);
+                throw error;
+            }
+        }
+
+        async function obtenerArticulos() {
+            try {
+                const result = await window.storage.get('articulos_asefip');
+                return result ? JSON.parse(result.value) : [];
+            } catch (error) {
+                // Si no existe la clave, retornar array vacío
+                return [];
+            }
+        }
+
+        async function cargarArticulos() {
+            try {
+                const articulos = await obtenerArticulos();
+                
+                if (articulos.length === 0) {
+                    listaArticulos.innerHTML = '<p style="color: #999; text-align: center;">No hay artículos enviados aún. ¡Sé el primero!</p>';
+                    return;
+                }
+
+                // Mostrar los últimos 5 artículos
+                const ultimosArticulos = articulos.slice(-5).reverse();
+                
+                listaArticulos.innerHTML = ultimosArticulos.map(art => `
+                    <div class="articulo-card">
+                        <h3>${art.titulo}</h3>
+                        <div class="meta">
+                            Por <strong>${art.nombre}</strong> • ${art.fecha} • ${art.categoria}
+                        </div>
+                        <div class="contenido-preview">
+                            ${art.contenido.substring(0, 150)}${art.contenido.length > 150 ? '...' : ''}
+                        </div>
+                        ${art.contenido.length > 150 ? `<button class="btn-ver-mas" onclick="verArticuloCompleto(${art.id})">Ver más</button>` : ''}
+                    </div>
+                `).join('');
+
+            } catch (error) {
+                console.error('Error al cargar artículos:', error);
+                listaArticulos.innerHTML = '<p style="color: #999;">Error al cargar artículos</p>';
+            }
+        }
+
+        async function verArticuloCompleto(id) {
+            const articulos = await obtenerArticulos();
+            const articulo = articulos.find(a => a.id === id);
+            
+            if (articulo) {
+                alert(`${articulo.titulo}\n\nPor: ${articulo.nombre}\nFecha: ${articulo.fecha}\n\n${articulo.contenido}`);
+            }
+        }
+
+        // Recargar artículos cada 30 segundos
+        setInterval(cargarArticulos, 30000);
+    </script>
 </body>
 </html>
