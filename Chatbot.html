@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lechuza Filosófica IA - ASEFIP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .chat-container {
+            width: 100%;
+            max-width: 800px;
+            height: 90vh;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .chat-header h1 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+
+        .chat-header p {
+            opacity: 0.9;
+            font-size: 0.95em;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f5f5f5;
+        }
+
+        .message {
+            margin-bottom: 20px;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.user {
+            text-align: right;
+        }
+
+        .message.bot {
+            text-align: left;
+        }
+
+        .message-content {
+            display: inline-block;
+            padding: 15px 20px;
+            border-radius: 18px;
+            max-width: 80%;
+            word-wrap: break-word;
+            line-height: 1.5;
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+
+        .message.bot .message-content {
+            background: white;
+            color: #333;
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .message-time {
+            font-size: 0.75em;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 18px;
+            width: fit-content;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .typing-indicator.active {
+            display: inline-block;
+        }
+
+        .typing-indicator span {
+            height: 10px;
+            width: 10px;
+            background: #667eea;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 2px;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .chat-input-container {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .chat-input-wrapper {
+            display: flex;
+            gap: 10px;
+        }
+
+        #chatInput {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 1em;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        #chatInput:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        #sendButton {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        #sendButton:hover {
+            transform: scale(1.05);
+        }
+
+        #sendButton:active {
+            transform: scale(0.95);
+        }
+
+        #sendButton:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .suggestions {
+            display: flex;
+            gap: 10px;
+            padding: 10px 0;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .suggestion-btn {
+            padding: 8px 16px;
+            background: #e7f3ff;
+            color: #667eea;
+            border: 1px solid #667eea;
+            border-radius: 20px;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .suggestion-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .welcome-message {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+
+        .welcome-message h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .welcome-message ul {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .welcome-message li {
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5568d3;
+        }
+
+        @media (max-width: 600px) {
+            .chat-container {
+                height: 100vh;
+                border-radius: 0;
+            }
+
+            .message-content {
+                max-width: 85%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>🦉 Lechuza Filosófica IA</h1>
+            <p>Tu asistente de filosofía impulsado por inteligencia artificial</p>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+            <div class="welcome-message">
+                <h2>¡Bienvenido! Soy tu asistente filosófico</h2>
+                <p>Puedo ayudarte con:</p>
+                <ul>
+                    <li>📚 Explicar conceptos filosóficos</li>
+                    <li>🎓 Resolver dudas sobre filósofos</li>
+                    <li>💭 Discutir ideas y teorías</li>
+                    <li>📖 Recomendar lecturas</li>
+                    <li>✍️ Ayudarte con tus ensayos</li>
+                </ul>
+            </div>
+            
+            <div class="suggestions">
+                <button class="suggestion-btn" onclick="enviarPregunta('¿Qué es la ética según Aristóteles?')">¿Qué es la ética?</button>
+                <button class="suggestion-btn" onclick="enviarPregunta('Explícame el mito de la caverna de Platón')">Mito de la caverna</button>
+                <button class="suggestion-btn" onclick="enviarPregunta('¿Quiénes son los filósofos peruanos más importantes?')">Filosofía peruana</button>
+                <button class="suggestion-btn" onclick="enviarPregunta('¿Qué es el existencialismo?')">Existencialismo</button>
+            </div>
+        </div>
+
+        <div class="chat-input-container">
+            <div class="chat-input-wrapper">
+                <input 
+                    type="text" 
+                    id="chatInput" 
+                    placeholder="Escribe tu pregunta filosófica..."
+                    onkeypress="if(event.key === 'Enter') enviarMensaje()"
+                >
+                <button id="sendButton" onclick="enviarMensaje()">
+                    📤 Enviar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const sendButton = document.getElementById('sendButton');
+
+        // Función para agregar mensaje a la interfaz
+        function agregarMensaje(texto, tipo) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${tipo}`;
+            
+            const ahora = new Date().toLocaleTimeString('es-PE', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+            
+            messageDiv.innerHTML = `
+                <div class="message-content">${texto}</div>
+                <div class="message-time">${ahora}</div>
+            `;
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Función para mostrar indicador de escritura
+        function mostrarEscribiendo(mostrar) {
+            let indicador = document.querySelector('.typing-indicator');
+            
+            if (mostrar) {
+                if (!indicador) {
+                    indicador = document.createElement('div');
+                    indicador.className = 'typing-indicator message bot';
+                    indicador.innerHTML = `
+                        <div class="message-content">
+                            <span></span><span></span><span></span>
+                        </div>
+                    `;
+                    chatMessages.appendChild(indicador);
+                }
+                indicador.classList.add('active');
+            } else {
+                if (indicador) {
+                    indicador.remove();
+                }
+            }
+            
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Función principal para enviar mensaje
+        async function enviarMensaje() {
+            const pregunta = chatInput.value.trim();
+            
+            if (!pregunta) return;
+            
+            // Agregar mensaje del usuario
+            agregarMensaje(pregunta, 'user');
+            chatInput.value = '';
+            
+            // Deshabilitar botón mientras procesa
+            sendButton.disabled = true;
+            mostrarEscribiendo(true);
+            
+            try {
+                // Llamar a la IA
+                const respuesta = await obtenerRespuestaIA(pregunta);
+                
+                // Quitar indicador y mostrar respuesta
+                mostrarEscribiendo(false);
+                agregarMensaje(respuesta, 'bot');
+                
+            } catch (error) {
+                mostrarEscribiendo(false);
+                agregarMensaje('Lo siento, tuve un problema al procesar tu pregunta. Por favor intenta nuevamente.', 'bot');
+                console.error('Error:', error);
+            } finally {
+                sendButton.disabled = false;
+                chatInput.focus();
+            }
+        }
+
+        // Función para obtener respuesta de la IA
+        async function obtenerRespuestaIA(pregunta) {
+            try {
+                const response = await fetch('https://api.anthropic.com/v1/messages', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        model: 'claude-sonnet-4-20250514',
+                        max_tokens: 1000,
+                        messages: [{
+                            role: 'user',
+                            content: `Eres un asistente filosófico experto de ASEFIP (Asociación de Estudiantes de Filosofía del Perú). Responde de manera clara, educativa y accesible. Si es posible, menciona filósofos peruanos relevantes. Pregunta: ${pregunta}`
+                        }]
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.content && data.content[0] && data.content[0].text) {
+                    return data.content[0].text;
+                } else {
+                    throw new Error('Respuesta inválida de la IA');
+                }
+                
+            } catch (error) {
+                console.error('Error al llamar a la IA:', error);
+                
+                // Respuestas de respaldo por categoría
+                return obtenerRespuestaLocal(pregunta);
+            }
+        }
+
+        // Sistema de respaldo con respuestas locales
+        function obtenerRespuestaLocal(pregunta) {
+            const preguntaLower = pregunta.toLowerCase();
+            
+            // Respuestas sobre ética
+            if (preguntaLower.includes('ética') || preguntaLower.includes('etica')) {
+                return 'La ética es la rama de la filosofía que estudia la moral, la virtud y el deber. Aristóteles la definió como la búsqueda de la "eudaimonia" (vida buena o florecimiento humano). En el Perú, filósofos como Augusto Salazar Bondy reflexionaron sobre la ética en el contexto latinoamericano. ¿Te gustaría profundizar en algún aspecto específico?';
+            }
+            
+            // Respuestas sobre Platón
+            if (preguntaLower.includes('platón') || preguntaLower.includes('platon') || preguntaLower.includes('caverna')) {
+                return 'El Mito de la Caverna de Platón es una alegoría sobre el conocimiento y la realidad. Describe a prisioneros que solo ven sombras proyectadas en una pared, creyendo que esa es toda la realidad. Cuando uno se libera y ve el mundo real, representa el viaje del conocimiento filosófico desde la ignorancia hasta la verdad. Esta alegoría es fundamental para entender la teoría de las Ideas de Platón.';
+            }
+            
+            // Respuestas sobre filosofía peruana
+            if (preguntaLower.includes('peru') || preguntaLower.includes('perú') || preguntaLower.includes('peruano')) {
+                return 'La filosofía peruana tiene grandes representantes: Augusto Salazar Bondy cuestionó si existe una filosofía auténticamente latinoamericana; Francisco Miró Quesada desarrolló su teoría de la razón; María Luisa Rivara de Tuesta estudió el pensamiento colonial; y David Sobrevilla reflexionó sobre estética y filosofía política. El pensamiento andino precolombino también es parte fundamental de nuestra tradición filosófica.';
+            }
+            
+            // Respuestas sobre existencialismo
+            if (preguntaLower.includes('existencialismo') || preguntaLower.includes('sartre') || preguntaLower.includes('camus')) {
+                return 'El existencialismo es una corriente filosófica que enfatiza la existencia individual, la libertad y la responsabilidad personal. Jean-Paul Sartre afirmaba que "la existencia precede a la esencia", es decir, que no tenemos una naturaleza predeterminada sino que nos creamos a través de nuestras decisiones. Albert Camus exploró el absurdo de la existencia humana. ¿Te interesa algún filósofo existencialista en particular?';
+            }
+            
+            // Respuesta genérica
+            return `Esa es una excelente pregunta filosófica. Te recomiendo explorar las obras de pensadores clásicos y contemporáneos sobre este tema. En ASEFIP tenemos recursos y artículos que pueden ayudarte. ¿Podrías reformular tu pregunta de manera más específica para poder ayudarte mejor?`;
+        }
+
+        // Función auxiliar para botones de sugerencias
+        function enviarPregunta(texto) {
+            chatInput.value = texto;
+            enviarMensaje();
+        }
+
+        // Enfocar el input al cargar
+        window.addEventListener('load', () => {
+            chatInput.focus();
+        });
+
+        // Guardar historial en localStorage
+        function guardarMensaje(texto, tipo) {
+            const historial = JSON.parse(localStorage.getItem('chat_historial') || '[]');
+            historial.push({
+                texto,
+                tipo,
+                fecha: new Date().toISOString()
+            });
+            localStorage.setItem('chat_historial', JSON.stringify(historial));
+        }
+    </script>
+</body>
+</html>
