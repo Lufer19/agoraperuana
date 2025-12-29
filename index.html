@@ -4,430 +4,623 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASEFIP - Asociación de Estudiantes de Filosofía del Perú</title>
-    <meta name="description" content="La primera plataforma digital de filosofía peruana. Aprende, conecta y crece con la comunidad filosófica más grande del Perú.">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦉</text></svg>">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
-        :root {
-            --primary: #667eea;
-            --secondary: #764ba2;
-            --dark: #2d3748;
-            --gray: #718096;
-            --light: #f7fafc;
-        }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: var(--dark);
             line-height: 1.6;
+            color: #333;
         }
-        
+
         /* NAVEGACIÓN */
         nav {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            padding: 1rem 0;
-            position: sticky;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
-        
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+
+        nav .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        
+
         .logo {
-            color: white;
-            font-size: 1.8em;
+            font-size: 1.5rem;
             font-weight: bold;
+            color: white;
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
-        
+
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 1.5rem;
             list-style: none;
         }
-        
+
         .nav-links a {
             color: white;
             text-decoration: none;
             font-weight: 500;
-            transition: opacity 0.3s;
+            transition: all 0.3s;
+            padding: 8px 15px;
+            border-radius: 20px;
         }
-        
+
         .nav-links a:hover {
-            opacity: 0.8;
+            background: rgba(255,255,255,0.2);
         }
-        
+
         /* HERO */
         .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 100px 20px;
+            padding: 120px 5% 80px;
             text-align: center;
+            margin-top: 60px;
         }
-        
+
         .hero h1 {
-            font-size: 3.5em;
-            margin-bottom: 20px;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s;
         }
-        
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .hero p {
-            font-size: 1.3em;
-            max-width: 700px;
-            margin: 0 auto 40px;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
             opacity: 0.95;
+            animation: fadeInUp 1s;
         }
-        
+
         .cta-buttons {
             display: flex;
-            gap: 20px;
+            gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
+            animation: fadeInUp 1.2s;
         }
-        
+
         .btn {
-            padding: 15px 35px;
-            border-radius: 8px;
+            padding: 15px 30px;
+            border-radius: 30px;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1em;
+            font-weight: bold;
             transition: all 0.3s;
             display: inline-block;
             cursor: pointer;
-            border: none;
         }
-        
+
         .btn-primary {
             background: white;
-            color: var(--primary);
+            color: #667eea;
         }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(255,255,255,0.3);
-        }
-        
+
         .btn-secondary {
             background: transparent;
-            border: 2px solid white;
             color: white;
+            border: 2px solid white;
         }
-        
-        .btn-secondary:hover {
-            background: white;
-            color: var(--primary);
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
-        
-        /* SECCIONES */
-        .container {
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* EFEMÉRIDE */
+        .efemeride {
+            background: #f8f9fa;
+            padding: 25px;
+            margin: 30px 5%;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            animation: slideIn 0.5s;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .efemeride h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .efemeride p {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* RECURSOS */
+        .recursos {
+            padding: 80px 5%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 80px 20px;
         }
-        
-        .section-title {
-            font-size: 2.5em;
+
+        .recursos h2 {
             text-align: center;
-            margin-bottom: 20px;
-            color: var(--dark);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #333;
         }
-        
-        .section-subtitle {
+
+        .recursos > p {
             text-align: center;
-            color: var(--gray);
-            font-size: 1.2em;
-            margin-bottom: 50px;
+            color: #666;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
         }
-        
-        /* EFEMÉRIDE DEL DÍA */
-        .efemeride {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px;
-            border-radius: 15px;
-            margin-bottom: 50px;
-            text-align: center;
-        }
-        
-        .efemeride h3 {
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
-        
-        .efemeride-content {
-            font-size: 1.2em;
-            line-height: 1.8;
-        }
-        
-        .efemeride-fecha {
-            font-weight: bold;
-            font-size: 1.3em;
-            margin-bottom: 15px;
-        }
-        
-        /* GRID DE RECURSOS */
+
         .recursos-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
+            gap: 2rem;
         }
-        
+
         .recurso-card {
             background: white;
-            padding: 40px;
-            border-radius: 15px;
+            padding: 35px;
+            border-radius: 20px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            text-align: center;
             transition: all 0.3s;
+            text-align: center;
             border: 2px solid transparent;
         }
-        
+
         .recurso-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
-            border-color: var(--primary);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
         }
-        
-        .recurso-icon {
-            font-size: 4em;
-            margin-bottom: 20px;
+
+        .recurso-card .icono {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
         }
-        
+
         .recurso-card h3 {
-            font-size: 1.5em;
-            margin-bottom: 15px;
-            color: var(--dark);
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
         }
-        
+
         .recurso-card p {
-            color: var(--gray);
-            margin-bottom: 20px;
+            margin-bottom: 1.5rem;
+            color: #666;
             line-height: 1.7;
         }
-        
+
+        .recurso-card .btn {
+            padding: 12px 28px;
+            font-size: 0.95rem;
+        }
+
         /* ESTADÍSTICAS */
         .stats {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 5%;
+            text-align: center;
+        }
+
+        .stats h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin: 50px 0;
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
         }
-        
-        .stat-card {
-            text-align: center;
-            padding: 30px;
-            background: var(--light);
+
+        .stat-item {
+            padding: 25px;
+            background: rgba(255,255,255,0.1);
             border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s;
         }
-        
+
+        .stat-item:hover {
+            transform: scale(1.05);
+            background: rgba(255,255,255,0.15);
+        }
+
         .stat-number {
-            font-size: 3em;
+            font-size: 3.5rem;
             font-weight: bold;
-            color: var(--primary);
-            line-height: 1;
-            margin-bottom: 10px;
+            margin-bottom: 0.5rem;
+            color: #fff;
         }
-        
+
         .stat-label {
-            color: var(--gray);
-            font-size: 1.1em;
+            font-size: 1.2rem;
+            opacity: 0.95;
         }
-        
+
         /* CHATBOT FLOTANTE */
-        .chatbot-btn {
+        .chat-button {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s;
+            z-index: 999;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            }
+            50% {
+                box-shadow: 0 8px 35px rgba(102, 126, 234, 0.6);
+            }
+        }
+
+        .chat-button:hover {
+            transform: scale(1.1);
+        }
+
+        .chat-button:active {
+            transform: scale(0.95);
+        }
+
+        .chat-popup {
+            position: fixed;
+            bottom: 110px;
+            right: 30px;
+            width: 380px;
+            height: 550px;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+            display: none;
+            flex-direction: column;
+            z-index: 998;
+            animation: slideUp 0.3s;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chat-popup.active {
+            display: flex;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 25px 25px 0 0;
+            position: relative;
+        }
+
+        .chat-header h3 {
+            margin: 0;
+            font-size: 1.3rem;
+        }
+
+        .chat-header p {
+            margin-top: 5px;
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .chat-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
-            z-index: 999;
-            transition: transform 0.3s;
+            transition: background 0.3s;
         }
-        
-        .chatbot-btn:hover {
-            transform: scale(1.1);
+
+        .chat-close:hover {
+            background: rgba(255,255,255,0.3);
         }
-        
-        .chatbot-btn span {
-            font-size: 2em;
-        }
-        
-        .chatbot-window {
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            width: 350px;
-            height: 500px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            display: none;
-            flex-direction: column;
-            z-index: 998;
-        }
-        
-        .chatbot-window.active {
-            display: flex;
-        }
-        
-        .chatbot-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 15px 15px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .chatbot-close {
-            cursor: pointer;
-            font-size: 1.5em;
-        }
-        
-        .chatbot-messages {
+
+        .chat-messages {
             flex: 1;
             padding: 20px;
             overflow-y: auto;
+            background: #f5f5f5;
         }
-        
-        .message {
+
+        .chat-message {
             margin-bottom: 15px;
-            padding: 12px 15px;
-            border-radius: 10px;
-            max-width: 80%;
+            animation: fadeIn 0.3s;
         }
-        
-        .message.bot {
-            background: var(--light);
-            margin-right: auto;
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        
-        .message.user {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            margin-left: auto;
-        }
-        
-        .chatbot-input {
-            display: flex;
+
+        .chat-message.bot .message-content {
+            background: white;
             padding: 15px;
-            border-top: 1px solid #e2e8f0;
+            border-radius: 18px;
+            border-bottom-left-radius: 5px;
+            display: inline-block;
+            max-width: 85%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            line-height: 1.5;
         }
-        
-        .chatbot-input input {
+
+        .chat-message.user {
+            text-align: right;
+        }
+
+        .chat-message.user .message-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 18px;
+            border-bottom-right-radius: 5px;
+            display: inline-block;
+            max-width: 85%;
+            line-height: 1.5;
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 18px;
+            width: fit-content;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .typing-indicator.active {
+            display: inline-block;
+        }
+
+        .typing-indicator span {
+            height: 8px;
+            width: 8px;
+            background: #667eea;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 2px;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .chat-input-area {
+            padding: 20px;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            gap: 10px;
+            background: white;
+            border-radius: 0 0 25px 25px;
+        }
+
+        .chat-input-area input {
             flex: 1;
-            padding: 10px;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            margin-right: 10px;
+            padding: 12px 18px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            outline: none;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
         }
-        
-        .chatbot-input button {
-            padding: 10px 20px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+
+        .chat-input-area input:focus {
+            border-color: #667eea;
+        }
+
+        .chat-input-area button {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 25px;
             cursor: pointer;
+            font-size: 1.1rem;
+            transition: transform 0.2s;
         }
-        
+
+        .chat-input-area button:hover {
+            transform: scale(1.05);
+        }
+
+        .chat-input-area button:active {
+            transform: scale(0.95);
+        }
+
         /* FOOTER */
         footer {
-            background: #1a202c;
-            color: #e2e8f0;
-            padding: 50px 20px 30px;
+            background: #2c3e50;
+            color: white;
+            padding: 50px 5%;
         }
-        
+
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 30px;
+            gap: 3rem;
         }
-        
+
         .footer-section h3 {
-            color: white;
-            margin-bottom: 20px;
+            margin-bottom: 1.5rem;
+            color: #667eea;
         }
-        
+
         .footer-section ul {
             list-style: none;
         }
-        
+
         .footer-section li {
-            margin-bottom: 10px;
+            margin-bottom: 0.8rem;
         }
-        
+
         .footer-section a {
-            color: #cbd5e0;
+            color: #ecf0f1;
             text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
         }
-        
+
         .footer-section a:hover {
-            color: #90cdf4;
+            color: #667eea;
+            transform: translateX(5px);
         }
-        
+
         .footer-bottom {
             text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid #4a5568;
-            color: #a0aec0;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #34495e;
         }
-        
+
+        /* RESPONSIVE */
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2.5em;
+                font-size: 2rem;
             }
             
             .nav-links {
-                display: none;
+                gap: 0.8rem;
+                font-size: 0.85rem;
             }
-            
-            .chatbot-window {
+
+            .nav-links a {
+                padding: 6px 10px;
+            }
+
+            .chat-popup {
                 width: calc(100% - 40px);
                 right: 20px;
+                left: 20px;
+                height: 70vh;
             }
+
+            .chat-button {
+                width: 55px;
+                height: 55px;
+                font-size: 1.6rem;
+            }
+
+            .recursos-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5568d3;
         }
     </style>
 </head>
 <body>
     <!-- NAVEGACIÓN -->
     <nav>
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <span>🦉</span>
-                <span>ASEFIP</span>
-            </a>
+        <div class="container">
+            <a href="index.html" class="logo">🦉 ASEFIP</a>
             <ul class="nav-links">
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#recursos">Recursos</a></li>
-                <li><a href="#comunidad">Comunidad</a></li>
+                <li><a href="enviar-articulo.html">Enviar Artículo</a></li>
+                <li><a href="chatbot.html">Chatbot IA</a></li>
             </ul>
         </div>
     </nav>
@@ -435,124 +628,123 @@
     <!-- HERO -->
     <section class="hero" id="inicio">
         <h1>🇵🇪 Filosofía Peruana para el Mundo</h1>
-        <p>La primera plataforma digital dedicada al pensamiento filosófico peruano. Un espacio donde estudiantes y amantes de la filosofía se encuentran.</p>
+        <p>La primera plataforma digital dedicada al pensamiento filosófico peruano.<br>Un espacio donde estudiantes y amantes de la filosofía se encuentran.</p>
         <div class="cta-buttons">
             <a href="#recursos" class="btn btn-primary">Comenzar a Aprender</a>
-            <a href="#comunidad" class="btn btn-secondary">Unirse a la Comunidad</a>
+            <a href="enviar-articulo.html" class="btn btn-secondary">Enviar tu Artículo</a>
         </div>
     </section>
 
     <!-- EFEMÉRIDE DEL DÍA -->
-    <div class="container">
-        <div class="efemeride">
-            <h3>📅 Hoy en la Historia de la Filosofía</h3>
-            <div class="efemeride-fecha" id="fecha-hoy"></div>
-            <div class="efemeride-content" id="efemeride-contenido">
-                Cargando efeméride del día...
-            </div>
-        </div>
-
-        <!-- RECURSOS -->
-        <div id="recursos">
-            <h2 class="section-title">Recursos Exclusivos</h2>
-            <p class="section-subtitle">Todo lo que necesitas para tu formación filosófica</p>
-            
-            <div class="recursos-grid">
-                <div class="recurso-card">
-                    <div class="recurso-icon">📚</div>
-                    <h3>Biblioteca Digital</h3>
-                    <p>Accede a cientos de textos filosóficos, desde clásicos griegos hasta pensadores peruanos contemporáneos.</p>
-                    <a href="#" class="btn btn-secondary">Explorar</a>
-                </div>
-                
-                <div class="recurso-card">
-                    <div class="recurso-icon">🇵🇪</div>
-                    <h3>Filosofía Peruana</h3>
-                    <p>Descubre el pensamiento filosófico hecho en el Perú. Única plataforma dedicada a nuestros pensadores.</p>
-                    <a href="#" class="btn btn-secondary">Descubrir</a>
-                </div>
-                
-                <div class="recurso-card">
-                    <div class="recurso-icon">🎓</div>
-                    <h3>Cursos Gratuitos</h3>
-                    <p>Aprende filosofía de manera estructurada con materiales diseñados por estudiantes y profesores.</p>
-                    <a href="#" class="btn btn-secondary">Comenzar</a>
-                </div>
-                
-                <div class="recurso-card">
-                    <div class="recurso-icon">💬</div>
-                    <h3>Foro de Debate</h3>
-                    <p>Participa en discusiones filosóficas con estudiantes de todo el Perú.</p>
-                    <a href="#" class="btn btn-secondary">Participar</a>
-                </div>
-                
-                <div class="recurso-card">
-                    <div class="recurso-icon">🎯</div>
-                    <h3>Ejercicios Interactivos</h3>
-                    <p>Pon a prueba tus conocimientos con tests de 3 niveles de dificultad.</p>
-                    <a href="#" class="btn btn-secondary">Practicar</a>
-                </div>
-                
-                <div class="recurso-card">
-                    <div class="recurso-icon">📖</div>
-                    <h3>Glosario Filosófico</h3>
-                    <p>Diccionario interactivo con más de 200 términos filosóficos explicados.</p>
-                    <a href="#" class="btn btn-secondary">Consultar</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- ESTADÍSTICAS -->
-        <div id="comunidad">
-            <h2 class="section-title">Una Comunidad Activa</h2>
-            <p class="section-subtitle">Únete a estudiantes de filosofía de todo el Perú</p>
-            
-            <div class="stats">
-                <div class="stat-card">
-                    <div class="stat-number" id="stat-estudiantes">0</div>
-                    <div class="stat-label">Estudiantes</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="stat-universidades">0</div>
-                    <div class="stat-label">Universidades</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="stat-recursos">0</div>
-                    <div class="stat-label">Recursos</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">24/7</div>
-                    <div class="stat-label">Activo</div>
-                </div>
-            </div>
-        </div>
+    <div class="efemeride">
+        <h3>📅 Hoy en la Historia de la Filosofía</h3>
+        <p id="efemeridesTexto">Cargando efeméride del día...</p>
     </div>
 
-    <!-- CHATBOT FLOTANTE -->
-    <div class="chatbot-btn" onclick="toggleChatbot()">
-        <span>💬</span>
-    </div>
+    <!-- RECURSOS -->
+    <section class="recursos" id="recursos">
+        <h2>Recursos Exclusivos</h2>
+        <p>Todo lo que necesitas para tu formación filosófica</p>
+        
+        <div class="recursos-grid">
+            <div class="recurso-card">
+                <div class="icono">📚</div>
+                <h3>Biblioteca Digital</h3>
+                <p>Accede a cientos de textos filosóficos, desde clásicos griegos hasta pensadores peruanos contemporáneos.</p>
+                <a href="recursos.html" class="btn btn-primary">Explorar</a>
+            </div>
 
-    <div class="chatbot-window" id="chatbot">
-        <div class="chatbot-header">
-            <div>
-                <strong>🤖 Asistente Filosófico</strong><br>
-                <small>Pregúntame sobre filosofía</small>
+            <div class="recurso-card">
+                <div class="icono">🇵🇪</div>
+                <h3>Filosofía Peruana</h3>
+                <p>Descubre el pensamiento filosófico hecho en el Perú. Única plataforma dedicada a nuestros pensadores.</p>
+                <a href="filosofia-peruana.html" class="btn btn-primary">Descubrir</a>
             </div>
-            <span class="chatbot-close" onclick="toggleChatbot()">×</span>
-        </div>
-        <div class="chatbot-messages" id="chatMessages">
-            <div class="message bot">
-                ¡Hola! Soy tu asistente filosófico. Puedo ayudarte con:
-                <br>• Definiciones de conceptos
-                <br>• Información sobre filósofos
-                <br>• Recomendaciones de lectura
-                <br><br>¿Qué te gustaría saber?
+
+            <div class="recurso-card">
+                <div class="icono">📝</div>
+                <h3>Enviar Artículo</h3>
+                <p>Comparte tus reflexiones filosóficas con la comunidad. Publica tus ensayos y análisis.</p>
+                <a href="enviar-articulo.html" class="btn btn-primary">Publicar</a>
+            </div>
+
+            <div class="recurso-card">
+                <div class="icono">💬</div>
+                <h3>Foro de Debate</h3>
+                <p>Participa en discusiones filosóficas con estudiantes de todo el Perú.</p>
+                <a href="comunidad.html" class="btn btn-primary">Participar</a>
+            </div>
+
+            <div class="recurso-card">
+                <div class="icono">🎯</div>
+                <h3>Ejercicios Interactivos</h3>
+                <p>Pon a prueba tus conocimientos con tests de 3 niveles de dificultad.</p>
+                <a href="ejercicios.html" class="btn btn-primary">Practicar</a>
+            </div>
+
+            <div class="recurso-card">
+                <div class="icono">📖</div>
+                <h3>Glosario Filosófico</h3>
+                <p>Diccionario interactivo con más de 200 términos filosóficos explicados.</p>
+                <a href="glosario.html" class="btn btn-primary">Consultar</a>
             </div>
         </div>
-        <div class="chatbot-input">
-            <input type="text" id="chatInput" placeholder="Escribe tu pregunta..." onkeypress="if(event.key==='Enter') enviarMensaje()">
-            <button onclick="enviarMensaje()">Enviar</button>
+    </section>
+
+    <!-- ESTADÍSTICAS -->
+    <section class="stats">
+        <h2>Una Comunidad Activa</h2>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number" id="statArticulos">...</div>
+                <div class="stat-label">Artículos Enviados</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Universidades</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Recursos</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Disponible</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOTÓN CHATBOT FLOTANTE -->
+    <button class="chat-button" onclick="toggleChat()" title="Habla con la Lechuza Filosófica">💬</button>
+
+    <!-- POPUP CHATBOT -->
+    <div class="chat-popup" id="chatPopup">
+        <div class="chat-header">
+            <h3>🤖 Lechuza Filosófica IA</h3>
+            <p>Tu asistente filosófico inteligente</p>
+            <button class="chat-close" onclick="toggleChat()">×</button>
+        </div>
+        <div class="chat-messages" id="popupChatMessages">
+            <div class="chat-message bot">
+                <div class="message-content">
+                    ¡Hola! 👋 Soy tu asistente filosófico impulsado por IA.<br><br>
+                    Puedo ayudarte con:<br>
+                    • Explicar conceptos filosóficos<br>
+                    • Información sobre filósofos<br>
+                    • Discutir ideas y teorías<br>
+                    • Recomendar lecturas<br><br>
+                    ¿Qué te gustaría saber?
+                </div>
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input 
+                type="text" 
+                id="popupChatInput" 
+                placeholder="Pregúntame sobre filosofía..."
+                onkeypress="if(event.key==='Enter') enviarMensajePopup()"
+            >
+            <button onclick="enviarMensajePopup()">📤</button>
         </div>
     </div>
 
@@ -562,40 +754,40 @@
             <div class="footer-section">
                 <h3>ASEFIP</h3>
                 <p>Asociación de Estudiantes de Filosofía del Perú</p>
-                <p style="margin-top: 15px;">Promoviendo el pensamiento crítico desde 2024</p>
+                <p style="margin-top: 15px;">Promoviendo el pensamiento crítico y la reflexión filosófica desde 2024</p>
             </div>
-            
+
             <div class="footer-section">
                 <h3>Recursos</h3>
                 <ul>
-                    <li><a href="#">Biblioteca Digital</a></li>
-                    <li><a href="#">Filosofía Peruana</a></li>
-                    <li><a href="#">Glosario</a></li>
-                    <li><a href="#">Ejercicios</a></li>
+                    <li><a href="recursos.html">📚 Biblioteca Digital</a></li>
+                    <li><a href="filosofia-peruana.html">🇵🇪 Filosofía Peruana</a></li>
+                    <li><a href="glosario.html">📖 Glosario Filosófico</a></li>
+                    <li><a href="ejercicios.html">🎯 Ejercicios Interactivos</a></li>
                 </ul>
             </div>
-            
+
             <div class="footer-section">
                 <h3>Comunidad</h3>
                 <ul>
-                    <li><a href="#">Foro</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Eventos</a></li>
-                    <li><a href="#">Únete</a></li>
+                    <li><a href="comunidad.html">💬 Foro de Debates</a></li>
+                    <li><a href="articulos.html">📰 Blog Filosófico</a></li>
+                    <li><a href="enviar-articulo.html">✍️ Enviar Artículo</a></li>
+                    <li><a href="chatbot.html">🤖 Chatbot IA Completo</a></li>
                 </ul>
             </div>
-            
+
             <div class="footer-section">
                 <h3>Contacto</h3>
                 <ul>
-                    <li><a href="mailto:contacto@asefip.org">contacto@asefip.org</a></li>
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Instagram</a></li>
-                    <li><a href="#">WhatsApp</a></li>
+                    <li><a href="mailto:contacto@asefip.org">📧 contacto@asefip.org</a></li>
+                    <li><a href="https://www.tiktok.com/@asefip01" target="_blank">🎵 TikTok: @asefip01</a></li>
+                    <li><a href="https://www.instagram.com/asefip_" target="_blank">📸 Instagram: @asefip_</a></li>
+                    <li><a href="https://wa.me/51999999999" target="_blank">💬 WhatsApp</a></li>
                 </ul>
             </div>
         </div>
-        
+
         <div class="footer-bottom">
             <p>© 2024-2025 ASEFIP - Asociación de Estudiantes de Filosofía del Perú</p>
             <p style="margin-top: 10px;">Filosofía para transformar el Perú 🇵🇪</p>
@@ -603,110 +795,251 @@
     </footer>
 
     <script>
-        // EFEMÉRIDES AUTOMÁTICAS
+        // ============================================
+        // EFEMÉRIDES FILOSÓFICAS (Base de datos ampliada)
+        // ============================================
         const efemerides = {
-            "12-26": {
-                titulo: "Nace Thomas Gray",
-                descripcion: "En 1716 nace Thomas Gray, poeta y erudito inglés conocido por su 'Elegía escrita en un cementerio de aldea', obra que reflexiona sobre la mortalidad y el paso del tiempo."
-            },
-            // Se pueden agregar 365 efemérides aquí
+            '1-1': 'Nació Giambattista Vico (1668), filósofo italiano pionero de la filosofía de la historia.',
+            '1-15': 'Nació Martin Luther King Jr. (1929), filósofo de la no violencia y activista por los derechos civiles.',
+            '2-5': 'Murió Georg Wilhelm Friedrich Hegel (1831), uno de los más grandes filósofos del idealismo alemán.',
+            '2-14': 'Murió Galileo Galilei (1564-1642), revolucionó la filosofía natural con el método científico.',
+            '3-8': 'Día Internacional de la Mujer - Celebramos a filósofas como Simone de Beauvoir, Hannah Arendt y María Zambrano.',
+            '3-15': 'Murió Santo Tomás de Aquino (1274), filósofo escolástico que sintetizó filosofía aristotélica con cristianismo.',
+            '4-15': 'Nació Leonardo da Vinci (1452), genio renacentista que integró arte, ciencia y filosofía.',
+            '4-27': 'Nació Mary Wollstonecraft (1759), filósofa pionera del feminismo y los derechos de la mujer.',
+            '5-5': 'Nació Søren Kierkegaard (1813), padre del existencialismo y filósofo de la angustia existencial.',
+            '5-18': 'Nació Bertrand Russell (1872), filósofo analítico, matemático y activista por la paz.',
+            '6-21': 'Nació Jean-Paul Sartre (1905), filósofo existencialista francés y escritor comprometido.',
+            '7-3': 'Murió Franz Kafka (1924), escritor cuya obra explora la angustia existencial y el absurdo.',
+            '7-6': 'Nació Frida Kahlo (1907), artista cuya obra reflexiona sobre identidad, sufrimiento y existencia.',
+            '8-13': 'Murió Augusto Salazar Bondy (1974), filósofo peruano que cuestionó la autenticidad del pensamiento latinoamericano.',
+            '8-27': 'Nació Georg Wilhelm Friedrich Hegel (1770), filósofo alemán del idealismo dialéctico.',
+            '9-21': 'Murió Arthur Schopenhauer (1860), filósofo alemán del pesimismo y la voluntad.',
+            '10-14': 'Nació Hannah Arendt (1906), filósofa política que reflexionó sobre totalitarismo y la condición humana.',
+            '10-15': 'Nació Friedrich Nietzsche (1844), filósofo que proclamó la muerte de Dios y el superhombre.',
+            '11-18': 'Murió Immanuel Kant (1804), filósofo de la Ilustración que revolucionó la epistemología y la ética.',
+            '12-7': 'Nació Noam Chomsky (1928), filósofo del lenguaje, lingüista y activista político.',
+            '12-25': 'Nació Isaac Newton (1642), científico y filósofo natural que transformó nuestra comprensión del universo.',
+            '12-28': 'Nació John von Neumann (1903), matemático y filósofo de la ciencia que contribuyó a la teoría de juegos y la computación.'
         };
 
-        function mostrarEfemeride() {
+        function cargarEfemeride() {
             const hoy = new Date();
-            const mes = String(hoy.getMonth() + 1).padStart(2, '0');
-            const dia = String(hoy.getDate()).padStart(2, '0');
+            const mes = hoy.getMonth() + 1;
+            const dia = hoy.getDate();
             const clave = `${mes}-${dia}`;
             
-            const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 
-                          'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
-            
-            document.getElementById('fecha-hoy').textContent = `${dia} de ${meses[hoy.getMonth()]}`;
-            
-            const efemeride = efemerides[clave];
-            if (efemeride) {
-                document.getElementById('efemeride-contenido').innerHTML = `
-                    <strong>${efemeride.titulo}</strong><br>
-                    ${efemeride.descripcion}
-                `;
+            const efemeridesTexto = document.getElementById('efemeridesTexto');
+            if (efemerides[clave]) {
+                efemeridesTexto.textContent = efemerides[clave];
             } else {
-                document.getElementById('efemeride-contenido').textContent = 
-                    "Hoy es un día para reflexionar sobre la filosofía y su impacto en nuestras vidas.";
+                efemeridesTexto.textContent = '📚 Hoy es un día perfecto para reflexionar sobre el legado filosófico que atraviesa la historia. La filosofía nos invita a cuestionar, pensar y transformar nuestra comprensión del mundo.';
             }
         }
 
-        // ANIMACIÓN DE ESTADÍSTICAS
-        function animarNumero(elemento, valorFinal, duracion) {
-            let inicio = 0;
-            const incremento = valorFinal / (duracion / 16);
+        // ============================================
+        // CONTADOR DE ARTÍCULOS REAL
+        // ============================================
+        function actualizarContadores() {
+            try {
+                const articulos = JSON.parse(localStorage.getItem('articulos_asefip') || '[]');
+                const cantidad = articulos.length;
+                const elemento = document.getElementById('statArticulos');
+                
+                // Animación de contador
+                let contador = 0;
+                const intervalo = setInterval(() => {
+                    elemento.textContent = contador;
+                    contador++;
+                    if (contador > cantidad) {
+                        clearInterval(intervalo);
+                        elemento.textContent = cantidad;
+                    }
+                }, 50);
+            } catch (e) {
+                document.getElementById('statArticulos').textContent = '0';
+            }
+        }
+
+        // ============================================
+        // CHATBOT POPUP MEJORADO
+        // ============================================
+        function toggleChat() {
+            const popup = document.getElementById('chatPopup');
+            popup.classList.toggle('active');
             
-            function actualizar() {
-                inicio += incremento;
-                if (inicio < valorFinal) {
-                    elemento.textContent = Math.floor(inicio) + '+';
-                    requestAnimationFrame(actualizar);
+            if (popup.classList.contains('active')) {
+                document.getElementById('popupChatInput').focus();
+            }
+        }
+
+        function agregarMensaje(texto, tipo) {
+            const messagesDiv = document.getElementById('popupChatMessages');
+            const mensaje = document.createElement('div');
+            mensaje.className = `chat-message ${tipo}`;
+            mensaje.innerHTML = `<div class="message-content">${texto}</div>`;
+            messagesDiv.appendChild(mensaje);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function mostrarEscribiendo(mostrar) {
+            const messagesDiv = document.getElementById('popupChatMessages');
+            let indicador = messagesDiv.querySelector('.typing-indicator');
+            
+            if (mostrar) {
+                if (!indicador) {
+                    indicador = document.createElement('div');
+                    indicador.className = 'typing-indicator active';
+                    indicador.innerHTML = '<span></span><span></span><span></span>';
+                    messagesDiv.appendChild(indicador);
                 } else {
-                    elemento.textContent = valorFinal + '+';
+                    indicador.classList.add('active');
+                }
+            } else {
+                if (indicador) {
+                    indicador.remove();
                 }
             }
-            actualizar();
-        }
-
-        // CHATBOT
-        function toggleChatbot() {
-            document.getElementById('chatbot').classList.toggle('active');
-        }
-
-        function enviarMensaje() {
-            const input = document.getElementById('chatInput');
-            const mensaje = input.value.trim();
             
-            if (!mensaje) return;
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        async function enviarMensajePopup() {
+            const input = document.getElementById('popupChatInput');
+            const pregunta = input.value.trim();
+            
+            if (!pregunta) return;
             
             // Agregar mensaje del usuario
-            const messagesDiv = document.getElementById('chatMessages');
-            messagesDiv.innerHTML += `<div class="message user">${mensaje}</div>`;
-            
-            // Limpiar input
+            agregarMensaje(pregunta, 'user');
             input.value = '';
             
-            // Respuesta automática del bot (GRATIS, sin API)
-            setTimeout(() => {
-                let respuesta = obtenerRespuesta(mensaje.toLowerCase());
-                messagesDiv.innerHTML += `<div class="message bot">${respuesta}</div>`;
-                messagesDiv.scrollTop = messagesDiv.scrollHeight;
-            }, 1000);
+            // Mostrar indicador de escritura
+            mostrarEscribiendo(true);
+            
+            // Simular delay de procesamiento
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            // Obtener respuesta
+            const respuesta = obtenerRespuestaIA(pregunta);
+            mostrarEscribiendo(false);
+            agregarMensaje(respuesta, 'bot');
         }
 
-        function obtenerRespuesta(mensaje) {
-            // Base de conocimiento simple (GRATIS)
-            if (mensaje.includes('socrates') || mensaje.includes('sócrates')) {
-                return "Sócrates (470-399 a.C.) fue el padre de la filosofía occidental. Desarrolló la mayéutica y su famosa frase es 'Sólo sé que no sé nada'. ¿Quieres saber más sobre algún aspecto específico?";
-            }
-            if (mensaje.includes('platon') || mensaje.includes('platón')) {
-                return "Platón (427-347 a.C.) fue discípulo de Sócrates y maestro de Aristóteles. Su obra más famosa es 'La República'. Desarrolló la teoría de las Ideas. ¿Te gustaría explorar su filosofía?";
-            }
-            if (mensaje.includes('kant')) {
-                return "Immanuel Kant (1724-1804) realizó la síntesis entre racionalismo y empirismo. Su obra 'Crítica de la Razón Pura' es fundamental. El imperativo categórico es central en su ética.";
-            }
-            if (mensaje.includes('filosofia peruana') || mensaje.includes('peru')) {
-                return "¡Excelente pregunta! La filosofía peruana incluye pensadores como José Carlos Mariátegui, Augusto Salazar Bondy y María Luisa Rivara. ¿Quieres conocer más sobre alguno de ellos?";
-            }
-            if (mensaje.includes('hola') || mensaje.includes('ayuda')) {
-                return "¡Hola! Estoy aquí para ayudarte con filosofía. Puedo explicarte conceptos, hablarte de filósofos o recomendarte lecturas. ¿Sobre qué te gustaría aprender?";
+        function obtenerRespuestaIA(pregunta) {
+            const p = pregunta.toLowerCase();
+            
+            // Saludos
+            if (p.includes('hola') || p.includes('buenos') || p.includes('hi')) {
+                return '¡Hola! 👋 Soy la Lechuza Filosófica. Estoy aquí para ayudarte con cualquier duda filosófica. Pregúntame sobre conceptos, filósofos, corrientes o problemas filosóficos.';
             }
             
-            // Respuesta genérica
-            return "Interesante pregunta. Te recomiendo explorar nuestra sección de Recursos o preguntarme sobre filósofos específicos como Sócrates, Platón, Kant o pensadores peruanos. ¿Hay algo más en lo que pueda ayudarte?";
+            // Ética
+            if (p.includes('ética') || p.includes('etica') || p.includes('moral')) {
+                return '🤔 La <strong>ética</strong> es la rama de la filosofía que estudia la moral, las virtudes y el deber. Aristóteles la definió como la búsqueda de la "eudaimonia" (vida buena). Kant propuso el imperativo categórico como principio ético universal. En Perú, Augusto Salazar Bondy reflexionó sobre la ética en el contexto latinoamericano.<br><br>¿Te gustaría profundizar en algún filósofo o corriente ética específica?';
+            }
+            
+            // Platón
+            if (p.includes('platón') || p.includes('platon') || p.includes('caverna')) {
+                return '🏛️ <strong>Platón</strong> (427-347 a.C.) fue uno de los filósofos más influyentes de la historia. Su famoso <strong>Mito de la Caverna</strong> describe prisioneros que solo ven sombras, creyendo que esa es toda la realidad. Cuando uno se libera y ve el mundo real, representa el viaje filosófico desde la ignorancia hasta la verdad.<br><br>Platón también desarrolló la Teoría de las Ideas, postulando que existe un mundo de formas perfectas e inmutables.';
+            }
+            
+            // Filosofía peruana
+            if (p.includes('perú') || p.includes('peru') || p.includes('peruano') || p.includes('peruana')) {
+                return '🇵🇪 La <strong>filosofía peruana</strong> tiene brillantes representantes:<br><br>• <strong>Augusto Salazar Bondy</strong>: Cuestionó si existe una filosofía auténticamente latinoamericana<br>• <strong>Francisco Miró Quesada</strong>: Desarrolló teoría de la razón y humanismo<br>• <strong>María Luisa Rivara de Tuesta</strong>: Estudió el pensamiento colonial<br>• <strong>David Sobrevilla</strong>: Reflexionó sobre estética y filosofía política<br><br>El pensamiento andino precolombino también es fundamental en nuestra tradición filosófica.';
+            }
+            
+            // Existencialismo
+            if (p.includes('existencialismo') || p.includes('sartre') || p.includes('camus') || p.includes('existencial')) {
+                return '🎭 El <strong>existencialismo</strong> enfatiza la existencia individual, la libertad y la responsabilidad personal. Jean-Paul Sartre afirmaba que "la existencia precede a la esencia" - no tenemos una naturaleza predeterminada sino que nos creamos a través de nuestras decisiones.<br><br>Albert Camus exploró el absurdo de la existencia. Kierkegaard, padre del existencialismo, analizó la angustia y la fe.<br><br>¿Te interesa algún filósofo existencialista en particular?';
+            }
+            
+            // Kant
+            if (p.includes('kant') || p.includes('imperativo') || p.includes('categórico')) {
+                return '🎓 <strong>Immanuel Kant</strong> (1724-1804) revolucionó la filosofía. En su <strong>Crítica de la Razón Pura</strong> explicó cómo conocemos el mundo. Propuso el <strong>imperativo categórico</strong>: "Actúa solo según aquella máxima que puedas querer que se convierta en ley universal".<br><br>Kant separó el mundo en <em>fenómenos</em> (lo que percibimos) y <em>noúmenos</em> (la cosa en sí). Su filosofía influyó en toda la tradición posterior.';
+            }
+            
+            // Nietzsche
+            if (p.includes('nietzsche') || p.includes('superhombre') || p.includes('dios ha muerto')) {
+                return '⚡ <strong>Friedrich Nietzsche</strong> (1844-1900) proclamó que "Dios ha muerto" y cuestionó toda la moral tradicional. Propuso el concepto del <strong>superhombre</strong> (Übermensch) como ideal humano que crea sus propios valores.<br><br>Criticó el cristianismo y la moral de esclavos. Su idea del <strong>eterno retorno</strong> nos desafía: ¿vivirías tu vida exactamente igual infinitas veces?';
+            }
+            
+            // Epistemología
+            if (p.includes('epistemolog') || p.includes('conocimiento') || p.includes('verdad')) {
+                return '🔍 La <strong>epistemología</strong> estudia el conocimiento: ¿qué podemos conocer? ¿Cómo lo conocemos? ¿Qué es la verdad?<br><br>Platón propuso el conocimiento innato. Aristóteles defendió el empirismo. Descartes con "Pienso, luego existo" buscó certezas absolutas. Kant sintetizó racionalismo y empirismo.<br><br>¿Te interesa algún problema epistemológico específico?';
+            }
+            
+            // Metafísica
+            if (p.includes('metafísica') || p.includes('metafisica') || p.includes('ser') || p.includes('realidad')) {
+                return '🌌 La <strong>metafísica</strong> estudia la naturaleza fundamental de la realidad: ¿qué existe? ¿Qué es el ser?<br><br>Parménides afirmó que el ser es eterno e inmutable. Heráclito defendió el cambio constante. Aristóteles estudió las causas y sustancias. Heidegger exploró el "ser-en-el-mundo".<br><br>¿Te gustaría profundizar en algún concepto metafísico?';
+            }
+            
+            // Lógica
+            if (p.includes('lógica') || p.includes('logica') || p.includes('argumento') || p.includes('razonamiento')) {
+                return '🧩 La <strong>lógica</strong> es la ciencia del razonamiento válido. Estudia cómo inferir correctamente conclusiones de premisas.<br><br>Aristóteles fundó la lógica formal con sus silogismos. La lógica simbólica moderna fue desarrollada por Frege, Russell y Whitehead. Es fundamental para la filosofía, matemáticas y ciencias de la computación.';
+            }
+            
+            // Filosofía política
+            if (p.includes('política') || p.includes('politica') || p.includes('estado') || p.includes('justicia')) {
+                return '⚖️ La <strong>filosofía política</strong> reflexiona sobre el poder, la justicia y el Estado ideal.<br><br>Platón propuso el gobierno de filósofos-reyes. Aristóteles analizó formas de gobierno. Hobbes justificó el Estado absoluto. Locke defendió derechos naturales. Rousseau propuso el contrato social. Marx criticó el capitalismo.<br><br>¿Te interesa algún filósofo político en particular?';
+            }
+            
+            // Descartes
+            if (p.includes('descartes') || p.includes('pienso luego existo') || p.includes('cogito')) {
+                return '💭 <strong>René Descartes</strong> (1596-1650) es el padre de la filosofía moderna. Su famosa frase <strong>"Pienso, luego existo"</strong> (Cogito, ergo sum) fue su punto de certeza absoluta tras dudar metódicamente de todo.<br><br>Separó mente (res cogitans) y cuerpo (res extensa), creando el dualismo cartesiano. Su método revolucionó la filosofía y las ciencias.';
+            }
+            
+            // Aristóteles
+            if (p.includes('aristóteles') || p.includes('aristoteles')) {
+                return '🏛️ <strong>Aristóteles</strong> (384-322 a.C.) fue discípulo de Platón pero desarrolló su propio sistema filosófico. Fundó la lógica formal, estudió la ética de las virtudes, analizó formas de gobierno y clasificó las ciencias.<br><br>Su concepto de <em>eudaimonia</em> (florecimiento humano) sigue siendo central en ética. Influyó en toda la filosofía medieval y moderna.';
+            }
+            
+            // Sócrates
+            if (p.includes('sócrates') || p.includes('socrates') || p.includes('mayéutica')) {
+                return '🗣️ <strong>Sócrates</strong> (470-399 a.C.) revolucionó la filosofía con su método dialógico. No dejó escritos; conocemos su pensamiento por Platón.<br><br>Su frase "Solo sé que no sé nada" expresa su humildad intelectual. Desarrolló la <strong>mayéutica</strong> (arte de dar a luz ideas mediante preguntas). Fue condenado a muerte por "corromper a la juventud".';
+            }
+            
+            // Filosofía contemporánea
+            if (p.includes('contemporánea') || p.includes('contemporanea') || p.includes('actual') || p.includes('siglo xx')) {
+                return '🌐 La <strong>filosofía contemporánea</strong> (siglo XX-XXI) es diversa: fenomenología (Husserl), existencialismo (Sartre, Camus), filosofía analítica (Russell, Wittgenstein), hermenéutica (Gadamer), deconstrucción (Derrida), y más.<br><br>Se enfoca en lenguaje, ciencia, tecnología, ética aplicada, y problemas globales. ¿Te interesa alguna corriente específica?';
+            }
+            
+            // Pregunta sobre el chatbot
+            if (p.includes('quién eres') || p.includes('quien eres') || p.includes('qué eres') || p.includes('que eres')) {
+                return '🦉 Soy la <strong>Lechuza Filosófica</strong>, tu asistente de filosofía impulsado por inteligencia artificial. Fui creada para ASEFIP para ayudar a estudiantes y entusiastas de la filosofía.<br><br>Puedo explicar conceptos, discutir ideas, recomendar lecturas y guiarte en tu aprendizaje filosófico. Para conversaciones más profundas, visita nuestro <a href="chatbot.html">chatbot completo</a>.';
+            }
+            
+            // Ayuda general
+            if (p.includes('ayuda') || p.includes('qué puedes') || p.includes('que puedes')) {
+                return '🎓 Puedo ayudarte con:<br><br>• Explicar conceptos filosóficos<br>• Información sobre filósofos<br>• Corrientes y períodos filosóficos<br>• Problemas filosóficos clásicos<br>• Filosofía peruana y latinoamericana<br>• Recomendar lecturas<br>• Discutir ideas y argumentos<br><br>¡Pregúntame lo que necesites sobre filosofía!';
+            }
+            
+            // Respuesta genérica pero útil
+            return `🤔 Esa es una pregunta interesante. Aunque este chatbot tiene capacidades limitadas, puedo ofrecerte información general.<br><br>Para una conversación más profunda y respuestas personalizadas con IA avanzada, te recomiendo visitar nuestro <a href="chatbot.html" style="color: #667eea; font-weight: bold;">Chatbot IA Completo</a>.<br><br>También puedes:<br>• Consultar nuestro <a href="glosario.html" style="color: #667eea;">Glosario</a><br>• Explorar <a href="filosofia-peruana.html" style="color: #667eea;">Filosofía Peruana</a><br>• Leer <a href="articulos.html" style="color: #667eea;">artículos</a> de la comunidad<br><br>¿Hay algo más específico en lo que pueda ayudarte?`;
         }
 
-        // INICIALIZAR
-        window.onload = function() {
-            mostrarEfemeride();
-            animarNumero(document.getElementById('stat-estudiantes'), 150, 2000);
-            animarNumero(document.getElementById('stat-universidades'), 15, 2000);
-            animarNumero(document.getElementById('stat-recursos'), 200, 2000);
-        };
+        // ============================================
+        // INICIALIZACIÓN
+        // ============================================
+        window.addEventListener('load', () => {
+            cargarEfemeride();
+            actualizarContadores();
+            
+            // Actualizar contadores cada minuto
+            setInterval(actualizarContadores, 60000);
+        });
+
+        // Cerrar chatbot al hacer clic fuera
+        window.addEventListener('click', (e) => {
+            const popup = document.getElementById('chatPopup');
+            const button = document.querySelector('.chat-button');
+            
+            if (popup.classList.contains('active') && 
+                !popup.contains(e.target) && 
+                e.target !== button) {
+                popup.classList.remove('active');
+            }
+        });
     </script>
 </body>
 </html>
