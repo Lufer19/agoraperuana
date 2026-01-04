@@ -4,570 +4,597 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glosario Filosófico - ASEFIP</title>
-    <meta name="description" content="Diccionario interactivo con más de 50 términos filosóficos explicados con ejemplos.">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
-        :root {
-            --primary: #667eea;
-            --secondary: #764ba2;
-            --dark: #2d3748;
-            --gray: #718096;
-            --light: #f7fafc;
-        }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: var(--dark);
             line-height: 1.6;
-            background: var(--light);
+            color: #333;
+            background: #f5f7fa;
         }
-        
+
         nav {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            padding: 1rem 0;
-            position: sticky;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
-        
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+
+        nav .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        
+
         .logo {
-            color: white;
-            font-size: 1.5em;
+            font-size: 1.5rem;
             font-weight: bold;
-            text-decoration: none;
-        }
-        
-        .back-link {
             color: white;
             text-decoration: none;
-            padding: 10px 20px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 8px;
         }
-        
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 5% 60px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 40px 5%;
         }
-        
-        .header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        h1 {
-            font-size: 3em;
-            color: var(--dark);
-            margin-bottom: 15px;
-        }
-        
-        .subtitle {
-            font-size: 1.2em;
-            color: var(--gray);
-        }
-        
+
         .search-box {
             background: white;
             padding: 30px;
             border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             margin-bottom: 40px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
-        
+
         .search-input {
             width: 100%;
             padding: 15px 20px;
-            font-size: 1.1em;
-            border: 2px solid #e2e8f0;
+            font-size: 1.1rem;
+            border: 2px solid #e0e0e0;
             border-radius: 10px;
             transition: border-color 0.3s;
         }
-        
+
         .search-input:focus {
             outline: none;
-            border-color: var(--primary);
+            border-color: #667eea;
         }
-        
-        .alphabet {
+
+        .alphabet-filter {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 10px;
+            margin-bottom: 30px;
             justify-content: center;
-            margin-bottom: 50px;
         }
-        
+
         .letter-btn {
-            width: 45px;
-            height: 45px;
+            padding: 10px 15px;
             background: white;
-            border: 2px solid #e2e8f0;
+            border: 2px solid #667eea;
+            color: #667eea;
             border-radius: 8px;
             cursor: pointer;
-            font-weight: 600;
-            font-size: 1.1em;
             transition: all 0.3s;
+            font-weight: bold;
         }
-        
-        .letter-btn:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-        
+
+        .letter-btn:hover,
         .letter-btn.active {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: #667eea;
             color: white;
-            border-color: transparent;
         }
-        
-        .terminos-lista {
-            display: grid;
-            gap: 25px;
-        }
-        
-        .termino-card {
+
+        .terms-container {
             background: white;
-            border-left: 5px solid var(--primary);
+            border-radius: 15px;
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
-        
-        .termino-card:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.2);
+
+        .term-item {
+            padding: 25px;
+            border-bottom: 1px solid #e0e0e0;
+            transition: background 0.3s;
         }
-        
-        .termino-titulo {
-            color: var(--dark);
-            font-size: 1.8em;
+
+        .term-item:last-child {
+            border-bottom: none;
+        }
+
+        .term-item:hover {
+            background: #f8f9fa;
+        }
+
+        .term-title {
+            font-size: 1.5rem;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .term-definition {
+            color: #555;
+            line-height: 1.8;
             margin-bottom: 10px;
         }
-        
-        .termino-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-        
-        .tag {
-            background: #e6fffa;
-            color: #234e52;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 0.85em;
-            font-weight: 600;
-        }
-        
-        .termino-definicion {
-            color: var(--gray);
-            line-height: 1.8;
-            margin-bottom: 20px;
-            font-size: 1.05em;
-        }
-        
-        .termino-ejemplo {
-            background: var(--light);
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 3px solid #90cdf4;
-            margin-bottom: 15px;
+
+        .term-example {
+            color: #777;
             font-style: italic;
+            margin-top: 10px;
+            padding-left: 15px;
+            border-left: 3px solid #667eea;
         }
-        
-        .termino-ejemplo strong {
-            font-style: normal;
-            color: var(--dark);
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #999;
         }
-        
-        .termino-relacionados {
-            margin-top: 15px;
-            color: var(--gray);
-            font-size: 0.95em;
-        }
-        
+
         footer {
-            background: #1a202c;
-            color: #e2e8f0;
-            padding: 40px 20px;
+            background: #2c3e50;
+            color: white;
+            padding: 40px 5%;
             text-align: center;
             margin-top: 60px;
         }
-        
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2em;
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                gap: 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            .alphabet-filter {
+                gap: 5px;
+            }
+
+            .letter-btn {
+                padding: 8px 12px;
+                font-size: 0.9rem;
             }
         }
     </style>
 </head>
 <body>
     <nav>
-        <div class="nav-container">
+        <div class="container">
             <a href="index.html" class="logo">🦉 ASEFIP</a>
-            <a href="index.html" class="back-link">← Inicio</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="filosofia-peruana.html">Filosofía Peruana</a></li>
+                <li><a href="glosario.html">Glosario</a></li>
+                <li><a href="comunidad.html">Comunidad</a></li>
+            </ul>
         </div>
     </nav>
 
-    <div class="container">
-        <div class="header">
-            <h1>📖 Glosario Filosófico</h1>
-            <p class="subtitle">Diccionario de conceptos y términos fundamentales</p>
-        </div>
+    <div class="hero">
+        <h1>📖 Glosario Filosófico</h1>
+        <p>Diccionario de términos filosóficos explicados de forma clara</p>
+    </div>
 
+    <div class="container">
         <div class="search-box">
             <input 
                 type="text" 
                 class="search-input" 
-                id="searchInput"
-                placeholder="🔍 Buscar término filosófico..." 
-                onkeyup="buscarTermino()">
+                id="searchInput" 
+                placeholder="🔍 Buscar término filosófico..."
+                onkeyup="filtrarTerminos()"
+            >
         </div>
 
-        <div class="alphabet">
-            <button class="letter-btn active" onclick="filtrarLetra('todas')">TODO</button>
-            <button class="letter-btn" onclick="filtrarLetra('A')">A</button>
-            <button class="letter-btn" onclick="filtrarLetra('C')">C</button>
-            <button class="letter-btn" onclick="filtrarLetra('D')">D</button>
-            <button class="letter-btn" onclick="filtrarLetra('E')">E</button>
-            <button class="letter-btn" onclick="filtrarLetra('F')">F</button>
-            <button class="letter-btn" onclick="filtrarLetra('H')">H</button>
-            <button class="letter-btn" onclick="filtrarLetra('I')">I</button>
-            <button class="letter-btn" onclick="filtrarLetra('M')">M</button>
-            <button class="letter-btn" onclick="filtrarLetra('N')">N</button>
-            <button class="letter-btn" onclick="filtrarLetra('R')">R</button>
-        </div>
+        <div class="alphabet-filter" id="alphabetFilter"></div>
 
-        <div class="terminos-lista">
-            <div class="termino-card" data-letra="A" data-termino="a priori">
-                <h3 class="termino-titulo">A priori / A posteriori</h3>
-                <div class="termino-tags">
-                    <span class="tag">Epistemología</span>
-                    <span class="tag">Kant</span>
-                </div>
-                <p class="termino-definicion">
-                    <strong>A priori:</strong> Conocimiento independiente de la experiencia. 
-                    <strong>A posteriori:</strong> Conocimiento derivado de la experiencia. 
-                    Kant usó esta distinción para fundamentar su filosofía crítica.
-                </p>
-                <div class="termino-ejemplo">
-                    <strong>Ejemplo:</strong> "Todos los solteros son no casados" es a priori. 
-                    "El cielo es azul" es a posteriori.
-                </div>
-            </div>
-
-            <div class="termino-card" data-letra="A" data-termino="alienacion">
-                <h3 class="termino-titulo">Alienación</h3>
-                <div class="termino-tags">
-                    <span class="tag">Marx</span>
-                    <span class="tag">Filosofía Social</span>
-                </div>
-                <p class="termino-definicion">
-                    Estado en el que el ser humano pierde su esencia o se vuelve ajeno a sí mismo. 
-                    En Marx, ocurre cuando el trabajador no se reconoce en el producto de su trabajo.
-                </p>
-                <div class="termino-ejemplo">
-                    <strong>Ejemplo:</strong> Un obrero que produce objetos en cadena sin control 
-                    sobre su trabajo está alienado de su labor y de sí mismo.
-                </div>
-            </div>
-
-            <div class="termino-card" data-letra="C" data-termino="cogito">
-                <h3 class="termino-titulo">Cogito (Pienso, luego existo)</h3>
-                <div class="termino-tags">
-                    <span class="tag">Descartes</span>
-                    <span class="tag">Epistemología</span>
-                </div>
-                <p class="termino-definicion">
-                    Principio fundamental de la filosofía cartesiana. Descartes lo establece como 
-                    la primera verdad indudable: el acto de pensar prueba la existencia del pensador.
-                </p>
-                <div class="termino-ejemplo">
-                    <strong>Ejemplo:</strong> Aunque dude de todo, no puedo dudar de que estoy dudando, 
-                    y por tanto, de que existo como cosa pensante.
-                </div>
-            </div>
-
-            <div class="termino-card" data-letra="C" data-termino="contrato social">
-                <h3 class="termino-titulo">Contrato Social</h3>
-                <div class="termino-tags">
-                    <span class="tag">Filosofía Política</span>
-                    <span class="tag">Rousseau</span>
-                </div>
-                <p class="termino-definicion">
-                    Acuerdo entre individuos para formar una sociedad y establecer un gobierno. 
-                    Los individuos renuncian a ciertos derechos a cambio de protección y orden social.
-                </p>
-                <div class="termino-ejemplo">
-                    <strong>Ejemplo:</strong> Para Rousseau, el contrato social ideal preserva la 
-                    libertad mediante la participación en la creación de leyes.
-                </div>
-            </div>
-
-            <div class="termino-card" data-letra="D" data-termino="dialectica">
-                <h3 class="termino-titulo">Dialéctica</h3>
-                <div class="termino-tags">
-                    <span class="tag">Hegel</span>
-                    <span class="tag">Marx</span>
-                </div>
-                <p class="termino-definicion">
-                    Método filosófico basado en la contraposición de ideas. En Hegel, es el proceso 
-                    mediante el cual la realidad se desarrolla: tesis, antítesis y síntesis.
-                </p>
-                <div class="termino-ejemplo">
-                    <strong>Ejemplo:</strong> El capitalismo (tesis) genera el proletariado (antítesis), 
-                    cuya lucha produce una nueva forma social (síntesis).
-                </div>
-            </div>
-
-            <div class="termino-card" data-letra="D" data-termino="dualismo">
-                <h3 class="termino-titulo">Dualismo</h3>
-                <div class="termino-tags">
-                    <span class="tag">Metafísica</span>
-                    <span class="tag">Descartes</span>
-                </div>
-                <p class="termino-definicion">
-                    Teoría que sostiene la existencia de dos sustancias fundamentales irreductibles. 
-                    El dualismo cartesiano: mente (res cogitans) y materia (res extensa).
-                </p>
-                <div class="termino-ejemplo">
-                    <strong>Ejemplo:</strong> El problema mente-cuerpo: ¿cómo interactúa lo mental 
-                    (decidir mover el brazo) con lo físico (el brazo moviéndose)?
-                </div>
-            </div>
-
-            <div class="termino-card" data-letra="E" data-termino="empirismo">
-                <h3 class="termino-titulo">Empirismo</h3>
-                <div class="termino-tags">
-                    <span class="tag">Epistemología</span>
-                    <span class="tag">Locke</span>
-                    <span class="tag">Hume</span>
-                </div>
-                <p class="termino-definicion">
-                    Corriente que sostiene que todo conocimiento proviene de la experiencia sensorial. 
-                    La mente es una "tabula rasa" que se llena mediante la experiencia.
-                </p>
-                <div class="termino-ejemplo">
-                    <strong>Ejemplo:</strong> No nacemos sabiendo qué es "rojo", lo aprendemos 
-                    viendo cosas rojas.
-                </div>
-            </div>
-
-            <div class="termino-card" data-letra="E" data-termino="epistemologia">
-                <h3 class="termino-titulo">Epistemología</h3>
-                <div class="termino-tags">
-                    <span class="tag">Teoría del Conocimiento</span>
-                </div>
-                <p class="termino-definicion">
-                    Rama de la filosofía que estudia la naturaleza, origen y límites del conocimiento. 
-                    ¿Qué podemos conocer? ¿Cómo sabemos que sabemos?
-                </p>
-                <div class="termino-ejemplo">
-                    <strong>Ejemplo:</strong> El debate entre racionalistas y empiristas sobre el 
-                    origen del conocimiento es epistemológico.
-                </div>
-            </div>
-
-            <div class="termino-card" data-letra="E" data-termino="etica">
-                <h3 class="termino-titulo">Ética</h3>
-                <div class="termino-tags">
-                    <span class="tag">Filosofía Moral</span>
-                </div>
-                <p class="termino-definicion">
-                    Rama que estudia el bien y el mal, lo correcto e incorrecto, y cómo debemos vivir. 
-                    Se divide en ética normativa, metaética y ética aplicada.
-                </p>
-                <div class="termino-ejemplo">
-                    <strong>Ejemplo:</strong> "¿Es moral mentir para salvar una vida?" es una 
-                    pregunta ética.
-                </div>
-            </div>
-
-            <div class="termino-card" data-letra="E" data-termino="existencialismo">
-                <h3 class="termino-titulo">Existencialismo</h3>
-                <div class="termino-tags">
-                    <span class="tag">Sartre</span>
-                    <span class="tag">Camus</span>
-                </div>
-                <p class="termino-definicion">
-                    Corriente que enfatiza la existencia individual, la libertad y la responsabilidad. 
-                    "La existencia precede a la esencia": nos creamos mediante nuestras elecciones.
-                </p>
-                <div class="termino-ejemplo">
-                    <strong>Ejemplo:</strong> Estamos "condenados a ser libres": somos totalmente 
-                    responsables de nuestras acciones.
-                </div>
-            </div>
-
-            <div class="termino-card" data-letra="F" data-termino="fenomenologia">
-                <h3 class="termino-titulo">Fenomenología</h3>
-                <div class="termino-tags">
-                    <span class="tag">Husserl</span>
-                    <span class="tag">Método</span>
-                </div>
-                <p class="termino-definicion">
-                    Método que estudia las estructuras de la experiencia y la conciencia. 
-                    Husserl propuso ir "a las cosas mismas", describiendo cómo aparecen los fenómenos.
-                </p>
-                <div class="termino-ejemplo">
-                    <strong>Ejemplo:</strong> En vez de preguntar si la mesa existe, se examina 
-                    cómo experimentamos la mesa en nuestra conciencia.
-                </div>
-            </div>
-
-            <div class="termino-card" data-letra="H" data-termino="hedonismo">
-                <h3 class="termino-titulo">Hedonismo</h3>
-                <div class="termino-tags">
-                    <span class="tag">Ética</span>
-                    <span class="tag">Epicuro</span>
-                </div>
-                <p class="termino-definicion">
-                    Teoría que sostiene que el placer es el bien supremo. Epicuro lo entendía como 
-                    ausencia de dolor (ataraxia) y tranquilidad del alma.
-                </p>
-                <div class="termino-ejemplo">
-                    <strong>Ejemplo:</strong> Para Epicuro, el mayor placer no es un lujo, sino 
-                    satisfacer necesidades básicas sin ansiedad.
-                </div>
-            </div>
-
-            <div class="termino-card" data-letra="I" data-termino="imperativo categorico">
-                <h3 class="termino-titulo">Imperativo Categórico</h3>
-                <div class="termino-tags">
-                    <span class="tag">Ética</span>
-                    <span class="tag">Kant</span>
-                </div>
-                <p class="termino-definicion">
-                    Principio moral supremo en Kant. "Actúa según una máxima que puedas querer 
-                    que se convierta en ley universal".
-                </p>
-                <div class="termino-ejemplo">
-                    <strong>Ejemplo:</strong> Antes de mentir, pregúntate: ¿qué pasaría si todos 
-                    mintieran siempre? Esto destruiría la confianza.
-                </div>
-            </div>
-
-            <div class="termino-card" data-letra="M" data-termino="mayeutica">
-                <h3 class="termino-titulo">Mayéutica</h3>
-                <div class="termino-tags">
-                    <span class="tag">Sócrates</span>
-                    <span class="tag">Método</span>
-                </div>
-                <p class="termino-definicion">
-                    Método socrático de enseñanza mediante preguntas. El maestro ayuda al 
-                    interlocutor a "dar a luz" el conocimiento que ya posee.
-                </p>
-                <div class="termino-ejemplo">
-                    <strong>Ejemplo:</strong> En vez de decir "la justicia es X", Sócrates pregunta 
-                    "¿qué es la justicia?" y guía con preguntas.
-                </div>
-            </div>
-
-            <div class="termino-card" data-letra="M" data-termino="metafisica">
-                <h3 class="termino-titulo">Metafísica</h3>
-                <div class="termino-tags">
-                    <span class="tag">Ontología</span>
-                    <span class="tag">Aristóteles</span>
-                </div>
-                <p class="termino-definicion">
-                    Rama que estudia la naturaleza fundamental de la realidad. 
-                    ¿Qué es el ser? ¿Qué existe realmente?
-                </p>
-                <div class="termino-ejemplo">
-                    <strong>Ejemplo:</strong> ¿Existe Dios? ¿Qué es el tiempo? ¿Tenemos libre 
-                    albedrío? Son preguntas metafísicas.
-                </div>
-            </div>
-
-            <div class="termino-card" data-letra="N" data-termino="nihilismo">
-                <h3 class="termino-titulo">Nihilismo</h3>
-                <div class="termino-tags">
-                    <span class="tag">Nietzsche</span>
-                    <span class="tag">Valores</span>
-                </div>
-                <p class="termino-definicion">
-                    Posición que sostiene que la vida carece de significado objetivo. 
-                    Para Nietzsche, es consecuencia de la "muerte de Dios".
-                </p>
-                <div class="termino-ejemplo">
-                    <strong>Ejemplo:</strong> Nietzsche ve el nihilismo como crisis pero también 
-                    oportunidad para crear nuevos valores.
-                </div>
-            </div>
-
-            <div class="termino-card" data-letra="R" data-termino="racionalismo">
-                <h3 class="termino-titulo">Racionalismo</h3>
-                <div class="termino-tags">
-                    <span class="tag">Epistemología</span>
-                    <span class="tag">Descartes</span>
-                </div>
-                <p class="termino-definicion">
-                    Corriente que sostiene que la razón es la fuente principal del conocimiento. 
-                    Existen verdades conocibles independientemente de la experiencia.
-                </p>
-                <div class="termino-ejemplo">
-                    <strong>Ejemplo:</strong> Mediante la razón pura podemos conocer "2+2=4" 
-                    sin experiencia sensorial.
-                </div>
-            </div>
-        </div>
+        <div class="terms-container" id="termsContainer"></div>
     </div>
 
     <footer>
-        <p><strong>© 2024-2025 ASEFIP</strong></p>
-        <p style="margin-top: 10px;">Este glosario está en continua expansión 📚</p>
+        <p>© 2024-2025 ASEFIP - Asociación de Estudiantes de Filosofía del Perú</p>
+        <p style="margin-top: 10px;">
+            <a href="index.html">Inicio</a> | 
+            <a href="recursos.html">Recursos</a> | 
+            <a href="comunidad.html">Comunidad</a>
+        </p>
     </footer>
 
     <script>
-        function buscarTermino() {
-            const input = document.getElementById('searchInput').value.toLowerCase();
-            const terminos = document.querySelectorAll('.termino-card');
+        const terminos = [
+            {
+                termino: "A priori",
+                definicion: "Conocimiento independiente de la experiencia. Para Kant, son las estructuras mentales que organizan nuestra experiencia antes de tenerla.",
+                ejemplo: "Las matemáticas son conocimiento a priori según Kant."
+            },
+            {
+                termino: "A posteriori",
+                definicion: "Conocimiento derivado de la experiencia. Se opone a a priori.",
+                ejemplo: "Saber que el fuego quema es conocimiento a posteriori."
+            },
+            {
+                termino: "Absoluto",
+                definicion: "En Hegel, la realidad total y completa que se despliega dialécticamente. Lo que existe por sí mismo sin depender de nada más.",
+                ejemplo: "El Absoluto hegeliano es el Espíritu que se conoce a sí mismo."
+            },
+            {
+                termino: "Absurdo",
+                definicion: "En Camus, la contradicción entre la búsqueda humana de sentido y la indiferencia del universo.",
+                ejemplo: "El mito de Sísifo representa el absurdo de la existencia humana."
+            },
+            {
+                termino: "Analogía",
+                definicion: "Razonamiento que establece semejanzas entre cosas diferentes para inferir propiedades comunes.",
+                ejemplo: "Tomás de Aquino usa analogías para hablar de Dios."
+            },
+            {
+                termino: "Antropología filosófica",
+                definicion: "Rama que estudia la naturaleza humana, qué es el ser humano y qué lo distingue de otros seres.",
+                ejemplo: "Max Scheler desarrolló una antropología filosófica sistemática."
+            },
+            {
+                termino: "Atomismo",
+                definicion: "Teoría de Demócrito y Leucipo: todo está compuesto de átomos indivisibles moviéndose en el vacío.",
+                ejemplo: "El atomismo antiguo anticipó la física moderna."
+            },
+            {
+                termino: "Axiología",
+                definicion: "Teoría filosófica de los valores. Estudia la naturaleza, fundamento y jerarquía de los valores.",
+                ejemplo: "La axiología distingue entre valores morales, estéticos y económicos."
+            },
+            {
+                termino: "Bien común",
+                definicion: "En filosofía política, el bienestar colectivo de la sociedad que trasciende intereses individuales.",
+                ejemplo: "Aristóteles consideraba que la política debe buscar el bien común."
+            },
+            {
+                termino: "Categorical Imperative",
+                definicion: "Imperativo categórico de Kant: principio moral universal que ordena actuar según máximas universalizables.",
+                ejemplo: "No mentir es un imperativo categórico para Kant."
+            },
+            {
+                termino: "Cogito",
+                definicion: "Frase de Descartes 'Cogito, ergo sum' (Pienso, luego existo): primera certeza indudable.",
+                ejemplo: "El cogito cartesiano fundamenta toda su filosofía."
+            },
+            {
+                termino: "Contingencia",
+                definicion: "Propiedad de lo que podría no existir o ser de otra manera. Se opone a necesidad.",
+                ejemplo: "La existencia humana es contingente para Sartre."
+            },
+            {
+                termino: "Cosmología",
+                definicion: "Estudio filosófico del origen, estructura y leyes fundamentales del universo.",
+                ejemplo: "Los presocráticos desarrollaron las primeras cosmologías."
+            },
+            {
+                termino: "Dasein",
+                definicion: "En Heidegger, el 'ser-ahí': modo de ser específico del ser humano caracterizado por su apertura al mundo.",
+                ejemplo: "El Dasein se caracteriza por ser un ser-para-la-muerte."
+            },
+            {
+                termino: "Deber",
+                definicion: "Obligación moral de realizar una acción. Central en la ética deontológica de Kant.",
+                ejemplo: "El deber moral es independiente de nuestros deseos según Kant."
+            },
+            {
+                termino: "Dialéctica",
+                definicion: "Método que procede por contraposición y síntesis. En Hegel: tesis-antítesis-síntesis.",
+                ejemplo: "La dialéctica hegeliana explica el desarrollo histórico."
+            },
+            {
+                termino: "Dualismo",
+                definicion: "Teoría que afirma la existencia de dos sustancias irreductibles. En Descartes: mente y cuerpo.",
+                ejemplo: "El dualismo cartesiano separa res cogitans y res extensa."
+            },
+            {
+                termino: "Empirismo",
+                definicion: "Doctrina que afirma que todo conocimiento proviene de la experiencia sensible.",
+                ejemplo: "Locke, Berkeley y Hume son empiristas británicos."
+            },
+            {
+                termino: "Epistemología",
+                definicion: "Rama de la filosofía que estudia el conocimiento: su naturaleza, posibilidad, alcance y fundamento.",
+                ejemplo: "La epistemología pregunta ¿qué podemos conocer?"
+            },
+            {
+                termino: "Escepticismo",
+                definicion: "Postura que duda de la posibilidad del conocimiento cierto. Suspende el juicio.",
+                ejemplo: "Pirrón fue el fundador del escepticismo griego."
+            },
+            {
+                termino: "Esencia",
+                definicion: "Aquello que hace que una cosa sea lo que es. Sus propiedades necesarias y definitorias.",
+                ejemplo: "La esencia del triángulo es tener tres lados."
+            },
+            {
+                termino: "Eudaimonia",
+                definicion: "Para Aristóteles, la vida buena o florecimiento humano. Fin último de la ética.",
+                ejemplo: "La eudaimonia se alcanza mediante la virtud."
+            },
+            {
+                termino: "Existencia",
+                definicion: "El hecho de ser o estar en la realidad. Para existencialistas, precede a la esencia.",
+                ejemplo: "Sartre afirma que la existencia precede a la esencia."
+            },
+            {
+                termino: "Existencialismo",
+                definicion: "Corriente que enfatiza la existencia individual, libertad y responsabilidad humana.",
+                ejemplo: "Sartre y Camus son filósofos existencialistas."
+            },
+            {
+                termino: "Fenómeno",
+                definicion: "En Kant, la cosa tal como se nos aparece. Se opone a noúmeno (cosa en sí).",
+                ejemplo: "Solo conocemos fenómenos, no la cosa en sí según Kant."
+            },
+            {
+                termino: "Fenomenología",
+                definicion: "Método filosófico de Husserl que describe estructuras de la experiencia consciente.",
+                ejemplo: "La fenomenología estudia cómo se nos dan las cosas a la consciencia."
+            },
+            {
+                termino: "Hedonismo",
+                definicion: "Doctrina ética que identifica el bien con el placer y el mal con el dolor.",
+                ejemplo: "Epicuro defendió un hedonismo moderado."
+            },
+            {
+                termino: "Hermenéutica",
+                definicion: "Arte de interpretar textos. En filosofía, teoría general de la interpretación.",
+                ejemplo: "Gadamer desarrolló una hermenéutica filosófica."
+            },
+            {
+                termino: "Idealismo",
+                definicion: "Doctrina que afirma la primacía de las ideas sobre la materia. La realidad es mental.",
+                ejemplo: "Berkeley es idealista: 'ser es ser percibido'."
+            },
+            {
+                termino: "Imperativo categórico",
+                definicion: "Principio moral kantiano que ordena incondicionalmente, sin fines externos.",
+                ejemplo: "Actúa según máximas universalizables."
+            },
+            {
+                termino: "Inducción",
+                definicion: "Razonamiento de lo particular a lo general. De casos observados a ley universal.",
+                ejemplo: "De 'todos los cisnes observados son blancos' a 'todos los cisnes son blancos'."
+            },
+            {
+                termino: "Justicia",
+                definicion: "Virtud que consiste en dar a cada uno lo que le corresponde según su mérito o derecho.",
+                ejemplo: "Platón define justicia como armonía entre las partes del alma."
+            },
+            {
+                termino: "Lógica",
+                definicion: "Ciencia del razonamiento válido. Estudia las reglas de la inferencia correcta.",
+                ejemplo: "Aristóteles fundó la lógica formal."
+            },
+            {
+                termino: "Materialismo",
+                definicion: "Doctrina que afirma que solo existe la materia. Niega sustancias inmateriales.",
+                ejemplo: "Marx desarrolló un materialismo histórico."
+            },
+            {
+                termino: "Mayéutica",
+                definicion: "Método socrático de dar a luz ideas mediante preguntas. Arte de hacer parir conocimiento.",
+                ejemplo: "Sócrates usaba la mayéutica para que descubrieran verdades por sí mismos."
+            },
+            {
+                termino: "Metafísica",
+                definicion: "Rama que estudia la naturaleza fundamental de la realidad: qué existe y por qué.",
+                ejemplo: "La metafísica pregunta ¿qué es el ser?"
+            },
+            {
+                termino: "Mónada",
+                definicion: "En Leibniz, sustancia simple e indivisible que compone la realidad.",
+                ejemplo: "Las mónadas son 'sin ventanas' pero reflejan el universo."
+            },
+            {
+                termino: "Nihilismo",
+                definicion: "Negación de valores objetivos. Para Nietzsche, resultado de la muerte de Dios.",
+                ejemplo: "El nihilismo es la pérdida de sentido en la modernidad."
+            },
+            {
+                termino: "Noúmeno",
+                definicion: "En Kant, la cosa en sí, independiente de nuestra percepción. Incognoscible.",
+                ejemplo: "El noúmeno es el límite del conocimiento humano."
+            },
+            {
+                termino: "Ontología",
+                definicion: "Parte de la metafísica que estudia el ser en cuanto ser y sus propiedades.",
+                ejemplo: "La ontología pregunta ¿qué significa existir?"
+            },
+            {
+                termino: "Positivismo",
+                definicion: "Doctrina de Comte: solo el conocimiento científico es válido. Rechaza metafísica.",
+                ejemplo: "El positivismo lógico exigía verificación empírica."
+            },
+            {
+                termino: "Pragmatismo",
+                definicion: "Corriente que evalúa verdad por utilidad práctica. Filosofía estadounidense.",
+                ejemplo: "William James y John Dewey fueron pragmatistas."
+            },
+            {
+                termino: "Racionalismo",
+                definicion: "Doctrina que afirma que la razón es fuente principal del conocimiento.",
+                ejemplo: "Descartes, Spinoza y Leibniz son racionalistas."
+            },
+            {
+                termino: "Relativismo",
+                definicion: "Tesis que niega verdades absolutas. Verdad depende del sujeto o cultura.",
+                ejemplo: "Protágoras: 'el hombre es la medida de todas las cosas'."
+            },
+            {
+                termino: "Silogismo",
+                definicion: "Razonamiento deductivo aristotélico: de dos premisas se infiere una conclusión.",
+                ejemplo: "Todos los hombres son mortales, Sócrates es hombre, luego Sócrates es mortal."
+            },
+            {
+                termino: "Solipsismo",
+                definicion: "Tesis extrema que solo admite la existencia del propio yo pensante.",
+                ejemplo: "El solipsismo duda de la existencia de otros sujetos."
+            },
+            {
+                termino: "Sustancia",
+                definicion: "Aquello que existe por sí mismo y no necesita de otra cosa para existir.",
+                ejemplo: "Aristóteles define sustancia como sujeto de propiedades."
+            },
+            {
+                termino: "Teleología",
+                definicion: "Estudio de los fines o propósitos. Explicación por causas finales.",
+                ejemplo: "Aristóteles explica la naturaleza teleológicamente."
+            },
+            {
+                termino: "Trascendental",
+                definicion: "En Kant, condiciones a priori que hacen posible la experiencia.",
+                ejemplo: "El espacio y tiempo son formas trascendentales."
+            },
+            {
+                termino: "Utilitarismo",
+                definicion: "Teoría ética que identifica lo correcto con maximizar la utilidad o felicidad general.",
+                ejemplo: "Bentham y Mill desarrollaron el utilitarismo."
+            },
+            {
+                termino: "Virtud",
+                definicion: "Excelencia del carácter. Para Aristóteles, término medio entre extremos.",
+                ejemplo: "La valentía es virtud entre cobardía y temeridad."
+            },
+            {
+                termino: "Voluntad de poder",
+                definicion: "En Nietzsche, impulso fundamental de afirmación y superación que mueve la vida.",
+                ejemplo: "La voluntad de poder es el principio vital nietzscheano."
+            }
+        ];
+
+        let terminosFiltrados = [...terminos];
+
+        function crearFiltroAlfabetico() {
+            const alfabeto = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+            const filtro = document.getElementById('alphabetFilter');
             
-            terminos.forEach(termino => {
-                const titulo = termino.querySelector('.termino-titulo').textContent.toLowerCase();
-                const definicion = termino.querySelector('.termino-definicion').textContent.toLowerCase();
-                const tags = Array.from(termino.querySelectorAll('.tag'))
-                    .map(tag => tag.textContent.toLowerCase())
-                    .join(' ');
-                
-                const match = titulo.includes(input) || definicion.includes(input) || tags.includes(input);
-                termino.style.display = match || input === '' ? 'block' : 'none';
+            const todosBtn = document.createElement('button');
+            todosBtn.className = 'letter-btn active';
+            todosBtn.textContent = 'Todos';
+            todosBtn.onclick = () => {
+                document.querySelectorAll('.letter-btn').forEach(b => b.classList.remove('active'));
+                todosBtn.classList.add('active');
+                terminosFiltrados = [...terminos];
+                mostrarTerminos();
+            };
+            filtro.appendChild(todosBtn);
+
+            alfabeto.forEach(letra => {
+                const terminosConLetra = terminos.filter(t => 
+                    t.termino.toUpperCase().startsWith(letra)
+                );
+
+                if (terminosConLetra.length > 0) {
+                    const btn = document.createElement('button');
+                    btn.className = 'letter-btn';
+                    btn.textContent = letra;
+                    btn.onclick = () => {
+                        document.querySelectorAll('.letter-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        terminosFiltrados = terminosConLetra;
+                        mostrarTerminos();
+                    };
+                    filtro.appendChild(btn);
+                }
             });
         }
 
-        function filtrarLetra(letra) {
-            document.querySelectorAll('.letter-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
+        function mostrarTerminos() {
+            const container = document.getElementById('termsContainer');
             
-            const terminos = document.querySelectorAll('.termino-card');
-            if (letra === 'todas') {
-                terminos.forEach(t => t.style.display = 'block');
-            } else {
-                terminos.forEach(t => {
-                    t.style.display = t.dataset.letra === letra ? 'block' : 'none';
-                });
+            if (terminosFiltrados.length === 0) {
+                container.innerHTML = '<div class="no-results">No se encontraron términos</div>';
+                return;
             }
+
+            container.innerHTML = terminosFiltrados.map(term => `
+                <div class="term-item">
+                    <div class="term-title">${term.termino}</div>
+                    <div class="term-definition">${term.definicion}</div>
+                    ${term.ejemplo ? `<div class="term-example">Ejemplo: ${term.ejemplo}</div>` : ''}
+                </div>
+            `).join('');
         }
+
+        function filtrarTerminos() {
+            const busqueda = document.getElementById('searchInput').value.toLowerCase();
+            
+            if (busqueda === '') {
+                terminosFiltrados = [...terminos];
+            } else {
+                terminosFiltrados = terminos.filter(t => 
+                    t.termino.toLowerCase().includes(busqueda) ||
+                    t.definicion.toLowerCase().includes(busqueda)
+                );
+            }
+            
+            mostrarTerminos();
+        }
+
+        window.addEventListener('load', () => {
+            crearFiltroAlfabetico();
+            mostrarTerminos();
+        });
     </script>
 </body>
 </html>
